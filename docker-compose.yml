@@ -1,0 +1,146 @@
+services:
+  gluetun:
+    image: qmcgaw/gluetun
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8080:8080     # qBittorrent
+      - 6881:6881
+    environment:
+      - VPN_SERVICE_PROVIDER=private internet access
+      - VPN_TYPE=openvpn
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+      - VPN_PORT_FORWARDING=on
+    volumes:
+      - ./config/gluetun:/gluetun
+    restart: unless-stopped
+    networks:
+      media-net:
+        aliases:
+          - qbittorrent
+          - prowlarr
+
+  qbittorrent:
+    image: linuxserver/qbittorrent
+    container_name: qbittorrent
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - WEBUI_PORT=8080
+    volumes:
+      - ./config/qbittorrent:/config
+      - ./downloads:/downloads
+    restart: unless-stopped
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    networks:
+      - media-net
+    ports:
+      - 9696:9696
+    depends_on:
+      - gluetun
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./config/prowlarr:/config
+      - ./config/prowlarr/Definitions/Custom:/config/Definitions/Custom:ro
+    restart: unless-stopped
+
+  flaresolverr:
+    image: 21hsmw/flaresolverr:nodriver
+    container_name: flaresolverr
+    networks:
+      - media-net
+    ports:
+      - 8191:8191
+    environment:
+      - LOG_LEVEL=info
+    restart: unless-stopped
+
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    networks:
+      - media-net
+    ports:
+      - 8989:8989
+    depends_on:
+      - gluetun
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./config/sonarr:/config
+      - ./downloads:/downloads
+      - ./media/Series:/series
+    restart: unless-stopped
+
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    networks:
+      - media-net
+    ports:
+      - 7878:7878
+    depends_on:
+      - gluetun
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./config/radarr:/config
+      - ./downloads:/downloads
+      - ./media/Movies:/movies
+    restart: unless-stopped
+
+  huntarr:
+    image: huntarr/huntarr:latest
+    container_name: huntarr
+    depends_on:
+      - gluetun
+    networks:
+      - media-net
+    ports:
+      - 9705:9705   # Web UI port for Huntarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./config/huntarr:/config
+    restart: unless-stopped
+
+  overseerr:
+    image: sctx/overseerr
+    container_name: overseerr
+    networks:
+      - media-net
+    ports:
+      - 5055:5055
+    environment:
+      - LOG_LEVEL=info
+      - TZ=Europe/Paris
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./config/overseerr:/app/config
+    depends_on:
+      - sonarr
+      - radarr
+    restart: unless-stopped
+
+networks:
+  media-net:
+    driver: bridge
