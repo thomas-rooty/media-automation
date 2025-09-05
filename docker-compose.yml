@@ -107,6 +107,28 @@ services:
       - "F:\\Medias\\Movies:/media/movies_f"
     restart: unless-stopped
 
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    networks:
+      - media-net
+    ports:
+      - 6767:6767
+    depends_on:
+      - sonarr
+      - radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./config/bazarr:/config
+      - ./media/Movies:/movies
+      - ./media/Series:/series
+      - "F:\\Medias\\Movies:/media/movies_f"
+      - "F:\\Medias\\Series:/media/series_f"
+    restart: unless-stopped
+
   huntarr:
     image: huntarr/huntarr:latest
     container_name: huntarr
