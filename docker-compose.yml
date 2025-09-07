@@ -162,6 +162,32 @@ services:
       - radarr
     user: "1000:1000"
     restart: unless-stopped
+  
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin
+    networks:
+      - media-net
+    ports:
+      - 8096:8096        # HTTP (http://HOST_IP:8096)
+      - 7359:7359/udp    # Local discovery
+      - 1900:1900/udp    # DLNA SSDP
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./config/jellyfin:/config
+      - ./cache/jellyfin:/cache
+      - ./media/Movies:/data/movies
+      - ./media/Series:/data/series
+      - "F:\\Medias\\Movies:/data/movies_f"
+      - "F:\\Medias\\Series:/data/series_f"
+    depends_on:
+      - sonarr
+      - radarr
+    restart: unless-stopped
+
 
 networks:
   media-net:
