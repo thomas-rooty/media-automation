@@ -83,7 +83,7 @@ services:
     volumes:
       - ./config/sonarr:/config
       - ./downloads:/downloads
-      - ./media/Series:/media/series
+      - ./media/Series:/series
       - "/mnt/medias/Medias/Series:/media/series_f"
     restart: unless-stopped
 
@@ -103,7 +103,7 @@ services:
     volumes:
       - ./config/radarr:/config
       - ./downloads:/downloads
-      - ./media/Movies:/media/movies
+      - ./media/Movies:/movies
       - "/mnt/medias/Medias/Movies:/media/movies_f"
     restart: unless-stopped
 
@@ -123,8 +123,8 @@ services:
       - TZ=Europe/Paris
     volumes:
       - ./config/bazarr:/config
-      - ./media/Movies:/media/movies
-      - ./media/Series:/media/series
+      - ./media/Movies:/movies
+      - ./media/Series:/series
       - "/mnt/medias/Medias/Movies:/media/movies_f"
       - "/mnt/medias/Medias/Series:/media/series_f"
     restart: unless-stopped
@@ -179,8 +179,8 @@ services:
     volumes:
       - ./config/jellyfin:/config
       - ./cache/jellyfin:/cache
-      - ./media/Movies:/media/movies
-      - ./media/Series:/media/series
+      - ./media/Movies:/movies
+      - ./media/Series:/series
       - "/mnt/medias/Medias/Movies:/media/movies_f"
       - "/mnt/medias/Medias/Series:/media/series_f"
     depends_on:
