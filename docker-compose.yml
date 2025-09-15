@@ -203,18 +203,18 @@ services:
     networks:
       - media-net
 
-  recyclarr:
-    image: recyclarr/recyclarr
-    container_name: recyclarr
+  profilarr:
+    image: ghcr.io/profilarr/profilarr:latest
+    container_name: profilarr
     networks:
       - media-net
-    volumes:
-      - ./config/recyclarr:/config
+    ports:
+      - 7575:7575   # Interface web (http://IP:7575)
     environment:
       - TZ=Europe/Paris
+    volumes:
+      - ./config/profilarr:/config
     restart: unless-stopped
-    command: >
-      sync
 
   glances:
     image: nicolargo/glances:latest
