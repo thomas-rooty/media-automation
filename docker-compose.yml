@@ -209,7 +209,7 @@ services:
     networks:
       - media-net
     ports:
-      - 7575:7575
+      - 7575:6868
     environment:
       - TZ=Europe/Paris
     volumes:
