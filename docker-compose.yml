@@ -204,7 +204,7 @@ services:
       - media-net
 
   profilarr:
-    image: santiagosayshey/profilarr-docker:latest
+    image: santiagosayshey/profilarr:latest
     container_name: profilarr
     networks:
       - media-net
