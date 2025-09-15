@@ -204,12 +204,12 @@ services:
       - media-net
 
   profilarr:
-    image: ghcr.io/profilarr/profilarr-docker:latest
+    image: santiagosayshey/profilarr-docker:latest
     container_name: profilarr
     networks:
       - media-net
     ports:
-      - 7575:7575   # Interface web (http://IP:7575)
+      - 7575:7575
     environment:
       - TZ=Europe/Paris
     volumes:
