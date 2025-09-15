@@ -203,6 +203,59 @@ services:
     networks:
       - media-net
 
+  recyclarr:
+    image: recyclarr/recyclarr
+    container_name: recyclarr
+    networks:
+      - media-net
+    volumes:
+      - ./config/recyclarr:/config
+    environment:
+      - TZ=Europe/Paris
+    restart: unless-stopped
+    command: >
+      sync
+
+  glances:
+    image: nicolargo/glances:latest
+    container_name: glances
+    pid: "host"
+    networks:
+      - media-net
+    ports:
+      - 61208:61208  # WebUI (http://IP:61208)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - TZ=Europe/Paris
+      - GLANCES_OPT=-w
+    restart: unless-stopped
+
+  dozzle:
+    image: amir20/dozzle:latest
+    container_name: dozzle
+    networks:
+      - media-net
+    ports:
+      - 9999:8080   # http://IP:9999
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: unless-stopped
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    networks:
+      - media-net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Europe/Paris
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_REMOVE_VOLUMES=false
+      - WATCHTOWER_POLL_INTERVAL=86400
+    restart: unless-stopped
+
 networks:
   media-net:
     driver: bridge
