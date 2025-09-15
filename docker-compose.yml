@@ -203,19 +203,6 @@ services:
     networks:
       - media-net
 
-  profilarr:
-    image: santiagosayshey/profilarr:latest
-    container_name: profilarr
-    networks:
-      - media-net
-    ports:
-      - 7575:6868
-    environment:
-      - TZ=Europe/Paris
-    volumes:
-      - ./config/profilarr:/config
-    restart: unless-stopped
-
   glances:
     image: nicolargo/glances:latest
     container_name: glances
