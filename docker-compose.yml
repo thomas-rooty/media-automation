@@ -144,6 +144,21 @@ services:
       - TZ=Europe/Paris
     volumes:
       - ./config/huntarr:/config
+    restart: unless-stopped.
+
+  notifiarr:
+    image: golift/notifiarr:latest
+    container_name: notifiarr
+    networks:
+      - media-net
+    ports:
+      - 5454:5454
+    environment:
+      - TZ=Europe/Paris
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - ./config/notifiarr:/config
     restart: unless-stopped
 
   jellyseerr:
