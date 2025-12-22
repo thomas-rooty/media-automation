@@ -7,6 +7,7 @@ services:
     ports:
       - 8080:8080     # qBittorrent
       - 6881:6881
+      - 9696:9696     # Prowlarr
     environment:
       - VPN_SERVICE_PROVIDER=private internet access
       - VPN_TYPE=openvpn
@@ -41,10 +42,6 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
-    networks:
-      - media-net
-    ports:
-      - 9696:9696
     depends_on:
       - gluetun
     environment:
@@ -144,21 +141,6 @@ services:
       - TZ=Europe/Paris
     volumes:
       - ./config/huntarr:/config
-    restart: unless-stopped.
-
-  notifiarr:
-    image: golift/notifiarr:latest
-    container_name: notifiarr
-    networks:
-      - media-net
-    ports:
-      - 5454:5454
-    environment:
-      - TZ=Europe/Paris
-      - PUID=1000
-      - PGID=1000
-    volumes:
-      - ./config/notifiarr:/config
     restart: unless-stopped
 
   jellyseerr:
@@ -177,7 +159,7 @@ services:
       - radarr
     user: "1000:1000"
     restart: unless-stopped
-  
+
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
