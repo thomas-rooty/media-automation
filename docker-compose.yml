@@ -243,6 +243,18 @@ services:
       - WATCHTOWER_REMOVE_VOLUMES=false
       - WATCHTOWER_POLL_INTERVAL=86400
     restart: unless-stopped
+  
+  byparr:
+    image: ghcr.io/thephaseless/byparr:latest
+    container_name: byparr
+    networks:
+      - media-net
+    ports:
+      - 8192:8192
+    environment:
+      - TZ=Europe/Paris
+      - LOG_LEVEL=info
+    restart: unless-stopped
 
 networks:
   media-net:
