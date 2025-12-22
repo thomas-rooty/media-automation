@@ -14,6 +14,8 @@ services:
       - OPENVPN_USER=${OPENVPN_USER}
       - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
       - VPN_PORT_FORWARDING=on
+      - VPN_INPUT_PORTS=8080,9696
+      - FIREWALL_INPUT_SUBNETS=192.168.1.0/24
     volumes:
       - ./config/gluetun:/gluetun
     restart: unless-stopped
@@ -42,6 +44,7 @@ services:
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
+    network_mode: "service:gluetun"
     depends_on:
       - gluetun
     environment:
