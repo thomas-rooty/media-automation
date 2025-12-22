@@ -16,6 +16,7 @@ services:
       - VPN_PORT_FORWARDING=on
       - VPN_INPUT_PORTS=8080,9696
       - FIREWALL_INPUT_SUBNETS=192.168.1.0/24
+      - VPN_RECONNECT_INTERVAL=12h
     volumes:
       - ./config/gluetun:/gluetun
     restart: unless-stopped
