@@ -253,6 +253,24 @@ services:
     volumes:
       - ./config/huntarr:/config
     restart: unless-stopped
+  
+  profilarr:
+    image: ghcr.io/dreulavelle/profilarr:latest
+    container_name: profilarr
+    networks:
+      - media-net
+    ports:
+      - 6868:6868
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - TZ=Europe/Paris
+    volumes:
+      - ./config/profilarr:/config
+    depends_on:
+      - sonarr
+      - radarr
+    restart: unless-stopped
 
   portainer:
     image: portainer/portainer-ce:latest
