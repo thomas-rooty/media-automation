@@ -81,6 +81,9 @@ services:
       - ./config/prowlarr:/config
       - ./config/prowlarr/Definitions/Custom:/config/Definitions/Custom:ro
     restart: unless-stopped
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
 
   flaresolverr:
     image: flaresolverr/flaresolverr:latest
@@ -101,6 +104,9 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
 
   # =========================
   # Arr stack (LAN normal)
