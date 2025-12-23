@@ -255,7 +255,7 @@ services:
     restart: unless-stopped
   
   profilarr:
-    image: ghcr.io/dreulavelle/profilarr:latest
+    image: ghcr.io/profilarr/profilarr:latest
     container_name: profilarr
     networks:
       - media-net
