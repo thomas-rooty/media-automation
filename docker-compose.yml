@@ -265,6 +265,8 @@ services:
       - no-new-privileges:true
     environment:
       - TZ=Europe/Paris
+      - PROFILARR_USERNAME=admin
+      - PROFILARR_PASSWORD=change_me_strong_password
     volumes:
       - ./config/profilarr:/config
     depends_on:
