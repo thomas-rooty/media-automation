@@ -1,38 +1,53 @@
 services:
+  # =========================
+  # VPN (uniquement pour qBittorrent)
+  # =========================
   gluetun:
-    image: qmcgaw/gluetun
+    image: qmcgaw/gluetun:latest
     container_name: gluetun
     cap_add:
       - NET_ADMIN
-    ports:
-      - 8080:8080     # qBittorrent
-      - 6881:6881
-      - 9696:9696     # Prowlarr
+    security_opt:
+      - no-new-privileges:true
     environment:
       - VPN_SERVICE_PROVIDER=private internet access
       - VPN_TYPE=openvpn
       - OPENVPN_USER=${OPENVPN_USER}
       - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
-      - VPN_PORT_FORWARDING=on
-      - VPN_INPUT_PORTS=8080,9696
-      - FIREWALL_INPUT_SUBNETS=192.168.1.0/24
-      - VPN_RECONNECT_INTERVAL=12h
       - SERVER_REGIONS=switzerland
+      - VPN_PORT_FORWARDING=on
+
+      # Ports exposés via gluetun (seulement qBittorrent ici)
+      - VPN_INPUT_PORTS=8080
+
+      # Autorise l'accès LAN à l'UI qBittorrent (depuis ton réseau)
+      - FIREWALL_INPUT_SUBNETS=192.168.1.0/24
+
+      - TZ=Europe/Paris
+      - VPN_RECONNECT_INTERVAL=12h
     volumes:
       - ./config/gluetun:/gluetun
+    ports:
+      - 8080:8080     # qBittorrent WebUI
+      - 6881:6881     # qBittorrent TCP
+      - 6881:6881/udp # qBittorrent UDP
     restart: unless-stopped
     networks:
-      media-net:
-        aliases:
-          - qbittorrent
-          - prowlarr
+      - media-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO", "-", "https://ipinfo.io/ip"]
+      interval: 60s
+      timeout: 10s
+      retries: 5
 
   qbittorrent:
-    image: linuxserver/qbittorrent
+    image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     network_mode: "service:gluetun"
     depends_on:
       - gluetun
+    security_opt:
+      - no-new-privileges:true
     environment:
       - PUID=1000
       - PGID=1000
@@ -42,13 +57,22 @@ services:
       - ./config/qbittorrent:/config
       - ./downloads:/downloads
     restart: unless-stopped
+    # pas de ports ici (hérite de gluetun)
 
+  # =========================
+  # Indexers (hors VPN pour éviter Cloudflare)
+  # =========================
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
-    network_mode: "service:gluetun"
+    networks:
+      - media-net
     depends_on:
-      - gluetun
+      - flaresolverr
+    ports:
+      - 9696:9696
+    security_opt:
+      - no-new-privileges:true
     environment:
       - PUID=1000
       - PGID=1000
@@ -59,24 +83,40 @@ services:
     restart: unless-stopped
 
   flaresolverr:
-    image: 21hsmw/flaresolverr:nodriver
+    image: flaresolverr/flaresolverr:latest
     container_name: flaresolverr
-    network_mode: "service:gluetun"
-    depends_on:
-      - gluetun
+    networks:
+      - media-net
+    # Pas besoin d'exposer 8191 vers l'hôte : Prowlarr y accède en interne
+    expose:
+      - "8191"
+    security_opt:
+      - no-new-privileges:true
     environment:
       - LOG_LEVEL=info
+      - TZ=Europe/Paris
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO", "-", "http://localhost:8191/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
+  # =========================
+  # Arr stack (LAN normal)
+  # =========================
   sonarr:
-    image: linuxserver/sonarr
+    image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     networks:
       - media-net
     ports:
       - 8989:8989
     depends_on:
-      - gluetun
+      - prowlarr
+      - qbittorrent
+    security_opt:
+      - no-new-privileges:true
     environment:
       - PUID=1000
       - PGID=1000
@@ -89,14 +129,17 @@ services:
     restart: unless-stopped
 
   radarr:
-    image: linuxserver/radarr
+    image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     networks:
       - media-net
     ports:
       - 7878:7878
     depends_on:
-      - gluetun
+      - prowlarr
+      - qbittorrent
+    security_opt:
+      - no-new-privileges:true
     environment:
       - PUID=1000
       - PGID=1000
@@ -118,6 +161,8 @@ services:
     depends_on:
       - sonarr
       - radarr
+    security_opt:
+      - no-new-privileges:true
     environment:
       - PUID=1000
       - PGID=1000
@@ -130,23 +175,9 @@ services:
       - "/mnt/medias/Medias/Series:/media/series_f"
     restart: unless-stopped
 
-  huntarr:
-    image: huntarr/huntarr:latest
-    container_name: huntarr
-    depends_on:
-      - gluetun
-    networks:
-      - media-net
-    ports:
-      - 9705:9705   # Web UI port for Huntarr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
-    volumes:
-      - ./config/huntarr:/config
-    restart: unless-stopped
-
+  # =========================
+  # Front / media
+  # =========================
   jellyseerr:
     image: ghcr.io/fallenbagel/jellyseerr:latest
     container_name: jellyseerr
@@ -154,13 +185,15 @@ services:
       - media-net
     ports:
       - 5055:5055
+    depends_on:
+      - sonarr
+      - radarr
+    security_opt:
+      - no-new-privileges:true
     environment:
       - TZ=Europe/Paris
     volumes:
       - ./config/jellyseerr:/app/config
-    depends_on:
-      - sonarr
-      - radarr
     user: "1000:1000"
     restart: unless-stopped
 
@@ -170,9 +203,11 @@ services:
     networks:
       - media-net
     ports:
-      - 8096:8096        # HTTP (http://HOST_IP:8096)
-      - 7359:7359/udp    # Local discovery
-      - 1900:1900/udp    # DLNA SSDP
+      - 8096:8096
+      - 7359:7359/udp
+      - 1900:1900/udp
+    security_opt:
+      - no-new-privileges:true
     environment:
       - PUID=1000
       - PGID=1000
@@ -189,20 +224,44 @@ services:
       - radarr
     restart: unless-stopped
 
+  # =========================
+  # Tools
+  # =========================
+  huntarr:
+    image: huntarr/huntarr:latest
+    container_name: huntarr
+    networks:
+      - media-net
+    ports:
+      - 9705:9705
+    depends_on:
+      - sonarr
+      - radarr
+      - prowlarr
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - ./config/huntarr:/config
+    restart: unless-stopped
+
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
-    restart: unless-stopped
+    networks:
+      - media-net
+    ports:
+      - 9443:9443
+      - 9000:9000
     security_opt:
       - no-new-privileges:true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./config/portainer:/data
-    ports:
-      - 9443:9443   # Interface web sécurisée
-      - 9000:9000   # interface HTTP non sécurisée
-    networks:
-      - media-net
+    restart: unless-stopped
 
   glances:
     image: nicolargo/glances:latest
@@ -211,7 +270,9 @@ services:
     networks:
       - media-net
     ports:
-      - 61208:61208  # WebUI (http://IP:61208)
+      - 61208:61208
+    security_opt:
+      - no-new-privileges:true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
@@ -225,16 +286,20 @@ services:
     networks:
       - media-net
     ports:
-      - 9999:8080   # http://IP:9999
+      - 9999:8080
+    security_opt:
+      - no-new-privileges:true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: unless-stopped
 
   watchtower:
-    image: containrrr/watchtower
+    image: containrrr/watchtower:latest
     container_name: watchtower
     networks:
       - media-net
+    security_opt:
+      - no-new-privileges:true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
@@ -242,18 +307,6 @@ services:
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_REMOVE_VOLUMES=false
       - WATCHTOWER_POLL_INTERVAL=86400
-    restart: unless-stopped
-  
-  byparr:
-    image: ghcr.io/thephaseless/byparr:latest
-    container_name: byparr
-    networks:
-      - media-net
-    ports:
-      - 8192:8192
-    environment:
-      - TZ=Europe/Paris
-      - LOG_LEVEL=info
     restart: unless-stopped
 
 networks:
