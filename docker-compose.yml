@@ -314,6 +314,56 @@ services:
       - WATCHTOWER_REMOVE_VOLUMES=false
       - WATCHTOWER_POLL_INTERVAL=86400
     restart: unless-stopped
+  
+  # =========================
+  # Nextcloud
+  # =========================
+  
+  nextcloud:
+    image: nextcloud:29
+    container_name: nextcloud
+    depends_on:
+      - nextcloud-db
+      - nextcloud-redis
+    ports:
+      - 8088:80
+    environment:
+      - TZ=Europe/Paris
+      - REDIS_HOST=nextcloud-redis
+      - MYSQL_HOST=nextcloud-db
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=ncpassword
+    volumes:
+      - ./nextcloud/app:/var/www/html
+      - ./nextcloud/data:/var/www/html/data
+      - /mnt/medias/Shares/Nextcloud:/var/www/html/data/shares:ro
+    networks:
+      - media-net
+    restart: unless-stopped
+
+  nextcloud-db:
+    image: mariadb:10.11
+    container_name: nextcloud-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=ncpassword
+    volumes:
+      - ./nextcloud/db:/var/lib/mysql
+    networks:
+      - media-net
+    restart: unless-stopped
+
+  nextcloud-redis:
+    image: redis:7-alpine
+    container_name: nextcloud-redis
+    volumes:
+      - ./nextcloud/redis:/data
+    networks:
+      - media-net
+    restart: unless-stopped
 
 networks:
   media-net:
