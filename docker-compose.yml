@@ -60,10 +60,9 @@ services:
   flaresolverr:
     image: 21hsmw/flaresolverr:nodriver
     container_name: flaresolverr
-    networks:
-      - media-net
-    ports:
-      - 8191:8191
+    network_mode: "service:gluetun"
+    depends_on:
+      - gluetun
     environment:
       - LOG_LEVEL=info
     restart: unless-stopped
