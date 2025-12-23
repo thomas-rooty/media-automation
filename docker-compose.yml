@@ -253,26 +253,6 @@ services:
     volumes:
       - ./config/huntarr:/config
     restart: unless-stopped
-  
-  profilarr:
-    image: santiagosayshey/profilarr:latest
-    container_name: profilarr
-    networks:
-      - media-net
-    ports:
-      - 6868:6868
-    security_opt:
-      - no-new-privileges:true
-    environment:
-      - TZ=Europe/Paris
-      - PROFILARR_USERNAME=admin
-      - PROFILARR_PASSWORD=change_me_strong_password
-    volumes:
-      - ./config/profilarr:/config
-    depends_on:
-      - sonarr
-      - radarr
-    restart: unless-stopped
 
   portainer:
     image: portainer/portainer-ce:latest
