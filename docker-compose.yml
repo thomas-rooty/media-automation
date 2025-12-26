@@ -89,7 +89,6 @@ services:
     container_name: flaresolverr
     networks:
       - media-net
-    # Pas besoin d'exposer 8191 vers l'hôte : Prowlarr y accède en interne
     expose:
       - "8191"
     security_opt:
@@ -97,12 +96,10 @@ services:
     environment:
       - LOG_LEVEL=info
       - TZ=Europe/Paris
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "-qO", "-", "http://localhost:8191/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
 
   # =========================
   # Arr stack (LAN normal)
