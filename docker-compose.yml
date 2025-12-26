@@ -14,8 +14,9 @@ services:
       - VPN_TYPE=openvpn
       - OPENVPN_USER=${OPENVPN_USER}
       - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
-      - SERVER_REGIONS=switzerland
+      - SERVER_REGIONS=france,netherlands,germany
       - VPN_PORT_FORWARDING=on
+      - VPN_PORT_FORWARDING_PROVIDER=private internet access
 
       # Ports exposés via gluetun (seulement qBittorrent ici)
       - VPN_INPUT_PORTS=8080
@@ -29,8 +30,6 @@ services:
       - ./config/gluetun:/gluetun
     ports:
       - 8080:8080     # qBittorrent WebUI
-      - 6881:6881     # qBittorrent TCP
-      - 6881:6881/udp # qBittorrent UDP
     restart: unless-stopped
     networks:
       - media-net
@@ -81,9 +80,6 @@ services:
       - ./config/prowlarr:/config
       - ./config/prowlarr/Definitions/Custom:/config/Definitions/Custom:ro
     restart: unless-stopped
-    dns:
-      - 1.1.1.1
-      - 8.8.8.8
 
   flaresolverr:
     image: flaresolverr/flaresolverr:latest
@@ -104,9 +100,6 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-    dns:
-      - 1.1.1.1
-      - 8.8.8.8
 
   # =========================
   # Arr stack (LAN normal)
