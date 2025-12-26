@@ -79,6 +79,9 @@ services:
     volumes:
       - ./config/prowlarr:/config
       - ./config/prowlarr/Definitions/Custom:/config/Definitions/Custom:ro
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
     restart: unless-stopped
 
   flaresolverr:
