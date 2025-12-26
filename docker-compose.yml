@@ -357,6 +357,40 @@ services:
     networks:
       - media-net
     restart: unless-stopped
+  
+  qbittorrent-port-sync:
+    image: alpine:3.19
+    container_name: qbittorrent-port-sync
+    depends_on:
+      - gluetun
+      - qbittorrent
+    network_mode: "service:gluetun"
+    volumes:
+      - ./config/gluetun:/gluetun:ro
+    environment:
+      - QB_URL=http://localhost:8080
+      - QB_USER=admin
+      - QB_PASS=adminadmin
+    command: >
+      sh -c "
+      apk add --no-cache curl jq &&
+      while true; do
+        PORT=$(cat /gluetun/forwarded_port 2>/dev/null);
+        [ -z \"$PORT\" ] && sleep 60 && continue;
+
+        CURRENT=$(curl -s -u $QB_USER:$QB_PASS $QB_URL/api/v2/app/preferences | jq .listen_port);
+
+        if [ \"$PORT\" != \"$CURRENT\" ]; then
+          echo \"[SYNC] Updating qBittorrent port to $PORT\";
+          curl -s -u $QB_USER:$QB_PASS \
+            -X POST $QB_URL/api/v2/app/setPreferences \
+            -d \"json={\\\"listen_port\\\":$PORT}\" >/dev/null;
+        fi;
+
+        sleep 300;
+      done
+      "
+    restart: unless-stopped
 
 networks:
   media-net:
