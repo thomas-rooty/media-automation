@@ -161,14 +161,25 @@ function renderWeatherModal(data) {
   // Hourly: show every 2 hours for ~24h starting now
   const hours = Array.isArray(data.hourly) ? data.hourly : [];
   const now = Date.now();
-  const upcoming = hours
-    .map((h) => ({...h, _t: new Date(h.time).getTime()}))
-    .filter((h) => Number.isFinite(h._t) && h._t >= now - 15*60*1000)
-    .sort((a,b) => a._t - b._t)
-    .slice(0, 30); // ~30h
+  // Find the first hour >= now (with small grace). If parsing fails, fall back to index 0.
+  let startIdx = 0;
+  for (let i = 0; i < hours.length; i++) {
+    const t = Date.parse(hours[i]?.time);
+    if (Number.isFinite(t) && t >= (now - 15 * 60 * 1000)) {
+      startIdx = i;
+      break;
+    }
+  }
 
-  const every2h = upcoming.filter((h, idx) => idx % 2 === 0).slice(0, 12); // 24h view
-  const hourlyHtml = every2h.map((h) => {
+  const every2h = [];
+  for (let i = startIdx; i < Math.min(hours.length, startIdx + 24); i += 2) {
+    every2h.push(hours[i]);
+  }
+
+  // If for any reason we got nothing (edge cases), show the first 12 points.
+  const view = every2h.length ? every2h : hours.filter((_, i) => i % 2 === 0).slice(0, 12);
+
+  const hourlyHtml = view.map((h) => {
     const ii = weatherIconFrom(h.code, h.isDay);
     const t = toHour(h.time);
     const tt = Number(h.tempC);
