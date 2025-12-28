@@ -22,6 +22,28 @@ body{
   color:var(--text);
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   letter-spacing:.2px;
+  position:relative;
+  overflow:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:-20%;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 700px at 20% 30%, rgba(76,194,255,.10), transparent 60%),
+    radial-gradient(800px 600px at 80% 20%, rgba(43,213,118,.08), transparent 60%),
+    radial-gradient(700px 700px at 60% 90%, rgba(255,176,32,.06), transparent 60%);
+  filter: blur(6px);
+  opacity:.55;
+  animation:bgDrift 28s ease-in-out infinite;
+  z-index:-1;
+}
+
+@keyframes bgDrift{
+  0%{transform:translate3d(-1.5%, -1%, 0) scale(1.02);}
+  50%{transform:translate3d(1.5%, 1%, 0) scale(1.04);}
+  100%{transform:translate3d(-1.5%, -1%, 0) scale(1.02);}
 }
 
 .app{
@@ -270,6 +292,15 @@ header{
   font-weight:650;
   color:var(--text);
 }
+.tagBtn{
+  cursor:pointer;
+  color:inherit;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+  user-select:none;
+}
+.tagBtn:active{transform:translateY(1px); background:rgba(255,255,255,.10);}
+.iconHints{opacity:.85; letter-spacing:.5px;}
 .tag.good{border-color:rgba(43,213,118,.35); background:rgba(43,213,118,.10); color:#bff4d9}
 .tag.bad{border-color:rgba(255,77,77,.35); background:rgba(255,77,77,.10); color:#ffd0d0}
 .tag.warn{border-color:rgba(255,176,32,.35); background:rgba(255,176,32,.10); color:#ffe4b6}
@@ -286,6 +317,14 @@ header{
   height:100%;
   background:linear-gradient(90deg, rgba(76,194,255,.9), rgba(43,213,118,.9));
   width:0%;
+}
+.progress.active > div{
+  animation:barPulse 1.9s ease-in-out infinite;
+}
+@keyframes barPulse{
+  0%{filter:brightness(0.95); opacity:.75;}
+  50%{filter:brightness(1.15); opacity:1;}
+  100%{filter:brightness(0.95); opacity:.75;}
 }
 
 .media-grid{
@@ -314,6 +353,13 @@ header{
 }
 .poster img{width:100%;height:100%;object-fit:cover;display:block}
 .media .txt{min-width:0;display:flex;flex-direction:column;justify-content:center;gap:4px}
+.mediaTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  min-width:0;
+}
 .media .txt .name{
   font-size:16px;
   font-weight:650;
@@ -328,6 +374,23 @@ header{
   overflow:hidden;
   text-overflow:ellipsis;
 }
+
+/* Subtle badges (Jellyfin playback) */
+.miniTag{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:4px 8px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.05);
+  color:#d8e3ee;
+  font-size:12px;
+  font-weight:750;
+  flex:0 0 auto;
+}
+.miniTag.good{border-color:rgba(43,213,118,.35); background:rgba(43,213,118,.10); color:#bff4d9}
+.miniTag.warn{border-color:rgba(255,176,32,.35); background:rgba(255,176,32,.10); color:#ffe4b6}
 
 .link-grid{
   display:grid;

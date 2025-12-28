@@ -3,6 +3,7 @@ from __future__ import annotations
 import datetime as dt
 import shutil
 import socket
+import time
 from pathlib import Path
 from typing import Any, Literal
 
@@ -21,6 +22,37 @@ app = FastAPI(title=settings.title)
 
 STATIC_DIR = Path(__file__).resolve().parents[1] / "static"
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+
+_NET_LAST: dict[str, float] = {}
+
+
+def _read_net_totals_linux() -> tuple[int | None, int | None]:
+    """
+    Read total rx/tx bytes from /proc/net/dev (Linux).
+    Returns (rx_bytes, tx_bytes) or (None, None) if unavailable.
+    """
+    path = "/proc/net/dev"
+    try:
+        rx_total = 0
+        tx_total = 0
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f:
+                if ":" not in line:
+                    continue
+                iface, rest = line.split(":", 1)
+                iface = iface.strip()
+                if not iface or iface == "lo":
+                    continue
+                cols = rest.strip().split()
+                # format: rx_bytes ... (8 cols) ... tx_bytes ...
+                if len(cols) < 16:
+                    continue
+                rx_total += int(cols[0])
+                tx_total += int(cols[8])
+        return rx_total, tx_total
+    except Exception:
+        return None, None
 
 
 @app.get("/", include_in_schema=False)
@@ -164,6 +196,22 @@ def system() -> dict[str, Any]:
         except Exception as e:
             disks_out.append({"label": label, "path": path, "error": str(e)})
 
+    rx_bps: float | None = None
+    tx_bps: float | None = None
+    rx, tx = _read_net_totals_linux()
+    now = time.time()
+    if rx is not None and tx is not None:
+        last_rx = _NET_LAST.get("rx")
+        last_tx = _NET_LAST.get("tx")
+        last_t = _NET_LAST.get("t")
+        if last_rx is not None and last_tx is not None and last_t is not None:
+            dt_s = max(0.001, now - float(last_t))
+            rx_bps = max(0.0, (float(rx) - float(last_rx)) / dt_s)
+            tx_bps = max(0.0, (float(tx) - float(last_tx)) / dt_s)
+        _NET_LAST["rx"] = float(rx)
+        _NET_LAST["tx"] = float(tx)
+        _NET_LAST["t"] = float(now)
+
     return {
         "host": host,
         "memory": {
@@ -171,6 +219,7 @@ def system() -> dict[str, Any]:
             "usedBytes": (mem_used_kb * 1024) if mem_used_kb is not None else None,
             "availBytes": (mem_avail_kb * 1024) if mem_avail_kb is not None else None,
         },
+        "network": {"rxBps": rx_bps, "txBps": tx_bps},
         "disks": disks_out,
     }
 
@@ -489,6 +538,28 @@ async def radarr_soon(days_future: int = 365, limit: int = 10) -> dict[str, Any]
         if reason == "Unreleased" and release_date and release_date > max_future:
             continue
 
+        missing_icons: list[str] = []
+        if reason == "Missing":
+            in_cinemas = _parse_date(m.get("inCinemas"))
+            digital = _parse_date(m.get("digitalRelease"))
+            physical = _parse_date(m.get("physicalRelease"))
+
+            # Heuristics:
+            # - 🎥 if we only have in-cinemas info (often means not yet on home release)
+            if in_cinemas and in_cinemas <= today and (digital is None and physical is None):
+                missing_icons.append("🎥")
+
+            # - 📀 if physical (BluRay) date is in the future
+            if physical and physical > today:
+                missing_icons.append("📀")
+
+            # - 🔍 missing + monitored typically means Radarr is searching
+            missing_icons.append("🔍")
+
+            # - 🌍 older missing items might be region/availability related
+            if release_date and (today - release_date).days >= 90:
+                missing_icons.append("🌍")
+
         out.append(
             {
                 "id": mid,
@@ -499,6 +570,7 @@ async def radarr_soon(days_future: int = 365, limit: int = 10) -> dict[str, Any]
                 "status": m.get("status"),
                 "hasFile": has_file,
                 "monitored": monitored,
+                "missingIcons": missing_icons,
             }
         )
 
@@ -591,9 +663,10 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
     params = {
         "IncludeItemTypes": "Movie,Episode",
         "Limit": str(lim),
-        "Fields": "DateCreated,PrimaryImageAspectRatio,PremiereDate",
+        "Fields": "DateCreated,PrimaryImageAspectRatio,PremiereDate,UserData",
         "EnableImages": "true",
         "ImageTypeLimit": "1",
+        "EnableUserData": "true",
     }
 
     async with httpx.AsyncClient(timeout=10) as client:
@@ -615,6 +688,15 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
 
     out: list[dict[str, Any]] = []
     for it in items:
+        ud = it.get("UserData") if isinstance(it, dict) else None
+        user_data_out: dict[str, Any] | None = None
+        if isinstance(ud, dict):
+            user_data_out = {
+                "played": bool(ud.get("Played")),
+                "playbackPositionTicks": ud.get("PlaybackPositionTicks"),
+                "playCount": ud.get("PlayCount"),
+                "lastPlayedDate": ud.get("LastPlayedDate"),
+            }
         out.append(
             {
                 "id": it.get("Id"),
@@ -627,6 +709,7 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
                 "dateCreated": it.get("DateCreated"),
                 "premiereDate": it.get("PremiereDate"),
                 "hasPrimaryImage": bool(it.get("ImageTags", {}).get("Primary")),
+                "userData": user_data_out,
             }
         )
 

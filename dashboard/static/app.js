@@ -53,6 +53,23 @@ function toLocalTime(iso) {
   return d.toLocaleTimeString(undefined, { hour:"2-digit", minute:"2-digit" });
 }
 
+function timeAgo(iso) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  const now = new Date();
+  if (isNaN(d.getTime())) return "—";
+  const diffMs = now.getTime() - d.getTime();
+  const s = Math.floor(diffMs / 1000);
+  if (!Number.isFinite(s) || s < 0) return "—";
+  if (s < 60) return "à l’instant";
+  const m = Math.floor(s / 60);
+  if (m < 60) return `il y a ${m} min`;
+  const h = Math.floor(m / 60);
+  if (h < 48) return `il y a ${h} h`;
+  const days = Math.floor(h / 24);
+  return `il y a ${days} j`;
+}
+
 function clockTick() {
   const d = new Date();
   el("clockTime").textContent = d.toLocaleTimeString(undefined, { hour:"2-digit", minute:"2-digit" });
@@ -150,13 +167,14 @@ function renderQb(items) {
     const ul = fmtSpeed(t.upspeed);
     const eta = fmtEta(t.eta);
     const state = safeText(t.state);
+    const active = (Number(t.dlspeed ?? 0) > 0) || (Number(t.upspeed ?? 0) > 0) || /dl|down|meta|check/i.test(state);
     const div = document.createElement("div");
     div.className = "row";
     div.innerHTML = `
       <div class="main">
         <div class="primary">${name}</div>
         <div class="secondary">${state || "—"} • DL ${dl} • UL ${ul} • ETA ${eta}</div>
-        <div class="progress"><div style="width:${(pct*100).toFixed(1)}%"></div></div>
+        <div class="progress${active && pct < 1 ? " active" : ""}"><div style="width:${(pct*100).toFixed(1)}%"></div></div>
       </div>
       <div class="meta">
         <div class="tag">${Math.round(pct*100)}%</div>
@@ -185,14 +203,42 @@ function renderJelly(items) {
     } else if (it.productionYear) {
       sub = `${typ} • ${it.productionYear}`;
     }
+    const added = timeAgo(it.dateCreated);
+
+    const ud = it.userData;
+    let playback = null; // "watched" | "progress" | "unwatched"
+    let playbackLabel = "";
+    if (ud && typeof ud === "object") {
+      const played = !!ud.played;
+      const pos = Number(ud.playbackPositionTicks ?? 0);
+      if (played) {
+        playback = "watched";
+        playbackLabel = "Vu";
+      } else if (pos > 0) {
+        playback = "progress";
+        playbackLabel = "En cours";
+      } else {
+        playback = "unwatched";
+        playbackLabel = "Non vu";
+      }
+    }
+    const badge =
+      playback === "watched" ? `<span class="miniTag good" title="Déjà regardé">${playbackLabel}</span>` :
+      playback === "progress" ? `<span class="miniTag warn" title="Lecture en cours">${playbackLabel}</span>` :
+      playback === "unwatched" ? `<span class="miniTag" title="Pas encore regardé">${playbackLabel}</span>` :
+      "";
+
     const img = it.id ? `/api/jellyfin/items/${encodeURIComponent(it.id)}/image?maxHeight=240&quality=80` : null;
     const div = document.createElement("div");
     div.className = "media";
     div.innerHTML = `
       <div class="poster">${img ? `<img loading="lazy" src="${img}" alt="">` : ""}</div>
       <div class="txt">
-        <div class="name">${name}</div>
-        <div class="sub">${sub}</div>
+        <div class="mediaTop">
+          <div class="name">${name}</div>
+          ${badge}
+        </div>
+        <div class="sub">${sub} • Ajouté ${added}</div>
       </div>
     `;
     root.appendChild(div);
@@ -225,8 +271,10 @@ function renderRadarrUpcoming(items) {
     const year = it.year ? `(${it.year})` : "";
     const when = toLocalDate(it.releaseDate);
     const reason = safeText(it.reason) || "—";
+    const icons = Array.isArray(it.missingIcons) ? it.missingIcons.map(safeText).filter(Boolean) : [];
+    const missingIcons = icons.length ? ` <span class="iconHints" aria-hidden="true">${icons.join("")}</span>` : "";
     const tag = reason === "Queued" ? `<span class="tag good">Queue</span>` :
-                reason === "Missing" ? `<span class="tag warn">Manquant</span>` :
+                reason === "Missing" ? `<button class="tag warn tagBtn radarrLegendBtn" type="button" title="Voir la légende">${"Manquant"}${missingIcons}</button>` :
                 `<span class="tag warn">À venir</span>`;
     const div = document.createElement("div");
     div.className = "row";
@@ -244,24 +292,60 @@ function renderRadarrUpcoming(items) {
   }
 }
 
+function setupLegendModal() {
+  const overlay = el("legendOverlay");
+  const modal = el("legendModal");
+  const closeBtn = el("legendCloseBtn");
+  const list = el("legendList");
+  if (!overlay || !modal || !closeBtn || !list) return;
+
+  const open = () => {
+    overlay.classList.remove("hidden");
+    modal.classList.remove("hidden");
+    overlay.setAttribute("aria-hidden", "false");
+    modal.setAttribute("aria-hidden", "false");
+  };
+  const close = () => {
+    overlay.classList.add("hidden");
+    modal.classList.add("hidden");
+    overlay.setAttribute("aria-hidden", "true");
+    modal.setAttribute("aria-hidden", "true");
+  };
+
+  closeBtn.addEventListener("click", close);
+  overlay.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+
+  // Event delegation: click on "Manquant" badge
+  const radarrRoot = el("radarrUpcomingList");
+  if (radarrRoot) {
+    radarrRoot.addEventListener("click", (e) => {
+      const btn = e.target?.closest?.(".radarrLegendBtn");
+      if (!btn) return;
+      list.innerHTML = `
+        <div class="serviceRow"><div class="serviceLeft"><div class="serviceName">🎥</div><div class="serviceDetail">Cinéma</div></div></div>
+        <div class="serviceRow"><div class="serviceLeft"><div class="serviceName">📀</div><div class="serviceDetail">Pas encore en BluRay</div></div></div>
+        <div class="serviceRow"><div class="serviceLeft"><div class="serviceName">🌍</div><div class="serviceDetail">Région / disponibilité</div></div></div>
+        <div class="serviceRow"><div class="serviceLeft"><div class="serviceName">🔍</div><div class="serviceDetail">Recherche active</div></div></div>
+      `;
+      open();
+    });
+  }
+}
+
 function renderSystem(sys) {
   const root = el("systemStats");
   if (!root) return;
   root.innerHTML = "";
 
-  const memTotal = sys?.memory?.totalBytes;
-  const memUsed = sys?.memory?.usedBytes;
-  const memAvail = sys?.memory?.availBytes;
-
   const stats = [];
 
-  if (memTotal && memUsed != null) {
-    const p = pct(memUsed, memTotal);
-    stats.push({ k: "RAM", v: `${fmtBytes(memUsed)} / ${fmtBytes(memTotal)}${p != null ? ` (${p}%)` : ""}` });
-  } else if (memTotal && memAvail != null) {
-    const used = memTotal - memAvail;
-    const p = pct(used, memTotal);
-    stats.push({ k: "RAM", v: `${fmtBytes(used)} / ${fmtBytes(memTotal)}${p != null ? ` (${p}%)` : ""}` });
+  const rx = sys?.network?.rxBps;
+  const tx = sys?.network?.txBps;
+  if (rx != null || tx != null) {
+    stats.push({ k: "Réseau", v: `${fmtSpeed(rx)} ↓ | ${fmtSpeed(tx)} ↑` });
   }
 
   for (const d of (sys?.disks || [])) {
@@ -477,6 +561,7 @@ async function main() {
   setInterval(clockTick, 1000);
   setupMenu();
   setupServicesModal();
+  setupLegendModal();
 
   let refreshSeconds = 45;
   try {
