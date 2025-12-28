@@ -180,13 +180,10 @@ header{
 .wxHourly{
   display:flex;
   gap:10px;
-  overflow-x:auto;
-  overflow-y:hidden;
+  flex-wrap: wrap;
+  overflow: visible;
   padding-bottom:2px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
 }
-.wxHourly::-webkit-scrollbar{display:none;}
 .wxHour{
   padding:10px 10px;
   border-radius:14px;
@@ -197,13 +194,26 @@ header{
   gap:6px;
   align-items:center;
   justify-content:center;
-  min-width: 96px;
-  flex: 0 0 auto;
+  min-width: 110px;
+  flex: 1 1 140px;
 }
 .wxHour .t{color:var(--muted); font-size:12px; font-weight:700;}
 .wxHour .i{font-size:18px; line-height:1;}
 .wxHour .c{font-size:14px; font-weight:800;}
-.wxHour .p{color:var(--muted); font-size:12px; white-space:nowrap;}
+.wxHour .p{color:var(--muted); font-size:12px; white-space:normal; text-align:center;}
+
+/* Weather modal: wider + no internal scroll needed */
+#weatherModal{
+  left:12px;
+  right:12px;
+  max-width: min(1200px, calc(100vw - 24px));
+  max-height: 90vh;
+  overflow: auto;
+}
+#weatherModal #weatherContent{
+  max-height: none;
+  overflow: visible;
+}
 .iconBtn{
   width:48px;
   height:48px;
