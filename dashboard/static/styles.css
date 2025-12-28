@@ -178,13 +178,15 @@ header{
 .wxBigTemp{font-size:22px; font-weight:850;}
 .wxSmall{color:var(--muted); font-size:13px; white-space:nowrap;}
 .wxHourly{
-  display:grid;
-  grid-auto-flow:column;
-  grid-auto-columns: minmax(88px, 1fr);
+  display:flex;
   gap:10px;
-  overflow:auto;
+  overflow-x:auto;
+  overflow-y:hidden;
   padding-bottom:2px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.wxHourly::-webkit-scrollbar{display:none;}
 .wxHour{
   padding:10px 10px;
   border-radius:14px;
@@ -195,6 +197,8 @@ header{
   gap:6px;
   align-items:center;
   justify-content:center;
+  min-width: 96px;
+  flex: 0 0 auto;
 }
 .wxHour .t{color:var(--muted); font-size:12px; font-weight:700;}
 .wxHour .i{font-size:18px; line-height:1;}
