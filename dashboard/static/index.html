@@ -11,7 +11,13 @@
     <div class="app">
       <header>
         <div class="title">
-          <h1>CapyFlix Monitoring</h1>
+          <div class="titleRow">
+            <h1>CapyFlix Monitoring</h1>
+            <div class="clock clockInline" aria-label="Horloge">
+              <div class="time" id="clockTime">--:--</div>
+              <div id="clockDate">—</div>
+            </div>
+          </div>
           <div class="sub">
             <button id="servicesBtn" class="pill pillBtn" type="button" aria-label="Voir l'état des services">
               <span id="statusDot" class="dot"></span>
@@ -32,10 +38,6 @@
             <span id="weatherIcon" class="weatherIcon">—</span>
             <strong id="weatherTemp">—</strong>
             <span id="weatherLabel" class="weatherLabel"></span>
-          </div>
-          <div class="clock">
-          <div class="time" id="clockTime">--:--</div>
-          <div id="clockDate">—</div>
           </div>
         </div>
       </header>
