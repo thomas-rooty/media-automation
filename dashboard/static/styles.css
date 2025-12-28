@@ -116,7 +116,8 @@ header{
 .radarr-upcoming{grid-column:2;grid-row:1}
 .qb{grid-column:3;grid-row:1}
 .jelly{grid-column:1 / 4;grid-row:2}
-.system{grid-column:1 / 4;grid-row:3}
+.system{grid-column:1 / 3;grid-row:3}
+.library{grid-column:3;grid-row:3}
 
 .card{
   background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
@@ -144,25 +145,7 @@ header{
   padding-right:2px;
 }
 
-.subsectionTitle{
-  margin-top:12px;
-  margin-bottom:8px;
-  font-size:13px;
-  letter-spacing:.5px;
-  color:var(--muted);
-  text-transform:uppercase;
-}
-
-/* qBittorrent card: keep downloads visible */
-.qb #qbList{
-  flex:1;
-  min-height:0;
-}
-.qb #libraryToday{
-  max-height:170px;
-  min-height:0;
-  overflow:auto;
-}
+/* (removed) subsection styling; library is its own card now */
 
 .row{
   display:grid;
@@ -328,6 +311,11 @@ a.btn:active{
   grid-template-columns: 1fr 1fr 1fr;
   gap:10px;
 }
+
+/* Library card: keep titles readable and not too tall */
+.library .list{
+  overflow:auto;
+}
 .scanLine{
   margin-top:10px;
   color:var(--muted);
@@ -390,7 +378,7 @@ a.btn:active{
 /* Tablet landscape tweaks */
 @media (max-width: 1100px){
   .grid{grid-template-columns: 1fr; grid-auto-rows:auto; }
-  .sonarr,.radarr-upcoming,.qb,.jelly,.system{grid-column:auto;grid-row:auto}
+  .sonarr,.radarr-upcoming,.qb,.jelly,.system,.library{grid-column:auto;grid-row:auto}
   .link-grid{grid-template-columns: repeat(3, 1fr);}
   .media-grid{grid-template-columns: repeat(2, 1fr);}
   .system-grid{grid-template-columns: 1fr;}
