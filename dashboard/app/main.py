@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import datetime as dt
+import os
+import shutil
+import socket
 from pathlib import Path
 from typing import Any, Literal
 
@@ -59,6 +62,87 @@ def _parse_date(value: Any) -> dt.date | None:
 @app.get("/api/meta")
 def meta() -> dict[str, Any]:
     return {"title": settings.title, "refreshSeconds": settings.refresh_seconds}
+
+
+def _read_meminfo() -> dict[str, int]:
+    """
+    Returns meminfo values in kB (Linux). Empty dict if not available.
+    """
+    path = "/proc/meminfo"
+    try:
+        out: dict[str, int] = {}
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f:
+                parts = line.strip().split()
+                if len(parts) >= 2 and parts[0].endswith(":"):
+                    key = parts[0][:-1]
+                    try:
+                        out[key] = int(parts[1])
+                    except Exception:
+                        continue
+        return out
+    except Exception:
+        return {}
+
+
+def _loadavg() -> tuple[float | None, float | None, float | None]:
+    try:
+        a, b, c = os.getloadavg()
+        return float(a), float(b), float(c)
+    except Exception:
+        return None, None, None
+
+
+@app.get("/api/system")
+def system() -> dict[str, Any]:
+    """
+    Basic host stats (inside container):
+    - load average
+    - RAM usage (Linux /proc/meminfo)
+    - disk usage for configured mount points
+    """
+    host = socket.gethostname()
+    load1, load5, load15 = _loadavg()
+
+    mem = _read_meminfo()
+    mem_total_kb = mem.get("MemTotal")
+    mem_avail_kb = mem.get("MemAvailable") or mem.get("MemFree")
+    mem_used_kb = None
+    if mem_total_kb is not None and mem_avail_kb is not None:
+        mem_used_kb = max(0, mem_total_kb - mem_avail_kb)
+
+    disks_cfg = settings.disks()
+    if not disks_cfg:
+        disks_cfg = [{"label": "Root", "path": "/"}]
+
+    disks_out: list[dict[str, Any]] = []
+    for d in disks_cfg:
+        label = d.get("label") or "Disk"
+        path = d.get("path") or "/"
+        try:
+            du = shutil.disk_usage(path)
+            disks_out.append(
+                {
+                    "label": label,
+                    "path": path,
+                    "total": du.total,
+                    "used": du.used,
+                    "free": du.free,
+                }
+            )
+        except Exception as e:
+            disks_out.append({"label": label, "path": path, "error": str(e)})
+
+    return {
+        "host": host,
+        "load": {"1": load1, "5": load5, "15": load15},
+        "memory": {
+            "totalBytes": (mem_total_kb * 1024) if mem_total_kb is not None else None,
+            "usedBytes": (mem_used_kb * 1024) if mem_used_kb is not None else None,
+            "availBytes": (mem_avail_kb * 1024) if mem_avail_kb is not None else None,
+        },
+        "disks": disks_out,
+    }
 
 
 def _default_links_for_host(host: str) -> list[dict[str, str]]:

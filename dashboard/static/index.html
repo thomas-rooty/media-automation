@@ -24,9 +24,14 @@
           </div>
         </div>
 
-        <div class="clock">
+        <div class="headerRight">
+          <button id="menuBtn" class="iconBtn" aria-label="Menu">
+            <span class="icon">☰</span>
+          </button>
+          <div class="clock">
           <div class="time" id="clockTime">--:--</div>
           <div id="clockDate">—</div>
+          </div>
         </div>
       </header>
 
@@ -51,12 +56,23 @@
           <div id="jellyList" class="media-grid"></div>
         </section>
 
-        <section class="card links">
-          <h2>Accès rapide</h2>
-          <div id="links" class="link-grid"></div>
+        <section class="card system">
+          <h2>Système</h2>
+          <div id="systemStats" class="system-grid"></div>
         </section>
       </div>
     </div>
+
+    <div id="menuOverlay" class="overlay hidden" aria-hidden="true"></div>
+    <aside id="menuPanel" class="panel hidden" aria-hidden="true">
+      <div class="panelHeader">
+        <div class="panelTitle">Accès rapide</div>
+        <button id="menuCloseBtn" class="iconBtn" aria-label="Fermer">
+          <span class="icon">✕</span>
+        </button>
+      </div>
+      <div id="links" class="link-grid panelLinks"></div>
+    </aside>
 
     <script src="/static/app.js"></script>
   </body>

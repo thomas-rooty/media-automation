@@ -9,6 +9,10 @@ services:
     env_file:
       # Copie `dashboard/dashboard.env.example` -> `dashboard/dashboard.env`
       - ./dashboard.env
+    # Pour afficher les disques externes dans /api/system, monte ici les mêmes points de montage
+    # que sur ton serveur (en lecture seule si tu veux).
+    # volumes:
+    #   - /mnt/medias:/mnt/medias:ro
     networks:
       - media-net
     restart: unless-stopped

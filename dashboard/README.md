@@ -30,6 +30,7 @@ Voir `env.example`. Les plus importantes :
 - `GET /api/jellyfin/latest?limit=9`
 - `GET /api/jellyfin/items/{itemId}/image?maxHeight=240&quality=80`
 - `GET /api/status`
+- `GET /api/system`
 - `GET /api/links`
 
 ## Lancer via Docker (minimal)

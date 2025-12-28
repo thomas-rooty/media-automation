@@ -9,6 +9,11 @@ function fmtBytes(n) {
   return `${v.toFixed(v >= 10 || i === 0 ? 0 : 1)} ${u[i]}`;
 }
 
+function pct(used, total) {
+  if (!total || total <= 0) return null;
+  return Math.round((used / total) * 100);
+}
+
 function fmtSpeed(bps) {
   if (!bps) return "—";
   return `${fmtBytes(bps)}/s`;
@@ -198,6 +203,86 @@ function renderRadarrUpcoming(items) {
   }
 }
 
+function renderSystem(sys) {
+  const root = el("systemStats");
+  if (!root) return;
+  root.innerHTML = "";
+
+  const memTotal = sys?.memory?.totalBytes;
+  const memUsed = sys?.memory?.usedBytes;
+  const memAvail = sys?.memory?.availBytes;
+
+  const load1 = sys?.load?.["1"];
+  const load5 = sys?.load?.["5"];
+
+  const stats = [];
+
+  if (typeof load1 === "number" && typeof load5 === "number") {
+    stats.push({ k: "Load", v: `${load1.toFixed(2)} / ${load5.toFixed(2)}` });
+  }
+
+  if (memTotal && memUsed != null) {
+    const p = pct(memUsed, memTotal);
+    stats.push({ k: "RAM", v: `${fmtBytes(memUsed)} / ${fmtBytes(memTotal)}${p != null ? ` (${p}%)` : ""}` });
+  } else if (memTotal && memAvail != null) {
+    const used = memTotal - memAvail;
+    const p = pct(used, memTotal);
+    stats.push({ k: "RAM", v: `${fmtBytes(used)} / ${fmtBytes(memTotal)}${p != null ? ` (${p}%)` : ""}` });
+  }
+
+  for (const d of (sys?.disks || [])) {
+    if (d.error) {
+      stats.push({ k: `Disque: ${d.label}`, v: "Erreur" });
+      continue;
+    }
+    const p = pct(d.used, d.total);
+    stats.push({
+      k: `Disque: ${d.label}`,
+      v: `${fmtBytes(d.free)} libre / ${fmtBytes(d.total)}${p != null ? ` (${p}% used)` : ""}`,
+    });
+  }
+
+  if (stats.length === 0) {
+    root.innerHTML = `<div class="stat"><div class="k">Système</div><div class="v">Indisponible</div></div>`;
+    return;
+  }
+
+  for (const s of stats.slice(0, 6)) {
+    const div = document.createElement("div");
+    div.className = "stat";
+    div.innerHTML = `<div class="k">${s.k}</div><div class="v">${s.v}</div>`;
+    root.appendChild(div);
+  }
+}
+
+function setupMenu() {
+  const btn = el("menuBtn");
+  const closeBtn = el("menuCloseBtn");
+  const overlay = el("menuOverlay");
+  const panel = el("menuPanel");
+  if (!btn || !closeBtn || !overlay || !panel) return;
+
+  const open = () => {
+    overlay.classList.remove("hidden");
+    panel.classList.remove("hidden");
+    overlay.setAttribute("aria-hidden", "false");
+    panel.setAttribute("aria-hidden", "false");
+  };
+  const close = () => {
+    overlay.classList.add("hidden");
+    panel.classList.add("hidden");
+    overlay.setAttribute("aria-hidden", "true");
+    panel.setAttribute("aria-hidden", "true");
+  };
+
+  btn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+  overlay.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+}
+
 async function refreshAll() {
   // Ne pas bloquer tout le dashboard si 1 API tombe.
   const tasks = [
@@ -223,6 +308,10 @@ async function refreshAll() {
       .then((jelly) => renderJelly(jelly.items))
       .catch(() => renderJelly([])),
 
+    jget("/api/system")
+      .then((sys) => renderSystem(sys))
+      .catch(() => renderSystem(null)),
+
     jget("/api/links")
       .then((links) => renderLinks(links.links))
       .catch(() => renderLinks([])),
@@ -234,6 +323,7 @@ async function refreshAll() {
 async function main() {
   clockTick();
   setInterval(clockTick, 1000);
+  setupMenu();
 
   let refreshSeconds = 45;
   try {

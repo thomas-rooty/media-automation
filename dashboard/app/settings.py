@@ -37,6 +37,10 @@ class Settings(BaseSettings):
     # JSON string: [{"label":"Jellyfin","url":"http://192.168.1.10:8096"}, ...]
     links_json: str = "[]"
 
+    # System disks to show (inside container paths)
+    # JSON string: [{"label":"Serveur","path":"/"},{"label":"SSD","path":"/mnt/ssd"}]
+    disks_json: str = "[]"
+
     def links(self) -> list[dict[str, str]]:
         try:
             raw: Any = json.loads(self.links_json)
@@ -49,6 +53,23 @@ class Settings(BaseSettings):
                     url = str(item.get("url", "")).strip()
                     if label and url:
                         out.append({"label": label, "url": url})
+                return out
+        except Exception:
+            pass
+        return []
+
+    def disks(self) -> list[dict[str, str]]:
+        try:
+            raw: Any = json.loads(self.disks_json)
+            if isinstance(raw, list):
+                out: list[dict[str, str]] = []
+                for item in raw:
+                    if not isinstance(item, dict):
+                        continue
+                    label = str(item.get("label", "")).strip()
+                    path = str(item.get("path", "")).strip()
+                    if label and path:
+                        out.append({"label": label, "path": path})
                 return out
         except Exception:
             pass
