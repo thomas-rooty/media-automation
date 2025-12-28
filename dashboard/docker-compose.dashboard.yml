@@ -1,0 +1,29 @@
+services:
+  salon-dashboard:
+    build:
+      context: ./dashboard
+    container_name: salon-dashboard
+    ports:
+      - "8008:8000"
+    environment:
+      # --- Backend -> services (internal Docker network URLs) ---
+      - DASH_SONARR_URL=http://sonarr:8989
+      - DASH_SONARR_API_KEY=CHANGE_ME
+
+      - DASH_QBITTORRENT_URL=http://gluetun:8080
+      - DASH_QBITTORRENT_USERNAME=admin
+      - DASH_QBITTORRENT_PASSWORD=adminadmin
+
+      - DASH_JELLYFIN_URL=http://jellyfin:8096
+      - DASH_JELLYFIN_API_KEY=CHANGE_ME
+
+      # --- Quick links shown in the UI (tablet needs LAN-reachable URLs) ---
+      # Example (replace 192.168.1.10 by your server IP):
+      # - DASH_LINKS_JSON=[{"label":"Jellyfin","url":"http://192.168.1.10:8096"},{"label":"Sonarr","url":"http://192.168.1.10:8989"}]
+    networks:
+      - media-net
+    restart: unless-stopped
+
+networks:
+  media-net:
+    external: true

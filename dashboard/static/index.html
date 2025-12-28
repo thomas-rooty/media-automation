@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0f14" />
+    <title>Salon Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <div class="title">
+          <h1>Salon Dashboard</h1>
+          <div class="sub">
+            <div class="pill">
+              <span id="statusDot" class="dot"></span>
+              <span id="statusText">Chargement…</span>
+            </div>
+            <div class="pill">
+              <span>Auto-refresh</span>
+              <strong id="refreshLabel">—</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="clock">
+          <div class="time" id="clockTime">--:--</div>
+          <div id="clockDate">—</div>
+        </div>
+      </header>
+
+      <div class="grid">
+        <section class="card">
+          <h2>Prochains épisodes (Sonarr)</h2>
+          <div id="sonarrList" class="list"></div>
+        </section>
+
+        <section class="card">
+          <h2>Téléchargements (qBittorrent)</h2>
+          <div id="qbList" class="list"></div>
+        </section>
+
+        <section class="card">
+          <h2>Derniers ajouts (Jellyfin)</h2>
+          <div id="jellyList" class="media-grid"></div>
+        </section>
+
+        <section class="card links">
+          <h2>Accès rapide</h2>
+          <div id="links" class="link-grid"></div>
+        </section>
+      </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

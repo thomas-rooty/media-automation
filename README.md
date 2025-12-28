@@ -15,6 +15,16 @@ Ce dépôt permet de déployer une stack complète pour le téléchargement auto
 | **Overseerr**| Interface de demande de médias pour les utilisateurs.                |
 | **FlareSolverr** | Bypass Cloudflare pour certains indexeurs (via Prowlarr).             |
 
+## 📺 Dashboard “salon” (tablette)
+
+Un mini dashboard **plein écran** (FastAPI + HTML/CSS/JS) est disponible dans `dashboard/` :
+
+- **UI**: grosses cartes, thème sombre, lisible à distance
+- **Données**: prochains épisodes (Sonarr), téléchargements (qBittorrent), derniers ajouts (Jellyfin)
+- **Sécurité**: les **API keys restent côté serveur** (proxy via FastAPI)
+
+Voir `dashboard/README.md` et `dashboard/docker-compose.dashboard.yml`.
+
 ## 🚀 Lancement rapide
 
 1. **Cloner ce dépôt** :

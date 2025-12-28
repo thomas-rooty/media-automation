@@ -1,0 +1,210 @@
+const el = (id) => document.getElementById(id);
+
+function fmtBytes(n) {
+  if (n == null || isNaN(n)) return "—";
+  const u = ["B","KB","MB","GB","TB"];
+  let i = 0;
+  let v = Number(n);
+  while (v >= 1024 && i < u.length - 1) { v /= 1024; i++; }
+  return `${v.toFixed(v >= 10 || i === 0 ? 0 : 1)} ${u[i]}`;
+}
+
+function fmtSpeed(bps) {
+  if (!bps) return "—";
+  return `${fmtBytes(bps)}/s`;
+}
+
+function fmtEta(sec) {
+  if (sec == null || sec < 0 || sec === 8640000) return "—";
+  if (sec === 0) return "0s";
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  if (h > 0) return `${h}h${m.toString().padStart(2,"0")}`;
+  return `${m}m`;
+}
+
+function safeText(s) {
+  return (s == null ? "" : String(s)).trim();
+}
+
+function toLocalShort(iso) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "—";
+  return d.toLocaleString(undefined, { weekday:"short", hour:"2-digit", minute:"2-digit" });
+}
+
+function clockTick() {
+  const d = new Date();
+  el("clockTime").textContent = d.toLocaleTimeString(undefined, { hour:"2-digit", minute:"2-digit" });
+  el("clockDate").textContent = d.toLocaleDateString(undefined, { weekday:"long", day:"2-digit", month:"long" });
+}
+
+function setStatus(ok, text) {
+  const dot = el("statusDot");
+  dot.classList.remove("good","bad");
+  dot.classList.add(ok ? "good" : "bad");
+  el("statusText").textContent = text;
+}
+
+async function jget(path) {
+  const r = await fetch(path, { cache: "no-store" });
+  if (!r.ok) throw new Error(`${path} -> ${r.status}`);
+  return await r.json();
+}
+
+function renderSonarr(items) {
+  const root = el("sonarrList");
+  root.innerHTML = "";
+  if (!items || items.length === 0) {
+    root.innerHTML = `<div class="row"><div class="main"><div class="primary">Aucun épisode</div><div class="secondary">Rien de prévu</div></div><div class="meta"><span class="tag warn">—</span></div></div>`;
+    return;
+  }
+  for (const it of items) {
+    const series = safeText(it.seriesTitle) || "Série";
+    const ep = safeText(it.episodeTitle) || "Épisode";
+    const sn = it.seasonNumber ?? "?";
+    const en = it.episodeNumber ?? "?";
+    const when = toLocalShort(it.airDateUtc);
+    const have = it.hasFile ? `<span class="tag good">OK</span>` : `<span class="tag warn">À venir</span>`;
+    const div = document.createElement("div");
+    div.className = "row";
+    div.innerHTML = `
+      <div class="main">
+        <div class="primary">${series}</div>
+        <div class="secondary">S${String(sn).padStart(2,"0")}E${String(en).padStart(2,"0")} — ${ep}</div>
+      </div>
+      <div class="meta">
+        <div>${when}</div>
+        <div style="margin-top:6px">${have}</div>
+      </div>
+    `;
+    root.appendChild(div);
+  }
+}
+
+function renderQb(items) {
+  const root = el("qbList");
+  root.innerHTML = "";
+  if (!items || items.length === 0) {
+    root.innerHTML = `<div class="row"><div class="main"><div class="primary">Aucune activité</div><div class="secondary">Téléchargements au repos</div></div><div class="meta"><span class="tag good">OK</span></div></div>`;
+    return;
+  }
+  for (const t of items) {
+    const name = safeText(t.name) || "Torrent";
+    const pct = Math.max(0, Math.min(1, Number(t.progress ?? 0)));
+    const dl = fmtSpeed(t.dlspeed);
+    const ul = fmtSpeed(t.upspeed);
+    const eta = fmtEta(t.eta);
+    const state = safeText(t.state);
+    const div = document.createElement("div");
+    div.className = "row";
+    div.innerHTML = `
+      <div class="main">
+        <div class="primary">${name}</div>
+        <div class="secondary">${state || "—"} • DL ${dl} • UL ${ul} • ETA ${eta}</div>
+        <div class="progress"><div style="width:${(pct*100).toFixed(1)}%"></div></div>
+      </div>
+      <div class="meta">
+        <div class="tag">${Math.round(pct*100)}%</div>
+      </div>
+    `;
+    root.appendChild(div);
+  }
+}
+
+function renderJelly(items) {
+  const root = el("jellyList");
+  root.innerHTML = "";
+  if (!items || items.length === 0) {
+    root.innerHTML = `<div class="row"><div class="main"><div class="primary">Aucun ajout</div><div class="secondary">Jellyfin n’a rien renvoyé</div></div><div class="meta"><span class="tag warn">—</span></div></div>`;
+    return;
+  }
+  for (const it of items) {
+    const name = safeText(it.name) || "Média";
+    const typ = safeText(it.type) || "Item";
+    let sub = typ;
+    if (typ.toLowerCase() === "episode") {
+      const series = safeText(it.seriesName);
+      const s = it.parentIndexNumber ?? "?";
+      const e = it.indexNumber ?? "?";
+      sub = `${series || "Série"} • S${String(s).padStart(2,"0")}E${String(e).padStart(2,"0")}`;
+    } else if (it.productionYear) {
+      sub = `${typ} • ${it.productionYear}`;
+    }
+    const img = it.id ? `/api/jellyfin/items/${encodeURIComponent(it.id)}/image?maxHeight=240&quality=80` : null;
+    const div = document.createElement("div");
+    div.className = "media";
+    div.innerHTML = `
+      <div class="poster">${img ? `<img loading="lazy" src="${img}" alt="">` : ""}</div>
+      <div class="txt">
+        <div class="name">${name}</div>
+        <div class="sub">${sub}</div>
+      </div>
+    `;
+    root.appendChild(div);
+  }
+}
+
+function renderLinks(links) {
+  const root = el("links");
+  root.innerHTML = "";
+  for (const l of (links || [])) {
+    const a = document.createElement("a");
+    a.className = "btn";
+    a.href = l.url;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = l.label;
+    root.appendChild(a);
+  }
+}
+
+async function refreshAll() {
+  try {
+    const [status, sonarr, qb, jelly, links] = await Promise.all([
+      jget("/api/status"),
+      jget("/api/sonarr/upcoming?days=7&limit=8"),
+      jget("/api/qbittorrent/torrents?filter=active&limit=6"),
+      jget("/api/jellyfin/latest?limit=9"),
+      jget("/api/links"),
+    ]);
+
+    const okCount = (status.items || []).filter(x => x.ok).length;
+    const total = (status.items || []).length;
+    setStatus(status.ok, `Services: ${okCount}/${total}`);
+
+    renderSonarr(sonarr.items);
+    renderQb(qb.items);
+    renderJelly(jelly.items);
+    renderLinks(links.links);
+  } catch (e) {
+    setStatus(false, "Erreur réseau / config");
+  }
+}
+
+async function main() {
+  clockTick();
+  setInterval(clockTick, 1000);
+
+  let refreshSeconds = 45;
+  try {
+    const meta = await jget("/api/meta");
+    if (meta && meta.title) {
+      document.title = meta.title;
+      const h1 = document.querySelector("h1");
+      if (h1) h1.textContent = meta.title;
+    }
+    if (meta && Number.isFinite(Number(meta.refreshSeconds))) {
+      refreshSeconds = Math.max(15, Math.min(300, Number(meta.refreshSeconds)));
+    }
+  } catch (e) {
+    // keep defaults
+  }
+  el("refreshLabel").textContent = `${refreshSeconds}s`;
+
+  await refreshAll();
+  setInterval(refreshAll, refreshSeconds * 1000);
+}
+
+main();

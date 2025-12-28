@@ -1,0 +1,43 @@
+# Salon Dashboard (LAN / tablette)
+
+Mini dashboard **FastAPI + HTML/CSS/JS** destiné à un affichage plein écran (tablette Android / Chrome) sur le réseau local.
+
+## Architecture (simple et robuste)
+
+- **Backend**: `FastAPI` sert :
+  - le frontend statique (`/` + `/static/*`)
+  - des endpoints `/api/*` qui **proxient** Sonarr / qBittorrent / Jellyfin (les clés restent côté serveur)
+- **Frontend**: `static/index.html` + `static/styles.css` + `static/app.js`
+  - rafraîchissement auto (par défaut 45s)
+  - thème sombre, grosses cartes, lisible à distance
+  - boutons “accès rapide” vers les UIs complètes
+
+## Variables d’environnement
+
+Voir `env.example`. Les plus importantes :
+
+- `DASH_SONARR_URL` / `DASH_SONARR_API_KEY`
+- `DASH_QBITTORRENT_URL` / `DASH_QBITTORRENT_USERNAME` / `DASH_QBITTORRENT_PASSWORD`
+- `DASH_JELLYFIN_URL` / `DASH_JELLYFIN_API_KEY`
+- (optionnel) `DASH_LINKS_JSON` (URLs **LAN** accessibles depuis la tablette)
+
+## Endpoints (exemples)
+
+- `GET /api/sonarr/upcoming?days=7&limit=8`
+- `GET /api/qbittorrent/torrents?filter=active&limit=6`
+- `GET /api/jellyfin/latest?limit=9`
+- `GET /api/jellyfin/items/{itemId}/image?maxHeight=240&quality=80`
+- `GET /api/status`
+- `GET /api/links`
+
+## Lancer via Docker (minimal)
+
+1. Assure-toi que ton réseau Docker `media-net` existe (il est créé quand tu lances la stack principale).
+2. Renseigne les `CHANGE_ME` dans `docker-compose.dashboard.yml` (ou utilise tes variables d’environnement).
+3. Démarre :
+
+```bash
+docker compose -f dashboard/docker-compose.dashboard.yml up -d --build
+```
+
+Puis ouvre: `http://<IP_DU_SERVEUR>:8008/`
