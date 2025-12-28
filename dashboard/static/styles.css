@@ -210,6 +210,18 @@ header{
   overflow:hidden;
   text-overflow:ellipsis;
 }
+
+/* qBittorrent rows: allow horizontal swipe to read full text */
+.qb .row .primary,
+.qb .row .secondary{
+  overflow-x:auto;
+  overflow-y:hidden;
+  text-overflow:clip;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+.qb .row .primary::-webkit-scrollbar,
+.qb .row .secondary::-webkit-scrollbar{display:none;}
 .meta{
   text-align:right;
   color:var(--muted);
