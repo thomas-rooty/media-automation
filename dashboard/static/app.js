@@ -178,17 +178,20 @@ function renderRadarrUpcoming(items) {
     const title = safeText(it.title) || "Film";
     const year = it.year ? `(${it.year})` : "";
     const when = toLocalDate(it.releaseDate);
-    const have = it.hasFile ? `<span class="tag good">OK</span>` : `<span class="tag warn">À venir</span>`;
+    const reason = safeText(it.reason) || "—";
+    const tag = reason === "Queued" ? `<span class="tag good">Queue</span>` :
+                reason === "Missing" ? `<span class="tag warn">Manquant</span>` :
+                `<span class="tag warn">À venir</span>`;
     const div = document.createElement("div");
     div.className = "row";
     div.innerHTML = `
       <div class="main">
         <div class="primary">${title} ${year}</div>
-        <div class="secondary">${safeText(it.status) || "—"}</div>
+        <div class="secondary">${reason}${safeText(it.status) ? ` • ${safeText(it.status)}` : ""}</div>
       </div>
       <div class="meta">
         <div>${when}</div>
-        <div style="margin-top:6px">${have}</div>
+        <div style="margin-top:6px">${tag}</div>
       </div>
     `;
     root.appendChild(div);
@@ -208,7 +211,7 @@ async function refreshAll() {
       .then((sonarr) => renderSonarr(sonarr.items))
       .catch(() => renderSonarr([])),
 
-    jget("/api/radarr/upcoming?days=21&limit=8")
+    jget("/api/radarr/soon?days_future=365&limit=8")
       .then((radarr) => renderRadarrUpcoming(radarr.items))
       .catch(() => renderRadarrUpcoming([])),
 

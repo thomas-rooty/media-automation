@@ -36,6 +36,26 @@ def _dt_utc_now() -> dt.datetime:
     return dt.datetime.now(dt.timezone.utc)
 
 
+def _parse_date(value: Any) -> dt.date | None:
+    """
+    Accepts ISO date/datetime strings from *arr and returns a date.
+    Returns None for empty / invalid / sentinel dates.
+    """
+    if not value:
+        return None
+    try:
+        s = str(value).strip()
+        if not s:
+            return None
+        # Handle sentinel "0001-01-01T00:00:00Z" or similar
+        if s.startswith("0001-01-01"):
+            return None
+        # Works for "YYYY-MM-DD" and "YYYY-MM-DDTHH:MM:SSZ"
+        return dt.datetime.fromisoformat(s.replace("Z", "+00:00")).date()
+    except Exception:
+        return None
+
+
 @app.get("/api/meta")
 def meta() -> dict[str, Any]:
     return {"title": settings.title, "refreshSeconds": settings.refresh_seconds}
@@ -141,6 +161,106 @@ async def radarr_upcoming(days: int = 90, limit: int = 10) -> dict[str, Any]:
         )
 
     return {"rangeDays": days, "count": min(limit, len(out)), "items": out[: max(0, min(limit, 50))]}
+
+
+@app.get("/api/radarr/soon")
+async def radarr_soon(days_future: int = 365, limit: int = 10) -> dict[str, Any]:
+    """
+    "Films bientôt téléchargés" = agrégation:
+    - Unreleased (monitored, pas de fichier, date de sortie future ou inconnue)
+    - Missing (monitored, pas de fichier, déjà sorti)
+    - Queued (présent dans la queue Radarr)
+    """
+    base = _require(settings.radarr_url, "Radarr URL")
+    api_key = _require(settings.radarr_api_key, "Radarr API key")
+    headers = {"X-Api-Key": api_key}
+
+    today = _dt_utc_now().date()
+    max_future = today + dt.timedelta(days=max(1, min(days_future, 3650)))
+
+    async with httpx.AsyncClient(timeout=12) as client:
+        # Movies list (source of truth for title + release dates)
+        movies_r = await client.get(f"{base.rstrip('/')}/api/v3/movie", headers=headers)
+        if movies_r.status_code >= 400:
+            raise HTTPException(status_code=502, detail=f"Radarr error ({movies_r.status_code})")
+        movies: list[dict[str, Any]] = movies_r.json()
+
+        # Queue (optional, but helps identify "Queued")
+        queued_ids: set[int] = set()
+        try:
+            q_params = {"page": "1", "pageSize": "200", "sortKey": "timeleft", "sortDirection": "ascending"}
+            queue_r = await client.get(f"{base.rstrip('/')}/api/v3/queue", headers=headers, params=q_params)
+            if queue_r.status_code < 400:
+                q_data: Any = queue_r.json()
+                records = q_data.get("records") if isinstance(q_data, dict) else None
+                if isinstance(records, list):
+                    for rec in records:
+                        mid = rec.get("movieId")
+                        if isinstance(mid, int):
+                            queued_ids.add(mid)
+        except Exception:
+            pass
+
+    def pick_release_date(x: dict[str, Any]) -> dt.date | None:
+        # Prefer Digital/Physical release when present, fallback to InCinemas / PremiereDate
+        return (
+            _parse_date(x.get("digitalRelease"))
+            or _parse_date(x.get("physicalRelease"))
+            or _parse_date(x.get("inCinemas"))
+            or _parse_date(x.get("premiereDate"))
+        )
+
+    out: list[dict[str, Any]] = []
+    for m in movies:
+        mid = m.get("id")
+        if not isinstance(mid, int):
+            continue
+
+        monitored = bool(m.get("monitored", False))
+        has_file = bool(m.get("hasFile", False))
+        if not monitored:
+            continue
+        if has_file and mid not in queued_ids:
+            continue
+
+        release_date = pick_release_date(m)
+
+        # Categorize
+        is_queued = mid in queued_ids
+        if is_queued:
+            reason = "Queued"
+        else:
+            # If already released (or release date passed), it's missing; otherwise unreleased
+            if release_date and release_date <= today:
+                reason = "Missing"
+            else:
+                reason = "Unreleased"
+
+        # Filter far-future unreleased items (still keep queued / missing)
+        if reason == "Unreleased" and release_date and release_date > max_future:
+            continue
+
+        out.append(
+            {
+                "id": mid,
+                "title": m.get("title"),
+                "year": m.get("year"),
+                "releaseDate": (release_date.isoformat() if release_date else None),
+                "reason": reason,
+                "status": m.get("status"),
+                "hasFile": has_file,
+                "monitored": monitored,
+            }
+        )
+
+    def sort_key(x: dict[str, Any]) -> tuple[int, str, str]:
+        d = x.get("releaseDate") or ""
+        # Unknown dates last
+        unknown = 1 if not d else 0
+        return (unknown, d, str(x.get("title") or ""))
+
+    out_sorted = sorted(out, key=sort_key)[: max(0, min(limit, 50))]
+    return {"rangeDaysFuture": days_future, "count": len(out_sorted), "items": out_sorted}
 
 
 async def _qb_login(client: httpx.AsyncClient, base: str, username: str, password: str) -> None:
