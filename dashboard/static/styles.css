@@ -36,7 +36,7 @@ body::before{
     radial-gradient(980px 860px at 52% 92%, rgba(255,176,32,.14), transparent 62%);
   opacity:.95;
   mix-blend-mode: screen;
-  animation:bgDrift 14s ease-in-out infinite, bgHue 18s ease-in-out infinite;
+  animation:bgDrift 5s ease-in-out infinite, bgHue 6s ease-in-out infinite;
   z-index:0;
 }
 
@@ -53,7 +53,7 @@ body::after{
   opacity:.85;
   mix-blend-mode: screen;
   filter: blur(10px);
-  animation:bgFloat 20s ease-in-out infinite, bgHue2 26s linear infinite;
+  animation:bgFloat 7s ease-in-out infinite, bgHue2 9s linear infinite;
   z-index:0;
 }
 
