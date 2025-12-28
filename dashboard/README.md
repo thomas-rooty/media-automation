@@ -26,7 +26,6 @@ Voir `env.example`. Les plus importantes :
 
 - `GET /api/sonarr/upcoming?days=7&limit=8`
 - `GET /api/radarr/upcoming?days=21&limit=8`
-- `GET /api/radarr/latest?limit=8`
 - `GET /api/qbittorrent/torrents?filter=active&limit=6`
 - `GET /api/jellyfin/latest?limit=9`
 - `GET /api/jellyfin/items/{itemId}/image?maxHeight=240&quality=80`

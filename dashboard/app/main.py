@@ -50,7 +50,6 @@ def _default_links_for_host(host: str) -> list[dict[str, str]]:
         {"label": "Radarr", "url": f"{base}:7878"},
         {"label": "Prowlarr", "url": f"{base}:9696"},
         {"label": "qBittorrent", "url": f"{base}:8080"},
-        {"label": "Nextcloud", "url": f"{base}:8088"},
     ]
 
 
@@ -142,56 +141,6 @@ async def radarr_upcoming(days: int = 14, limit: int = 10) -> dict[str, Any]:
         )
 
     return {"rangeDays": days, "count": min(limit, len(out)), "items": out[: max(0, min(limit, 50))]}
-
-
-@app.get("/api/radarr/latest")
-async def radarr_latest(limit: int | None = None) -> dict[str, Any]:
-    base = _require(settings.radarr_url, "Radarr URL")
-    api_key = _require(settings.radarr_api_key, "Radarr API key")
-    lim = max(1, min(limit or settings.radarr_latest_limit, 50))
-
-    headers = {"X-Api-Key": api_key}
-
-    async with httpx.AsyncClient(timeout=12) as client:
-        # Preferred: paged + sorted response (newer Radarr)
-        paged_url = f"{base.rstrip('/')}/api/v3/movie"
-        params = {"page": "1", "pageSize": str(lim), "sortKey": "added", "sortDirection": "descending"}
-        r = await client.get(paged_url, headers=headers, params=params)
-
-        if r.status_code >= 400:
-            raise HTTPException(status_code=502, detail=f"Radarr error ({r.status_code})")
-
-        data: Any = r.json()
-
-    movies: list[dict[str, Any]]
-    if isinstance(data, dict) and isinstance(data.get("records"), list):
-        movies = data["records"]
-    elif isinstance(data, list):
-        movies = data
-    else:
-        movies = []
-
-    def added_key(x: dict[str, Any]) -> str:
-        return str(x.get("added") or "")
-
-    if isinstance(data, list):
-        movies = sorted(movies, key=added_key, reverse=True)[:lim]
-    else:
-        movies = movies[:lim]
-
-    out: list[dict[str, Any]] = []
-    for m in movies:
-        out.append(
-            {
-                "title": m.get("title"),
-                "year": m.get("year"),
-                "added": m.get("added"),
-                "hasFile": m.get("hasFile", False),
-                "status": m.get("status"),
-            }
-        )
-
-    return {"count": len(out), "items": out}
 
 
 async def _qb_login(client: httpx.AsyncClient, base: str, username: str, password: str) -> None:

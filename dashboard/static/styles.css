@@ -92,8 +92,7 @@ header{
 .sonarr{grid-column:1;grid-row:1}
 .radarr-upcoming{grid-column:2;grid-row:1}
 .qb{grid-column:3;grid-row:1}
-.jelly{grid-column:1 / 3;grid-row:2}
-.radarr-latest{grid-column:3;grid-row:2}
+.jelly{grid-column:1 / 4;grid-row:2}
 .links{grid-column:1 / 4;grid-row:3}
 
 .card{
@@ -260,7 +259,7 @@ a.btn:active{
 /* Tablet landscape tweaks */
 @media (max-width: 1100px){
   .grid{grid-template-columns: 1fr; grid-auto-rows:auto; }
-  .sonarr,.radarr-upcoming,.qb,.jelly,.radarr-latest,.links{grid-column:auto;grid-row:auto}
+  .sonarr,.radarr-upcoming,.qb,.jelly,.links{grid-column:auto;grid-row:auto}
   .link-grid{grid-template-columns: repeat(3, 1fr);}
   .media-grid{grid-template-columns: repeat(2, 1fr);}
 }
