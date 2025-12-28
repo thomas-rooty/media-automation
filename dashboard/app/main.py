@@ -63,7 +63,7 @@ def links(req: Request) -> dict[str, Any]:
 
 
 @app.get("/api/sonarr/upcoming")
-async def sonarr_upcoming(days: int = 7, limit: int = 10) -> dict[str, Any]:
+async def sonarr_upcoming(days: int = 30, limit: int = 10) -> dict[str, Any]:
     base = _require(settings.sonarr_url, "Sonarr URL")
     api_key = _require(settings.sonarr_api_key, "Sonarr API key")
 
@@ -101,7 +101,7 @@ async def sonarr_upcoming(days: int = 7, limit: int = 10) -> dict[str, Any]:
 
 
 @app.get("/api/radarr/upcoming")
-async def radarr_upcoming(days: int = 14, limit: int = 10) -> dict[str, Any]:
+async def radarr_upcoming(days: int = 90, limit: int = 10) -> dict[str, Any]:
     base = _require(settings.radarr_url, "Radarr URL")
     api_key = _require(settings.radarr_api_key, "Radarr API key")
 
