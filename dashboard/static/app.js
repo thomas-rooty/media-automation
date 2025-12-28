@@ -274,7 +274,7 @@ function renderLibraryToday(data) {
     div.className = "row";
     div.innerHTML = `
       <div class="main">
-        <div class="primary">✔ ${title}</div>
+        <div class="primary libraryTitle"><span class="check">✔</span><span class="titleScroll">${title}</span></div>
         <div class="secondary">${safeText(it.type) || ""}</div>
       </div>
       <div class="meta">${when}</div>

@@ -153,6 +153,17 @@ header{
   text-transform:uppercase;
 }
 
+/* qBittorrent card: keep downloads visible */
+.qb #qbList{
+  flex:1;
+  min-height:0;
+}
+.qb #libraryToday{
+  max-height:170px;
+  min-height:0;
+  overflow:auto;
+}
+
 .row{
   display:grid;
   grid-template-columns: 1fr auto;
@@ -162,6 +173,7 @@ header{
   border-radius:14px;
   background:rgba(0,0,0,.18);
   border:1px solid rgba(255,255,255,.06);
+  overflow:hidden;
 }
 .row .main{
   display:flex;
@@ -176,6 +188,32 @@ header{
   overflow:hidden;
   text-overflow:ellipsis;
 }
+
+/* Library-today rows: smaller + grey title, horizontal scroll to read full */
+.libraryTitle{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:15px;
+  font-weight:650;
+  color:#b8c3cf;
+  min-width:0;
+}
+.libraryTitle .check{
+  color:#bff4d9;
+  font-weight:900;
+  flex:0 0 auto;
+}
+.titleScroll{
+  display:block;
+  min-width:0;
+  overflow-x:auto;
+  overflow-y:hidden;
+  white-space:nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.titleScroll::-webkit-scrollbar{display:none;}
 .row .secondary{
   font-size:14px;
   color:var(--muted);
