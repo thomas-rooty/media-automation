@@ -344,8 +344,11 @@ function renderSystem(sys) {
 
   const rx = sys?.network?.rxBps;
   const tx = sys?.network?.txBps;
-  if (rx != null || tx != null) {
-    stats.push({ k: "Réseau", v: `${fmtSpeed(rx)} ↓ | ${fmtSpeed(tx)} ↑` });
+  const dw = sys?.diskIo?.writeBps;
+  if (rx != null || tx != null || dw != null) {
+    const netStr = `${fmtSpeed(rx)} ↓ | ${fmtSpeed(tx)} ↑`;
+    const diskStr = `Écriture ${fmtSpeed(dw)}`;
+    stats.push({ k: "Réseau/Disque", v: `${netStr} • ${diskStr}` });
   }
 
   for (const d of (sys?.disks || [])) {

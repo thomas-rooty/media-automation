@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import os
 import shutil
 import socket
 import time
@@ -25,6 +26,7 @@ app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 
 _NET_LAST: dict[str, float] = {}
+_DISK_LAST: dict[str, float] = {}
 
 
 def _read_net_totals_linux() -> tuple[int | None, int | None]:
@@ -51,6 +53,42 @@ def _read_net_totals_linux() -> tuple[int | None, int | None]:
                 rx_total += int(cols[0])
                 tx_total += int(cols[8])
         return rx_total, tx_total
+    except Exception:
+        return None, None
+
+
+def _read_disk_totals_linux() -> tuple[int | None, int | None]:
+    """
+    Read total disk read/write bytes from /proc/diskstats (Linux).
+    We only include base block devices (present in /sys/block) to avoid double-counting partitions.
+
+    Returns (read_bytes, write_bytes) or (None, None) if unavailable.
+    Note: Uses 512 bytes/sector (typical) as approximation.
+    """
+    path = "/proc/diskstats"
+    try:
+        read_sectors_total = 0
+        write_sectors_total = 0
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f:
+                parts = line.strip().split()
+                if len(parts) < 14:
+                    continue
+                name = parts[2]
+                # Keep only base devices (exclude partitions) using /sys/block presence.
+                if not os.path.exists(f"/sys/block/{name}"):
+                    continue
+                # Exclude loop/ram devices
+                if name.startswith(("loop", "ram")):
+                    continue
+                # sectors read at index 5, sectors written at index 9
+                try:
+                    read_sectors_total += int(parts[5])
+                    write_sectors_total += int(parts[9])
+                except Exception:
+                    continue
+        # Approx sector size (512B)
+        return read_sectors_total * 512, write_sectors_total * 512
     except Exception:
         return None, None
 
@@ -234,6 +272,25 @@ async def system() -> dict[str, Any]:
             _NET_LAST["t"] = float(now)
             net_source = "container"
 
+    # Disk IO throughput (approx host view via /proc/diskstats)
+    disk_read_bps: float | None = None
+    disk_write_bps: float | None = None
+    disk_source: str | None = None
+    dr, dw = _read_disk_totals_linux()
+    now2 = time.time()
+    if dr is not None and dw is not None:
+        last_dr = _DISK_LAST.get("r")
+        last_dw = _DISK_LAST.get("w")
+        last_t2 = _DISK_LAST.get("t")
+        if last_dr is not None and last_dw is not None and last_t2 is not None:
+            dt_s = max(0.001, now2 - float(last_t2))
+            disk_read_bps = max(0.0, (float(dr) - float(last_dr)) / dt_s)
+            disk_write_bps = max(0.0, (float(dw) - float(last_dw)) / dt_s)
+        _DISK_LAST["r"] = float(dr)
+        _DISK_LAST["w"] = float(dw)
+        _DISK_LAST["t"] = float(now2)
+        disk_source = "diskstats"
+
     return {
         "host": host,
         "memory": {
@@ -242,6 +299,7 @@ async def system() -> dict[str, Any]:
             "availBytes": (mem_avail_kb * 1024) if mem_avail_kb is not None else None,
         },
         "network": {"rxBps": rx_bps, "txBps": tx_bps, "source": net_source},
+        "diskIo": {"readBps": disk_read_bps, "writeBps": disk_write_bps, "source": disk_source},
         "disks": disks_out,
     }
 
