@@ -172,12 +172,12 @@ function renderWeatherModal(data) {
   }
 
   const every2h = [];
-  for (let i = startIdx; i < hours.length && every2h.length < 13; i += 2) {
+  for (let i = startIdx; i < hours.length && every2h.length < 12; i += 2) {
     every2h.push(hours[i]);
   }
 
-  // If for any reason we got nothing (edge cases), show the first 13 points.
-  const view = every2h.length ? every2h : hours.filter((_, i) => i % 2 === 0).slice(0, 13);
+  // If for any reason we got nothing (edge cases), show the first 12 points.
+  const view = every2h.length ? every2h : hours.filter((_, i) => i % 2 === 0).slice(0, 12);
 
   const hourlyHtml = view.map((h) => {
     const ii = weatherIconFrom(h.code, h.isDay);
