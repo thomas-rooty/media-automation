@@ -12,7 +12,7 @@ class Settings(BaseSettings):
 
     # General
     title: str = "CapyFlix Monitoring"
-    refresh_seconds: int = 45
+    refresh_seconds: int = 30
 
     # Sonarr
     sonarr_url: str | None = None  # e.g. http://sonarr:8989

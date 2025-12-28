@@ -8,7 +8,7 @@ Mini dashboard **FastAPI + HTML/CSS/JS** destiné à un affichage plein écran (
   - le frontend statique (`/` + `/static/*`)
   - des endpoints `/api/*` qui **proxient** Sonarr / qBittorrent / Jellyfin (les clés restent côté serveur)
 - **Frontend**: `static/index.html` + `static/styles.css` + `static/app.js`
-  - rafraîchissement auto (par défaut 45s)
+  - rafraîchissement auto (par défaut 30s)
   - thème sombre, grosses cartes, lisible à distance
   - boutons “accès rapide” vers les UIs complètes
 
