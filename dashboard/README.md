@@ -1,4 +1,4 @@
-# Salon Dashboard (LAN / tablette)
+# CapyFlix Monitoring (LAN / tablette)
 
 Mini dashboard **FastAPI + HTML/CSS/JS** destiné à un affichage plein écran (tablette Android / Chrome) sur le réseau local.
 

@@ -65,6 +65,12 @@ header{
   border:1px solid var(--border);
   border-radius:999px;
 }
+.pillBtn{
+  cursor:pointer;
+  color:inherit;
+  font: inherit;
+}
+.pillBtn:active{transform:translateY(1px); background:rgba(255,255,255,.10);}
 .dot{width:10px;height:10px;border-radius:999px;background:var(--warn)}
 .dot.good{background:var(--good)}
 .dot.bad{background:var(--bad)}
@@ -373,6 +379,74 @@ a.btn:active{
 .panelLinks{
   grid-template-columns: repeat(2, 1fr);
   overflow:auto;
+}
+
+/* Services modal */
+.modalOverlay{z-index:70;}
+.modal{
+  position:fixed;
+  inset:auto 18px 18px 18px;
+  top:80px;
+  max-width: 900px;
+  margin: 0 auto;
+  background:rgba(10,14,20,.96);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.55);
+  z-index: 80;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.modalHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.modalTitle{
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  color:#cfe7ff;
+}
+.modalList{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  overflow:auto;
+  max-height: min(60vh, 520px);
+  padding-right:2px;
+}
+.serviceRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+  border-radius:14px;
+  background:rgba(0,0,0,.18);
+  border:1px solid rgba(255,255,255,.06);
+}
+.serviceLeft{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+.serviceName{
+  font-size:16px;
+  font-weight:750;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.serviceDetail{
+  color:var(--muted);
+  font-size:14px;
+  white-space:nowrap;
 }
 
 /* Tablet landscape tweaks */

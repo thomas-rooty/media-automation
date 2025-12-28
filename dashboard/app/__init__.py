@@ -1,1 +1,1 @@
-"""Salon dashboard backend package."""
+"""CapyFlix Monitoring backend package."""

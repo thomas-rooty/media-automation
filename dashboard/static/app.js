@@ -66,6 +66,8 @@ function setStatus(ok, text) {
   el("statusText").textContent = text;
 }
 
+let lastStatusData = null;
+
 async function jget(path) {
   const r = await fetch(path, { cache: "no-store" });
   if (!r.ok) throw new Error(`${path} -> ${r.status}`);
@@ -319,6 +321,75 @@ function setupMenu() {
   });
 }
 
+function renderServicesModal(status) {
+  const list = el("servicesList");
+  if (!list) return;
+  const items = status?.items || [];
+  if (!items.length) {
+    list.innerHTML = `<div class="serviceRow"><div class="serviceLeft"><span class="dot bad"></span><div class="serviceName">Aucune donnée</div></div><div class="serviceDetail">—</div></div>`;
+    return;
+  }
+
+  list.innerHTML = "";
+  for (const it of items) {
+    const ok = it.ok === true;
+    const name = safeText(it.name) || "Service";
+    const detail = safeText(it.detail) || (ok ? "OK" : "KO");
+    const row = document.createElement("div");
+    row.className = "serviceRow";
+    row.innerHTML = `
+      <div class="serviceLeft">
+        <span class="dot ${ok ? "good" : "bad"}"></span>
+        <div class="serviceName">${name}</div>
+      </div>
+      <div class="serviceDetail">${detail}</div>
+    `;
+    list.appendChild(row);
+  }
+}
+
+function setupServicesModal() {
+  const btn = el("servicesBtn");
+  const closeBtn = el("servicesCloseBtn");
+  const overlay = el("servicesOverlay");
+  const modal = el("servicesModal");
+  if (!btn || !closeBtn || !overlay || !modal) return;
+
+  const open = async () => {
+    overlay.classList.remove("hidden");
+    modal.classList.remove("hidden");
+    overlay.setAttribute("aria-hidden", "false");
+    modal.setAttribute("aria-hidden", "false");
+
+    // Use cached status if available, otherwise fetch.
+    if (lastStatusData) {
+      renderServicesModal(lastStatusData);
+    } else {
+      try {
+        const s = await jget("/api/status");
+        lastStatusData = s;
+        renderServicesModal(s);
+      } catch (e) {
+        renderServicesModal(null);
+      }
+    }
+  };
+
+  const close = () => {
+    overlay.classList.add("hidden");
+    modal.classList.add("hidden");
+    overlay.setAttribute("aria-hidden", "true");
+    modal.setAttribute("aria-hidden", "true");
+  };
+
+  btn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+  overlay.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+}
+
 async function refreshAll() {
   // Ne pas bloquer tout le dashboard si 1 API tombe.
   const tasks = [
@@ -326,6 +397,7 @@ async function refreshAll() {
       const okCount = (status.items || []).filter(x => x.ok).length;
       const total = (status.items || []).length;
       setStatus(status.ok, `Services: ${okCount}/${total}`);
+      lastStatusData = status;
     }).catch(() => setStatus(false, "Erreur réseau / config")),
 
     jget("/api/sonarr/upcoming?days=7&limit=8")
@@ -368,6 +440,7 @@ async function main() {
   clockTick();
   setInterval(clockTick, 1000);
   setupMenu();
+  setupServicesModal();
 
   let refreshSeconds = 45;
   try {

@@ -13,10 +13,10 @@
         <div class="title">
           <h1>CapyFlix Monitoring</h1>
           <div class="sub">
-            <div class="pill">
+            <button id="servicesBtn" class="pill pillBtn" type="button" aria-label="Voir l'état des services">
               <span id="statusDot" class="dot"></span>
               <span id="statusText">Chargement…</span>
-            </div>
+            </button>
             <div class="pill">
               <span>Auto-refresh</span>
               <strong id="refreshLabel">—</strong>
@@ -79,6 +79,17 @@
       </div>
       <div id="links" class="link-grid panelLinks"></div>
     </aside>
+
+    <div id="servicesOverlay" class="overlay modalOverlay hidden" aria-hidden="true"></div>
+    <div id="servicesModal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-label="État des services">
+      <div class="modalHeader">
+        <div class="modalTitle">État des services</div>
+        <button id="servicesCloseBtn" class="iconBtn" aria-label="Fermer" type="button">
+          <span class="icon">✕</span>
+        </button>
+      </div>
+      <div id="servicesList" class="modalList"></div>
+    </div>
 
     <script src="/static/app.js"></script>
   </body>

@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_prefix="DASH_", extra="ignore")
 
     # General
-    title: str = "Salon Dashboard"
+    title: str = "CapyFlix Monitoring"
     refresh_seconds: int = 45
 
     # Sonarr
