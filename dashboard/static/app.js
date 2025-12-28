@@ -409,7 +409,7 @@ function renderScans(scans) {
   if (!line) return;
   const s = scans?.sonarr ? toLocalTime(scans.sonarr) : "—";
   const r = scans?.radarr ? toLocalTime(scans.radarr) : "—";
-  line.textContent = `Dernier scan • Sonarr: ${s} • Radarr: ${r}`;
+  line.textContent = `Scan • Sonarr: ${s} • Radarr: ${r}`;
 }
 
 function setupMenu() {

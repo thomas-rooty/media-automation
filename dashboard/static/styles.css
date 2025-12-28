@@ -436,11 +436,12 @@ a.btn:active{
 .library .list{
   overflow:auto;
 }
-.scanLine{
-  margin-top:10px;
+.scanPill{
   color:var(--muted);
   font-size:12px;
-  text-align:right;
+  padding:6px 10px;
+  gap:8px;
+  opacity:.95;
 }
 
 .stat{
