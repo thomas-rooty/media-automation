@@ -133,61 +133,6 @@ def system() -> dict[str, Any]:
     }
 
 
-@app.get("/api/vpn")
-async def vpn() -> dict[str, Any]:
-    """
-    Gluetun VPN status (public IP + forwarded port) via HTTP control server.
-    Endpoints (Gluetun):
-    - GET /v1/publicip/ip
-    - GET /v1/openvpn/portforwarded
-    """
-    name = settings.gluetun_name
-    base = settings.gluetun_url or "http://gluetun:8000"
-    headers: dict[str, str] = {}
-    if settings.gluetun_api_key:
-        headers["X-API-Key"] = settings.gluetun_api_key
-
-    async with httpx.AsyncClient(timeout=6) as client:
-        ip: str | None = None
-        port: int | None = None
-        ok = True
-        details: list[str] = []
-
-        try:
-            r = await client.get(f"{base.rstrip('/')}/v1/publicip/ip", headers=headers)
-            if r.status_code >= 400:
-                ok = False
-                details.append(f"ip http {r.status_code}")
-            else:
-                data: Any = r.json()
-                ip = str(data.get("public_ip") or data.get("ip") or "").strip() or None
-        except Exception as e:
-            ok = False
-            details.append(f"ip {type(e).__name__}")
-
-        try:
-            r = await client.get(f"{base.rstrip('/')}/v1/openvpn/portforwarded", headers=headers)
-            if r.status_code >= 400:
-                ok = False
-                details.append(f"port http {r.status_code}")
-            else:
-                data = r.json()
-                # gluetun returns {"port": 12345} (can vary)
-                p = data.get("port")
-                if isinstance(p, int):
-                    port = p
-                else:
-                    try:
-                        port = int(str(p))
-                    except Exception:
-                        port = None
-        except Exception as e:
-            ok = False
-            details.append(f"port {type(e).__name__}")
-
-    return {"name": name, "ok": ok, "ip": ip, "port": port, "detail": "; ".join(details) if details else None}
-
-
 def _start_of_today_utc() -> dt.datetime:
     now = dt.datetime.now(dt.timezone.utc)
     return dt.datetime(now.year, now.month, now.day, tzinfo=dt.timezone.utc)

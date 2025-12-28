@@ -41,12 +41,6 @@ class Settings(BaseSettings):
     # JSON string: [{"label":"Serveur","path":"/"},{"label":"SSD","path":"/mnt/ssd"}]
     disks_json: str = "[]"
 
-    # Gluetun (VPN) - HTTP control server (optional)
-    # If enabled, dashboard can show VPN public IP + forwarded port.
-    gluetun_url: str | None = None  # e.g. http://gluetun:8000
-    gluetun_api_key: str | None = None  # if your control server requires X-API-Key
-    gluetun_name: str = "VPN (PIA)"
-
     def links(self) -> list[dict[str, str]]:
         try:
             raw: Any = json.loads(self.links_json)

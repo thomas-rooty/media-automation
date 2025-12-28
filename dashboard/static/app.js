@@ -258,19 +258,6 @@ function renderSystem(sys) {
   }
 }
 
-function renderVpn(vpn) {
-  const line = el("vpnLine");
-  if (!line) return;
-  const name = vpn?.name || "VPN";
-  const ip = vpn?.ip ? String(vpn.ip) : "—";
-  const port = vpn?.port != null ? String(vpn.port) : "—";
-  const ok = vpn?.ok === true && vpn?.ip && vpn?.port;
-  line.innerHTML = `
-    <div class="left">${name}</div>
-    <div class="right">IP: ${ip} • Port: ${port} ${ok ? "(OK)" : ""}</div>
-  `;
-}
-
 function renderLibraryToday(data) {
   const root = el("libraryToday");
   if (!root) return;
@@ -360,10 +347,6 @@ async function refreshAll() {
     jget("/api/system")
       .then((sys) => renderSystem(sys))
       .catch(() => renderSystem(null)),
-
-    jget("/api/vpn")
-      .then((vpn) => renderVpn(vpn))
-      .catch(() => renderVpn(null)),
 
     jget("/api/library/today?limit=6")
       .then((data) => renderLibraryToday(data))

@@ -290,19 +290,6 @@ a.btn:active{
   grid-template-columns: 1fr 1fr 1fr;
   gap:10px;
 }
-.system-line{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:10px 12px;
-  border-radius:14px;
-  background:rgba(0,0,0,.18);
-  border:1px solid rgba(255,255,255,.06);
-  margin-bottom:10px;
-}
-.system-line .left{font-weight:750}
-.system-line .right{color:var(--muted); font-size:14px; white-space:nowrap}
 .scanLine{
   margin-top:10px;
   color:var(--muted);
