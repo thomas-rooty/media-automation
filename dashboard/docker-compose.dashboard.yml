@@ -11,8 +11,9 @@ services:
       - ./dashboard.env
     # Pour afficher les disques externes dans /api/system, monte ici les mêmes points de montage
     # que sur ton serveur (en lecture seule si tu veux).
-    # volumes:
-    #   - /mnt/medias:/mnt/medias:ro
+    volumes:
+      # ton disque externe (lsblk -> /mnt/medias)
+      - ${MEDIA_MOUNT_PATH:-/mnt/medias}:/mnt/medias:ro
     networks:
       - media-net
     restart: unless-stopped
