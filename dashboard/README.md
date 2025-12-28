@@ -33,7 +33,7 @@ Voir `env.example`. Les plus importantes :
 ## Lancer via Docker (minimal)
 
 1. Assure-toi que ton réseau Docker `media-net` existe (il est créé quand tu lances la stack principale).
-2. Renseigne les `CHANGE_ME` dans `docker-compose.dashboard.yml` (ou utilise tes variables d’environnement).
+2. Copie `dashboard/dashboard.env.example` -> `dashboard/dashboard.env` et remplis les valeurs (API keys, etc.).
 3. Démarre :
 
 ```bash
