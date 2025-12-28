@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import datetime as dt
-import os
 import shutil
 import socket
 from pathlib import Path
@@ -85,24 +84,14 @@ def _read_meminfo() -> dict[str, int]:
         return {}
 
 
-def _loadavg() -> tuple[float | None, float | None, float | None]:
-    try:
-        a, b, c = os.getloadavg()
-        return float(a), float(b), float(c)
-    except Exception:
-        return None, None, None
-
-
 @app.get("/api/system")
 def system() -> dict[str, Any]:
     """
     Basic host stats (inside container):
-    - load average
     - RAM usage (Linux /proc/meminfo)
     - disk usage for configured mount points
     """
     host = socket.gethostname()
-    load1, load5, load15 = _loadavg()
 
     mem = _read_meminfo()
     mem_total_kb = mem.get("MemTotal")
@@ -135,7 +124,6 @@ def system() -> dict[str, Any]:
 
     return {
         "host": host,
-        "load": {"1": load1, "5": load5, "15": load15},
         "memory": {
             "totalBytes": (mem_total_kb * 1024) if mem_total_kb is not None else None,
             "usedBytes": (mem_used_kb * 1024) if mem_used_kb is not None else None,

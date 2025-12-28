@@ -212,14 +212,7 @@ function renderSystem(sys) {
   const memUsed = sys?.memory?.usedBytes;
   const memAvail = sys?.memory?.availBytes;
 
-  const load1 = sys?.load?.["1"];
-  const load5 = sys?.load?.["5"];
-
   const stats = [];
-
-  if (typeof load1 === "number" && typeof load5 === "number") {
-    stats.push({ k: "Load", v: `${load1.toFixed(2)} / ${load5.toFixed(2)}` });
-  }
 
   if (memTotal && memUsed != null) {
     const p = pct(memUsed, memTotal);
