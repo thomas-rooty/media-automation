@@ -91,6 +91,20 @@ header{
   align-items:center;
   gap:12px;
 }
+.weatherPill{
+  min-width: 160px;
+  justify-content:center;
+  gap:10px;
+}
+.weatherIcon{font-size:18px; line-height:1;}
+.weatherLabel{
+  color:var(--muted);
+  font-weight:650;
+  max-width: 140px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
 .iconBtn{
   width:48px;
   height:48px;

@@ -41,6 +41,13 @@ class Settings(BaseSettings):
     # JSON string: [{"label":"Serveur","path":"/"},{"label":"SSD","path":"/mnt/ssd"}]
     disks_json: str = "[]"
 
+    # Weather (Open-Meteo, no API key)
+    # Recommended: set lat/lon + optional label (city name shown in UI).
+    weather_lat: float | None = None
+    weather_lon: float | None = None
+    weather_label: str = ""
+    weather_timezone: str = "auto"
+
     def links(self) -> list[dict[str, str]]:
         try:
             raw: Any = json.loads(self.links_json)

@@ -63,6 +63,48 @@ def meta() -> dict[str, Any]:
     return {"title": settings.title, "refreshSeconds": settings.refresh_seconds}
 
 
+@app.get("/api/weather")
+async def weather() -> dict[str, Any]:
+    """
+    Simple weather proxy using Open-Meteo (no API key).
+    Config via DASH_WEATHER_LAT / DASH_WEATHER_LON (and optional DASH_WEATHER_LABEL).
+    """
+    if settings.weather_lat is None or settings.weather_lon is None:
+        return {"configured": False}
+
+    params = {
+        "latitude": str(settings.weather_lat),
+        "longitude": str(settings.weather_lon),
+        "current": "temperature_2m,weather_code,is_day",
+        "timezone": settings.weather_timezone or "auto",
+    }
+    url = "https://api.open-meteo.com/v1/forecast"
+
+    async with httpx.AsyncClient(timeout=8) as client:
+        r = await client.get(url, params=params)
+        if r.status_code >= 400:
+            raise HTTPException(status_code=502, detail={"service": "weather", "status": r.status_code})
+        data: Any = r.json()
+
+    cur = data.get("current") if isinstance(data, dict) else None
+    if not isinstance(cur, dict):
+        return {"configured": True, "label": (settings.weather_label or "").strip() or None, "error": "no current"}
+
+    temp = cur.get("temperature_2m")
+    code = cur.get("weather_code")
+    is_day = cur.get("is_day")
+    t = cur.get("time")
+
+    return {
+        "configured": True,
+        "label": (settings.weather_label or "").strip() or None,
+        "tempC": temp,
+        "code": code,
+        "isDay": bool(int(is_day)) if is_day is not None else None,
+        "time": t,
+    }
+
+
 def _read_meminfo() -> dict[str, int]:
     """
     Returns meminfo values in kB (Linux). Empty dict if not available.

@@ -66,6 +66,38 @@ function setStatus(ok, text) {
   el("statusText").textContent = text;
 }
 
+function weatherIconFrom(code, isDay) {
+  const c = Number(code);
+  if (!Number.isFinite(c)) return "☁️";
+  if (c === 0) return isDay === false ? "🌙" : "☀️";
+  if ([1,2,3].includes(c)) return "⛅";
+  if ([45,48].includes(c)) return "🌫️";
+  if ((c >= 51 && c <= 57) || (c >= 61 && c <= 67) || (c >= 80 && c <= 82)) return "🌧️";
+  if ((c >= 71 && c <= 77) || (c >= 85 && c <= 86)) return "❄️";
+  if (c >= 95 && c <= 99) return "⛈️";
+  return "☁️";
+}
+
+function renderWeather(data) {
+  const iconEl = el("weatherIcon");
+  const tempEl = el("weatherTemp");
+  const labelEl = el("weatherLabel");
+  if (!iconEl || !tempEl || !labelEl) return;
+
+  if (!data || data.configured === false) {
+    iconEl.textContent = "—";
+    tempEl.textContent = "—";
+    labelEl.textContent = "";
+    return;
+  }
+
+  const icon = weatherIconFrom(data.code, data.isDay);
+  const temp = Number(data.tempC);
+  iconEl.textContent = icon;
+  tempEl.textContent = Number.isFinite(temp) ? `${Math.round(temp)}°C` : "—";
+  labelEl.textContent = safeText(data.label);
+}
+
 let lastStatusData = null;
 
 async function jget(path) {
@@ -419,6 +451,10 @@ async function refreshAll() {
     jget("/api/system")
       .then((sys) => renderSystem(sys))
       .catch(() => renderSystem(null)),
+
+    jget("/api/weather")
+      .then((w) => renderWeather(w))
+      .catch(() => renderWeather(null)),
 
     jget("/api/library/today?limit=6")
       .then((data) => renderLibraryToday(data))
