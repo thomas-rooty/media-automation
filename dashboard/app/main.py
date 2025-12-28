@@ -159,7 +159,7 @@ def _read_meminfo() -> dict[str, int]:
 
 
 @app.get("/api/system")
-def system() -> dict[str, Any]:
+async def system() -> dict[str, Any]:
     """
     Basic host stats (inside container):
     - RAM usage (Linux /proc/meminfo)
@@ -196,21 +196,43 @@ def system() -> dict[str, Any]:
         except Exception as e:
             disks_out.append({"label": label, "path": path, "error": str(e)})
 
+    # Network throughput:
+    # - Prefer qBittorrent global transfer speeds if configured (matches "torrent en cours" expectation)
+    # - Fallback to container network namespace (/proc/net/dev) otherwise
     rx_bps: float | None = None
     tx_bps: float | None = None
-    rx, tx = _read_net_totals_linux()
-    now = time.time()
-    if rx is not None and tx is not None:
-        last_rx = _NET_LAST.get("rx")
-        last_tx = _NET_LAST.get("tx")
-        last_t = _NET_LAST.get("t")
-        if last_rx is not None and last_tx is not None and last_t is not None:
-            dt_s = max(0.001, now - float(last_t))
-            rx_bps = max(0.0, (float(rx) - float(last_rx)) / dt_s)
-            tx_bps = max(0.0, (float(tx) - float(last_tx)) / dt_s)
-        _NET_LAST["rx"] = float(rx)
-        _NET_LAST["tx"] = float(tx)
-        _NET_LAST["t"] = float(now)
+    net_source: str | None = None
+
+    if settings.qbittorrent_url and settings.qbittorrent_username and settings.qbittorrent_password:
+        base = settings.qbittorrent_url
+        async with httpx.AsyncClient(timeout=6) as client:
+            try:
+                await _qb_login(client, base, settings.qbittorrent_username, settings.qbittorrent_password)
+                r = await client.get(f"{base.rstrip('/')}/api/v2/transfer/info")
+                if r.status_code < 400:
+                    data: Any = r.json()
+                    if isinstance(data, dict):
+                        rx_bps = float(data.get("dl_info_speed") or 0.0)
+                        tx_bps = float(data.get("up_info_speed") or 0.0)
+                        net_source = "qbittorrent"
+            except Exception:
+                pass
+
+    if net_source is None:
+        rx, tx = _read_net_totals_linux()
+        now = time.time()
+        if rx is not None and tx is not None:
+            last_rx = _NET_LAST.get("rx")
+            last_tx = _NET_LAST.get("tx")
+            last_t = _NET_LAST.get("t")
+            if last_rx is not None and last_tx is not None and last_t is not None:
+                dt_s = max(0.001, now - float(last_t))
+                rx_bps = max(0.0, (float(rx) - float(last_rx)) / dt_s)
+                tx_bps = max(0.0, (float(tx) - float(last_tx)) / dt_s)
+            _NET_LAST["rx"] = float(rx)
+            _NET_LAST["tx"] = float(tx)
+            _NET_LAST["t"] = float(now)
+            net_source = "container"
 
     return {
         "host": host,
@@ -219,7 +241,7 @@ def system() -> dict[str, Any]:
             "usedBytes": (mem_used_kb * 1024) if mem_used_kb is not None else None,
             "availBytes": (mem_avail_kb * 1024) if mem_avail_kb is not None else None,
         },
-        "network": {"rxBps": rx_bps, "txBps": tx_bps},
+        "network": {"rxBps": rx_bps, "txBps": tx_bps, "source": net_source},
         "disks": disks_out,
     }
 

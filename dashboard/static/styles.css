@@ -28,22 +28,28 @@ body{
 body::before{
   content:"";
   position:fixed;
-  inset:-20%;
+  inset:-35%;
   pointer-events:none;
   background:
-    radial-gradient(900px 700px at 20% 30%, rgba(76,194,255,.10), transparent 60%),
-    radial-gradient(800px 600px at 80% 20%, rgba(43,213,118,.08), transparent 60%),
-    radial-gradient(700px 700px at 60% 90%, rgba(255,176,32,.06), transparent 60%);
-  filter: blur(6px);
-  opacity:.55;
-  animation:bgDrift 28s ease-in-out infinite;
-  z-index:-1;
+    radial-gradient(900px 700px at 20% 30%, rgba(76,194,255,.18), transparent 62%),
+    radial-gradient(900px 700px at 85% 25%, rgba(43,213,118,.14), transparent 62%),
+    radial-gradient(900px 800px at 55% 90%, rgba(255,176,32,.10), transparent 62%);
+  opacity:.85;
+  mix-blend-mode: screen;
+  animation:bgDrift 18s ease-in-out infinite, bgHue 22s ease-in-out infinite;
+  z-index:0;
 }
 
 @keyframes bgDrift{
-  0%{transform:translate3d(-1.5%, -1%, 0) scale(1.02);}
-  50%{transform:translate3d(1.5%, 1%, 0) scale(1.04);}
-  100%{transform:translate3d(-1.5%, -1%, 0) scale(1.02);}
+  0%{transform:translate3d(-4%, -2.5%, 0) scale(1.06) rotate(-0.6deg);}
+  50%{transform:translate3d(4%, 2.5%, 0) scale(1.10) rotate(0.6deg);}
+  100%{transform:translate3d(-4%, -2.5%, 0) scale(1.06) rotate(-0.6deg);}
+}
+
+@keyframes bgHue{
+  0%{filter:blur(2px) saturate(1.15) hue-rotate(0deg) brightness(1.00);}
+  50%{filter:blur(2px) saturate(1.35) hue-rotate(18deg) brightness(1.06);}
+  100%{filter:blur(2px) saturate(1.15) hue-rotate(0deg) brightness(1.00);}
 }
 
 .app{
@@ -52,6 +58,8 @@ body::before{
   flex-direction:column;
   padding:18px;
   gap:14px;
+  position:relative;
+  z-index:1;
 }
 
 header{
