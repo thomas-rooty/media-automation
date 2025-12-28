@@ -766,6 +766,39 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
             raise HTTPException(status_code=502, detail=detail)
         items: list[dict[str, Any]] = r.json()
 
+        # Series progress lookup (episodes watched / total) for episode items.
+        # Only reliable when we have a configured user id.
+        series_progress: dict[str, dict[str, int]] = {}
+        if settings.jellyfin_user_id:
+            series_ids: set[str] = set()
+            for it in items:
+                if not isinstance(it, dict):
+                    continue
+                if str(it.get("Type") or "").lower() != "episode":
+                    continue
+                sid = it.get("SeriesId")
+                if sid:
+                    series_ids.add(str(sid))
+
+            for sid in series_ids:
+                try:
+                    s_url = f"{base.rstrip('/')}/Users/{settings.jellyfin_user_id}/Items/{sid}"
+                    s_params = {"Fields": "RecursiveItemCount,UserData", "EnableUserData": "true"}
+                    sr = await client.get(s_url, headers=_jellyfin_headers(), params=s_params)
+                    if sr.status_code >= 400:
+                        continue
+                    data: Any = sr.json()
+                    if not isinstance(data, dict):
+                        continue
+                    total = data.get("RecursiveItemCount")
+                    ud = data.get("UserData") if isinstance(data.get("UserData"), dict) else {}
+                    unplayed = ud.get("UnplayedItemCount") if isinstance(ud, dict) else None
+                    if isinstance(total, int) and total > 0 and isinstance(unplayed, int) and unplayed >= 0:
+                        watched = max(0, total - unplayed)
+                        series_progress[sid] = {"watched": watched, "total": total}
+                except Exception:
+                    continue
+
     out: list[dict[str, Any]] = []
     for it in items:
         ud = it.get("UserData") if isinstance(it, dict) else None
@@ -777,12 +810,17 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
                 "playCount": ud.get("PlayCount"),
                 "lastPlayedDate": ud.get("LastPlayedDate"),
             }
+        sid_val = it.get("SeriesId") if isinstance(it, dict) else None
+        series_id = str(sid_val) if sid_val else None
+        sp = series_progress.get(series_id) if series_id else None
         out.append(
             {
                 "id": it.get("Id"),
                 "name": it.get("Name"),
                 "type": it.get("Type"),
                 "seriesName": it.get("SeriesName"),
+                "seriesId": series_id,
+                "seriesProgress": sp,
                 "productionYear": it.get("ProductionYear"),
                 "indexNumber": it.get("IndexNumber"),
                 "parentIndexNumber": it.get("ParentIndexNumber"),

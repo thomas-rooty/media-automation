@@ -397,6 +397,7 @@ header{
   font-weight:750;
   flex:0 0 auto;
 }
+.miniTag.info{border-color:rgba(76,194,255,.35); background:rgba(76,194,255,.10); color:#cfeeff}
 .miniTag.good{border-color:rgba(43,213,118,.35); background:rgba(43,213,118,.10); color:#bff4d9}
 .miniTag.warn{border-color:rgba(255,176,32,.35); background:rgba(255,176,32,.10); color:#ffe4b6}
 

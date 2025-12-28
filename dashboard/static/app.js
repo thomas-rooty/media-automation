@@ -194,8 +194,9 @@ function renderJelly(items) {
   for (const it of items) {
     const name = safeText(it.name) || "Média";
     const typ = safeText(it.type) || "Item";
+    const isEpisode = typ.toLowerCase() === "episode";
     let sub = typ;
-    if (typ.toLowerCase() === "episode") {
+    if (isEpisode) {
       const series = safeText(it.seriesName);
       const s = it.parentIndexNumber ?? "?";
       const e = it.indexNumber ?? "?";
@@ -214,7 +215,7 @@ function renderJelly(items) {
       if (played) {
         playback = "watched";
         playbackLabel = "Vu";
-      } else if (pos > 0) {
+      } else if (!isEpisode && pos > 0) {
         playback = "progress";
         playbackLabel = "En cours";
       } else {
@@ -222,6 +223,20 @@ function renderJelly(items) {
         playbackLabel = "Non vu";
       }
     }
+
+    // For episodes: show series progress (watched/total) if series has been started.
+    let seriesBadge = "";
+    if (isEpisode && playback !== "watched") {
+      const sp = it.seriesProgress;
+      const w = Number(sp?.watched);
+      const t = Number(sp?.total);
+      if (Number.isFinite(w) && Number.isFinite(t) && t > 0 && w > 0 && w < t) {
+        seriesBadge = `<span class="miniTag info" title="Progression série">${Math.round(w)}/${Math.round(t)}</span>`;
+      } else if (Number.isFinite(w) && Number.isFinite(t) && t > 0 && w >= t) {
+        seriesBadge = `<span class="miniTag good" title="Série terminée">${Math.round(t)}/${Math.round(t)}</span>`;
+      }
+    }
+
     const badge =
       playback === "watched" ? `<span class="miniTag good" title="Déjà regardé">${playbackLabel}</span>` :
       playback === "progress" ? `<span class="miniTag warn" title="Lecture en cours">${playbackLabel}</span>` :
@@ -236,7 +251,7 @@ function renderJelly(items) {
       <div class="txt">
         <div class="mediaTop">
           <div class="name">${name}</div>
-          ${badge}
+          ${seriesBadge || badge}
         </div>
         <div class="sub">${sub} • Ajouté ${added}</div>
       </div>
