@@ -31,12 +31,29 @@ body::before{
   inset:-35%;
   pointer-events:none;
   background:
-    radial-gradient(900px 700px at 20% 30%, rgba(76,194,255,.18), transparent 62%),
-    radial-gradient(900px 700px at 85% 25%, rgba(43,213,118,.14), transparent 62%),
-    radial-gradient(900px 800px at 55% 90%, rgba(255,176,32,.10), transparent 62%);
+    radial-gradient(1000px 780px at 18% 28%, rgba(76,194,255,.26), transparent 62%),
+    radial-gradient(980px 760px at 86% 22%, rgba(43,213,118,.20), transparent 62%),
+    radial-gradient(980px 860px at 52% 92%, rgba(255,176,32,.14), transparent 62%);
+  opacity:.95;
+  mix-blend-mode: screen;
+  animation:bgDrift 14s ease-in-out infinite, bgHue 18s ease-in-out infinite;
+  z-index:0;
+}
+
+/* Second animated layer for more visible movement */
+body::after{
+  content:"";
+  position:fixed;
+  inset:-45%;
+  pointer-events:none;
+  background:
+    radial-gradient(1100px 900px at 15% 85%, rgba(76,194,255,.16), transparent 60%),
+    radial-gradient(1100px 900px at 85% 75%, rgba(255,77,77,.10), transparent 62%),
+    radial-gradient(1200px 1000px at 70% 10%, rgba(155,95,255,.12), transparent 60%);
   opacity:.85;
   mix-blend-mode: screen;
-  animation:bgDrift 18s ease-in-out infinite, bgHue 22s ease-in-out infinite;
+  filter: blur(10px);
+  animation:bgFloat 20s ease-in-out infinite, bgHue2 26s linear infinite;
   z-index:0;
 }
 
@@ -47,9 +64,24 @@ body::before{
 }
 
 @keyframes bgHue{
-  0%{filter:blur(2px) saturate(1.15) hue-rotate(0deg) brightness(1.00);}
-  50%{filter:blur(2px) saturate(1.35) hue-rotate(18deg) brightness(1.06);}
-  100%{filter:blur(2px) saturate(1.15) hue-rotate(0deg) brightness(1.00);}
+  0%{filter:blur(2px) saturate(1.30) hue-rotate(0deg) brightness(1.02) contrast(1.02);}
+  50%{filter:blur(2px) saturate(1.70) hue-rotate(22deg) brightness(1.10) contrast(1.05);}
+  100%{filter:blur(2px) saturate(1.30) hue-rotate(0deg) brightness(1.02) contrast(1.02);}
+}
+
+@keyframes bgFloat{
+  0%{transform:translate3d(-2%, 1.5%, 0) scale(1.10) rotate(0.8deg);}
+  50%{transform:translate3d(2%, -1.5%, 0) scale(1.14) rotate(-0.8deg);}
+  100%{transform:translate3d(-2%, 1.5%, 0) scale(1.10) rotate(0.8deg);}
+}
+
+@keyframes bgHue2{
+  0%{filter: blur(10px) saturate(1.35) hue-rotate(0deg) brightness(1.00);}
+  100%{filter: blur(10px) saturate(1.35) hue-rotate(45deg) brightness(1.00);}
+}
+
+@media (prefers-reduced-motion: reduce){
+  body::before, body::after{animation:none;}
 }
 
 .app{
