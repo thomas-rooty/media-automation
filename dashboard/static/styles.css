@@ -107,6 +107,11 @@ header{
   font: inherit;
 }
 .pillBtn:active{transform:translateY(1px); background:rgba(255,255,255,.10);}
+.pillBtn#servicesBtn,
+.pillBtn#refreshBtn{
+  border-color: rgba(255,255,255,.55);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.12) inset;
+}
 .dot{width:10px;height:10px;border-radius:999px;background:var(--warn)}
 .dot.good{background:var(--good)}
 .dot.bad{background:var(--bad)}
