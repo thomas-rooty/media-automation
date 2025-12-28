@@ -46,6 +46,13 @@ function toLocalDate(iso) {
   return d.toLocaleDateString(undefined, { weekday:"short", day:"2-digit", month:"short" });
 }
 
+function toLocalTime(iso) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "—";
+  return d.toLocaleTimeString(undefined, { hour:"2-digit", minute:"2-digit" });
+}
+
 function clockTick() {
   const d = new Date();
   el("clockTime").textContent = d.toLocaleTimeString(undefined, { hour:"2-digit", minute:"2-digit" });
@@ -229,9 +236,12 @@ function renderSystem(sys) {
       continue;
     }
     const p = pct(d.used, d.total);
+    const freePct = d.total ? Math.round((d.free / d.total) * 100) : null;
+    const isLow = freePct != null && freePct <= 5;
     stats.push({
       k: `Disque: ${d.label}`,
-      v: `${fmtBytes(d.free)} libre / ${fmtBytes(d.total)}${p != null ? ` (${p}% used)` : ""}`,
+      v: `${fmtBytes(d.free)} libre / ${fmtBytes(d.total)}${freePct != null ? ` (${freePct}% libre)` : ""}${isLow ? " • ALERTE" : ""}`,
+      bad: isLow,
     });
   }
 
@@ -242,10 +252,56 @@ function renderSystem(sys) {
 
   for (const s of stats.slice(0, 6)) {
     const div = document.createElement("div");
-    div.className = "stat";
+    div.className = `stat${s.bad ? " bad" : ""}`;
     div.innerHTML = `<div class="k">${s.k}</div><div class="v">${s.v}</div>`;
     root.appendChild(div);
   }
+}
+
+function renderVpn(vpn) {
+  const line = el("vpnLine");
+  if (!line) return;
+  const name = vpn?.name || "VPN";
+  const ip = vpn?.ip ? String(vpn.ip) : "—";
+  const port = vpn?.port != null ? String(vpn.port) : "—";
+  const ok = vpn?.ok === true && vpn?.ip && vpn?.port;
+  line.innerHTML = `
+    <div class="left">${name}</div>
+    <div class="right">IP: ${ip} • Port: ${port} ${ok ? "(OK)" : ""}</div>
+  `;
+}
+
+function renderLibraryToday(data) {
+  const root = el("libraryToday");
+  if (!root) return;
+  root.innerHTML = "";
+  const items = data?.items || [];
+  if (!items.length) {
+    root.innerHTML = `<div class="row"><div class="main"><div class="primary">Rien aujourd’hui</div><div class="secondary">—</div></div><div class="meta"><span class="tag good">OK</span></div></div>`;
+    return;
+  }
+  for (const it of items.slice(0, 6)) {
+    const title = safeText(it.title) || "Élément";
+    const when = toLocalTime(it.date);
+    const div = document.createElement("div");
+    div.className = "row";
+    div.innerHTML = `
+      <div class="main">
+        <div class="primary">✔ ${title}</div>
+        <div class="secondary">${safeText(it.type) || ""}</div>
+      </div>
+      <div class="meta">${when}</div>
+    `;
+    root.appendChild(div);
+  }
+}
+
+function renderScans(scans) {
+  const line = el("scanLine");
+  if (!line) return;
+  const s = scans?.sonarr ? toLocalTime(scans.sonarr) : "—";
+  const r = scans?.radarr ? toLocalTime(scans.radarr) : "—";
+  line.textContent = `Dernier scan • Sonarr: ${s} • Radarr: ${r}`;
 }
 
 function setupMenu() {
@@ -304,6 +360,18 @@ async function refreshAll() {
     jget("/api/system")
       .then((sys) => renderSystem(sys))
       .catch(() => renderSystem(null)),
+
+    jget("/api/vpn")
+      .then((vpn) => renderVpn(vpn))
+      .catch(() => renderVpn(null)),
+
+    jget("/api/library/today?limit=6")
+      .then((data) => renderLibraryToday(data))
+      .catch(() => renderLibraryToday(null)),
+
+    jget("/api/scans")
+      .then((data) => renderScans(data))
+      .catch(() => renderScans(null)),
 
     jget("/api/links")
       .then((links) => renderLinks(links.links))

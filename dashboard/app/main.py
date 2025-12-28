@@ -133,6 +133,196 @@ def system() -> dict[str, Any]:
     }
 
 
+@app.get("/api/vpn")
+async def vpn() -> dict[str, Any]:
+    """
+    Gluetun VPN status (public IP + forwarded port) via HTTP control server.
+    Endpoints (Gluetun):
+    - GET /v1/publicip/ip
+    - GET /v1/openvpn/portforwarded
+    """
+    name = settings.gluetun_name
+    base = settings.gluetun_url or "http://gluetun:8000"
+    headers: dict[str, str] = {}
+    if settings.gluetun_api_key:
+        headers["X-API-Key"] = settings.gluetun_api_key
+
+    async with httpx.AsyncClient(timeout=6) as client:
+        ip: str | None = None
+        port: int | None = None
+        ok = True
+        details: list[str] = []
+
+        try:
+            r = await client.get(f"{base.rstrip('/')}/v1/publicip/ip", headers=headers)
+            if r.status_code >= 400:
+                ok = False
+                details.append(f"ip http {r.status_code}")
+            else:
+                data: Any = r.json()
+                ip = str(data.get("public_ip") or data.get("ip") or "").strip() or None
+        except Exception as e:
+            ok = False
+            details.append(f"ip {type(e).__name__}")
+
+        try:
+            r = await client.get(f"{base.rstrip('/')}/v1/openvpn/portforwarded", headers=headers)
+            if r.status_code >= 400:
+                ok = False
+                details.append(f"port http {r.status_code}")
+            else:
+                data = r.json()
+                # gluetun returns {"port": 12345} (can vary)
+                p = data.get("port")
+                if isinstance(p, int):
+                    port = p
+                else:
+                    try:
+                        port = int(str(p))
+                    except Exception:
+                        port = None
+        except Exception as e:
+            ok = False
+            details.append(f"port {type(e).__name__}")
+
+    return {"name": name, "ok": ok, "ip": ip, "port": port, "detail": "; ".join(details) if details else None}
+
+
+def _start_of_today_utc() -> dt.datetime:
+    now = dt.datetime.now(dt.timezone.utc)
+    return dt.datetime(now.year, now.month, now.day, tzinfo=dt.timezone.utc)
+
+
+@app.get("/api/library/today")
+async def library_today(limit: int = 12) -> dict[str, Any]:
+    """
+    "Ajouté dans la bibliothèque aujourd’hui" = history imports Sonarr + Radarr.
+    We use history endpoints and keep items whose date >= start of today (UTC).
+    """
+    start = _start_of_today_utc()
+    lim = max(1, min(limit, 50))
+    items: list[dict[str, Any]] = []
+
+    async with httpx.AsyncClient(timeout=10) as client:
+        # Sonarr
+        if settings.sonarr_url and settings.sonarr_api_key:
+            try:
+                r = await client.get(
+                    f"{settings.sonarr_url.rstrip('/')}/api/v3/history",
+                    headers={"X-Api-Key": settings.sonarr_api_key},
+                    params={"page": "1", "pageSize": "50", "sortKey": "date", "sortDirection": "descending"},
+                )
+                if r.status_code < 400:
+                    data: Any = r.json()
+                    records = data.get("records") if isinstance(data, dict) else None
+                    if isinstance(records, list):
+                        for rec in records:
+                            when = rec.get("date")
+                            dt_when = None
+                            try:
+                                dt_when = dt.datetime.fromisoformat(str(when).replace("Z", "+00:00"))
+                            except Exception:
+                                dt_when = None
+                            if not dt_when or dt_when < start:
+                                continue
+                            event_type = str(rec.get("eventType") or "")
+                            if event_type and "import" not in event_type.lower():
+                                continue
+                            title = str(rec.get("sourceTitle") or rec.get("title") or "").strip()
+                            if title:
+                                items.append({"type": "sonarr", "title": title, "date": dt_when.isoformat()})
+            except Exception:
+                pass
+
+        # Radarr
+        if settings.radarr_url and settings.radarr_api_key:
+            try:
+                r = await client.get(
+                    f"{settings.radarr_url.rstrip('/')}/api/v3/history",
+                    headers={"X-Api-Key": settings.radarr_api_key},
+                    params={"page": "1", "pageSize": "50", "sortKey": "date", "sortDirection": "descending"},
+                )
+                if r.status_code < 400:
+                    data = r.json()
+                    records = data.get("records") if isinstance(data, dict) else None
+                    if isinstance(records, list):
+                        for rec in records:
+                            when = rec.get("date")
+                            dt_when = None
+                            try:
+                                dt_when = dt.datetime.fromisoformat(str(when).replace("Z", "+00:00"))
+                            except Exception:
+                                dt_when = None
+                            if not dt_when or dt_when < start:
+                                continue
+                            event_type = str(rec.get("eventType") or "")
+                            if event_type and "import" not in event_type.lower():
+                                continue
+                            title = str(rec.get("sourceTitle") or rec.get("title") or "").strip()
+                            if title:
+                                items.append({"type": "radarr", "title": title, "date": dt_when.isoformat()})
+            except Exception:
+                pass
+
+    # sort newest first
+    items.sort(key=lambda x: x.get("date") or "", reverse=True)
+    return {"count": min(lim, len(items)), "items": items[:lim]}
+
+
+@app.get("/api/scans")
+async def scans() -> dict[str, Any]:
+    """
+    Discrete "Dernier scan" info using /api/v3/system/task (Sonarr/Radarr).
+    We return the most recent lastExecutionTime for each service.
+    """
+    out: dict[str, Any] = {"sonarr": None, "radarr": None}
+
+    async with httpx.AsyncClient(timeout=8) as client:
+        if settings.sonarr_url and settings.sonarr_api_key:
+            try:
+                r = await client.get(
+                    f"{settings.sonarr_url.rstrip('/')}/api/v3/system/task",
+                    headers={"X-Api-Key": settings.sonarr_api_key},
+                )
+                if r.status_code < 400:
+                    tasks: Any = r.json()
+                    best: str | None = None
+                    if isinstance(tasks, list):
+                        for t in tasks:
+                            last = t.get("lastExecutionTime") or t.get("lastExecution") or t.get("lastRun")
+                            if not last:
+                                continue
+                            s = str(last)
+                            if not best or s > best:
+                                best = s
+                    out["sonarr"] = best
+            except Exception:
+                pass
+
+        if settings.radarr_url and settings.radarr_api_key:
+            try:
+                r = await client.get(
+                    f"{settings.radarr_url.rstrip('/')}/api/v3/system/task",
+                    headers={"X-Api-Key": settings.radarr_api_key},
+                )
+                if r.status_code < 400:
+                    tasks = r.json()
+                    best = None
+                    if isinstance(tasks, list):
+                        for t in tasks:
+                            last = t.get("lastExecutionTime") or t.get("lastExecution") or t.get("lastRun")
+                            if not last:
+                                continue
+                            s = str(last)
+                            if not best or s > best:
+                                best = s
+                    out["radarr"] = best
+            except Exception:
+                pass
+
+    return out
+
+
 def _default_links_for_host(host: str) -> list[dict[str, str]]:
     base = f"http://{host}"
     return [

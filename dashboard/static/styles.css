@@ -144,6 +144,15 @@ header{
   padding-right:2px;
 }
 
+.subsectionTitle{
+  margin-top:12px;
+  margin-bottom:8px;
+  font-size:13px;
+  letter-spacing:.5px;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+
 .row{
   display:grid;
   grid-template-columns: 1fr auto;
@@ -281,6 +290,26 @@ a.btn:active{
   grid-template-columns: 1fr 1fr 1fr;
   gap:10px;
 }
+.system-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 12px;
+  border-radius:14px;
+  background:rgba(0,0,0,.18);
+  border:1px solid rgba(255,255,255,.06);
+  margin-bottom:10px;
+}
+.system-line .left{font-weight:750}
+.system-line .right{color:var(--muted); font-size:14px; white-space:nowrap}
+.scanLine{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:12px;
+  text-align:right;
+}
+
 .stat{
   padding:10px 12px;
   border-radius:14px;
@@ -289,6 +318,10 @@ a.btn:active{
 }
 .stat .k{color:var(--muted); font-size:13px; margin-bottom:6px}
 .stat .v{font-size:18px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.stat.bad{
+  border-color: rgba(255,77,77,.35);
+  background: rgba(255,77,77,.10);
+}
 
 /* Slide-out menu */
 .hidden{display:none !important}
