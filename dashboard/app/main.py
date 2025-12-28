@@ -175,6 +175,104 @@ async def weather() -> dict[str, Any]:
     }
 
 
+@app.get("/api/weather/forecast")
+async def weather_forecast(days: int = 7) -> dict[str, Any]:
+    """
+    Detailed weather (today + week + hourly precip) via Open-Meteo (no API key).
+    """
+    if settings.weather_lat is None or settings.weather_lon is None:
+        return {"configured": False}
+
+    d = max(1, min(days, 14))
+    params = {
+        "latitude": str(settings.weather_lat),
+        "longitude": str(settings.weather_lon),
+        "timezone": settings.weather_timezone or "auto",
+        "forecast_days": str(d),
+        "current": "temperature_2m,weather_code,is_day,precipitation,precipitation_probability",
+        "hourly": "temperature_2m,precipitation,precipitation_probability,weather_code,is_day",
+        "daily": "weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,sunrise,sunset",
+    }
+    url = "https://api.open-meteo.com/v1/forecast"
+
+    async with httpx.AsyncClient(timeout=10) as client:
+        r = await client.get(url, params=params)
+        if r.status_code >= 400:
+            raise HTTPException(status_code=502, detail={"service": "weather", "status": r.status_code})
+        data: Any = r.json()
+
+    cur = data.get("current") if isinstance(data, dict) else None
+    hourly = data.get("hourly") if isinstance(data, dict) else None
+    daily = data.get("daily") if isinstance(data, dict) else None
+
+    out: dict[str, Any] = {
+        "configured": True,
+        "label": (settings.weather_label or "").strip() or None,
+        "timezone": data.get("timezone") if isinstance(data, dict) else None,
+        "current": None,
+        "hourly": [],
+        "daily": [],
+    }
+
+    if isinstance(cur, dict):
+        out["current"] = {
+            "time": cur.get("time"),
+            "tempC": cur.get("temperature_2m"),
+            "code": cur.get("weather_code"),
+            "isDay": bool(int(cur.get("is_day"))) if cur.get("is_day") is not None else None,
+            "precipMm": cur.get("precipitation"),
+            "precipProb": cur.get("precipitation_probability"),
+        }
+
+    if isinstance(hourly, dict):
+        times = hourly.get("time")
+        temps = hourly.get("temperature_2m")
+        codes = hourly.get("weather_code")
+        is_days = hourly.get("is_day")
+        precs = hourly.get("precipitation")
+        probs = hourly.get("precipitation_probability")
+        if isinstance(times, list):
+            for i, t in enumerate(times):
+                out["hourly"].append(
+                    {
+                        "time": t,
+                        "tempC": temps[i] if isinstance(temps, list) and i < len(temps) else None,
+                        "code": codes[i] if isinstance(codes, list) and i < len(codes) else None,
+                        "isDay": (
+                            bool(int(is_days[i])) if isinstance(is_days, list) and i < len(is_days) and is_days[i] is not None else None
+                        ),
+                        "precipMm": precs[i] if isinstance(precs, list) and i < len(precs) else None,
+                        "precipProb": probs[i] if isinstance(probs, list) and i < len(probs) else None,
+                    }
+                )
+
+    if isinstance(daily, dict):
+        times = daily.get("time")
+        codes = daily.get("weather_code")
+        tmax = daily.get("temperature_2m_max")
+        tmin = daily.get("temperature_2m_min")
+        psum = daily.get("precipitation_sum")
+        pmax = daily.get("precipitation_probability_max")
+        sunrise = daily.get("sunrise")
+        sunset = daily.get("sunset")
+        if isinstance(times, list):
+            for i, t in enumerate(times):
+                out["daily"].append(
+                    {
+                        "date": t,
+                        "code": codes[i] if isinstance(codes, list) and i < len(codes) else None,
+                        "tMax": tmax[i] if isinstance(tmax, list) and i < len(tmax) else None,
+                        "tMin": tmin[i] if isinstance(tmin, list) and i < len(tmin) else None,
+                        "precipSum": psum[i] if isinstance(psum, list) and i < len(psum) else None,
+                        "precipProbMax": pmax[i] if isinstance(pmax, list) and i < len(pmax) else None,
+                        "sunrise": sunrise[i] if isinstance(sunrise, list) and i < len(sunrise) else None,
+                        "sunset": sunset[i] if isinstance(sunset, list) and i < len(sunset) else None,
+                    }
+                )
+
+    return out
+
+
 def _read_meminfo() -> dict[str, int]:
     """
     Returns meminfo values in kB (Linux). Empty dict if not available.

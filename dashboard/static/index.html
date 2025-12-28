@@ -35,11 +35,11 @@
           <button id="menuBtn" class="iconBtn" aria-label="Menu">
             <span class="icon">☰</span>
           </button>
-          <div id="weatherPill" class="pill weatherPill" aria-label="Météo">
+          <button id="weatherPill" class="pill pillBtn weatherPill" type="button" aria-label="Voir la météo détaillée">
             <span id="weatherIcon" class="weatherIcon">—</span>
             <strong id="weatherTemp">—</strong>
             <span id="weatherLabel" class="weatherLabel"></span>
-          </div>
+          </button>
         </div>
       </header>
 
@@ -107,6 +107,17 @@
         </button>
       </div>
       <div id="legendList" class="modalList"></div>
+    </div>
+
+    <div id="weatherOverlay" class="overlay modalOverlay hidden" aria-hidden="true"></div>
+    <div id="weatherModal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Météo détaillée">
+      <div class="modalHeader">
+        <div id="weatherModalTitle" class="modalTitle">Météo</div>
+        <button id="weatherCloseBtn" class="iconBtn" aria-label="Fermer" type="button">
+          <span class="icon">✕</span>
+        </button>
+      </div>
+      <div id="weatherContent" class="modalList"></div>
     </div>
 
     <script src="/static/app.js"></script>

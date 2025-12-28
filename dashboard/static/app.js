@@ -115,6 +115,163 @@ function renderWeather(data) {
   labelEl.textContent = safeText(data.label);
 }
 
+let lastWeatherForecast = null;
+let lastWeatherForecastAt = 0;
+
+function fmtPct(n) {
+  const v = Number(n);
+  if (!Number.isFinite(v)) return "—";
+  return `${Math.round(v)}%`;
+}
+
+function fmtMm(n) {
+  const v = Number(n);
+  if (!Number.isFinite(v)) return "—";
+  if (v === 0) return "0 mm";
+  return `${v.toFixed(v >= 10 ? 0 : 1)} mm`;
+}
+
+function toHour(iso) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "—";
+  return d.toLocaleTimeString(undefined, { hour:"2-digit", minute:"2-digit" });
+}
+
+function renderWeatherModal(data) {
+  const titleEl = el("weatherModalTitle");
+  const root = el("weatherContent");
+  if (!root) return;
+
+  if (!data || data.configured === false) {
+    if (titleEl) titleEl.textContent = "Météo";
+    root.innerHTML = `<div class="serviceRow"><div class="serviceLeft"><div class="serviceName">Météo</div><div class="serviceDetail">Non configurée (lat/lon)</div></div></div>`;
+    return;
+  }
+
+  const label = safeText(data.label) || "Météo";
+  if (titleEl) titleEl.textContent = `Météo • ${label}`;
+
+  const cur = data.current || {};
+  const icon = weatherIconFrom(cur.code, cur.isDay);
+  const temp = Number(cur.tempC);
+  const precipMm = cur.precipMm;
+  const precipProb = cur.precipProb;
+
+  // Hourly: show every 2 hours for ~24h starting now
+  const hours = Array.isArray(data.hourly) ? data.hourly : [];
+  const now = Date.now();
+  const upcoming = hours
+    .map((h) => ({...h, _t: new Date(h.time).getTime()}))
+    .filter((h) => Number.isFinite(h._t) && h._t >= now - 15*60*1000)
+    .sort((a,b) => a._t - b._t)
+    .slice(0, 30); // ~30h
+
+  const every2h = upcoming.filter((h, idx) => idx % 2 === 0).slice(0, 12); // 24h view
+  const hourlyHtml = every2h.map((h) => {
+    const ii = weatherIconFrom(h.code, h.isDay);
+    const t = toHour(h.time);
+    const tt = Number(h.tempC);
+    const pp = Number(h.precipProb);
+    const mm = Number(h.precipMm);
+    const showRain = (Number.isFinite(mm) && mm > 0) || (Number.isFinite(pp) && pp >= 30);
+    return `
+      <div class="wxHour">
+        <div class="t">${t}</div>
+        <div class="i">${ii}</div>
+        <div class="c">${Number.isFinite(tt) ? `${Math.round(tt)}°` : "—"}</div>
+        <div class="p">${showRain ? `🌧️ ${fmtPct(pp)} • ${fmtMm(mm)}` : `Sec • ${fmtPct(pp)}`}</div>
+      </div>
+    `;
+  }).join("");
+
+  // Daily: next 7 days
+  const days = Array.isArray(data.daily) ? data.daily : [];
+  const dailyHtml = days.slice(0, 7).map((d) => {
+    const ii = weatherIconFrom(d.code, true);
+    const date = toLocalDate(d.date);
+    const tmin = Number(d.tMin);
+    const tmax = Number(d.tMax);
+    const ps = d.precipSum;
+    const pm = d.precipProbMax;
+    return `
+      <div class="serviceRow">
+        <div class="serviceLeft">
+          <div class="serviceName">${ii}</div>
+          <div class="serviceName">${date}</div>
+          <div class="serviceDetail">${Number.isFinite(tmin) ? Math.round(tmin) : "—"}° / ${Number.isFinite(tmax) ? Math.round(tmax) : "—"}° • 🌧️ ${fmtPct(pm)} • ${fmtMm(ps)}</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  root.innerHTML = `
+    <div class="wxSectionTitle">Aujourd’hui</div>
+    <div class="wxSummary">
+      <div class="wxSummaryLeft">
+        <div class="wxBigIcon">${icon}</div>
+        <div>
+          <div class="wxBigTemp">${Number.isFinite(temp) ? `${Math.round(temp)}°C` : "—"}</div>
+          <div class="wxSmall">Précip. ${fmtPct(precipProb)} • ${fmtMm(precipMm)}</div>
+        </div>
+      </div>
+      <div class="wxSmall">${safeText(data.timezone) || ""}</div>
+    </div>
+
+    <div class="wxSectionTitle">Pluie / heure (toutes les 2h)</div>
+    <div class="wxHourly">${hourlyHtml || `<div class="wxSmall">Indisponible</div>`}</div>
+
+    <div class="wxSectionTitle">Semaine</div>
+    <div>${dailyHtml || `<div class="wxSmall">Indisponible</div>`}</div>
+  `;
+}
+
+function setupWeatherModal() {
+  const pill = el("weatherPill");
+  const overlay = el("weatherOverlay");
+  const modal = el("weatherModal");
+  const closeBtn = el("weatherCloseBtn");
+  const content = el("weatherContent");
+  if (!pill || !overlay || !modal || !closeBtn || !content) return;
+
+  const open = async () => {
+    overlay.classList.remove("hidden");
+    modal.classList.remove("hidden");
+    overlay.setAttribute("aria-hidden", "false");
+    modal.setAttribute("aria-hidden", "false");
+    content.innerHTML = `<div class="wxSmall">Chargement météo…</div>`;
+
+    const now = Date.now();
+    if (lastWeatherForecast && (now - lastWeatherForecastAt) < 5 * 60 * 1000) {
+      renderWeatherModal(lastWeatherForecast);
+      return;
+    }
+
+    try {
+      const data = await jget("/api/weather/forecast?days=7");
+      lastWeatherForecast = data;
+      lastWeatherForecastAt = Date.now();
+      renderWeatherModal(data);
+    } catch (e) {
+      renderWeatherModal(null);
+    }
+  };
+
+  const close = () => {
+    overlay.classList.add("hidden");
+    modal.classList.add("hidden");
+    overlay.setAttribute("aria-hidden", "true");
+    modal.setAttribute("aria-hidden", "true");
+  };
+
+  pill.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+  overlay.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+}
+
 let lastStatusData = null;
 
 async function jget(path) {
@@ -580,6 +737,7 @@ async function main() {
   setupMenu();
   setupServicesModal();
   setupLegendModal();
+  setupWeatherModal();
 
   let refreshSeconds = 45;
   try {
