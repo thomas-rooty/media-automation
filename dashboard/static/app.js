@@ -161,26 +161,32 @@ function renderLinks(links) {
 }
 
 async function refreshAll() {
-  try {
-    const [status, sonarr, qb, jelly, links] = await Promise.all([
-      jget("/api/status"),
-      jget("/api/sonarr/upcoming?days=7&limit=8"),
-      jget("/api/qbittorrent/torrents?filter=active&limit=6"),
-      jget("/api/jellyfin/latest?limit=9"),
-      jget("/api/links"),
-    ]);
+  // Ne pas bloquer tout le dashboard si 1 API tombe.
+  const tasks = [
+    jget("/api/status").then((status) => {
+      const okCount = (status.items || []).filter(x => x.ok).length;
+      const total = (status.items || []).length;
+      setStatus(status.ok, `Services: ${okCount}/${total}`);
+    }).catch(() => setStatus(false, "Erreur réseau / config")),
 
-    const okCount = (status.items || []).filter(x => x.ok).length;
-    const total = (status.items || []).length;
-    setStatus(status.ok, `Services: ${okCount}/${total}`);
+    jget("/api/sonarr/upcoming?days=7&limit=8")
+      .then((sonarr) => renderSonarr(sonarr.items))
+      .catch(() => renderSonarr([])),
 
-    renderSonarr(sonarr.items);
-    renderQb(qb.items);
-    renderJelly(jelly.items);
-    renderLinks(links.links);
-  } catch (e) {
-    setStatus(false, "Erreur réseau / config");
-  }
+    jget("/api/qbittorrent/torrents?filter=active&limit=6")
+      .then((qb) => renderQb(qb.items))
+      .catch(() => renderQb([])),
+
+    jget("/api/jellyfin/latest?limit=9")
+      .then((jelly) => renderJelly(jelly.items))
+      .catch(() => renderJelly([])),
+
+    jget("/api/links")
+      .then((links) => renderLinks(links.links))
+      .catch(() => renderLinks([])),
+  ];
+
+  await Promise.allSettled(tasks);
 }
 
 async function main() {

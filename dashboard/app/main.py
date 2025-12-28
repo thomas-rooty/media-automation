@@ -189,11 +189,20 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
     }
 
     async with httpx.AsyncClient(timeout=10) as client:
-        # `/Items/Latest` works with X-Emby-Token
-        url = f"{base.rstrip('/')}/Items/Latest"
+        # Sur certains Jellyfin, le endpoint recommandé est user-scoped:
+        # /Users/{userId}/Items/Latest
+        if settings.jellyfin_user_id:
+            url = f"{base.rstrip('/')}/Users/{settings.jellyfin_user_id}/Items/Latest"
+        else:
+            url = f"{base.rstrip('/')}/Items/Latest"
         r = await client.get(url, headers=_jellyfin_headers(), params=params)
         if r.status_code >= 400:
-            raise HTTPException(status_code=502, detail=f"Jellyfin error ({r.status_code})")
+            detail: dict[str, Any] = {"service": "jellyfin", "status": r.status_code}
+            try:
+                detail["body"] = r.json()
+            except Exception:
+                detail["body"] = (r.text or "").strip()[:500]
+            raise HTTPException(status_code=502, detail=detail)
         items: list[dict[str, Any]] = r.json()
 
     out: list[dict[str, Any]] = []
@@ -225,7 +234,10 @@ async def jellyfin_primary_image(item_id: str, maxHeight: int = 240, quality: in
     async with httpx.AsyncClient(timeout=15) as client:
         r = await client.get(url, headers=_jellyfin_headers(), params=params)
         if r.status_code >= 400:
-            raise HTTPException(status_code=502, detail=f"Jellyfin image error ({r.status_code})")
+            raise HTTPException(
+                status_code=502,
+                detail={"service": "jellyfin", "status": r.status_code, "endpoint": "primaryImage"},
+            )
         content_type = r.headers.get("content-type") or "image/jpeg"
         return Response(content=r.content, media_type=content_type, headers={"Cache-Control": "public, max-age=300"})
 
