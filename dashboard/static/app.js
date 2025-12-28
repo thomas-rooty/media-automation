@@ -34,6 +34,13 @@ function toLocalShort(iso) {
   return d.toLocaleString(undefined, { weekday:"short", hour:"2-digit", minute:"2-digit" });
 }
 
+function toLocalDate(iso) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "—";
+  return d.toLocaleDateString(undefined, { weekday:"short", day:"2-digit", month:"short" });
+}
+
 function clockTick() {
   const d = new Date();
   el("clockTime").textContent = d.toLocaleTimeString(undefined, { hour:"2-digit", minute:"2-digit" });
@@ -160,6 +167,62 @@ function renderLinks(links) {
   }
 }
 
+function renderRadarrUpcoming(items) {
+  const root = el("radarrUpcomingList");
+  root.innerHTML = "";
+  if (!items || items.length === 0) {
+    root.innerHTML = `<div class="row"><div class="main"><div class="primary">Aucun film</div><div class="secondary">Rien de prévu</div></div><div class="meta"><span class="tag warn">—</span></div></div>`;
+    return;
+  }
+  for (const it of items) {
+    const title = safeText(it.title) || "Film";
+    const year = it.year ? `(${it.year})` : "";
+    const when = toLocalDate(it.releaseDate);
+    const have = it.hasFile ? `<span class="tag good">OK</span>` : `<span class="tag warn">À venir</span>`;
+    const div = document.createElement("div");
+    div.className = "row";
+    div.innerHTML = `
+      <div class="main">
+        <div class="primary">${title} ${year}</div>
+        <div class="secondary">${safeText(it.status) || "—"}</div>
+      </div>
+      <div class="meta">
+        <div>${when}</div>
+        <div style="margin-top:6px">${have}</div>
+      </div>
+    `;
+    root.appendChild(div);
+  }
+}
+
+function renderRadarrLatest(items) {
+  const root = el("radarrLatestList");
+  root.innerHTML = "";
+  if (!items || items.length === 0) {
+    root.innerHTML = `<div class="row"><div class="main"><div class="primary">Aucun ajout</div><div class="secondary">Radarr n’a rien renvoyé</div></div><div class="meta"><span class="tag warn">—</span></div></div>`;
+    return;
+  }
+  for (const it of items) {
+    const title = safeText(it.title) || "Film";
+    const year = it.year ? `(${it.year})` : "";
+    const added = toLocalDate(it.added);
+    const have = it.hasFile ? `<span class="tag good">OK</span>` : `<span class="tag warn">Manque</span>`;
+    const div = document.createElement("div");
+    div.className = "row";
+    div.innerHTML = `
+      <div class="main">
+        <div class="primary">${title} ${year}</div>
+        <div class="secondary">${safeText(it.status) || "—"}</div>
+      </div>
+      <div class="meta">
+        <div>${added}</div>
+        <div style="margin-top:6px">${have}</div>
+      </div>
+    `;
+    root.appendChild(div);
+  }
+}
+
 async function refreshAll() {
   // Ne pas bloquer tout le dashboard si 1 API tombe.
   const tasks = [
@@ -173,6 +236,10 @@ async function refreshAll() {
       .then((sonarr) => renderSonarr(sonarr.items))
       .catch(() => renderSonarr([])),
 
+    jget("/api/radarr/upcoming?days=21&limit=8")
+      .then((radarr) => renderRadarrUpcoming(radarr.items))
+      .catch(() => renderRadarrUpcoming([])),
+
     jget("/api/qbittorrent/torrents?filter=active&limit=6")
       .then((qb) => renderQb(qb.items))
       .catch(() => renderQb([])),
@@ -180,6 +247,10 @@ async function refreshAll() {
     jget("/api/jellyfin/latest?limit=9")
       .then((jelly) => renderJelly(jelly.items))
       .catch(() => renderJelly([])),
+
+    jget("/api/radarr/latest?limit=8")
+      .then((radarr) => renderRadarrLatest(radarr.items))
+      .catch(() => renderRadarrLatest([])),
 
     jget("/api/links")
       .then((links) => renderLinks(links.links))

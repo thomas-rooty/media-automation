@@ -18,6 +18,11 @@ class Settings(BaseSettings):
     sonarr_url: str | None = None  # e.g. http://sonarr:8989
     sonarr_api_key: str | None = None
 
+    # Radarr
+    radarr_url: str | None = None  # e.g. http://radarr:7878
+    radarr_api_key: str | None = None
+    radarr_latest_limit: int = 10
+
     # qBittorrent
     qbittorrent_url: str | None = None  # e.g. http://gluetun:8080 (same network) or http://qbittorrent:8080
     qbittorrent_username: str | None = None

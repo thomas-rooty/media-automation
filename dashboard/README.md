@@ -17,6 +17,7 @@ Mini dashboard **FastAPI + HTML/CSS/JS** destiné à un affichage plein écran (
 Voir `env.example`. Les plus importantes :
 
 - `DASH_SONARR_URL` / `DASH_SONARR_API_KEY`
+- `DASH_RADARR_URL` / `DASH_RADARR_API_KEY`
 - `DASH_QBITTORRENT_URL` / `DASH_QBITTORRENT_USERNAME` / `DASH_QBITTORRENT_PASSWORD`
 - `DASH_JELLYFIN_URL` / `DASH_JELLYFIN_API_KEY`
 - (optionnel) `DASH_LINKS_JSON` (URLs **LAN** accessibles depuis la tablette)
@@ -24,6 +25,8 @@ Voir `env.example`. Les plus importantes :
 ## Endpoints (exemples)
 
 - `GET /api/sonarr/upcoming?days=7&limit=8`
+- `GET /api/radarr/upcoming?days=21&limit=8`
+- `GET /api/radarr/latest?limit=8`
 - `GET /api/qbittorrent/torrents?filter=active&limit=6`
 - `GET /api/jellyfin/latest?limit=9`
 - `GET /api/jellyfin/items/{itemId}/image?maxHeight=240&quality=80`
