@@ -385,8 +385,10 @@ a.btn:active{
 .modalOverlay{z-index:70;}
 .modal{
   position:fixed;
-  inset:auto 18px 18px 18px;
+  left:18px;
+  right:18px;
   top:80px;
+  bottom:auto;
   max-width: 900px;
   margin: 0 auto;
   background:rgba(10,14,20,.96);
@@ -398,6 +400,8 @@ a.btn:active{
   display:flex;
   flex-direction:column;
   gap:12px;
+  max-height: min(70vh, 560px);
+  overflow:hidden;
 }
 .modalHeader{
   display:flex;

@@ -621,6 +621,19 @@ async def _status_sonarr() -> ServiceStatus:
         return ServiceStatus("Sonarr", True, f"v{ver}" if ver else "ok")
 
 
+async def _status_radarr() -> ServiceStatus:
+    if not (settings.radarr_url and settings.radarr_api_key):
+        return ServiceStatus("Radarr", False, "not configured")
+    url = f"{settings.radarr_url.rstrip('/')}/api/v3/system/status"
+    async with httpx.AsyncClient(timeout=5) as client:
+        r = await client.get(url, headers={"X-Api-Key": settings.radarr_api_key})
+        if r.status_code >= 400:
+            return ServiceStatus("Radarr", False, f"http {r.status_code}")
+        data = r.json()
+        ver = data.get("version")
+        return ServiceStatus("Radarr", True, f"v{ver}" if ver else "ok")
+
+
 async def _status_jellyfin() -> ServiceStatus:
     if not settings.jellyfin_url:
         return ServiceStatus("Jellyfin", False, "not configured")
@@ -651,8 +664,13 @@ async def _status_qb() -> ServiceStatus:
 
 @app.get("/api/status")
 async def status() -> JSONResponse:
-    sonarr_s, qb_s, jelly_s = await _status_sonarr(), await _status_qb(), await _status_jellyfin()
-    items = [sonarr_s, qb_s, jelly_s]
+    sonarr_s, radarr_s, qb_s, jelly_s = (
+        await _status_sonarr(),
+        await _status_radarr(),
+        await _status_qb(),
+        await _status_jellyfin(),
+    )
+    items = [sonarr_s, radarr_s, qb_s, jelly_s]
     return JSONResponse(
         {
             "ok": all(x.ok for x in items if x.detail != "not configured"),
