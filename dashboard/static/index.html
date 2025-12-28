@@ -23,22 +23,25 @@
               <span id="statusDot" class="dot"></span>
               <span id="statusText">Chargement…</span>
             </button>
-            <div class="pill">
+            <button id="refreshBtn" class="pill pillBtn" type="button" aria-label="Changer la fréquence d'auto-refresh">
               <span>Auto-refresh</span>
               <strong id="refreshLabel">—</strong>
-            </div>
+            </button>
             <div id="scanLine" class="pill scanPill" aria-label="Dernier scan Sonarr/Radarr">Scan: —</div>
           </div>
         </div>
 
         <div class="headerRight">
-          <button id="menuBtn" class="iconBtn" aria-label="Menu">
-            <span class="icon">☰</span>
-          </button>
           <button id="weatherPill" class="pill pillBtn weatherPill" type="button" aria-label="Voir la météo détaillée">
             <span id="weatherIcon" class="weatherIcon">—</span>
             <strong id="weatherTemp">—</strong>
             <span id="weatherLabel" class="weatherLabel"></span>
+          </button>
+          <button id="reloadBtn" class="iconBtn" aria-label="Rafraîchir la page" type="button">
+            <span class="icon">↻</span>
+          </button>
+          <button id="menuBtn" class="iconBtn" aria-label="Menu">
+            <span class="icon">☰</span>
           </button>
         </div>
       </header>
@@ -118,6 +121,17 @@
         </button>
       </div>
       <div id="weatherContent" class="modalList"></div>
+    </div>
+
+    <div id="refreshOverlay" class="overlay modalOverlay hidden" aria-hidden="true"></div>
+    <div id="refreshModal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Fréquence d'auto-refresh">
+      <div class="modalHeader">
+        <div class="modalTitle">Auto-refresh</div>
+        <button id="refreshCloseBtn" class="iconBtn" aria-label="Fermer" type="button">
+          <span class="icon">✕</span>
+        </button>
+      </div>
+      <div id="refreshChoices" class="refreshChoices"></div>
     </div>
 
     <script src="/static/app.js"></script>

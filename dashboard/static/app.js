@@ -283,12 +283,93 @@ function setupWeatherModal() {
   });
 }
 
+function setupReloadButton() {
+  const btn = el("reloadBtn");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    window.location.reload();
+  });
+}
+
 let lastStatusData = null;
 
 async function jget(path) {
   const r = await fetch(path, { cache: "no-store" });
   if (!r.ok) throw new Error(`${path} -> ${r.status}`);
   return await r.json();
+}
+
+const REFRESH_OPTIONS = [
+  { s: 10, label: "10s" },
+  { s: 30, label: "30s" },
+  { s: 45, label: "45s" },
+  { s: 60, label: "1min" },
+  { s: 180, label: "3min" },
+  { s: 300, label: "5min" },
+  { s: 600, label: "10min" },
+  { s: 1800, label: "30min" },
+];
+
+let refreshSeconds = 45;
+let refreshTimer = null;
+
+function setRefreshSeconds(next) {
+  const n = Number(next);
+  if (!Number.isFinite(n)) return;
+  const allowed = REFRESH_OPTIONS.some(o => o.s === n);
+  if (!allowed) return;
+
+  refreshSeconds = n;
+  try { localStorage.setItem("dashRefreshSeconds", String(n)); } catch {}
+  el("refreshLabel").textContent = `${n}s`;
+
+  if (refreshTimer) clearInterval(refreshTimer);
+  refreshTimer = setInterval(refreshAll, refreshSeconds * 1000);
+}
+
+function setupRefreshPicker() {
+  const btn = el("refreshBtn");
+  const overlay = el("refreshOverlay");
+  const modal = el("refreshModal");
+  const closeBtn = el("refreshCloseBtn");
+  const choices = el("refreshChoices");
+  if (!btn || !overlay || !modal || !closeBtn || !choices) return;
+
+  const render = () => {
+    choices.innerHTML = REFRESH_OPTIONS.map(o => {
+      const on = o.s === refreshSeconds ? " on" : "";
+      return `<button class="choiceBtn${on}" type="button" data-seconds="${o.s}">${o.label}</button>`;
+    }).join("");
+  };
+
+  const open = () => {
+    render();
+    overlay.classList.remove("hidden");
+    modal.classList.remove("hidden");
+    overlay.setAttribute("aria-hidden", "false");
+    modal.setAttribute("aria-hidden", "false");
+  };
+  const close = () => {
+    overlay.classList.add("hidden");
+    modal.classList.add("hidden");
+    overlay.setAttribute("aria-hidden", "true");
+    modal.setAttribute("aria-hidden", "true");
+  };
+
+  btn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+  overlay.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+
+  choices.addEventListener("click", (e) => {
+    const b = e.target?.closest?.("button[data-seconds]");
+    if (!b) return;
+    setRefreshSeconds(Number(b.getAttribute("data-seconds")));
+    close();
+    refreshAll(); // immediate refresh on change
+  });
 }
 
 function renderSonarr(items) {
@@ -745,12 +826,13 @@ async function refreshAll() {
 async function main() {
   clockTick();
   setInterval(clockTick, 1000);
+  setupReloadButton();
+  setupRefreshPicker();
   setupMenu();
   setupServicesModal();
   setupLegendModal();
   setupWeatherModal();
 
-  let refreshSeconds = 45;
   try {
     const meta = await jget("/api/meta");
     if (meta && meta.title) {
@@ -759,15 +841,21 @@ async function main() {
       if (h1) h1.textContent = meta.title;
     }
     if (meta && Number.isFinite(Number(meta.refreshSeconds))) {
-      refreshSeconds = Math.max(15, Math.min(300, Number(meta.refreshSeconds)));
+      refreshSeconds = Number(meta.refreshSeconds);
     }
   } catch (e) {
     // keep defaults
   }
-  el("refreshLabel").textContent = `${refreshSeconds}s`;
+
+  // Allow local override (persisted)
+  try {
+    const stored = Number(localStorage.getItem("dashRefreshSeconds"));
+    if (REFRESH_OPTIONS.some(o => o.s === stored)) refreshSeconds = stored;
+  } catch {}
+
+  setRefreshSeconds(refreshSeconds);
 
   await refreshAll();
-  setInterval(refreshAll, refreshSeconds * 1000);
 }
 
 main();

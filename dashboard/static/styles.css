@@ -154,6 +154,33 @@ header{
   text-overflow:ellipsis;
 }
 
+.refreshChoices{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:10px;
+  overflow:visible;
+}
+.choiceBtn{
+  width:100%;
+  padding:14px 12px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  font-size:16px;
+  font-weight:800;
+  letter-spacing:.3px;
+  cursor:pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select:none;
+}
+.choiceBtn:active{transform:translateY(1px); background:rgba(255,255,255,.10);}
+.choiceBtn.on{
+  border-color: rgba(76,194,255,.35);
+  background: rgba(76,194,255,.10);
+  color:#cfeeff;
+}
+
 /* Weather detailed modal */
 .wxSectionTitle{
   margin:6px 0 8px;
