@@ -444,12 +444,18 @@ function renderJelly(items) {
     const name = safeText(it.name) || "Média";
     const typ = safeText(it.type) || "Item";
     const isEpisode = typ.toLowerCase() === "episode";
+    let titleLine = name;
     let sub = typ;
     if (isEpisode) {
       const series = safeText(it.seriesName);
       const s = it.parentIndexNumber ?? "?";
       const e = it.indexNumber ?? "?";
-      sub = `${series || "Série"} • S${String(s).padStart(2,"0")}E${String(e).padStart(2,"0")}`;
+      const se = `S${String(s).padStart(2,"0")}E${String(e).padStart(2,"0")}`;
+      // Make it obvious that an episode was added:
+      // - Primary: series + SxxExx
+      // - Secondary: episode title
+      titleLine = `${series || "Série"} • ${se}`;
+      sub = `${name} • ${se}`;
     } else if (it.productionYear) {
       sub = `${typ} • ${it.productionYear}`;
     }
@@ -499,7 +505,7 @@ function renderJelly(items) {
       <div class="poster">${img ? `<img loading="lazy" src="${img}" alt="">` : ""}</div>
       <div class="txt">
         <div class="mediaTop">
-          <div class="name">${name}</div>
+          <div class="name">${titleLine}</div>
           ${seriesBadge || badge}
         </div>
         <div class="sub">${sub} • Ajouté ${added}</div>
