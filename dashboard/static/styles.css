@@ -156,7 +156,6 @@ header{
   border-radius:14px;
   background:rgba(0,0,0,.18);
   border:1px solid rgba(255,255,255,.06);
-  overflow:hidden;
 }
 .row .main{
   display:flex;
@@ -195,6 +194,7 @@ header{
   white-space:nowrap;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  font-size: 12px;
 }
 .titleScroll::-webkit-scrollbar{display:none;}
 .row .secondary{
