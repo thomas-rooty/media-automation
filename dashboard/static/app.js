@@ -311,7 +311,29 @@ const REFRESH_OPTIONS = [
 ];
 
 let refreshSeconds = 45;
-let refreshTimer = null;
+let refreshTimeout = null;
+let refreshCountdownTimer = null;
+let nextRefreshAt = 0;
+
+function updateRefreshLabel() {
+  const remaining = nextRefreshAt ? Math.max(0, Math.ceil((nextRefreshAt - Date.now()) / 1000)) : refreshSeconds;
+  el("refreshLabel").textContent = `${refreshSeconds}s • ${remaining}s`;
+}
+
+function scheduleNextRefresh() {
+  if (refreshTimeout) clearTimeout(refreshTimeout);
+  nextRefreshAt = Date.now() + refreshSeconds * 1000;
+  updateRefreshLabel();
+
+  refreshTimeout = setTimeout(async () => {
+    await refreshAll();
+    scheduleNextRefresh();
+  }, refreshSeconds * 1000);
+
+  if (!refreshCountdownTimer) {
+    refreshCountdownTimer = setInterval(updateRefreshLabel, 1000);
+  }
+}
 
 function setRefreshSeconds(next) {
   const n = Number(next);
@@ -321,10 +343,7 @@ function setRefreshSeconds(next) {
 
   refreshSeconds = n;
   try { localStorage.setItem("dashRefreshSeconds", String(n)); } catch {}
-  el("refreshLabel").textContent = `${n}s`;
-
-  if (refreshTimer) clearInterval(refreshTimer);
-  refreshTimer = setInterval(refreshAll, refreshSeconds * 1000);
+  scheduleNextRefresh();
 }
 
 function setupRefreshPicker() {
@@ -368,7 +387,8 @@ function setupRefreshPicker() {
     if (!b) return;
     setRefreshSeconds(Number(b.getAttribute("data-seconds")));
     close();
-    refreshAll(); // immediate refresh on change
+    // immediate refresh on change + restart countdown from now
+    refreshAll().then(() => scheduleNextRefresh());
   });
 }
 
