@@ -32,12 +32,18 @@ Voir `env.example`. Les plus importantes :
 
 ## Lancer via Docker (minimal)
 
-1. Assure-toi que ton réseau Docker `media-net` existe (il est créé quand tu lances la stack principale).
+1. Assure-toi que le réseau Docker de ta stack existe (souvent `media-automation_media-net`).
 2. Copie `dashboard/dashboard.env.example` -> `dashboard/dashboard.env` et remplis les valeurs (API keys, etc.).
 3. Démarre :
 
 ```bash
 docker compose -f dashboard/docker-compose.dashboard.yml up -d --build
+```
+
+Si ton réseau ne s’appelle pas `media-automation_media-net`, passe-le en variable :
+
+```bash
+MEDIA_NET_NAME=<ton_reseau> docker compose -f dashboard/docker-compose.dashboard.yml up -d --build
 ```
 
 Puis ouvre: `http://<IP_DU_SERVEUR>:8008/`

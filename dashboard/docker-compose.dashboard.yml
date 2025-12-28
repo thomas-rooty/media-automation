@@ -1,7 +1,8 @@
 services:
   salon-dashboard:
     build:
-      context: ./dashboard
+      # le chemin est relatif à CE fichier (dashboard/...)
+      context: .
     container_name: salon-dashboard
     ports:
       - "8008:8000"
@@ -15,3 +16,6 @@ services:
 networks:
   media-net:
     external: true
+    # compose renomme souvent le réseau en "<projet>_media-net"
+    # (par défaut: "media-automation_media-net" si ton dossier s’appelle media-automation)
+    name: ${MEDIA_NET_NAME:-media-automation_media-net}
