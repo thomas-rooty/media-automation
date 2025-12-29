@@ -480,7 +480,7 @@ function setupAddSeriesModal() {
     }
 
     const seasons = Array.isArray(info?.seasons) ? info.seasons : [];
-    sHint.textContent = seasons.length ? "Choisis les saisons à demander." : "Aucune saison trouvée.";
+    sHint.textContent = seasons.length ? "Sélectionne les saisons à demander." : "Aucune saison trouvée.";
 
     const isSeasonAvailable = (st) => {
       const n = Number(st);
@@ -491,13 +491,12 @@ function setupAddSeriesModal() {
       return Number.isFinite(n) && n >= 2 && n < 5;
     };
 
-    // default: select seasons that are neither available nor already requested
+    // default: nothing selected (user must opt-in season by season)
     for (const s of seasons) {
       const sn = Number(s.seasonNumber);
       if (!Number.isFinite(sn)) continue;
       const st = s.status;
       if (isSeasonAvailable(st)) currentLocked.add(sn);
-      else if (!isSeasonRequested(st)) currentSelected.add(sn);
     }
 
     const render = () => {
