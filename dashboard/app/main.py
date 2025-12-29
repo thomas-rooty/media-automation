@@ -13,6 +13,7 @@ from fastapi import FastAPI, HTTPException, Response
 from fastapi import Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
 
 from .settings import ServiceStatus, Settings
 
@@ -104,6 +105,17 @@ def _require(v: str | None, name: str) -> str:
     return v
 
 
+def _jellyseerr_headers() -> dict[str, str]:
+    token = _require(settings.jellyseerr_api_key, "Jellyseerr API key")
+    return {"X-Api-Key": token}
+
+
+class JellyseerrRequest(BaseModel):
+    mediaId: int
+    mediaType: Literal["tv", "movie"] = "tv"
+    seasons: list[int] | None = None
+
+
 def _dt_utc_now() -> dt.datetime:
     return dt.datetime.now(dt.timezone.utc)
 
@@ -173,6 +185,93 @@ async def weather() -> dict[str, Any]:
         "isDay": bool(int(is_day)) if is_day is not None else None,
         "time": t,
     }
+
+
+@app.get("/api/jellyseerr/search")
+async def jellyseerr_search(query: str, type: Literal["tv", "movie"] = "tv") -> dict[str, Any]:
+    """
+    Search Jellyseerr (Overseerr-compatible API).
+    """
+    base = _require(settings.jellyseerr_url, "Jellyseerr URL")
+    q = (query or "").strip()
+    if len(q) < 2:
+        return {"count": 0, "items": []}
+
+    async with httpx.AsyncClient(timeout=12) as client:
+        r = await client.get(
+            f"{base.rstrip('/')}/api/v1/search",
+            headers=_jellyseerr_headers(),
+            params={"query": q},
+        )
+        if r.status_code >= 400:
+            raise HTTPException(status_code=502, detail={"service": "jellyseerr", "status": r.status_code})
+        data: Any = r.json()
+
+    results = data.get("results") if isinstance(data, dict) else None
+    if not isinstance(results, list):
+        return {"count": 0, "items": []}
+
+    out: list[dict[str, Any]] = []
+    for it in results:
+        if not isinstance(it, dict):
+            continue
+        media_type = str(it.get("mediaType") or "")
+        if media_type != type:
+            continue
+        tmdb_id = it.get("tmdbId")
+        if not isinstance(tmdb_id, int):
+            continue
+        title = str(it.get("name") or it.get("title") or "").strip() or "—"
+        year = None
+        date_str = it.get("firstAirDate") if media_type == "tv" else it.get("releaseDate")
+        try:
+            if date_str:
+                year = int(str(date_str)[:4])
+        except Exception:
+            year = None
+        mi = it.get("mediaInfo") if isinstance(it.get("mediaInfo"), dict) else {}
+        status = mi.get("status")
+        out.append(
+            {
+                "mediaType": media_type,
+                "mediaId": tmdb_id,
+                "title": title,
+                "year": year,
+                "status": status,
+            }
+        )
+
+    return {"count": len(out), "items": out[:50]}
+
+
+@app.post("/api/jellyseerr/request")
+async def jellyseerr_request(req: JellyseerrRequest) -> dict[str, Any]:
+    """
+    Create a request in Jellyseerr.
+    """
+    base = _require(settings.jellyseerr_url, "Jellyseerr URL")
+
+    payload: dict[str, Any] = {"mediaId": req.mediaId, "mediaType": req.mediaType}
+    if req.seasons:
+        payload["seasons"] = req.seasons
+
+    async with httpx.AsyncClient(timeout=12) as client:
+        r = await client.post(
+            f"{base.rstrip('/')}/api/v1/request",
+            headers={**_jellyseerr_headers(), "Content-Type": "application/json"},
+            json=payload,
+        )
+        if r.status_code >= 400:
+            detail: dict[str, Any] = {"service": "jellyseerr", "status": r.status_code}
+            try:
+                detail["body"] = r.json()
+            except Exception:
+                detail["body"] = (r.text or "").strip()[:500]
+            raise HTTPException(status_code=502, detail=detail)
+        try:
+            return {"ok": True, "result": r.json()}
+        except Exception:
+            return {"ok": True}
 
 
 @app.get("/api/weather/forecast")
@@ -818,6 +917,7 @@ async def qbittorrent_torrents(
     for t in view:
         out.append(
             {
+                "hash": t.get("hash"),
                 "name": t.get("name"),
                 "state": t.get("state"),
                 "progress": t.get("progress"),
@@ -825,6 +925,12 @@ async def qbittorrent_torrents(
                 "upspeed": t.get("upspeed"),
                 "eta": t.get("eta"),
                 "size": t.get("size"),
+                "amount_left": t.get("amount_left"),
+                "num_seeds": t.get("num_seeds"),
+                "num_leechs": t.get("num_leechs"),
+                "ratio": t.get("ratio"),
+                "category": t.get("category"),
+                "tags": t.get("tags"),
                 "added_on": t.get("added_on"),
             }
         )

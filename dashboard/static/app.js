@@ -32,11 +32,56 @@ function safeText(s) {
   return (s == null ? "" : String(s)).trim();
 }
 
+function parseQualityTags(name) {
+  const s = safeText(name).toLowerCase();
+  const tags = [];
+  if (!s) return tags;
+
+  if (/(2160p|4k)/.test(s)) tags.push({ t: "4K", cls: "info" });
+  else if (/1080p/.test(s)) tags.push({ t: "1080p", cls: "info" });
+  else if (/720p/.test(s)) tags.push({ t: "720p", cls: "" });
+
+  if (/(webrip|web-dl|webdl)/.test(s)) tags.push({ t: "WEB", cls: "" });
+  else if (/(bluray|blu-ray|bdrip|bdremux)/.test(s)) tags.push({ t: "BLURAY", cls: "" });
+  else if (/hdtv/.test(s)) tags.push({ t: "HDTV", cls: "" });
+
+  if (/(x265|hevc|h\\.265)/.test(s)) tags.push({ t: "x265", cls: "good" });
+  else if (/(x264|h\\.264|avc)/.test(s)) tags.push({ t: "x264", cls: "" });
+
+  return tags.slice(0, 3);
+}
+
+function qbStateLabel(state) {
+  const s = safeText(state).toLowerCase();
+  if (!s) return { text: "—", cls: "warn" };
+  if (s.includes("stalled")) return { text: "Bloqué", cls: "bad" };
+  if (s.includes("queued")) return { text: "En file", cls: "warn" };
+  if (s.includes("checking")) return { text: "Vérif.", cls: "warn" };
+  if (s.includes("downloading") || s.includes("forceddl") || s.includes("allocating")) return { text: "DL", cls: "good" };
+  if (s.includes("uploading") || s.includes("seeding")) return { text: "Seed", cls: "good" };
+  return { text: s, cls: "warn" };
+}
+
 function toLocalShort(iso) {
   if (!iso) return "—";
   const d = new Date(iso);
   if (isNaN(d.getTime())) return "—";
   return d.toLocaleString(undefined, { weekday:"short", hour:"2-digit", minute:"2-digit" });
+}
+
+function dayBucketLabel(isoOrDate) {
+  if (!isoOrDate) return { k: "unknown", label: "Date inconnue" };
+  const d = new Date(isoOrDate);
+  if (isNaN(d.getTime())) return { k: "unknown", label: "Date inconnue" };
+  const now = new Date();
+  const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const startD = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const diffDays = Math.round((startD - startToday) / 86400000);
+  if (diffDays === 0) return { k: "0", label: "Aujourd’hui" };
+  if (diffDays === 1) return { k: "1", label: "Demain" };
+  if (diffDays >= 2 && diffDays <= 7) return { k: "w", label: "Cette semaine" };
+  if (diffDays > 7) return { k: "l", label: "Plus tard" };
+  return { k: "p", label: "Passé" };
 }
 
 function toLocalDate(iso) {
@@ -299,6 +344,115 @@ async function jget(path) {
   return await r.json();
 }
 
+async function jpost(path, body) {
+  const r = await fetch(path, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body || {}),
+  });
+  if (!r.ok) throw new Error(`${path} -> ${r.status}`);
+  return await r.json();
+}
+
+function jellyseerrStatusLabel(status) {
+  // Jellyseerr status is numeric; keep it simple and robust.
+  const s = Number(status);
+  if (!Number.isFinite(s)) return null;
+  if (s >= 4) return { text: "Disponible", cls: "good" };
+  if (s >= 2) return { text: "Demandé", cls: "warn" };
+  return { text: "—", cls: "warn" };
+}
+
+function setupAddSeriesModal() {
+  const btn = el("addSeriesBtn");
+  const overlay = el("addOverlay");
+  const modal = el("addModal");
+  const closeBtn = el("addCloseBtn");
+  const input = el("addQuery");
+  const searchBtn = el("addSearchBtn");
+  const hint = el("addHint");
+  const results = el("addResults");
+  if (!btn || !overlay || !modal || !closeBtn || !input || !searchBtn || !results || !hint) return;
+
+  const open = () => {
+    overlay.classList.remove("hidden");
+    modal.classList.remove("hidden");
+    overlay.setAttribute("aria-hidden", "false");
+    modal.setAttribute("aria-hidden", "false");
+    results.innerHTML = "";
+    hint.textContent = "Tape au moins 2 caractères.";
+    setTimeout(() => input.focus(), 50);
+  };
+  const close = () => {
+    overlay.classList.add("hidden");
+    modal.classList.add("hidden");
+    overlay.setAttribute("aria-hidden", "true");
+    modal.setAttribute("aria-hidden", "true");
+  };
+
+  const doSearch = async () => {
+    const q = safeText(input.value);
+    if (q.length < 2) {
+      hint.textContent = "Tape au moins 2 caractères.";
+      results.innerHTML = "";
+      return;
+    }
+    hint.textContent = "Recherche…";
+    results.innerHTML = "";
+    try {
+      const data = await jget(`/api/jellyseerr/search?type=tv&query=${encodeURIComponent(q)}`);
+      const items = data?.items || [];
+      hint.textContent = items.length ? `${items.length} résultat(s)` : "Aucun résultat.";
+      for (const it of items) {
+        const title = safeText(it.title) || "Série";
+        const year = it.year ? `(${it.year})` : "";
+        const st = jellyseerrStatusLabel(it.status);
+        const tag = st ? `<span class="tag ${st.cls}">${st.text}</span>` : "";
+
+        const row = document.createElement("div");
+        row.className = "serviceRow";
+        row.innerHTML = `
+          <div class="serviceLeft">
+            <div class="serviceName">${title} ${year}</div>
+            <div class="serviceDetail">${tag}</div>
+          </div>
+          <button class="choiceBtn" type="button" style="padding:10px 12px; border-radius:14px;" data-add-id="${it.mediaId}">Ajouter</button>
+        `;
+        results.appendChild(row);
+      }
+    } catch (e) {
+      hint.textContent = "Erreur Jellyseerr (URL/API key ?)";
+    }
+  };
+
+  btn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+  overlay.addEventListener("click", close);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") close();
+  });
+  searchBtn.addEventListener("click", doSearch);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") doSearch();
+  });
+
+  results.addEventListener("click", async (e) => {
+    const b = e.target?.closest?.("button[data-add-id]");
+    if (!b) return;
+    const id = Number(b.getAttribute("data-add-id"));
+    if (!Number.isFinite(id)) return;
+    b.disabled = true;
+    b.textContent = "…";
+    try {
+      await jpost("/api/jellyseerr/request", { mediaId: id, mediaType: "tv" });
+      b.textContent = "Ajouté";
+    } catch (err) {
+      b.disabled = false;
+      b.textContent = "Erreur";
+    }
+  });
+}
+
 const REFRESH_OPTIONS = [
   { s: 10, label: "10s" },
   { s: 30, label: "30s" },
@@ -399,13 +553,23 @@ function renderSonarr(items) {
     root.innerHTML = `<div class="row"><div class="main"><div class="primary">Aucun épisode</div><div class="secondary">Rien de prévu</div></div><div class="meta"><span class="tag warn">—</span></div></div>`;
     return;
   }
-  for (const it of items) {
+  const sorted = [...items].sort((a,b) => String(a.airDateUtc||"").localeCompare(String(b.airDateUtc||"")));
+  let lastBucket = null;
+  for (const it of sorted) {
     const series = safeText(it.seriesTitle) || "Série";
     const ep = safeText(it.episodeTitle) || "Épisode";
     const sn = it.seasonNumber ?? "?";
     const en = it.episodeNumber ?? "?";
     const when = toLocalShort(it.airDateUtc);
     const have = it.hasFile ? `<span class="tag good">OK</span>` : `<span class="tag warn">À venir</span>`;
+    const b = dayBucketLabel(it.airDateUtc);
+    if (b.k !== lastBucket) {
+      lastBucket = b.k;
+      const h = document.createElement("div");
+      h.className = "sectionRow";
+      h.textContent = b.label;
+      root.appendChild(h);
+    }
     const div = document.createElement("div");
     div.className = "row";
     div.innerHTML = `
@@ -436,17 +600,24 @@ function renderQb(items) {
     const ul = fmtSpeed(t.upspeed);
     const eta = fmtEta(t.eta);
     const state = safeText(t.state);
+    const left = fmtBytes(t.amount_left);
+    const seeds = Number(t.num_seeds ?? 0);
+    const leech = Number(t.num_leechs ?? 0);
+    const st = qbStateLabel(state);
+    const qtags = parseQualityTags(name).map(x => `<span class="miniTag ${x.cls}">${x.t}</span>`).join("");
     const active = (Number(t.dlspeed ?? 0) > 0) || (Number(t.upspeed ?? 0) > 0) || /dl|down|meta|check/i.test(state);
     const div = document.createElement("div");
     div.className = "row";
     div.innerHTML = `
       <div class="main">
         <div class="primary">${name}</div>
-        <div class="secondary">${state || "—"} • DL ${dl} • UL ${ul} • ETA ${eta}</div>
+        <div class="secondary">${state || "—"} • DL ${dl} • UL ${ul} • Reste ${left} • S${seeds} / L${leech} • ETA ${eta}</div>
+        <div class="badges">${qtags}</div>
         <div class="progress${active && pct < 1 ? " active" : ""}"><div style="width:${(pct*100).toFixed(1)}%"></div></div>
       </div>
       <div class="meta">
-        <div class="tag">${Math.round(pct*100)}%</div>
+        <div class="tag ${st.cls}">${st.text}</div>
+        <div style="margin-top:6px" class="tag">${Math.round(pct*100)}%</div>
       </div>
     `;
     root.appendChild(div);
@@ -556,7 +727,9 @@ function renderRadarrUpcoming(items) {
     root.innerHTML = `<div class="row"><div class="main"><div class="primary">Aucun film</div><div class="secondary">Rien de prévu</div></div><div class="meta"><span class="tag warn">—</span></div></div>`;
     return;
   }
-  for (const it of items) {
+  const sorted = [...items].sort((a,b) => String(a.releaseDate||"").localeCompare(String(b.releaseDate||"")));
+  let lastBucket = null;
+  for (const it of sorted) {
     const title = safeText(it.title) || "Film";
     const year = it.year ? `(${it.year})` : "";
     const when = toLocalDate(it.releaseDate);
@@ -566,6 +739,14 @@ function renderRadarrUpcoming(items) {
     const tag = reason === "Queued" ? `<span class="tag good">Queue</span>` :
                 reason === "Missing" ? `<button class="tag warn tagBtn radarrLegendBtn" type="button" title="Voir la légende">${"Manquant"}${missingIcons}</button>` :
                 `<span class="tag warn">À venir</span>`;
+    const b = dayBucketLabel(it.releaseDate);
+    if (b.k !== lastBucket) {
+      lastBucket = b.k;
+      const h = document.createElement("div");
+      h.className = "sectionRow";
+      h.textContent = b.label;
+      root.appendChild(h);
+    }
     const div = document.createElement("div");
     div.className = "row";
     div.innerHTML = `
@@ -809,11 +990,11 @@ async function refreshAll() {
       lastStatusData = status;
     }).catch(() => setStatus(false, "Erreur réseau / config")),
 
-    jget("/api/sonarr/upcoming?days=7&limit=8")
+    jget("/api/sonarr/upcoming?days=14&limit=30")
       .then((sonarr) => renderSonarr(sonarr.items))
       .catch(() => renderSonarr([])),
 
-    jget("/api/radarr/soon?days_future=365&limit=8")
+    jget("/api/radarr/soon?days_future=365&limit=30")
       .then((radarr) => renderRadarrUpcoming(radarr.items))
       .catch(() => renderRadarrUpcoming([])),
 
@@ -854,6 +1035,7 @@ async function main() {
   setInterval(clockTick, 1000);
   setupReloadButton();
   setupRefreshPicker();
+  setupAddSeriesModal();
   setupMenu();
   setupServicesModal();
   setupLegendModal();

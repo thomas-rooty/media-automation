@@ -33,6 +33,10 @@ class Settings(BaseSettings):
     jellyfin_user_id: str | None = None
     jellyfin_latest_limit: int = 12
 
+    # Jellyseerr (requests from dashboard)
+    jellyseerr_url: str | None = None  # e.g. http://jellyseerr:5055
+    jellyseerr_api_key: str | None = None
+
     # Links (quick navigation buttons)
     # JSON string: [{"label":"Jellyfin","url":"http://192.168.1.10:8096"}, ...]
     links_json: str = "[]"
