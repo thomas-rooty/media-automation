@@ -773,7 +773,7 @@ async def _qb_login(client: httpx.AsyncClient, base: str, username: str, passwor
 @app.get("/api/qbittorrent/torrents")
 async def qbittorrent_torrents(
     filter: Literal["all", "downloading", "seeding", "completed", "active"] = "active",
-    limit: int = 10,
+    limit: int | None = None,
 ) -> dict[str, Any]:
     base = _require(settings.qbittorrent_url, "qBittorrent URL")
     user = _require(settings.qbittorrent_username, "qBittorrent username")
@@ -782,12 +782,14 @@ async def qbittorrent_torrents(
     async with httpx.AsyncClient(timeout=10) as client:
         await _qb_login(client, base, user, pw)
         url = f"{base.rstrip('/')}/api/v2/torrents/info"
-        params = {
+        params: dict[str, str] = {
             "filter": "all" if filter == "active" else filter,
             "sort": "added_on",
             "reverse": "true",
-            "limit": str(max(1, min(limit, 50))),
         }
+        # If limit is unset/<=0 => no limit (qBittorrent returns all).
+        if limit is not None and limit > 0:
+            params["limit"] = str(limit)
         r = await client.get(url, params=params)
         if r.status_code >= 400:
             raise HTTPException(status_code=502, detail=f"qBittorrent error ({r.status_code})")
@@ -812,7 +814,8 @@ async def qbittorrent_torrents(
         ]
 
     out: list[dict[str, Any]] = []
-    for t in torrents[: max(1, min(limit, 50))]:
+    view = torrents if not (limit is not None and limit > 0) else torrents[:limit]
+    for t in view:
         out.append(
             {
                 "name": t.get("name"),

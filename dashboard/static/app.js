@@ -817,7 +817,7 @@ async function refreshAll() {
       .then((radarr) => renderRadarrUpcoming(radarr.items))
       .catch(() => renderRadarrUpcoming([])),
 
-    jget("/api/qbittorrent/torrents?filter=active&limit=6")
+    jget("/api/qbittorrent/torrents?filter=active")
       .then((qb) => renderQb(qb.items))
       .catch(() => renderQb([])),
 
