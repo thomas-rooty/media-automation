@@ -164,10 +164,20 @@ async def weather() -> dict[str, Any]:
     url = "https://api.open-meteo.com/v1/forecast"
 
     async with httpx.AsyncClient(timeout=8) as client:
-        r = await client.get(url, params=params)
-        if r.status_code >= 400:
-            raise HTTPException(status_code=502, detail={"service": "weather", "status": r.status_code})
-        data: Any = r.json()
+        try:
+            r = await client.get(url, params=params)
+            if r.status_code >= 400:
+                raise HTTPException(status_code=502, detail={"service": "weather", "status": r.status_code})
+            data: Any = r.json()
+        except httpx.TimeoutException:
+            return {"configured": True, "label": (settings.weather_label or "").strip() or None, "error": "timeout"}
+        except Exception as e:
+            return {
+                "configured": True,
+                "label": (settings.weather_label or "").strip() or None,
+                "error": "unavailable",
+                "detail": str(e)[:200],
+            }
 
     cur = data.get("current") if isinstance(data, dict) else None
     if not isinstance(cur, dict):
@@ -189,7 +199,9 @@ async def weather() -> dict[str, Any]:
 
 
 @app.get("/api/jellyseerr/search")
-async def jellyseerr_search(query: str, type: Literal["tv", "movie"] = "tv") -> dict[str, Any]:
+async def jellyseerr_search(
+    query: str, type: Literal["tv", "movie"] = "tv", debug: bool = False
+) -> dict[str, Any]:
     """
     Search Jellyseerr (Overseerr-compatible API).
     """
@@ -232,17 +244,46 @@ async def jellyseerr_search(query: str, type: Literal["tv", "movie"] = "tv") -> 
 
     results = data.get("results") if isinstance(data, dict) else None
     if not isinstance(results, list):
-        return {"count": 0, "items": []}
+        return {"count": 0, "items": [], "debug": {"shape": type(data).__name__} if debug else None}
 
+    debug_sample: list[dict[str, Any]] = []
     out: list[dict[str, Any]] = []
     for it in results:
         if not isinstance(it, dict):
             continue
         media_type = str(it.get("mediaType") or "").strip().lower()
-        if media_type != str(type).lower():
+        wanted = str(type).lower()
+        if media_type != wanted:
+            if debug and len(debug_sample) < 8:
+                debug_sample.append(
+                    {
+                        "mediaType": media_type,
+                        "tmdbId": it.get("tmdbId"),
+                        "name": it.get("name") or it.get("title"),
+                    }
+                )
             continue
-        tmdb_id = it.get("tmdbId")
-        if not isinstance(tmdb_id, int):
+        tmdb_raw = it.get("tmdbId")
+        tmdb_id: int | None = None
+        if isinstance(tmdb_raw, int):
+            tmdb_id = tmdb_raw
+        elif isinstance(tmdb_raw, str):
+            s = tmdb_raw.strip()
+            if s.isdigit():
+                try:
+                    tmdb_id = int(s)
+                except Exception:
+                    tmdb_id = None
+        if tmdb_id is None:
+            if debug and len(debug_sample) < 8:
+                debug_sample.append(
+                    {
+                        "mediaType": media_type,
+                        "tmdbId": tmdb_raw,
+                        "name": it.get("name") or it.get("title"),
+                        "note": "tmdbId not int",
+                    }
+                )
             continue
         title = str(it.get("name") or it.get("title") or "").strip() or "—"
         year = None
@@ -264,7 +305,15 @@ async def jellyseerr_search(query: str, type: Literal["tv", "movie"] = "tv") -> 
             }
         )
 
-    return {"count": len(out), "items": out[:50]}
+    resp: dict[str, Any] = {"count": len(out), "items": out[:50]}
+    if debug:
+        resp["debug"] = {
+            "wanted": str(type).lower(),
+            "resultsCount": len(results),
+            "sampleFiltered": debug_sample,
+            "rawKeys": sorted(list(data.keys())) if isinstance(data, dict) else None,
+        }
+    return resp
 
 
 @app.post("/api/jellyseerr/request")
@@ -318,10 +367,20 @@ async def weather_forecast(days: int = 7) -> dict[str, Any]:
     url = "https://api.open-meteo.com/v1/forecast"
 
     async with httpx.AsyncClient(timeout=10) as client:
-        r = await client.get(url, params=params)
-        if r.status_code >= 400:
-            raise HTTPException(status_code=502, detail={"service": "weather", "status": r.status_code})
-        data: Any = r.json()
+        try:
+            r = await client.get(url, params=params)
+            if r.status_code >= 400:
+                raise HTTPException(status_code=502, detail={"service": "weather", "status": r.status_code})
+            data: Any = r.json()
+        except httpx.TimeoutException:
+            return {"configured": True, "label": (settings.weather_label or "").strip() or None, "error": "timeout"}
+        except Exception as e:
+            return {
+                "configured": True,
+                "label": (settings.weather_label or "").strip() or None,
+                "error": "unavailable",
+                "detail": str(e)[:200],
+            }
 
     cur = data.get("current") if isinstance(data, dict) else None
     hourly = data.get("hourly") if isinstance(data, dict) else None
