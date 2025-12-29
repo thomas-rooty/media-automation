@@ -228,6 +228,28 @@ header{
   gap:10px;
   align-items:center;
 }
+.addTypeRow{
+  display:flex;
+  gap:10px;
+}
+.typeBtn{
+  flex:1 1 0;
+  height:40px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.04);
+  color:var(--muted);
+  font-weight:900;
+  letter-spacing:.2px;
+  cursor:pointer;
+  user-select:none;
+}
+.typeBtn.on{
+  border-color: rgba(76,194,255,.35);
+  background: rgba(76,194,255,.10);
+  color:#cfeeff;
+}
+.typeBtn:active{transform:translateY(1px); background:rgba(255,255,255,.08);}
 .addBtn{
   flex:0 0 auto;
   width:92px;
@@ -471,6 +493,20 @@ header{
   letter-spacing:.6px;
   color:#cfe7ff;
   text-transform:uppercase;
+}
+
+.cardTitleRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:0 0 10px;
+}
+.cardTitleRow h2{margin:0;}
+.addMediaBtn{
+  width:40px;
+  height:40px;
+  border-radius:14px;
 }
 
 .list{

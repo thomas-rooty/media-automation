@@ -376,7 +376,25 @@ function setupAddSeriesModal() {
   const searchBtn = el("addSearchBtn");
   const hint = el("addHint");
   const results = el("addResults");
+  const typeTvBtn = el("addTypeTv");
+  const typeMovieBtn = el("addTypeMovie");
   if (!btn || !overlay || !modal || !closeBtn || !input || !searchBtn || !results || !hint) return;
+
+  let currentType = "tv";
+
+  const setType = (t) => {
+    currentType = (t === "movie") ? "movie" : "tv";
+    if (typeTvBtn && typeMovieBtn) {
+      const tvOn = currentType === "tv";
+      typeTvBtn.classList.toggle("on", tvOn);
+      typeMovieBtn.classList.toggle("on", !tvOn);
+      typeTvBtn.setAttribute("aria-selected", tvOn ? "true" : "false");
+      typeMovieBtn.setAttribute("aria-selected", !tvOn ? "true" : "false");
+    }
+    input.placeholder = currentType === "movie" ? "Rechercher un film…" : "Rechercher une série…";
+    results.innerHTML = "";
+    hint.textContent = "Tape au moins 2 caractères.";
+  };
 
   const open = () => {
     overlay.classList.remove("hidden");
@@ -385,6 +403,7 @@ function setupAddSeriesModal() {
     modal.setAttribute("aria-hidden", "false");
     results.innerHTML = "";
     hint.textContent = "Tape au moins 2 caractères.";
+    setType(currentType);
     setTimeout(() => input.focus(), 50);
   };
   const close = () => {
@@ -404,11 +423,11 @@ function setupAddSeriesModal() {
     hint.textContent = "Recherche…";
     results.innerHTML = "";
     try {
-      const data = await jget(`/api/jellyseerr/search?type=tv&query=${encodeURIComponent(q)}`);
+      const data = await jget(`/api/jellyseerr/search?type=${encodeURIComponent(currentType)}&query=${encodeURIComponent(q)}`);
       const items = data?.items || [];
       hint.textContent = items.length ? `${items.length} résultat(s)` : "Aucun résultat.";
       for (const it of items) {
-        const title = safeText(it.title) || "Série";
+        const title = safeText(it.title) || (currentType === "movie" ? "Film" : "Série");
         const year = it.year ? `(${it.year})` : "";
         const st = jellyseerrStatusLabel(it.status);
         const tag = st ? `<span class="tag ${st.cls}">${st.text}</span>` : "";
@@ -423,7 +442,7 @@ function setupAddSeriesModal() {
             <div class="serviceName">${title} ${year}</div>
             <div class="serviceDetail">${tag}</div>
           </div>
-          <button class="addBtn" type="button" data-add-id="${it.mediaId}" ${isAvailable ? "disabled" : ""}>${isAvailable ? "Déjà" : (isRequested ? "Saisons" : "Saisons")}</button>
+          <button class="addBtn" type="button" data-add-id="${it.mediaId}" data-media-type="${currentType}" ${isAvailable ? "disabled" : ""}>${isAvailable ? "Déjà" : (currentType === "movie" ? "Ajouter" : "Saisons")}</button>
         `;
         results.appendChild(row);
       }
@@ -442,6 +461,8 @@ function setupAddSeriesModal() {
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") doSearch();
   });
+  if (typeTvBtn) typeTvBtn.addEventListener("click", () => setType("tv"));
+  if (typeMovieBtn) typeMovieBtn.addEventListener("click", () => setType("movie"));
 
   // Season picker modal
   const sOverlay = el("seasonOverlay");
@@ -580,11 +601,23 @@ function setupAddSeriesModal() {
     if (b.disabled) return;
     const id = Number(b.getAttribute("data-add-id"));
     if (!Number.isFinite(id)) return;
-    // open season picker
+    const mt = safeText(b.getAttribute("data-media-type")) || "tv";
     const row = b.closest(".serviceRow");
     const titleEl = row?.querySelector?.(".serviceName");
     const t = safeText(titleEl?.textContent);
-    await openSeasons(id, t);
+    if (mt === "movie") {
+      b.disabled = true;
+      b.textContent = "…";
+      try {
+        await jpost("/api/jellyseerr/request", { mediaId: id, mediaType: "movie" });
+        b.textContent = "Ajouté";
+      } catch (err) {
+        b.disabled = false;
+        b.textContent = "Erreur";
+      }
+    } else {
+      await openSeasons(id, t);
+    }
   });
 }
 
