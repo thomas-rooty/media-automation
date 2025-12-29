@@ -5,6 +5,7 @@ import os
 import shutil
 import socket
 import time
+import logging
 from pathlib import Path
 from typing import Any, Literal
 
@@ -25,6 +26,8 @@ app = FastAPI(title=settings.title)
 
 STATIC_DIR = Path(__file__).resolve().parents[1] / "static"
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+log = logging.getLogger("uvicorn.error")
 
 
 _NET_LAST: dict[str, float] = {}
@@ -143,7 +146,12 @@ def _parse_date(value: Any) -> dt.date | None:
 
 @app.get("/api/meta")
 def meta() -> dict[str, Any]:
-    return {"title": settings.title, "refreshSeconds": settings.refresh_seconds}
+    # Helps confirm the running container actually picked up the latest code.
+    try:
+        code_version = int(Path(__file__).stat().st_mtime)
+    except Exception:
+        code_version = None
+    return {"title": settings.title, "refreshSeconds": settings.refresh_seconds, "codeVersion": code_version}
 
 
 @app.get("/api/weather")
@@ -216,8 +224,10 @@ async def jellyseerr_search(
             # and rejects reserved characters when not encoded.
             encoded_q = quote(q, safe="")
             url = f"{base.rstrip('/')}/api/v1/search?query={encoded_q}&page=1"
+            log.info("jellyseerr.search start query=%r url=%s", q, url)
             r = await client.get(url, headers=_jellyseerr_headers())
         except Exception as e:
+            log.warning("jellyseerr.search request failed query=%r err=%r", q, e)
             raise HTTPException(status_code=502, detail={"service": "jellyseerr", "error": str(e)})
 
         if r.status_code >= 400:
@@ -226,11 +236,24 @@ async def jellyseerr_search(
                 detail["body"] = r.json()
             except Exception:
                 detail["body"] = (r.text or "").strip()[:500]
+            log.warning(
+                "jellyseerr.search upstream error query=%r status=%s body=%r",
+                q,
+                r.status_code,
+                detail.get("body"),
+            )
             raise HTTPException(status_code=502, detail=detail)
 
         try:
             data = r.json()
         except Exception:
+            log.warning(
+                "jellyseerr.search invalid json query=%r status=%s ct=%r body=%r",
+                q,
+                r.status_code,
+                r.headers.get("content-type"),
+                (r.text or "").strip()[:200],
+            )
             raise HTTPException(
                 status_code=502,
                 detail={
@@ -244,26 +267,39 @@ async def jellyseerr_search(
 
     results = data.get("results") if isinstance(data, dict) else None
     if not isinstance(results, list):
-        return {"count": 0, "items": [], "debug": {"shape": type(data).__name__} if debug else None}
+        log.info(
+            "jellyseerr.search unexpected shape query=%r dataType=%s keys=%s",
+            q,
+            data.__class__.__name__,
+            sorted(list(data.keys())) if isinstance(data, dict) else None,
+        )
+        return {"count": 0, "items": [], "debug": {"shape": data.__class__.__name__} if debug else None}
 
     debug_sample: list[dict[str, Any]] = []
     out: list[dict[str, Any]] = []
+    dropped_type = 0
+    dropped_id = 0
     for it in results:
         if not isinstance(it, dict):
             continue
         media_type = str(it.get("mediaType") or "").strip().lower()
         wanted = str(type).lower()
         if media_type != wanted:
+            dropped_type += 1
             if debug and len(debug_sample) < 8:
                 debug_sample.append(
                     {
                         "mediaType": media_type,
                         "tmdbId": it.get("tmdbId"),
+                        "id": it.get("id"),
                         "name": it.get("name") or it.get("title"),
                     }
                 )
             continue
+        # Jellyseerr usually provides tmdbId, but some installs / versions can return `id`.
         tmdb_raw = it.get("tmdbId")
+        if tmdb_raw is None:
+            tmdb_raw = it.get("id")
         tmdb_id: int | None = None
         if isinstance(tmdb_raw, int):
             tmdb_id = tmdb_raw
@@ -275,11 +311,13 @@ async def jellyseerr_search(
                 except Exception:
                     tmdb_id = None
         if tmdb_id is None:
+            dropped_id += 1
             if debug and len(debug_sample) < 8:
                 debug_sample.append(
                     {
                         "mediaType": media_type,
                         "tmdbId": tmdb_raw,
+                        "id": it.get("id"),
                         "name": it.get("name") or it.get("title"),
                         "note": "tmdbId not int",
                     }
@@ -313,6 +351,29 @@ async def jellyseerr_search(
             "sampleFiltered": debug_sample,
             "rawKeys": sorted(list(data.keys())) if isinstance(data, dict) else None,
         }
+    if len(out) == 0:
+        # High-signal one-liner when things look "ok" but we filtered everything.
+        sample = []
+        for it in results[:5]:
+            if isinstance(it, dict):
+                sample.append(
+                    {
+                        "mediaType": it.get("mediaType"),
+                        "tmdbId": it.get("tmdbId"),
+                        "id": it.get("id"),
+                        "name": it.get("name") or it.get("title"),
+                    }
+                )
+        log.info(
+            "jellyseerr.search filtered_all query=%r results=%d droppedType=%d droppedId=%d sample=%s",
+            q,
+            len(results),
+            dropped_type,
+            dropped_id,
+            sample,
+        )
+    else:
+        log.info("jellyseerr.search ok query=%r results=%d kept=%d", q, len(results), len(out))
     return resp
 
 
