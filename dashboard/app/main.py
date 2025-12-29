@@ -14,6 +14,7 @@ from fastapi import Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from urllib.parse import quote
 
 from .settings import ServiceStatus, Settings
 
@@ -199,11 +200,11 @@ async def jellyseerr_search(query: str, type: Literal["tv", "movie"] = "tv") -> 
 
     async with httpx.AsyncClient(timeout=12) as client:
         try:
-            r = await client.get(
-                f"{base.rstrip('/')}/api/v1/search",
-                headers=_jellyseerr_headers(),
-                params={"query": q, "page": "1"},
-            )
+            # Jellyseerr expects `query` to be percent-encoded (spaces as %20, not '+')
+            # and rejects reserved characters when not encoded.
+            encoded_q = quote(q, safe="")
+            url = f"{base.rstrip('/')}/api/v1/search?query={encoded_q}&page=1"
+            r = await client.get(url, headers=_jellyseerr_headers())
         except Exception as e:
             raise HTTPException(status_code=502, detail={"service": "jellyseerr", "error": str(e)})
 
