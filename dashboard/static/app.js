@@ -416,7 +416,7 @@ function setupAddSeriesModal() {
             <div class="serviceName">${title} ${year}</div>
             <div class="serviceDetail">${tag}</div>
           </div>
-          <button class="choiceBtn" type="button" style="padding:10px 12px; border-radius:14px;" data-add-id="${it.mediaId}">Ajouter</button>
+          <button class="addBtn" type="button" data-add-id="${it.mediaId}">Ajouter</button>
         `;
         results.appendChild(row);
       }
