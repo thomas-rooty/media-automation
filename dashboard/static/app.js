@@ -421,7 +421,7 @@ function setupAddSeriesModal() {
         results.appendChild(row);
       }
     } catch (e) {
-      hint.textContent = "Erreur Jellyseerr (URL/API key ?)";
+      hint.textContent = "Erreur Jellyseerr (voir logs du dashboard)";
     }
   };
 

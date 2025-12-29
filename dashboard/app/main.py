@@ -198,14 +198,36 @@ async def jellyseerr_search(query: str, type: Literal["tv", "movie"] = "tv") -> 
         return {"count": 0, "items": []}
 
     async with httpx.AsyncClient(timeout=12) as client:
-        r = await client.get(
-            f"{base.rstrip('/')}/api/v1/search",
-            headers=_jellyseerr_headers(),
-            params={"query": q},
-        )
+        try:
+            r = await client.get(
+                f"{base.rstrip('/')}/api/v1/search",
+                headers=_jellyseerr_headers(),
+                params={"query": q, "page": "1"},
+            )
+        except Exception as e:
+            raise HTTPException(status_code=502, detail={"service": "jellyseerr", "error": str(e)})
+
         if r.status_code >= 400:
-            raise HTTPException(status_code=502, detail={"service": "jellyseerr", "status": r.status_code})
-        data: Any = r.json()
+            detail: dict[str, Any] = {"service": "jellyseerr", "status": r.status_code}
+            try:
+                detail["body"] = r.json()
+            except Exception:
+                detail["body"] = (r.text or "").strip()[:500]
+            raise HTTPException(status_code=502, detail=detail)
+
+        try:
+            data = r.json()
+        except Exception:
+            raise HTTPException(
+                status_code=502,
+                detail={
+                    "service": "jellyseerr",
+                    "status": r.status_code,
+                    "error": "invalid json",
+                    "contentType": r.headers.get("content-type"),
+                    "body": (r.text or "").strip()[:500],
+                },
+            )
 
     results = data.get("results") if isinstance(data, dict) else None
     if not isinstance(results, list):
@@ -215,8 +237,8 @@ async def jellyseerr_search(query: str, type: Literal["tv", "movie"] = "tv") -> 
     for it in results:
         if not isinstance(it, dict):
             continue
-        media_type = str(it.get("mediaType") or "")
-        if media_type != type:
+        media_type = str(it.get("mediaType") or "").strip().lower()
+        if media_type != str(type).lower():
             continue
         tmdb_id = it.get("tmdbId")
         if not isinstance(tmdb_id, int):
@@ -971,7 +993,19 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
             except Exception:
                 detail["body"] = (r.text or "").strip()[:500]
             raise HTTPException(status_code=502, detail=detail)
-        items: list[dict[str, Any]] = r.json()
+        try:
+            items: list[dict[str, Any]] = r.json()
+        except Exception:
+            raise HTTPException(
+                status_code=502,
+                detail={
+                    "service": "jellyfin",
+                    "status": r.status_code,
+                    "error": "invalid json",
+                    "contentType": r.headers.get("content-type"),
+                    "body": (r.text or "").strip()[:200],
+                },
+            )
 
         # Series progress lookup (episodes watched / total) for episode items.
         # Only reliable when we have a configured user id.
@@ -1092,7 +1126,11 @@ async def _status_jellyfin() -> ServiceStatus:
         r = await client.get(url)
         if r.status_code >= 400:
             return ServiceStatus("Jellyfin", False, f"http {r.status_code}")
-        data = r.json()
+        try:
+            data = r.json()
+        except Exception:
+            ct = (r.headers.get("content-type") or "").strip()
+            return ServiceStatus("Jellyfin", False, f"invalid json ({ct or 'unknown'})")
         ver = data.get("Version")
         return ServiceStatus("Jellyfin", True, f"v{ver}" if ver else "ok")
 
