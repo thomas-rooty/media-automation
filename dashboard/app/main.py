@@ -333,6 +333,19 @@ async def jellyseerr_search(
             year = None
         mi = it.get("mediaInfo") if isinstance(it.get("mediaInfo"), dict) else {}
         status = mi.get("status")
+        seasons_status: list[dict[str, Any]] | None = None
+        if media_type == "tv":
+            raw_ss = mi.get("seasons")
+            if isinstance(raw_ss, list):
+                ss_out: list[dict[str, Any]] = []
+                for s_it in raw_ss:
+                    if not isinstance(s_it, dict):
+                        continue
+                    sn = s_it.get("seasonNumber")
+                    st = s_it.get("status")
+                    if isinstance(sn, int):
+                        ss_out.append({"seasonNumber": sn, "status": st})
+                seasons_status = ss_out if ss_out else None
         out.append(
             {
                 "mediaType": media_type,
@@ -340,6 +353,7 @@ async def jellyseerr_search(
                 "title": title,
                 "year": year,
                 "status": status,
+                "seasonsStatus": seasons_status,
             }
         )
 
@@ -375,6 +389,82 @@ async def jellyseerr_search(
     else:
         log.info("jellyseerr.search ok query=%r results=%d kept=%d", q, len(results), len(out))
     return resp
+
+
+@app.get("/api/jellyseerr/tv/{media_id}")
+async def jellyseerr_tv(media_id: int) -> dict[str, Any]:
+    """
+    Fetch TV details (including seasons) from Jellyseerr.
+    Used to pick seasons before requesting.
+    """
+    base = _require(settings.jellyseerr_url, "Jellyseerr URL")
+    async with httpx.AsyncClient(timeout=12) as client:
+        r = await client.get(f"{base.rstrip('/')}/api/v1/tv/{media_id}", headers=_jellyseerr_headers())
+        if r.status_code >= 400:
+            detail: dict[str, Any] = {"service": "jellyseerr", "status": r.status_code}
+            try:
+                detail["body"] = r.json()
+            except Exception:
+                detail["body"] = (r.text or "").strip()[:500]
+            raise HTTPException(status_code=502, detail=detail)
+        try:
+            data: Any = r.json()
+        except Exception:
+            raise HTTPException(
+                status_code=502,
+                detail={
+                    "service": "jellyseerr",
+                    "status": r.status_code,
+                    "error": "invalid json",
+                    "contentType": r.headers.get("content-type"),
+                    "body": (r.text or "").strip()[:500],
+                },
+            )
+
+    if not isinstance(data, dict):
+        return {"mediaId": media_id, "seasons": []}
+
+    title = str(data.get("name") or data.get("title") or "").strip() or None
+    mi = data.get("mediaInfo") if isinstance(data.get("mediaInfo"), dict) else {}
+    status = mi.get("status")
+
+    seasons: list[dict[str, Any]] = []
+    raw_seasons = data.get("seasons")
+    if isinstance(raw_seasons, list):
+        for s in raw_seasons:
+            if not isinstance(s, dict):
+                continue
+            sn = s.get("seasonNumber")
+            if not isinstance(sn, int):
+                continue
+            if sn <= 0:
+                # skip specials by default (season 0)
+                continue
+            seasons.append(
+                {
+                    "seasonNumber": sn,
+                    "name": str(s.get("name") or f"Saison {sn}"),
+                    "episodeCount": s.get("episodeCount"),
+                }
+            )
+
+    # Season status list (if present)
+    season_status_map: dict[int, Any] = {}
+    raw_ss = mi.get("seasons")
+    if isinstance(raw_ss, list):
+        for ss in raw_ss:
+            if not isinstance(ss, dict):
+                continue
+            sn = ss.get("seasonNumber")
+            if isinstance(sn, int):
+                season_status_map[sn] = ss.get("status")
+    for s in seasons:
+        sn = int(s["seasonNumber"])
+        if sn in season_status_map:
+            s["status"] = season_status_map.get(sn)
+
+    seasons.sort(key=lambda x: int(x.get("seasonNumber") or 0))
+    return {"mediaId": media_id, "title": title, "status": status, "seasons": seasons}
 
 
 @app.post("/api/jellyseerr/request")

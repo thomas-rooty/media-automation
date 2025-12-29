@@ -358,7 +358,11 @@ function jellyseerrStatusLabel(status) {
   // Jellyseerr status is numeric; keep it simple and robust.
   const s = Number(status);
   if (!Number.isFinite(s)) return null;
-  if (s >= 4) return { text: "Disponible", cls: "good" };
+  // Overseerr/Jellyseerr MediaStatus:
+  // 1 unknown, 2 pending, 3 processing, 4 partially available, 5 available
+  if (s >= 5) return { text: "Disponible", cls: "good" };
+  if (s >= 4) return { text: "Partiel", cls: "warn" };
+  if (s >= 3) return { text: "Traitement", cls: "warn" };
   if (s >= 2) return { text: "Demandé", cls: "warn" };
   return { text: "—", cls: "warn" };
 }
@@ -408,6 +412,9 @@ function setupAddSeriesModal() {
         const year = it.year ? `(${it.year})` : "";
         const st = jellyseerrStatusLabel(it.status);
         const tag = st ? `<span class="tag ${st.cls}">${st.text}</span>` : "";
+        const sNum = Number(it.status);
+        const isAvailable = Number.isFinite(sNum) && sNum >= 5;
+        const isRequested = Number.isFinite(sNum) && sNum >= 2 && sNum < 5;
 
         const row = document.createElement("div");
         row.className = "serviceRow";
@@ -416,7 +423,7 @@ function setupAddSeriesModal() {
             <div class="serviceName">${title} ${year}</div>
             <div class="serviceDetail">${tag}</div>
           </div>
-          <button class="addBtn" type="button" data-add-id="${it.mediaId}">Ajouter</button>
+          <button class="addBtn" type="button" data-add-id="${it.mediaId}" ${isAvailable ? "disabled" : ""}>${isAvailable ? "Déjà" : (isRequested ? "Saisons" : "Saisons")}</button>
         `;
         results.appendChild(row);
       }
@@ -436,20 +443,149 @@ function setupAddSeriesModal() {
     if (e.key === "Enter") doSearch();
   });
 
+  // Season picker modal
+  const sOverlay = el("seasonOverlay");
+  const sModal = el("seasonModal");
+  const sClose = el("seasonCloseBtn");
+  const sTitle = el("seasonTitle");
+  const sGrid = el("seasonGrid");
+  const sHint = el("seasonHint");
+  const sRequest = el("seasonRequestBtn");
+
+  let currentTvId = null;
+  let currentSelected = new Set();
+  let currentLocked = new Set(); // seasons already available (disabled)
+
+  const openSeasons = async (tvId, showTitle) => {
+    if (!sOverlay || !sModal || !sGrid || !sRequest || !sTitle || !sHint) return;
+    currentTvId = tvId;
+    currentSelected = new Set();
+    currentLocked = new Set();
+    sTitle.textContent = `Saisons • ${showTitle || "Série"}`;
+    sHint.textContent = "Chargement…";
+    sGrid.innerHTML = "";
+    sRequest.disabled = true;
+
+    sOverlay.classList.remove("hidden");
+    sModal.classList.remove("hidden");
+    sOverlay.setAttribute("aria-hidden", "false");
+    sModal.setAttribute("aria-hidden", "false");
+
+    let info = null;
+    try {
+      info = await jget(`/api/jellyseerr/tv/${encodeURIComponent(tvId)}`);
+    } catch (e) {
+      sHint.textContent = "Impossible de charger les saisons.";
+      return;
+    }
+
+    const seasons = Array.isArray(info?.seasons) ? info.seasons : [];
+    sHint.textContent = seasons.length ? "Choisis les saisons à demander." : "Aucune saison trouvée.";
+
+    const isSeasonAvailable = (st) => {
+      const n = Number(st);
+      return Number.isFinite(n) && n >= 5;
+    };
+    const isSeasonRequested = (st) => {
+      const n = Number(st);
+      return Number.isFinite(n) && n >= 2 && n < 5;
+    };
+
+    // default: select seasons that are neither available nor already requested
+    for (const s of seasons) {
+      const sn = Number(s.seasonNumber);
+      if (!Number.isFinite(sn)) continue;
+      const st = s.status;
+      if (isSeasonAvailable(st)) currentLocked.add(sn);
+      else if (!isSeasonRequested(st)) currentSelected.add(sn);
+    }
+
+    const render = () => {
+      sGrid.innerHTML = "";
+      for (const s of seasons) {
+        const sn = Number(s.seasonNumber);
+        if (!Number.isFinite(sn)) continue;
+        const st = s.status;
+        const locked = currentLocked.has(sn);
+        const on = currentSelected.has(sn);
+        const cls = isSeasonAvailable(st) ? "good" : (isSeasonRequested(st) ? "warn" : "");
+        const chip = document.createElement("div");
+        chip.className = `seasonChip ${cls} ${on ? "on" : ""} ${locked ? "disabled" : ""}`.trim();
+        chip.setAttribute("role", "button");
+        chip.setAttribute("tabindex", "0");
+        chip.setAttribute("data-season", String(sn));
+        const badge = isSeasonAvailable(st) ? "OK" : (isSeasonRequested(st) ? "⏳" : "");
+        chip.innerHTML = `<div>S${String(sn).padStart(2,"0")}</div><div class="sub">${badge}</div>`;
+        sGrid.appendChild(chip);
+      }
+      sRequest.disabled = currentSelected.size === 0;
+    };
+    render();
+  };
+
+  const closeSeasons = () => {
+    if (!sOverlay || !sModal) return;
+    sOverlay.classList.add("hidden");
+    sModal.classList.add("hidden");
+    sOverlay.setAttribute("aria-hidden", "true");
+    sModal.setAttribute("aria-hidden", "true");
+    currentTvId = null;
+    currentSelected = new Set();
+    currentLocked = new Set();
+  };
+
+  if (sClose && sOverlay) {
+    sClose.addEventListener("click", closeSeasons);
+    sOverlay.addEventListener("click", closeSeasons);
+  }
+
+  if (sGrid) {
+    sGrid.addEventListener("click", (e) => {
+      const c = e.target?.closest?.("[data-season]");
+      if (!c) return;
+      const sn = Number(c.getAttribute("data-season"));
+      if (!Number.isFinite(sn)) return;
+      if (currentLocked.has(sn)) return;
+      if (currentSelected.has(sn)) currentSelected.delete(sn);
+      else currentSelected.add(sn);
+      // rerender cheaply by toggling classes
+      c.classList.toggle("on");
+      if (sRequest) sRequest.disabled = currentSelected.size === 0;
+    });
+  }
+
+  if (sRequest) {
+    sRequest.addEventListener("click", async () => {
+      const id = Number(currentTvId);
+      if (!Number.isFinite(id)) return;
+      const seasons = Array.from(currentSelected.values()).filter(Number.isFinite).sort((a,b)=>a-b);
+      if (!seasons.length) return;
+      sRequest.disabled = true;
+      sRequest.textContent = "…";
+      try {
+        await jpost("/api/jellyseerr/request", { mediaId: id, mediaType: "tv", seasons });
+        sRequest.textContent = "Demandé";
+        setTimeout(() => closeSeasons(), 500);
+      } catch (e) {
+        sRequest.textContent = "Erreur";
+        sRequest.disabled = false;
+      } finally {
+        setTimeout(() => { if (sRequest) sRequest.textContent = "Demander"; }, 1500);
+      }
+    });
+  }
+
   results.addEventListener("click", async (e) => {
     const b = e.target?.closest?.("button[data-add-id]");
     if (!b) return;
+    if (b.disabled) return;
     const id = Number(b.getAttribute("data-add-id"));
     if (!Number.isFinite(id)) return;
-    b.disabled = true;
-    b.textContent = "…";
-    try {
-      await jpost("/api/jellyseerr/request", { mediaId: id, mediaType: "tv" });
-      b.textContent = "Ajouté";
-    } catch (err) {
-      b.disabled = false;
-      b.textContent = "Erreur";
-    }
+    // open season picker
+    const row = b.closest(".serviceRow");
+    const titleEl = row?.querySelector?.(".serviceName");
+    const t = safeText(titleEl?.textContent);
+    await openSeasons(id, t);
   });
 }
 

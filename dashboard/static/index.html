@@ -154,6 +154,21 @@
       <div id="addResults" class="modalList"></div>
     </div>
 
+    <div id="seasonOverlay" class="overlay modalOverlay hidden" aria-hidden="true"></div>
+    <div id="seasonModal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Choisir les saisons">
+      <div class="modalHeader">
+        <div id="seasonTitle" class="modalTitle">Choisir saisons</div>
+        <button id="seasonCloseBtn" class="iconBtn" aria-label="Fermer" type="button">
+          <span class="icon">✕</span>
+        </button>
+      </div>
+      <div class="seasonActions">
+        <div id="seasonHint" class="wxSmall">Choisis les saisons à demander.</div>
+        <button id="seasonRequestBtn" class="choiceBtn" type="button">Demander</button>
+      </div>
+      <div id="seasonGrid" class="seasonGrid"></div>
+    </div>
+
     <script src="/static/app.js"></script>
   </body>
 </html>
