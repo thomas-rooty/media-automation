@@ -76,6 +76,20 @@ function toLocalShort(iso) {
   });
 }
 
+function toLocalShortWithWeekday(iso) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return "—";
+  return d.toLocaleString("fr-FR", {
+    weekday: "long",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 function dayBucketLabel(isoOrDate) {
   if (!isoOrDate) return { k: "unknown", label: "Date inconnue" };
   const d = new Date(isoOrDate);
@@ -735,9 +749,9 @@ function renderSonarr(items) {
     const ep = safeText(it.episodeTitle) || "Épisode";
     const sn = it.seasonNumber ?? "?";
     const en = it.episodeNumber ?? "?";
-    const when = toLocalShort(it.airDateUtc);
-    const have = it.hasFile ? `<span class="tag good">OK</span>` : `<span class="tag warn">À venir</span>`;
     const b = dayBucketLabel(it.airDateUtc);
+    const when = (b.k === "1" || b.k === "w") ? toLocalShortWithWeekday(it.airDateUtc) : toLocalShort(it.airDateUtc);
+    const have = it.hasFile ? `<span class="tag good">OK</span>` : `<span class="tag warn">À venir</span>`;
     if (b.k !== lastBucket) {
       lastBucket = b.k;
       const h = document.createElement("div");
