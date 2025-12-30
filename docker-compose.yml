@@ -330,6 +330,7 @@ services:
     volumes:
       - ./nextcloud/app:/var/www/html
       - ./nextcloud/data:/var/www/html/data
+      - /mnt/medias/Medias:/var/www/html/data/thomas/files/Medias:ro
       - /mnt/medias/Shares/Nextcloud:/var/www/html/data/shares:ro
     networks:
       - media-net
