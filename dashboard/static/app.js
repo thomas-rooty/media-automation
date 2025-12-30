@@ -105,6 +105,35 @@ function dayBucketLabel(isoOrDate) {
   return { k: "p", label: "Passé" };
 }
 
+function _startOfWeekMonday(d) {
+  // local week starting Monday
+  const day = d.getDay(); // 0=Sun..6=Sat
+  const diffToMonday = (day + 6) % 7; // Mon->0, Tue->1, ... Sun->6
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate() - diffToMonday);
+}
+
+function sonarrBucketLabel(isoOrDate) {
+  // Sonarr: "Cette semaine" = semaine calendaire (lundi -> dimanche), pas "dans 7 jours".
+  if (!isoOrDate) return { k: "unknown", label: "Date inconnue" };
+  const d = new Date(isoOrDate);
+  if (isNaN(d.getTime())) return { k: "unknown", label: "Date inconnue" };
+
+  const now = new Date();
+  const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const startD = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const diffDays = Math.round((startD - startToday) / 86400000);
+  if (diffDays === 0) return { k: "0", label: "Aujourd’hui" };
+  if (diffDays === 1) return { k: "1", label: "Demain" };
+  if (diffDays < 0) return { k: "p", label: "Passé" };
+
+  const wNow = _startOfWeekMonday(now);
+  const wD = _startOfWeekMonday(d);
+  const weekDiffDays = Math.round((wD - wNow) / 86400000); // multiples of 7
+  if (weekDiffDays === 0) return { k: "w", label: "Cette semaine" };
+  if (weekDiffDays === 7) return { k: "nw", label: "Semaine prochaine" };
+  return { k: "l", label: "Plus tard" };
+}
+
 function toLocalDate(iso) {
   if (!iso) return "—";
   const d = new Date(iso);
@@ -749,8 +778,8 @@ function renderSonarr(items) {
     const ep = safeText(it.episodeTitle) || "Épisode";
     const sn = it.seasonNumber ?? "?";
     const en = it.episodeNumber ?? "?";
-    const b = dayBucketLabel(it.airDateUtc);
-    const when = (b.k === "1" || b.k === "w") ? toLocalShortWithWeekday(it.airDateUtc) : toLocalShort(it.airDateUtc);
+    const b = sonarrBucketLabel(it.airDateUtc);
+    const when = (b.k === "1" || b.k === "w" || b.k === "nw") ? toLocalShortWithWeekday(it.airDateUtc) : toLocalShort(it.airDateUtc);
     const have = it.hasFile ? `<span class="tag good">OK</span>` : `<span class="tag warn">À venir</span>`;
     if (b.k !== lastBucket) {
       lastBucket = b.k;
