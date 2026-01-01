@@ -928,6 +928,69 @@ async def sonarr_upcoming(days: int = 30, limit: int = 10) -> dict[str, Any]:
     return {"rangeDays": days, "count": min(limit, len(out)), "items": out[: max(0, min(limit, 50))]}
 
 
+@app.get("/api/sonarr/importing")
+async def sonarr_importing(limit: int = 20) -> dict[str, Any]:
+    """
+    Expose items currently being imported/moved by Sonarr (Completed Download Handling).
+
+    Sonarr surfaces this via /api/v3/queue with statuses like "importing"/"processing".
+    """
+    base = _require(settings.sonarr_url, "Sonarr URL")
+    api_key = _require(settings.sonarr_api_key, "Sonarr API key")
+    headers = {"X-Api-Key": api_key}
+
+    params = {
+        "page": "1",
+        "pageSize": "200",
+        "sortKey": "timeleft",
+        "sortDirection": "ascending",
+        "includeSeries": "true",
+        "includeEpisode": "true",
+    }
+
+    async with httpx.AsyncClient(timeout=10) as client:
+        r = await client.get(f"{base.rstrip('/')}/api/v3/queue", headers=headers, params=params)
+        if r.status_code >= 400:
+            raise HTTPException(status_code=502, detail=f"Sonarr error ({r.status_code})")
+        data: Any = r.json()
+
+    records = data.get("records") if isinstance(data, dict) else None
+    if not isinstance(records, list):
+        return {"count": 0, "items": []}
+
+    out: list[dict[str, Any]] = []
+    for rec in records:
+        if not isinstance(rec, dict):
+            continue
+        status = str(rec.get("status") or "").strip()
+        state = str(rec.get("trackedDownloadState") or "").strip()
+        st = f"{status} {state}".lower()
+        if "import" not in st and "process" not in st and "move" not in st:
+            continue
+
+        series = rec.get("series") if isinstance(rec.get("series"), dict) else {}
+        episode = rec.get("episode") if isinstance(rec.get("episode"), dict) else {}
+        out.append(
+            {
+                "seriesTitle": series.get("title") or rec.get("seriesTitle"),
+                "episodeTitle": episode.get("title") or rec.get("episodeTitle"),
+                "seasonNumber": episode.get("seasonNumber") or rec.get("seasonNumber"),
+                "episodeNumber": episode.get("episodeNumber") or rec.get("episodeNumber"),
+                "status": status or None,
+                "trackedDownloadState": state or None,
+                "progress": rec.get("progress"),
+                "timeleft": rec.get("timeleft"),
+                "outputPath": rec.get("outputPath") or rec.get("downloadClientOutputPath"),
+            }
+        )
+
+    def sk(x: dict[str, Any]) -> str:
+        return str(x.get("timeleft") or "") + str(x.get("seriesTitle") or "")
+
+    items = sorted(out, key=sk)[: max(0, min(limit, 50))]
+    return {"count": len(items), "items": items}
+
+
 @app.get("/api/radarr/upcoming")
 async def radarr_upcoming(days: int = 90, limit: int = 10) -> dict[str, Any]:
     base = _require(settings.radarr_url, "Radarr URL")

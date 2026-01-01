@@ -804,6 +804,39 @@ function renderSonarr(items) {
   }
 }
 
+function renderSonarrImporting(data) {
+  const box = el("sonarrImporting");
+  if (!box) return;
+  const items = data?.items || [];
+  if (!items.length) {
+    box.classList.add("hidden");
+    box.innerHTML = "";
+    return;
+  }
+  box.classList.remove("hidden");
+  const rows = items.map((it) => {
+    const series = safeText(it.seriesTitle) || "Série";
+    const ep = safeText(it.episodeTitle) || "Épisode";
+    const sn = it.seasonNumber ?? "?";
+    const en = it.episodeNumber ?? "?";
+    const st = safeText(it.status) || safeText(it.trackedDownloadState) || "Import";
+    const path = safeText(it.outputPath);
+    return `
+      <div class="row">
+        <div class="main">
+          <div class="primary">${series}</div>
+          <div class="secondary">S${String(sn).padStart(2,"0")}E${String(en).padStart(2,"0")} — ${ep}${path ? ` • ${path}` : ""}</div>
+        </div>
+        <div class="meta">
+          <div class="tag warn">Import</div>
+          <div style="margin-top:6px">${st}</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+  box.innerHTML = `<div class="sectionRow">Importation en cours</div>${rows}`;
+}
+
 function renderQb(items) {
   const root = el("qbList");
   root.innerHTML = "";
@@ -1211,6 +1244,10 @@ async function refreshAll() {
     jget("/api/sonarr/upcoming?days=14&limit=30")
       .then((sonarr) => renderSonarr(sonarr.items))
       .catch(() => renderSonarr([])),
+
+    jget("/api/sonarr/importing?limit=10")
+      .then((d) => renderSonarrImporting(d))
+      .catch(() => renderSonarrImporting(null)),
 
     jget("/api/radarr/soon?days_future=365&limit=30")
       .then((radarr) => renderRadarrUpcoming(radarr.items))

@@ -517,6 +517,16 @@ header{
   padding-right:2px;
 }
 
+.importBox{
+  margin:2px 0 10px;
+  padding:10px 12px;
+  border-radius:14px;
+  background:rgba(0,0,0,.18);
+  border:1px solid rgba(255,255,255,.06);
+}
+.importBox .sectionRow{padding:0; margin:0 0 8px;}
+.importBox .row{background:transparent; border-color:rgba(255,255,255,.06);}
+
 .sectionRow{
   padding:6px 2px 2px;
   color:#cfe7ff;
