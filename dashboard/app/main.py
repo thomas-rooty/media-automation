@@ -1366,6 +1366,27 @@ async def jellyfin_primary_image(item_id: str, maxHeight: int = 240, quality: in
         return Response(content=r.content, media_type=content_type, headers={"Cache-Control": "public, max-age=300"})
 
 
+@app.post("/api/jellyfin/refresh")
+async def jellyfin_refresh_library() -> dict[str, Any]:
+    """
+    Trigger a Jellyfin library refresh (scan).
+
+    Jellyfin endpoint: POST /Library/Refresh
+    """
+    base = _require(settings.jellyfin_url, "Jellyfin URL")
+    url = f"{base.rstrip('/')}/Library/Refresh"
+    async with httpx.AsyncClient(timeout=10) as client:
+        r = await client.post(url, headers=_jellyfin_headers())
+        if r.status_code >= 400:
+            detail: dict[str, Any] = {"service": "jellyfin", "status": r.status_code, "endpoint": "libraryRefresh"}
+            try:
+                detail["body"] = r.json()
+            except Exception:
+                detail["body"] = (r.text or "").strip()[:500]
+            raise HTTPException(status_code=502, detail=detail)
+    return {"ok": True}
+
+
 async def _status_sonarr() -> ServiceStatus:
     if not (settings.sonarr_url and settings.sonarr_api_key):
         return ServiceStatus("Sonarr", False, "not configured")

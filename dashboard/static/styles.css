@@ -503,6 +503,11 @@ header{
   margin:0 0 10px;
 }
 .cardTitleRow h2{margin:0;}
+.cardTitleActions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
 .addMediaBtn{
   width:40px;
   height:40px;

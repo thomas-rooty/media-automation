@@ -66,9 +66,14 @@
         <section class="card jelly">
           <div class="cardTitleRow">
             <h2>Derniers ajouts (Jellyfin)</h2>
-            <button id="addSeriesBtn" class="iconBtn addMediaBtn" aria-label="Ajouter un média" type="button">
-              <span class="icon">＋</span>
-            </button>
+            <div class="cardTitleActions">
+              <button id="jellyRefreshBtn" class="iconBtn addMediaBtn" aria-label="Rafraîchir la bibliothèque Jellyfin" type="button">
+                <span class="icon">⟳</span>
+              </button>
+              <button id="addSeriesBtn" class="iconBtn addMediaBtn" aria-label="Ajouter un média" type="button">
+                <span class="icon">＋</span>
+              </button>
+            </div>
           </div>
           <div id="jellyList" class="media-grid"></div>
         </section>

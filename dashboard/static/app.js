@@ -671,6 +671,32 @@ function setupAddSeriesModal() {
   });
 }
 
+function setupJellyfinRefreshButton() {
+  const btn = el("jellyRefreshBtn");
+  if (!btn) return;
+  btn.addEventListener("click", async () => {
+    btn.disabled = true;
+    const icon = btn.querySelector(".icon");
+    const prev = icon ? icon.textContent : null;
+    if (icon) icon.textContent = "…";
+    try {
+      await jpost("/api/jellyfin/refresh", {});
+      if (icon) icon.textContent = "✓";
+      // optional: refresh UI shortly after
+      setTimeout(() => {
+        refreshAll().catch(() => {});
+      }, 2500);
+    } catch (e) {
+      if (icon) icon.textContent = "!";
+    } finally {
+      setTimeout(() => {
+        if (icon && prev) icon.textContent = prev;
+        btn.disabled = false;
+      }, 1200);
+    }
+  });
+}
+
 const REFRESH_OPTIONS = [
   { s: 10, label: "10s" },
   { s: 30, label: "30s" },
@@ -1291,6 +1317,7 @@ async function main() {
   setupReloadButton();
   setupRefreshPicker();
   setupAddSeriesModal();
+  setupJellyfinRefreshButton();
   setupMenu();
   setupServicesModal();
   setupLegendModal();
