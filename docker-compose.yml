@@ -247,6 +247,21 @@ services:
       - ./config/huntarr:/config
     restart: unless-stopped
 
+  watcharr:
+    image: ghcr.io/sbondco/watcharr:latest
+    container_name: watcharr
+    networks:
+      - media-net
+    ports:
+      - 3080:3080
+    security_opt:
+      - no-new-privileges:true
+    environment:
+      - TZ=Europe/Paris
+    volumes:
+      - ./config/watcharr:/data
+    restart: unless-stopped
+
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
