@@ -679,10 +679,12 @@ header{
 
 .media-grid{
   display:grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap:10px;
-  overflow:auto;
+  overflow-y:auto;
+  overflow-x:hidden;
   padding-right:2px;
+  min-width:0;
 }
 .media{
   display:flex;
@@ -691,11 +693,14 @@ header{
   border-radius:14px;
   background:rgba(0,0,0,.18);
   border:1px solid rgba(255,255,255,.06);
-  min-height:96px;
+  height:104px; /* keep all Jellyfin cards same height */
+  min-width:0;  /* prevent grid item overflow -> horizontal scroll */
+  overflow:hidden;
 }
 .poster{
   width:70px;
   flex:0 0 70px;
+  height:100%;
   border-radius:10px;
   background:rgba(255,255,255,.06);
   border:1px solid rgba(255,255,255,.08);
@@ -716,6 +721,7 @@ header{
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+  min-width:0;
 }
 .media .txt .sub{
   font-size:13px;
