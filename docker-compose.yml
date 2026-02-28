@@ -25,7 +25,7 @@ services:
       - FIREWALL_INPUT_SUBNETS=192.168.1.0/24
 
       - TZ=Europe/Paris
-      - VPN_RECONNECT_INTERVAL=12h
+      #- VPN_RECONNECT_INTERVAL=12h
     volumes:
       - ./config/gluetun:/gluetun
     ports:
@@ -178,7 +178,7 @@ services:
   # Front / media
   # =========================
   jellyseerr:
-    image: ghcr.io/fallenbagel/jellyseerr:latest
+    image: ghcr.io/seerr-team/seerr:latest
     container_name: jellyseerr
     networks:
       - media-net
