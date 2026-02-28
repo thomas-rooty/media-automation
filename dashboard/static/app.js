@@ -1083,6 +1083,25 @@ function setupLegendModal() {
   }
 }
 
+let sysViewMode = "live"; // "live" | "history"
+
+function setupSysToggle() {
+  const btn = el("sysToggleBtn");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    sysViewMode = sysViewMode === "live" ? "history" : "live";
+    const icon = btn.querySelector(".icon");
+    if (icon) icon.textContent = sysViewMode === "live" ? "📊" : "⚡";
+    const live = el("systemStats");
+    const hist = el("systemHistory");
+    if (live) live.classList.toggle("hidden", sysViewMode !== "live");
+    if (hist) hist.classList.toggle("hidden", sysViewMode !== "history");
+    if (sysViewMode === "history") {
+      jget("/api/network/history").then(renderNetHistory).catch(() => renderNetHistory(null));
+    }
+  });
+}
+
 function renderSystem(sys) {
   const root = el("systemStats");
   if (!root) return;
@@ -1122,6 +1141,71 @@ function renderSystem(sys) {
   for (const s of stats.slice(0, 6)) {
     const div = document.createElement("div");
     div.className = `stat${s.bad ? " bad" : ""}`;
+    div.innerHTML = `<div class="k">${s.k}</div><div class="v">${s.v}</div>`;
+    root.appendChild(div);
+  }
+}
+
+function renderNetHistory(data) {
+  const root = el("systemHistory");
+  if (!root) return;
+  root.innerHTML = "";
+
+  if (!data || !data.configured) {
+    root.innerHTML = `<div class="stat"><div class="k">Historique réseau</div><div class="v">qBittorrent non configuré</div></div>`;
+    return;
+  }
+
+  const samples = data.samples || 0;
+  if (samples < 2) {
+    root.innerHTML = `<div class="stat"><div class="k">Historique réseau</div><div class="v">Collecte en cours… (${samples} échantillon${samples > 1 ? "s" : ""})</div></div>`;
+    return;
+  }
+
+  const fmt = (b) => {
+    if (b == null) return "—";
+    const n = Number(b);
+    if (!Number.isFinite(n)) return "—";
+    if (n >= 1e12) return `${(n / 1e12).toFixed(2)} TB`;
+    if (n >= 1e9) return `${(n / 1e9).toFixed(2)} GB`;
+    if (n >= 1e6) return `${(n / 1e6).toFixed(1)} MB`;
+    if (n >= 1e3) return `${(n / 1e3).toFixed(0)} KB`;
+    return `${n} B`;
+  };
+
+  const fmtSpan = (s) => {
+    if (!s) return "";
+    const h = Math.round(s / 3600);
+    if (h < 24) return `(${h}h de données)`;
+    const d = (h / 24).toFixed(1);
+    return `(${d}j de données)`;
+  };
+
+  const h24 = data.last24h;
+  const d7 = data.last7d;
+
+  const stats = [];
+  if (h24) {
+    stats.push({ k: `Upload 24h ${fmtSpan(h24.spanSeconds)}`, v: `↑ ${fmt(h24.uploadBytes)}` });
+    stats.push({ k: `Download 24h`, v: `↓ ${fmt(h24.downloadBytes)}` });
+  } else {
+    stats.push({ k: "Upload 24h", v: "Pas encore assez de données" });
+  }
+  if (d7) {
+    stats.push({ k: `Upload 7 jours ${fmtSpan(d7.spanSeconds)}`, v: `↑ ${fmt(d7.uploadBytes)}` });
+    stats.push({ k: `Download 7 jours`, v: `↓ ${fmt(d7.downloadBytes)}` });
+  } else {
+    stats.push({ k: "Upload 7 jours", v: "Pas encore assez de données" });
+  }
+
+  if (data.current) {
+    stats.push({ k: "Upload total (alltime)", v: `↑ ${fmt(data.current.ul)}` });
+    stats.push({ k: "Download total (alltime)", v: `↓ ${fmt(data.current.dl)}` });
+  }
+
+  for (const s of stats) {
+    const div = document.createElement("div");
+    div.className = "stat";
     div.innerHTML = `<div class="k">${s.k}</div><div class="v">${s.v}</div>`;
     root.appendChild(div);
   }
@@ -1291,6 +1375,10 @@ async function refreshAll() {
       .then((sys) => renderSystem(sys))
       .catch(() => renderSystem(null)),
 
+    sysViewMode === "history"
+      ? jget("/api/network/history").then(renderNetHistory).catch(() => renderNetHistory(null))
+      : Promise.resolve(),
+
     jget("/api/weather")
       .then((w) => renderWeather(w))
       .catch(() => renderWeather(null)),
@@ -1322,6 +1410,7 @@ async function main() {
   setupServicesModal();
   setupLegendModal();
   setupWeatherModal();
+  setupSysToggle();
 
   try {
     const meta = await jget("/api/meta");

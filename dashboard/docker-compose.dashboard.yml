@@ -14,9 +14,14 @@ services:
     volumes:
       # ton disque externe (lsblk -> /mnt/medias)
       - ${MEDIA_MOUNT_PATH:-/mnt/medias}:/mnt/medias:ro
+      # persistance des données internes (historique réseau, etc.)
+      - dashboard-data:/data
     networks:
       - media-net
     restart: unless-stopped
+
+volumes:
+  dashboard-data:
 
 networks:
   media-net:

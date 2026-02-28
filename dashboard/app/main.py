@@ -6,6 +6,9 @@ import shutil
 import socket
 import time
 import logging
+import json as _json
+import asyncio
+import threading
 from pathlib import Path
 from typing import Any, Literal
 
@@ -28,6 +31,131 @@ STATIC_DIR = Path(__file__).resolve().parents[1] / "static"
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 log = logging.getLogger("uvicorn.error")
+
+# ──── Network history (qBittorrent alltime upload/download) ────
+_NET_HISTORY_FILE = Path("/data/net_history.json")
+_NET_HISTORY_LOCK = threading.Lock()
+_NET_HISTORY: list[dict[str, Any]] = []
+_NET_HISTORY_MAX = 2016  # ~7 days at 5-min intervals
+
+
+def _load_net_history() -> None:
+    global _NET_HISTORY
+    try:
+        if _NET_HISTORY_FILE.exists():
+            raw = _json.loads(_NET_HISTORY_FILE.read_text("utf-8"))
+            if isinstance(raw, list):
+                _NET_HISTORY = raw[-_NET_HISTORY_MAX:]
+                log.info("net_history loaded %d samples from %s", len(_NET_HISTORY), _NET_HISTORY_FILE)
+                return
+    except Exception as e:
+        log.warning("net_history load failed: %s", e)
+    _NET_HISTORY = []
+
+
+def _save_net_history() -> None:
+    try:
+        _NET_HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
+        _NET_HISTORY_FILE.write_text(_json.dumps(_NET_HISTORY[-_NET_HISTORY_MAX:]), "utf-8")
+    except Exception as e:
+        log.warning("net_history save failed: %s", e)
+
+
+async def _sample_qb_alltime() -> None:
+    """Fetch qBittorrent alltime_ul / alltime_dl and append to history."""
+    if not (settings.qbittorrent_url and settings.qbittorrent_username and settings.qbittorrent_password):
+        return
+    base = settings.qbittorrent_url
+    try:
+        async with httpx.AsyncClient(timeout=8) as client:
+            await _qb_login(client, base, settings.qbittorrent_username, settings.qbittorrent_password)
+            r = await client.get(f"{base.rstrip('/')}/api/v2/sync/maindata")
+            if r.status_code >= 400:
+                return
+            data: Any = r.json()
+            if not isinstance(data, dict):
+                return
+            ss = data.get("server_state")
+            if not isinstance(ss, dict):
+                return
+            alltime_ul = ss.get("alltime_ul")
+            alltime_dl = ss.get("alltime_dl")
+            if alltime_ul is None and alltime_dl is None:
+                return
+            sample = {
+                "t": time.time(),
+                "ul": int(alltime_ul or 0),
+                "dl": int(alltime_dl or 0),
+            }
+            with _NET_HISTORY_LOCK:
+                _NET_HISTORY.append(sample)
+                if len(_NET_HISTORY) > _NET_HISTORY_MAX:
+                    _NET_HISTORY[:] = _NET_HISTORY[-_NET_HISTORY_MAX:]
+                _save_net_history()
+    except Exception as e:
+        log.debug("net_history sample failed: %s", e)
+
+
+async def _net_history_loop() -> None:
+    """Background loop: sample every 5 minutes."""
+    while True:
+        try:
+            await _sample_qb_alltime()
+        except Exception:
+            pass
+        await asyncio.sleep(300)
+
+
+@app.on_event("startup")
+async def _startup_net_history() -> None:
+    _load_net_history()
+    asyncio.create_task(_net_history_loop())
+
+
+@app.get("/api/network/history")
+def network_history() -> dict[str, Any]:
+    """
+    Return network upload/download deltas for the last 24h and 7 days,
+    based on qBittorrent alltime counters sampled every 5 minutes.
+    """
+    now = time.time()
+    t_24h = now - 86400
+    t_7d = now - 7 * 86400
+
+    with _NET_HISTORY_LOCK:
+        if len(_NET_HISTORY) < 2:
+            return {"configured": bool(settings.qbittorrent_url), "samples": len(_NET_HISTORY)}
+
+        latest = _NET_HISTORY[-1]
+
+        def _closest(target_t: float) -> dict[str, Any] | None:
+            best: dict[str, Any] | None = None
+            best_diff = float("inf")
+            for s in _NET_HISTORY:
+                d = abs(s["t"] - target_t)
+                if d < best_diff:
+                    best_diff = d
+                    best = s
+            return best
+
+        s_24h = _closest(t_24h)
+        s_7d = _closest(t_7d)
+
+    def _delta(old: dict[str, Any] | None, new: dict[str, Any]) -> dict[str, Any] | None:
+        if old is None:
+            return None
+        span_s = max(1, new["t"] - old["t"])
+        ul = max(0, new["ul"] - old["ul"])
+        dl = max(0, new["dl"] - old["dl"])
+        return {"uploadBytes": ul, "downloadBytes": dl, "spanSeconds": span_s}
+
+    return {
+        "configured": True,
+        "samples": len(_NET_HISTORY),
+        "last24h": _delta(s_24h, latest),
+        "last7d": _delta(s_7d, latest),
+        "current": {"ul": latest["ul"], "dl": latest["dl"], "t": latest["t"]},
+    }
 
 
 _NET_LAST: dict[str, float] = {}

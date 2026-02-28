@@ -79,8 +79,14 @@
         </section>
 
         <section class="card system">
-          <h2>Système</h2>
+          <div class="cardTitleRow">
+            <h2>Système</h2>
+            <button id="sysToggleBtn" class="iconBtn addMediaBtn" aria-label="Basculer live / historique" type="button">
+              <span class="icon">📊</span>
+            </button>
+          </div>
           <div id="systemStats" class="system-grid"></div>
+          <div id="systemHistory" class="system-grid hidden"></div>
         </section>
 
         <section class="card library">
