@@ -226,17 +226,17 @@ services:
   # =========================
   # Tools
   # =========================
-  huntarr:
-    image: huntarr/huntarr:latest
-    container_name: huntarr
+  autobrr:
+    image: ghcr.io/autobrr/autobrr:latest
+    container_name: autobrr
     networks:
       - media-net
     ports:
-      - 9705:9705
+      - 7474:7474
     depends_on:
       - sonarr
       - radarr
-      - prowlarr
+      - qbittorrent
     security_opt:
       - no-new-privileges:true
     environment:
@@ -244,7 +244,7 @@ services:
       - PGID=1000
       - TZ=Europe/Paris
     volumes:
-      - ./config/huntarr:/config
+      - ./config/autobrr:/config
     restart: unless-stopped
 
   watcharr:
