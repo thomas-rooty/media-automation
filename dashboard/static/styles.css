@@ -779,6 +779,9 @@ a.btn:active{
   display:grid;
   grid-template-columns: 1fr 1fr;
   gap:10px;
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
 }
 
 /* Library card: keep titles readable and not too tall */
@@ -919,9 +922,126 @@ a.btn:active{
 
 /* Tablet landscape tweaks */
 @media (max-width: 1100px){
-  .grid{grid-template-columns: 1fr; grid-auto-rows:auto; }
+  body{overflow:auto; overflow-x:hidden;}
+  .app{height:auto; min-height:100%;}
+  .grid{grid-template-columns:1fr; grid-auto-rows:auto; flex:none;}
   .sonarr,.radarr-upcoming,.qb,.jelly,.system,.library{grid-column:auto;grid-row:auto}
+  .list{max-height:50vh;}
   .link-grid{grid-template-columns: repeat(3, 1fr);}
   .media-grid{grid-template-columns: repeat(2, 1fr);}
-  .system-grid{grid-template-columns: 1fr;}
+  .system-grid{grid-template-columns:1fr; max-height:45vh;}
+}
+
+/* Phone portrait */
+@media (max-width: 600px){
+  .app{padding:12px 10px; gap:10px;}
+
+  /* ── Header ── */
+  header{flex-direction:column; align-items:stretch; gap:8px;}
+  .title{width:100%;}
+  .titleRow{flex-wrap:wrap; gap:6px;}
+  .title h1{font-size:20px;}
+  .clockInline{gap:8px;}
+  .clockInline .time{font-size:18px;}
+  .clockInline #clockDate{font-size:12px;}
+  .sub{flex-wrap:wrap; gap:6px; font-size:12px;}
+  .pill{padding:5px 8px; font-size:12px; gap:6px;}
+  .headerRight{width:100%; justify-content:space-between;}
+  .weatherPill{min-width:0; height:40px; padding:0 10px; flex:1 1 0;}
+  .weatherLabel{max-width:90px; font-size:12px;}
+  .iconBtn{width:40px; height:40px; font-size:16px; border-radius:12px;}
+
+  /* ── Grid layout ── */
+  .grid{gap:10px;}
+
+  /* ── Cards ── */
+  .card{padding:10px; border-radius:14px;}
+  .card h2{font-size:14px; letter-spacing:.4px; margin-bottom:8px;}
+  .cardTitleRow{margin-bottom:8px; gap:8px;}
+  .addMediaBtn{width:34px; height:34px; border-radius:10px; font-size:14px;}
+
+  /* ── Lists ── */
+  .list{max-height:45vh; gap:8px;}
+
+  /* ── Rows ── */
+  .row{padding:8px 10px; border-radius:12px; gap:8px;}
+  .row .primary{font-size:14px;}
+  .row .secondary{font-size:12px;}
+  .meta{min-width:80px; font-size:12px;}
+
+  /* ── Jellyfin media grid ── */
+  .media-grid{grid-template-columns:1fr; gap:8px;}
+  .media{height:88px; padding:8px; border-radius:12px;}
+  .poster{width:56px; flex:0 0 56px; border-radius:8px;}
+  .media .txt .name{font-size:14px;}
+  .media .txt .sub{font-size:12px;}
+  .miniTag{padding:3px 6px; font-size:11px;}
+
+  /* ── Tags & badges ── */
+  .tag{padding:4px 8px; font-size:12px;}
+  .badges{gap:6px; margin-top:4px;}
+
+  /* ── Progress bar ── */
+  .progress{height:8px; margin-top:4px;}
+
+  /* ── System card ── */
+  .stat{padding:8px 10px; border-radius:12px;}
+  .stat .k{font-size:12px; margin-bottom:4px;}
+  .stat .v{font-size:15px;}
+
+  /* ── Import box ── */
+  .importBox{max-height:170px; padding:8px 10px; border-radius:12px;}
+
+  /* ── Section headers ── */
+  .sectionRow{font-size:11px; padding:4px 2px 2px;}
+
+  /* ── Link grid (panel) ── */
+  .link-grid{grid-template-columns:repeat(2, 1fr); gap:8px;}
+  a.btn{padding:12px 10px; font-size:14px; border-radius:12px;}
+
+  /* ── Slide-out panel ── */
+  .panel{width:100vw; padding:12px; gap:12px;}
+  .panelTitle{font-size:14px;}
+  .panelLinks{grid-template-columns:repeat(2, 1fr);}
+
+  /* ── Modals ── */
+  .modal{left:6px; right:6px; top:24px; padding:12px; max-height:85vh; border-radius:14px;}
+  .modalTitle{font-size:14px;}
+  .modalList{max-height:70vh;}
+  .serviceRow{padding:10px 12px; border-radius:12px; gap:8px;}
+  .serviceName{font-size:14px;}
+  .serviceDetail{font-size:12px;}
+
+  /* ── Weather modal ── */
+  #weatherModal{left:6px; right:6px; max-height:85vh;}
+  .wxHourly{grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px;}
+  .wxHour{min-height:78px; padding:8px;}
+  .wxHour .i{font-size:16px;}
+  .wxHour .c{font-size:13px;}
+  .wxSummary{padding:10px 12px; border-radius:12px;}
+  .wxBigTemp{font-size:18px;}
+  .wxBigIcon{font-size:22px;}
+  .wxSmall{font-size:12px;}
+
+  /* ── Add media modal ── */
+  .addRow{grid-template-columns:1fr; gap:8px;}
+  .textInput{height:44px; font-size:15px; border-radius:12px;}
+  .typeBtn{height:36px; font-size:13px; border-radius:12px;}
+  .addTypeRow{gap:8px;}
+  .choiceBtn{padding:12px 10px; font-size:14px; border-radius:12px;}
+
+  /* ── Season grid ── */
+  .seasonGrid{grid-template-columns:repeat(3, minmax(0, 1fr)); gap:8px;}
+  .seasonChip{height:38px; border-radius:12px; font-size:13px;}
+  .seasonActions #seasonHint{font-size:12px; max-width:60%;}
+  .seasonReqBtn{width:100px; height:32px; font-size:12px; border-radius:10px;}
+
+  /* ── Refresh choices ── */
+  .refreshChoices{grid-template-columns:1fr; gap:8px;}
+
+  /* ── Scan pill ── */
+  .scanPill{font-size:11px; padding:4px 8px;}
+
+  /* ── Dot indicator ── */
+  .dot{width:8px; height:8px;}
 }
