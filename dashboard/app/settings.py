@@ -37,6 +37,36 @@ class Settings(BaseSettings):
     jellyseerr_url: str | None = None  # e.g. http://jellyseerr:5055
     jellyseerr_api_key: str | None = None
 
+    # Prowlarr
+    prowlarr_url: str | None = None  # e.g. http://prowlarr:9696
+
+    # Bazarr
+    bazarr_url: str | None = None  # e.g. http://bazarr:6767
+
+    # FlareSolverr
+    flaresolverr_url: str | None = None  # e.g. http://flaresolverr:8191
+
+    # Autobrr
+    autobrr_url: str | None = None  # e.g. http://autobrr:7474
+
+    # Watcharr
+    watcharr_url: str | None = None  # e.g. http://watcharr:3080
+
+    # Portainer
+    portainer_url: str | None = None  # e.g. http://portainer:9000
+
+    # Glances
+    glances_url: str | None = None  # e.g. http://glances:61208
+
+    # Dozzle
+    dozzle_url: str | None = None  # e.g. http://dozzle:8080
+
+    # Nextcloud
+    nextcloud_url: str | None = None  # e.g. http://nextcloud:80
+
+    # Gluetun (VPN control server)
+    gluetun_url: str | None = None  # e.g. http://gluetun:8000
+
     # Links (quick navigation buttons)
     # JSON string: [{"label":"Jellyfin","url":"http://192.168.1.10:8096"}, ...]
     links_json: str = "[]"

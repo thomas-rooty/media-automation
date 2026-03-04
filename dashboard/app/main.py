@@ -1515,77 +1515,186 @@ async def jellyfin_refresh_library() -> dict[str, Any]:
     return {"ok": True}
 
 
+async def _status_simple(name: str, url: str | None, path: str = "/", version_key: str | None = None) -> ServiceStatus:
+    """Generic health check: GET url+path, optionally extract version from JSON response."""
+    if not url:
+        return ServiceStatus(name, False, "not configured")
+    full = f"{url.rstrip('/')}{path}"
+    try:
+        async with httpx.AsyncClient(timeout=5, follow_redirects=True) as client:
+            r = await client.get(full)
+            if r.status_code >= 400:
+                return ServiceStatus(name, False, f"http {r.status_code}")
+            if version_key:
+                try:
+                    data = r.json()
+                    ver = data.get(version_key) if isinstance(data, dict) else None
+                    return ServiceStatus(name, True, f"v{ver}" if ver else "ok")
+                except Exception:
+                    pass
+            return ServiceStatus(name, True, "ok")
+    except Exception as exc:
+        return ServiceStatus(name, False, str(exc)[:80])
+
+
+async def _status_arr(name: str, url: str | None, api_key: str | None, api_ver: str = "v3") -> ServiceStatus:
+    """Health check for *arr apps (Sonarr, Radarr, Prowlarr)."""
+    if not (url and api_key):
+        return ServiceStatus(name, False, "not configured")
+    full = f"{url.rstrip('/')}/api/{api_ver}/system/status"
+    try:
+        async with httpx.AsyncClient(timeout=5) as client:
+            r = await client.get(full, headers={"X-Api-Key": api_key})
+            if r.status_code >= 400:
+                return ServiceStatus(name, False, f"http {r.status_code}")
+            data = r.json()
+            ver = data.get("version")
+            return ServiceStatus(name, True, f"v{ver}" if ver else "ok")
+    except Exception as exc:
+        return ServiceStatus(name, False, str(exc)[:80])
+
+
 async def _status_sonarr() -> ServiceStatus:
-    if not (settings.sonarr_url and settings.sonarr_api_key):
-        return ServiceStatus("Sonarr", False, "not configured")
-    url = f"{settings.sonarr_url.rstrip('/')}/api/v3/system/status"
-    async with httpx.AsyncClient(timeout=5) as client:
-        r = await client.get(url, headers={"X-Api-Key": settings.sonarr_api_key})
-        if r.status_code >= 400:
-            return ServiceStatus("Sonarr", False, f"http {r.status_code}")
-        data = r.json()
-        ver = data.get("version")
-        return ServiceStatus("Sonarr", True, f"v{ver}" if ver else "ok")
+    return await _status_arr("Sonarr", settings.sonarr_url, settings.sonarr_api_key)
 
 
 async def _status_radarr() -> ServiceStatus:
-    if not (settings.radarr_url and settings.radarr_api_key):
-        return ServiceStatus("Radarr", False, "not configured")
-    url = f"{settings.radarr_url.rstrip('/')}/api/v3/system/status"
-    async with httpx.AsyncClient(timeout=5) as client:
-        r = await client.get(url, headers={"X-Api-Key": settings.radarr_api_key})
-        if r.status_code >= 400:
-            return ServiceStatus("Radarr", False, f"http {r.status_code}")
-        data = r.json()
-        ver = data.get("version")
-        return ServiceStatus("Radarr", True, f"v{ver}" if ver else "ok")
+    return await _status_arr("Radarr", settings.radarr_url, settings.radarr_api_key)
+
+
+async def _status_prowlarr() -> ServiceStatus:
+    if not settings.prowlarr_url:
+        return ServiceStatus("Prowlarr", False, "not configured")
+    if settings.prowlarr_api_key:
+        return await _status_arr("Prowlarr", settings.prowlarr_url, settings.prowlarr_api_key, api_ver="v1")
+    return await _status_simple("Prowlarr", settings.prowlarr_url, "/ping")
 
 
 async def _status_jellyfin() -> ServiceStatus:
     if not settings.jellyfin_url:
         return ServiceStatus("Jellyfin", False, "not configured")
     url = f"{settings.jellyfin_url.rstrip('/')}/System/Info/Public"
-    async with httpx.AsyncClient(timeout=5) as client:
-        r = await client.get(url)
-        if r.status_code >= 400:
-            return ServiceStatus("Jellyfin", False, f"http {r.status_code}")
-        try:
-            data = r.json()
-        except Exception:
-            ct = (r.headers.get("content-type") or "").strip()
-            return ServiceStatus("Jellyfin", False, f"invalid json ({ct or 'unknown'})")
-        ver = data.get("Version")
-        return ServiceStatus("Jellyfin", True, f"v{ver}" if ver else "ok")
+    try:
+        async with httpx.AsyncClient(timeout=5) as client:
+            r = await client.get(url)
+            if r.status_code >= 400:
+                return ServiceStatus("Jellyfin", False, f"http {r.status_code}")
+            try:
+                data = r.json()
+            except Exception:
+                ct = (r.headers.get("content-type") or "").strip()
+                return ServiceStatus("Jellyfin", False, f"invalid json ({ct or 'unknown'})")
+            ver = data.get("Version")
+            return ServiceStatus("Jellyfin", True, f"v{ver}" if ver else "ok")
+    except Exception as exc:
+        return ServiceStatus("Jellyfin", False, str(exc)[:80])
 
 
 async def _status_qb() -> ServiceStatus:
     if not (settings.qbittorrent_url and settings.qbittorrent_username and settings.qbittorrent_password):
         return ServiceStatus("qBittorrent", False, "not configured")
     base = settings.qbittorrent_url
-    async with httpx.AsyncClient(timeout=5) as client:
-        try:
-            await _qb_login(client, base, settings.qbittorrent_username, settings.qbittorrent_password)
-        except HTTPException as e:
-            return ServiceStatus("qBittorrent", False, str(e.detail))
-        r = await client.get(f"{base.rstrip('/')}/api/v2/app/version")
-        if r.status_code >= 400:
-            return ServiceStatus("qBittorrent", False, f"http {r.status_code}")
-        return ServiceStatus("qBittorrent", True, f"v{r.text.strip()}" if r.text else "ok")
+    try:
+        async with httpx.AsyncClient(timeout=5) as client:
+            try:
+                await _qb_login(client, base, settings.qbittorrent_username, settings.qbittorrent_password)
+            except HTTPException as e:
+                return ServiceStatus("qBittorrent", False, str(e.detail))
+            r = await client.get(f"{base.rstrip('/')}/api/v2/app/version")
+            if r.status_code >= 400:
+                return ServiceStatus("qBittorrent", False, f"http {r.status_code}")
+            return ServiceStatus("qBittorrent", True, f"v{r.text.strip()}" if r.text else "ok")
+    except Exception as exc:
+        return ServiceStatus("qBittorrent", False, str(exc)[:80])
+
+
+async def _status_jellyseerr() -> ServiceStatus:
+    if not settings.jellyseerr_url:
+        return ServiceStatus("Jellyseerr", False, "not configured")
+    url = f"{settings.jellyseerr_url.rstrip('/')}/api/v1/status"
+    headers = {"X-Api-Key": settings.jellyseerr_api_key} if settings.jellyseerr_api_key else {}
+    try:
+        async with httpx.AsyncClient(timeout=5) as client:
+            r = await client.get(url, headers=headers)
+            if r.status_code >= 400:
+                return ServiceStatus("Jellyseerr", False, f"http {r.status_code}")
+            try:
+                data = r.json()
+                ver = data.get("version")
+                return ServiceStatus("Jellyseerr", True, f"v{ver}" if ver else "ok")
+            except Exception:
+                return ServiceStatus("Jellyseerr", True, "ok")
+    except Exception as exc:
+        return ServiceStatus("Jellyseerr", False, str(exc)[:80])
+
+
+async def _status_bazarr() -> ServiceStatus:
+    return await _status_simple("Bazarr", settings.bazarr_url, "/api/system/health")
+
+
+async def _status_flaresolverr() -> ServiceStatus:
+    if not settings.flaresolverr_url:
+        return ServiceStatus("FlareSolverr", False, "not configured")
+    return await _status_simple("FlareSolverr", settings.flaresolverr_url, "/health", version_key="version")
+
+
+async def _status_autobrr() -> ServiceStatus:
+    return await _status_simple("Autobrr", settings.autobrr_url, "/api/healthz/liveness")
+
+
+async def _status_watcharr() -> ServiceStatus:
+    return await _status_simple("Watcharr", settings.watcharr_url)
+
+
+async def _status_portainer() -> ServiceStatus:
+    if not settings.portainer_url:
+        return ServiceStatus("Portainer", False, "not configured")
+    return await _status_simple("Portainer", settings.portainer_url, "/api/status", version_key="Version")
+
+
+async def _status_glances() -> ServiceStatus:
+    return await _status_simple("Glances", settings.glances_url, "/api/4/quicklook")
+
+
+async def _status_dozzle() -> ServiceStatus:
+    return await _status_simple("Dozzle", settings.dozzle_url, "/healthcheck")
+
+
+async def _status_nextcloud() -> ServiceStatus:
+    if not settings.nextcloud_url:
+        return ServiceStatus("Nextcloud", False, "not configured")
+    return await _status_simple("Nextcloud", settings.nextcloud_url, "/status.php", version_key="versionstring")
+
+
+async def _status_gluetun() -> ServiceStatus:
+    return await _status_simple("Gluetun (VPN)", settings.gluetun_url, "/v1/openvpn/status")
 
 
 @app.get("/api/status")
 async def status() -> JSONResponse:
-    sonarr_s, radarr_s, qb_s, jelly_s = (
-        await _status_sonarr(),
-        await _status_radarr(),
-        await _status_qb(),
-        await _status_jellyfin(),
-    )
-    items = [sonarr_s, radarr_s, qb_s, jelly_s]
+    checks = [
+        _status_sonarr(),
+        _status_radarr(),
+        _status_prowlarr(),
+        _status_qb(),
+        _status_jellyfin(),
+        _status_jellyseerr(),
+        _status_bazarr(),
+        _status_flaresolverr(),
+        _status_autobrr(),
+        _status_watcharr(),
+        _status_portainer(),
+        _status_glances(),
+        _status_dozzle(),
+        _status_nextcloud(),
+        _status_gluetun(),
+    ]
+    results: list[ServiceStatus] = await asyncio.gather(*checks)
+    configured = [x for x in results if x.detail != "not configured"]
     return JSONResponse(
         {
-            "ok": all(x.ok for x in items if x.detail != "not configured"),
-            "items": [{"name": x.name, "ok": x.ok, "detail": x.detail} for x in items],
+            "ok": all(x.ok for x in configured) if configured else False,
+            "items": [{"name": x.name, "ok": x.ok, "detail": x.detail} for x in results if x.detail != "not configured"],
         }
     )
 

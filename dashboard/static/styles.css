@@ -934,6 +934,10 @@ a.btn:active{
 
 /* Phone portrait */
 @media (max-width: 600px){
+  body{
+    background:#0c1118;
+  }
+  body::before, body::after{display:none;}
   .app{padding:12px 10px; gap:10px;}
 
   /* ── Header ── */
