@@ -54,9 +54,8 @@ services:
       - WEBUI_PORT=8080
     volumes:
       - ./config/qbittorrent:/config
-      - ./downloads:/downloads
+      - /mnt/medias/torrents:/downloads
     restart: unless-stopped
-    # pas de ports ici (hérite de gluetun)
 
   # =========================
   # Indexers (hors VPN pour éviter Cloudflare)
@@ -122,9 +121,8 @@ services:
       - TZ=Europe/Paris
     volumes:
       - ./config/sonarr:/config
-      - ./downloads:/downloads
-      - ./media/Series:/series
-      - "/mnt/medias/Medias/Series:/media/series_f"
+      - /mnt/medias/torrents:/downloads
+      - /mnt/medias/Medias/Series:/series
     restart: unless-stopped
 
   radarr:
@@ -145,9 +143,8 @@ services:
       - TZ=Europe/Paris
     volumes:
       - ./config/radarr:/config
-      - ./downloads:/downloads
-      - ./media/Movies:/movies
-      - "/mnt/medias/Medias/Movies:/media/movies_f"
+      - /mnt/medias/torrents:/downloads
+      - /mnt/medias/Medias/Movies:/movies
     restart: unless-stopped
 
   bazarr:
@@ -168,10 +165,8 @@ services:
       - TZ=Europe/Paris
     volumes:
       - ./config/bazarr:/config
-      - ./media/Movies:/movies
-      - ./media/Series:/series
-      - "/mnt/medias/Medias/Movies:/media/movies_f"
-      - "/mnt/medias/Medias/Series:/media/series_f"
+      - /mnt/medias/Medias/Movies:/movies
+      - /mnt/medias/Medias/Series:/series
     restart: unless-stopped
 
   # =========================
@@ -214,10 +209,8 @@ services:
     volumes:
       - ./config/jellyfin:/config
       - ./cache/jellyfin:/cache
-      - ./media/Movies:/movies
-      - ./media/Series:/series
-      - "/mnt/medias/Medias/Movies:/media/movies_f"
-      - "/mnt/medias/Medias/Series:/media/series_f"
+      - /mnt/medias/Medias/Movies:/movies
+      - /mnt/medias/Medias/Series:/series
     depends_on:
       - sonarr
       - radarr
