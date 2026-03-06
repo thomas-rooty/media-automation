@@ -18,14 +18,11 @@ services:
       - WIREGUARD_PRESHARED_KEY=${AIRVPN_PRESHARED_KEY}
       - WIREGUARD_ADDRESSES=${AIRVPN_ADDRESS}
 
-      # AirVPN endpoint générique
-      - SERVER_HOSTNAMES=${AIRVPN_HOSTNAME}
+      - SERVER_COUNTRIES=Germany
 
-      # port torrent
       - FIREWALL_VPN_INPUT_PORTS=10032
       - FIREWALL_INPUT_PORTS=10032
 
-      # performances
       - DOT=off
       - DNS_ADDRESS=1.1.1.1
       - MTU=1320
