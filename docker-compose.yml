@@ -19,7 +19,7 @@ services:
       - WIREGUARD_ADDRESSES=${AIRVPN_ADDRESS}
 
       # AirVPN endpoint générique
-      - SERVER_REGIONS=Europe
+      - SERVER_HOSTNAMES=${AIRVPN_HOSTNAME}
 
       # port torrent
       - FIREWALL_VPN_INPUT_PORTS=10032
