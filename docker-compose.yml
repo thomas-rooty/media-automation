@@ -20,7 +20,7 @@ services:
 
     ports:
       - 8080:8080
-      - 10032:10032
+      - 10032:10032/tcp
       - 10032:10032/udp
 
     restart: unless-stopped
