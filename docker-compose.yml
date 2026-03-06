@@ -13,9 +13,9 @@ services:
       - /dev/net/tun:/dev/net/tun
 
     environment:
-      - VPN_SERVICE_PROVIDER=airvpn
+      - VPN_SERVICE_PROVIDER=custom
       - VPN_TYPE=openvpn
-      - OPENVPN_CUSTOM_CONFIG=/gluetun/openvpn/airvpn.ovpn
+      - OPENVPN_CUSTOM_CONFIG=/gluetun/airvpn.ovpn
       - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
 
     volumes:
