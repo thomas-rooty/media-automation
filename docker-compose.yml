@@ -13,14 +13,24 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=airvpn
       - VPN_TYPE=wireguard
+
       - WIREGUARD_PRIVATE_KEY=${AIRVPN_PRIVATE_KEY}
       - WIREGUARD_PRESHARED_KEY=${AIRVPN_PRESHARED_KEY}
       - WIREGUARD_ADDRESSES=${AIRVPN_ADDRESS}
-      - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
+
+      # AirVPN endpoint générique
+      - SERVER_REGIONS=Europe
+
+      # port torrent
+      - FIREWALL_VPN_INPUT_PORTS=10032
       - FIREWALL_INPUT_PORTS=10032
-      - SERVER_COUNTRIES=netherlands
+
+      # performances
+      - DOT=off
+      - DNS_ADDRESS=1.1.1.1,9.9.9.9
+      - MTU=1320
+
       - TZ=Europe/Paris
-      - VPN_ENDPOINT_PORT=1637
 
     volumes:
       - ./config/gluetun:/gluetun
