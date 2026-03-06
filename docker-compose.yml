@@ -6,6 +6,8 @@ services:
     image: qmcgaw/gluetun:latest
     container_name: gluetun
 
+    network_mode: "host"
+
     cap_add:
       - NET_ADMIN
 
@@ -18,15 +20,7 @@ services:
     env_file:
       - .env
 
-    ports:
-      - 8080:8080
-      - 10032:10032/tcp
-      - 10032:10032/udp
-
     restart: unless-stopped
-
-    networks:
-      - media-net
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
