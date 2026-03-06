@@ -5,26 +5,22 @@ services:
   gluetun:
     image: qmcgaw/gluetun:latest
     container_name: gluetun
-  
+
     cap_add:
       - NET_ADMIN
-    security_opt:
-      - no-new-privileges:true
-    environment:
-      - VPN_SERVICE_PROVIDER=private internet access
-      - VPN_TYPE=openvpn
-      - OPENVPN_USER=${OPENVPN_USER}
-      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
-      - SERVER_REGIONS=france,netherlands,germany
-      - VPN_PORT_FORWARDING=on
-      - VPN_PORT_FORWARDING_PROVIDER=private internet access
-      - VPN_INPUT_PORTS=8080
-      - FIREWALL_INPUT_SUBNETS=192.168.1.0/24
-
-      - TZ=Europe/Paris
 
     devices:
       - /dev/net/tun:/dev/net/tun
+
+    restart: unless-stopped
+
+    networks:
+      - media-net
+
+    ports:
+      - 8080:8080        # WebUI qBittorrent
+      - 10032:10032      # port optionnel si utilisé
+      - 10032:10032/udp
 
     volumes:
       - ./config/gluetun:/gluetun
@@ -32,15 +28,28 @@ services:
     env_file:
       - .env
 
-    ports:
-      - 8080:8080
-      - 10032:10032
-      - 10032:10032/udp
+    environment:
+      - VPN_SERVICE_PROVIDER=private internet access
+      - VPN_TYPE=openvpn
 
-    restart: unless-stopped
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
 
-    networks:
-      - media-net
+      # régions rapides avec port forwarding
+      - SERVER_REGIONS=france,netherlands,germany
+
+      # Port forwarding PIA
+      - VPN_PORT_FORWARDING=on
+      - VPN_PORT_FORWARDING_PROVIDER=private internet access
+
+      # accès LAN autorisé (pour accéder au WebUI)
+      - FIREWALL_INPUT_SUBNETS=192.168.1.0/24
+
+      # timezone
+      - TZ=Europe/Paris
+
+    security_opt:
+      - no-new-privileges:true
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
