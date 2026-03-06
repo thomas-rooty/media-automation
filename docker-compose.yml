@@ -12,15 +12,11 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
 
-    environment:
-      - VPN_SERVICE_PROVIDER=custom
-      - VPN_TYPE=openvpn
-      - OPENVPN_CUSTOM_CONFIG=/gluetun/airvpn.ovpn
-      - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
-      - VPN_INTERFACE_MTU=1380
-      
     volumes:
       - ./config/gluetun:/gluetun
+
+    env_file:
+      - .env
 
     ports:
       - 8080:8080
@@ -28,6 +24,7 @@ services:
       - 10032:10032/udp
 
     restart: unless-stopped
+
     networks:
       - media-net
 
