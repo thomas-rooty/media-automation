@@ -17,7 +17,8 @@ services:
       - VPN_TYPE=openvpn
       - OPENVPN_CUSTOM_CONFIG=/gluetun/airvpn.ovpn
       - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
-
+      - VPN_INTERFACE_MTU=1380
+      
     volumes:
       - ./config/gluetun:/gluetun
 
