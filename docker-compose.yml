@@ -15,18 +15,11 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=airvpn
       - VPN_TYPE=wireguard
-
+      - SERVER_COUNTRIES=Netherlands
       - WIREGUARD_PRIVATE_KEY=${AIRVPN_PRIVATE_KEY}
       - WIREGUARD_PRESHARED_KEY=${AIRVPN_PRESHARED_KEY}
-      - WIREGUARD_ADDRESSES=${AIRVPN_ADDRESS}
-
-      - SERVER_COUNTRIES=Germany
-
+      - WIREGUARD_ADDRESSES=${AIRVPN_ADDRESSES}
       - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
-      - FIREWALL_OUTBOUND_SUBNETS=192.168.1.0/24
-
-      - DOT=off
-      - TZ=Europe/Paris
 
     volumes:
       - ./config/gluetun:/gluetun
