@@ -5,10 +5,12 @@ services:
   gluetun:
     image: qmcgaw/gluetun:latest
     container_name: gluetun
+
     cap_add:
       - NET_ADMIN
-    security_opt:
-      - no-new-privileges:true
+
+    devices:
+      - /dev/net/tun:/dev/net/tun
 
     environment:
       - VPN_SERVICE_PROVIDER=airvpn
@@ -21,6 +23,7 @@ services:
       - SERVER_COUNTRIES=Germany
 
       - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
+      - FIREWALL_OUTBOUND_SUBNETS=192.168.1.0/24
 
       - DOT=off
       - TZ=Europe/Paris
