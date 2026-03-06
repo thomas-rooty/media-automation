@@ -6,8 +6,6 @@ services:
     image: qmcgaw/gluetun:latest
     container_name: gluetun
 
-    network_mode: "host"
-
     cap_add:
       - NET_ADMIN
 
@@ -19,6 +17,13 @@ services:
 
     env_file:
       - .env
+
+    networks:
+      - media-net
+
+    ports:
+      - 8080:8080
+      - 10032:10032
 
     restart: unless-stopped
 
