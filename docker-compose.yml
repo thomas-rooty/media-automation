@@ -23,7 +23,8 @@ services:
 
     ports:
       - 8080:8080
-      - 10032:10032
+      - 39167:39167
+      - 39167:39167/udp
 
     restart: unless-stopped
 
