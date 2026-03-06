@@ -17,7 +17,7 @@ services:
       - WIREGUARD_PRESHARED_KEY=${AIRVPN_PRESHARED_KEY}
       - WIREGUARD_ADDRESSES=${AIRVPN_ADDRESS}
       - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
-      - SERVER_COUNTRIES=netherlands
+      - SERVER_COUNTRIES=switzerland
       - TZ=Europe/Paris
 
     volumes:
