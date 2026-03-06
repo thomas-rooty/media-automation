@@ -17,7 +17,9 @@ services:
       - WIREGUARD_PRESHARED_KEY=${AIRVPN_PRESHARED_KEY}
       - WIREGUARD_ADDRESSES=${AIRVPN_ADDRESS}
       - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
-      - SERVER_COUNTRIES=switzerland
+      - SERVER_COUNTRIES=Switzerland
+      - DOT=off
+      - DNS_ADDRESS=1.1.1.1
       - TZ=Europe/Paris
 
     volumes:
