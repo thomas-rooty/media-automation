@@ -15,9 +15,7 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=airvpn
       - VPN_TYPE=openvpn
-      - SERVER_COUNTRIES=Netherlands
-      - OPENVPN_USER=${AIRVPN_USERNAME}
-      - OPENVPN_PASSWORD=${AIRVPN_PASSWORD}
+      - OPENVPN_CUSTOM_CONFIG=/gluetun/openvpn/airvpn.ovpn
       - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
 
     volumes:
