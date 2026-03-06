@@ -11,19 +11,34 @@ services:
       - no-new-privileges:true
     environment:
       - VPN_SERVICE_PROVIDER=private internet access
-      - VPN_TYPE=wireguard
-      - WIREGUARD_USER=${OPENVPN_USER}
-      - WIREGUARD_PASSWORD=${OPENVPN_PASSWORD}
-      - SERVER_REGIONS=france,netherlands,germany
+      - VPN_TYPE=openvpn
+
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+
+      # serveurs rapides pour torrent
+      - SERVER_REGIONS=france,netherlands,switzerland
+
+      # port forwarding torrent
       - VPN_PORT_FORWARDING=on
       - VPN_PORT_FORWARDING_PROVIDER=private internet access
+
+      # performance
+      - OPENVPN_MSSFIX=1450
+      - DOT=off
+
+      # accès LAN
       - FIREWALL_INPUT_SUBNETS=192.168.1.0/24
       - VPN_INPUT_PORTS=8080
+
       - TZ=Europe/Paris
+
     volumes:
       - ./config/gluetun:/gluetun
+
     ports:
       - 8080:8080
+
     restart: unless-stopped
     networks:
       - media-net
