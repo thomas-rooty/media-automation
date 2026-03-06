@@ -1,6 +1,6 @@
 services:
   # =========================
-  # VPN (uniquement pour qBittorrent)
+  # VPN (AirVPN)
   # =========================
   gluetun:
     image: qmcgaw/gluetun:latest
@@ -12,35 +12,65 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
 
+    env_file:
+      - .env
+
+    environment:
+      - VPN_SERVICE_PROVIDER=airvpn
+      - VPN_TYPE=wireguard
+      - WIREGUARD_PUBLIC_KEY=${WIREGUARD_PUBLIC_KEY}
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
+      - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
+      - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
+
+      - SERVER_REGIONS=${SERVER_REGIONS}
+
+      - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
+
+      - TZ=${TZ}
+
     volumes:
       - ./config/gluetun:/gluetun
 
-    env_file:
-      - .env
+    ports:
+      - ${WEBUI_PORT}:${WEBUI_PORT}
+      - ${AIRVPN_PORT_FORWARD}:${AIRVPN_PORT_FORWARD}
+      - ${AIRVPN_PORT_FORWARD}:${AIRVPN_PORT_FORWARD}/udp
+
+    healthcheck:
+      test: ping -c 1 1.1.1.1 || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+    restart: unless-stopped
 
     networks:
       - media-net
 
-    ports:
-      - 8080:8080
-      - 39167:39167
-      - 39167:39167/udp
 
-    restart: unless-stopped
-
+  # =========================
+  # qBittorrent (via VPN)
+  # =========================
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     network_mode: "service:gluetun"
     depends_on:
-      - gluetun
-    security_opt:
-      - no-new-privileges:true
+      gluetun:
+        condition: service_healthy
+
+    env_file:
+      - .env
+
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
-      - WEBUI_PORT=8080
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
+      - WEBUI_PORT=${WEBUI_PORT}
+      - TORRENTING_PORT=${TORRENT_PORT}
+
     volumes:
       - ./config/qbittorrent:/config
       - /mnt/medias/torrents:/downloads
