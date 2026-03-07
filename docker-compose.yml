@@ -1,7 +1,9 @@
 services:
-  # =========================
-  # VPN (AirVPN)
-  # =========================
+
+# =========================
+# VPN (AirVPN + Auto Rotation)
+# =========================
+
   gluetun:
     image: qmcgaw/gluetun:latest
     container_name: gluetun
@@ -16,17 +18,24 @@ services:
       - .env
 
     environment:
+
       - VPN_SERVICE_PROVIDER=airvpn
       - VPN_TYPE=wireguard
+
       - WIREGUARD_PUBLIC_KEY=${WIREGUARD_PUBLIC_KEY}
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
       - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
 
+      # serveur autorisés
       - SERVER_COUNTRIES=${SERVER_COUNTRIES}
-      # - SERVER_REGIONS=${SERVER_REGIONS}
-      # - SERVER_CITIES=${SERVER_CITIES}
 
+      # rotation auto serveur
+      - VPN_ENDPOINT_IP_ROTATION=on
+      - VPN_ENDPOINT_IP_ROTATION_PERIOD=24h
+
+      # firewall kill switch
+      - FIREWALL=on
       - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
 
       - TZ=${TZ}
@@ -39,25 +48,29 @@ services:
       - ${AIRVPN_PORT_FORWARD}:${AIRVPN_PORT_FORWARD}
       - ${AIRVPN_PORT_FORWARD}:${AIRVPN_PORT_FORWARD}/udp
 
+    restart: unless-stopped
+
     healthcheck:
       test: ping -c 1 1.1.1.1 || exit 1
       interval: 30s
       timeout: 10s
       retries: 5
 
-    restart: unless-stopped
-
     networks:
-      - media-net
+      - vpn-network
+      - arr-network
 
 
-  # =========================
-  # qBittorrent (via VPN)
-  # =========================
+# =========================
+# qBittorrent
+# =========================
+
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
+
     network_mode: "service:gluetun"
+
     depends_on:
       gluetun:
         condition: service_healthy
@@ -71,323 +84,224 @@ services:
       - TZ=${TZ}
 
       - WEBUI_PORT=${WEBUI_PORT}
-      - TORRENTING_PORT=${TORRENT_PORT}
+      - TORRENTING_PORT=${AIRVPN_PORT_FORWARD}
 
     volumes:
       - ./config/qbittorrent:/config
       - /mnt/medias/torrents:/downloads
+
     restart: unless-stopped
 
-  # =========================
-  # Indexers (hors VPN pour éviter Cloudflare)
-  # =========================
+
+# =========================
+# Indexers
+# =========================
+
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
+
     networks:
-      - media-net
-    depends_on:
-      - flaresolverr
+      - arr-network
+
     ports:
       - 9696:9696
-    security_opt:
-      - no-new-privileges:true
+
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
     volumes:
       - ./config/prowlarr:/config
-      - ./config/prowlarr/Definitions/Custom:/config/Definitions/Custom:ro
-    dns:
-      - 1.1.1.1
-      - 1.0.0.1
+
     restart: unless-stopped
+
 
   flaresolverr:
     image: flaresolverr/flaresolverr:latest
     container_name: flaresolverr
+
     networks:
-      - media-net
+      - arr-network
+
     expose:
       - "8191"
-    security_opt:
-      - no-new-privileges:true
+
     environment:
       - LOG_LEVEL=info
-      - TZ=Europe/Paris
-    dns:
-      - 1.1.1.1
-      - 1.0.0.1
+      - TZ=${TZ}
+
     restart: unless-stopped
 
-  # =========================
-  # Arr stack (LAN normal)
-  # =========================
+
+# =========================
+# ARR
+# =========================
+
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
+
     networks:
-      - media-net
+      - arr-network
+
     ports:
       - 8989:8989
-    depends_on:
-      - prowlarr
-      - qbittorrent
-    security_opt:
-      - no-new-privileges:true
+
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
     volumes:
       - ./config/sonarr:/config
       - /mnt/medias/torrents:/downloads
       - /mnt/medias/Medias/Series:/series
+
     restart: unless-stopped
+
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
+
     networks:
-      - media-net
+      - arr-network
+
     ports:
       - 7878:7878
-    depends_on:
-      - prowlarr
-      - qbittorrent
-    security_opt:
-      - no-new-privileges:true
+
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
     volumes:
       - ./config/radarr:/config
       - /mnt/medias/torrents:/downloads
       - /mnt/medias/Medias/Movies:/movies
+
     restart: unless-stopped
+
 
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
     container_name: bazarr
+
     networks:
-      - media-net
+      - arr-network
+
     ports:
       - 6767:6767
-    depends_on:
-      - sonarr
-      - radarr
-    security_opt:
-      - no-new-privileges:true
+
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
     volumes:
       - ./config/bazarr:/config
       - /mnt/medias/Medias/Movies:/movies
       - /mnt/medias/Medias/Series:/series
+
     restart: unless-stopped
 
-  # =========================
-  # Front / media
-  # =========================
+
+# =========================
+# Media
+# =========================
+
   jellyseerr:
     image: ghcr.io/seerr-team/seerr:latest
     container_name: jellyseerr
+
     networks:
-      - media-net
+      - media-network
+      - arr-network
+
     ports:
       - 5055:5055
-    depends_on:
-      - sonarr
-      - radarr
-    security_opt:
-      - no-new-privileges:true
-    environment:
-      - TZ=Europe/Paris
+
     volumes:
       - ./config/jellyseerr:/app/config
-    user: "1000:1000"
+
     restart: unless-stopped
+
 
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
+
     networks:
-      - media-net
+      - media-network
+
     ports:
       - 8096:8096
-      - 7359:7359/udp
-      - 1900:1900/udp
-    security_opt:
-      - no-new-privileges:true
+
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
     volumes:
       - ./config/jellyfin:/config
-      - ./cache/jellyfin:/cache
       - /mnt/medias/Medias/Movies:/movies
       - /mnt/medias/Medias/Series:/series
-    depends_on:
-      - sonarr
-      - radarr
+
     restart: unless-stopped
 
-  # =========================
-  # Tools
-  # =========================
-  autobrr:
-    image: ghcr.io/autobrr/autobrr:latest
-    container_name: autobrr
-    networks:
-      - media-net
-    ports:
-      - 7474:7474
-    depends_on:
-      - sonarr
-      - radarr
-      - qbittorrent
-    security_opt:
-      - no-new-privileges:true
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
-    volumes:
-      - ./config/autobrr:/config
-    restart: unless-stopped
 
-  watcharr:
-    image: ghcr.io/sbondco/watcharr:latest
-    container_name: watcharr
-    networks:
-      - media-net
-    ports:
-      - 3080:3080
-    security_opt:
-      - no-new-privileges:true
-    environment:
-      - TZ=Europe/Paris
-    volumes:
-      - ./config/watcharr:/data
-    restart: unless-stopped
+# =========================
+# Tools
+# =========================
 
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
+
     networks:
-      - media-net
+      - media-network
+
     ports:
       - 9443:9443
       - 9000:9000
-    security_opt:
-      - no-new-privileges:true
+
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock
       - ./config/portainer:/data
+
     restart: unless-stopped
 
-  glances:
-    image: nicolargo/glances:latest
-    container_name: glances
-    pid: "host"
-    networks:
-      - media-net
-    ports:
-      - 61208:61208
-    security_opt:
-      - no-new-privileges:true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    environment:
-      - TZ=Europe/Paris
-      - GLANCES_OPT=-w
-    restart: unless-stopped
-
-  dozzle:
-    image: amir20/dozzle:latest
-    container_name: dozzle
-    networks:
-      - media-net
-    ports:
-      - 9999:8080
-    security_opt:
-      - no-new-privileges:true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: unless-stopped
 
   watchtower:
     image: containrrr/watchtower:latest
     container_name: watchtower
+
     networks:
-      - media-net
-    security_opt:
-      - no-new-privileges:true
+      - media-network
+
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
     environment:
-      - TZ=Europe/Paris
       - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_REMOVE_VOLUMES=false
       - WATCHTOWER_POLL_INTERVAL=86400
-    restart: unless-stopped
-  
-  # =========================
-  # Nextcloud
-  # =========================
-  
-  nextcloud:
-    image: nextcloud:29
-    container_name: nextcloud
-    depends_on:
-      - nextcloud-db
-      - nextcloud-redis
-    ports:
-      - 8088:80
-    environment:
-      - TZ=Europe/Paris
-      - REDIS_HOST=nextcloud-redis
-      - MYSQL_HOST=nextcloud-db
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_PASSWORD=ncpassword
-    volumes:
-      - ./nextcloud/app:/var/www/html
-      - ./nextcloud/data:/var/www/html/data
-      - /mnt/medias/Medias:/var/www/html/data/thomas/files/Medias:ro
-      - /mnt/medias/Shares/Nextcloud:/var/www/html/data/shares:ro
-    networks:
-      - media-net
+
     restart: unless-stopped
 
-  nextcloud-db:
-    image: mariadb:10.11
-    container_name: nextcloud-db
-    environment:
-      - MYSQL_ROOT_PASSWORD=rootpassword
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_PASSWORD=ncpassword
-    volumes:
-      - ./nextcloud/db:/var/lib/mysql
-    networks:
-      - media-net
-    restart: unless-stopped
 
-  nextcloud-redis:
-    image: redis:7-alpine
-    container_name: nextcloud-redis
-    volumes:
-      - ./nextcloud/redis:/data
-    networks:
-      - media-net
-    restart: unless-stopped
+# =========================
+# Networks
+# =========================
 
 networks:
-  media-net:
+
+  vpn-network:
+    driver: bridge
+
+  arr-network:
+    driver: bridge
+
+  media-network:
     driver: bridge
