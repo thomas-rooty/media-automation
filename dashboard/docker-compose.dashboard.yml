@@ -17,15 +17,19 @@ services:
       # persistance des données internes (historique réseau, etc.)
       - dashboard-data:/data
     networks:
-      - media-net
+      - arr-network
+      - media-network
     restart: unless-stopped
 
 volumes:
   dashboard-data:
 
+# Réseaux créés par le docker-compose.yml principal (media-automation/).
+# Par défaut Docker Compose les préfixe avec le nom du projet (= nom du dossier).
 networks:
-  media-net:
+  arr-network:
     external: true
-    # compose renomme souvent le réseau en "<projet>_media-net"
-    # (par défaut: "media-automation_media-net" si ton dossier s’appelle media-automation)
-    name: ${MEDIA_NET_NAME:-media-automation_media-net}
+    name: ${COMPOSE_PROJECT:-media-automation}_arr-network
+  media-network:
+    external: true
+    name: ${COMPOSE_PROJECT:-media-automation}_media-network
