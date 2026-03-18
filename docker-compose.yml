@@ -209,6 +209,25 @@ services:
     restart: unless-stopped
 
 
+  huntarr:
+    image: huntarr/huntarr:latest
+    container_name: huntarr
+
+    networks:
+      - arr-network
+
+    ports:
+      - 9705:9705
+
+    environment:
+      - TZ=${TZ}
+
+    volumes:
+      - ./config/huntarr:/config
+
+    restart: unless-stopped
+
+
 # =========================
 # Media
 # =========================
