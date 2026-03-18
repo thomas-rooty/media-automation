@@ -209,22 +209,6 @@ services:
     restart: unless-stopped
 
 
-  fetcharr:
-    image: ghcr.io/fetcharr/fetcharr:latest
-    container_name: fetcharr
-
-    networks:
-      - arr-network
-
-    environment:
-      - TZ=${TZ}
-
-    volumes:
-      - ./config/fetcharr:/config
-
-    restart: unless-stopped
-
-
 # =========================
 # Media
 # =========================
