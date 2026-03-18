@@ -209,21 +209,21 @@ services:
     restart: unless-stopped
 
 
-  huntarr:
-    image: huntarr/huntarr:latest
-    container_name: huntarr
+  fetcharr:
+    image: egg82/fetcharr:latest
+    container_name: fetcharr
 
     networks:
       - arr-network
 
-    ports:
-      - 9705:9705
-
     environment:
       - TZ=${TZ}
-
-    volumes:
-      - ./config/huntarr:/config
+      - SEARCH_AMOUNT=5
+      - SEARCH_INTERVAL=10min
+      - SONARR_0_URL=http://sonarr:8989
+      - SONARR_0_API_KEY=${SONARR_API_KEY}
+      - RADARR_0_URL=http://radarr:7878
+      - RADARR_0_API_KEY=${RADARR_API_KEY}
 
     restart: unless-stopped
 
