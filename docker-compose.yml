@@ -210,7 +210,7 @@ services:
 
 
   fetcharr:
-    image: egg82/fetcharr:latest
+    image: ghcr.io/fetcharr/fetcharr:latest
     container_name: fetcharr
 
     networks:
@@ -218,12 +218,9 @@ services:
 
     environment:
       - TZ=${TZ}
-      - SEARCH_AMOUNT=5
-      - SEARCH_INTERVAL=10min
-      - SONARR_0_URL=http://sonarr:8989
-      - SONARR_0_API_KEY=${SONARR_API_KEY}
-      - RADARR_0_URL=http://radarr:7878
-      - RADARR_0_API_KEY=${RADARR_API_KEY}
+
+    volumes:
+      - ./config/fetcharr:/config
 
     restart: unless-stopped
 
