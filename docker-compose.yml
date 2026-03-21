@@ -335,6 +335,8 @@ services:
       - PGID=${PGID}
       - TZ=${TZ}
 
+      - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
+
       - HOMEPAGE_VAR_HOST=${SERVER_IP:-localhost}
       - HOMEPAGE_VAR_QBIT_PORT=${WEBUI_PORT}
 
