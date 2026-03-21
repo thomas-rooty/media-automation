@@ -1,7 +1,8 @@
 media/Movies
 media/Series
 downloads/
-config/
+config/*
+!config/homepage/
 .env
 
 *.env

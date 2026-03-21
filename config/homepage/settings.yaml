@@ -1,0 +1,28 @@
+title: Media Automation
+
+theme: dark
+color: slate
+
+headerStyle: clean
+
+layout:
+  - VPN & Téléchargements:
+      icon: mdi-download-network
+      style: row
+      columns: 2
+  - Indexers:
+      icon: mdi-file-search
+      style: row
+      columns: 2
+  - Bibliothèque ARR:
+      icon: mdi-movie-open
+      style: row
+      columns: 4
+  - Média:
+      icon: mdi-play-circle
+      style: row
+      columns: 2
+  - Outils:
+      icon: mdi-wrench
+      style: row
+      columns: 2

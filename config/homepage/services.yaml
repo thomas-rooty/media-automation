@@ -1,0 +1,133 @@
+- VPN & Téléchargements:
+
+    - qBittorrent:
+        icon: qbittorrent
+        href: http://{{HOMEPAGE_VAR_HOST}}:{{HOMEPAGE_VAR_QBIT_PORT}}
+        description: Client torrent via VPN
+        server: my-docker
+        container: qbittorrent
+        widget:
+          type: qbittorrent
+          url: http://gluetun:{{HOMEPAGE_VAR_QBIT_PORT}}
+          username: ""
+          password: ""
+
+    - Gluetun:
+        icon: gluetun
+        description: VPN AirVPN (WireGuard)
+        server: my-docker
+        container: gluetun
+        widget:
+          type: gluetun
+          url: http://gluetun:8000
+
+- Indexers:
+
+    - Prowlarr:
+        icon: prowlarr
+        href: http://{{HOMEPAGE_VAR_HOST}}:9696
+        description: Gestionnaire d'indexeurs
+        server: my-docker
+        container: prowlarr
+        widget:
+          type: prowlarr
+          url: http://prowlarr:9696
+          key: "{{HOMEPAGE_VAR_PROWLARR_KEY}}"
+
+    - FlareSolverr:
+        icon: flaresolverr
+        description: Résolution CAPTCHA / Cloudflare
+        server: my-docker
+        container: flaresolverr
+
+- Bibliothèque ARR:
+
+    - Sonarr:
+        icon: sonarr
+        href: http://{{HOMEPAGE_VAR_HOST}}:8989
+        description: Séries TV
+        server: my-docker
+        container: sonarr
+        widget:
+          type: sonarr
+          url: http://sonarr:8989
+          key: "{{HOMEPAGE_VAR_SONARR_KEY}}"
+
+    - Sonarr Private:
+        icon: sonarr
+        href: http://{{HOMEPAGE_VAR_HOST}}:8990
+        description: Séries TV (privé)
+        server: my-docker
+        container: sonarr_private
+        widget:
+          type: sonarr
+          url: http://sonarr_private:8989
+          key: "{{HOMEPAGE_VAR_SONARR_PRIVATE_KEY}}"
+
+    - Radarr:
+        icon: radarr
+        href: http://{{HOMEPAGE_VAR_HOST}}:7878
+        description: Films
+        server: my-docker
+        container: radarr
+        widget:
+          type: radarr
+          url: http://radarr:7878
+          key: "{{HOMEPAGE_VAR_RADARR_KEY}}"
+
+    - Bazarr:
+        icon: bazarr
+        href: http://{{HOMEPAGE_VAR_HOST}}:6767
+        description: Sous-titres
+        server: my-docker
+        container: bazarr
+        widget:
+          type: bazarr
+          url: http://bazarr:6767
+          key: "{{HOMEPAGE_VAR_BAZARR_KEY}}"
+
+- Média:
+
+    - Jellyfin:
+        icon: jellyfin
+        href: http://{{HOMEPAGE_VAR_HOST}}:8096
+        description: Serveur multimédia
+        server: my-docker
+        container: jellyfin
+        widget:
+          type: jellyfin
+          url: http://jellyfin:8096
+          key: "{{HOMEPAGE_VAR_JELLYFIN_KEY}}"
+          enableBlocks: true
+          enableNowPlaying: true
+
+    - Jellyseerr:
+        icon: jellyseerr
+        href: http://{{HOMEPAGE_VAR_HOST}}:5055
+        description: Requêtes de médias
+        server: my-docker
+        container: jellyseerr
+        widget:
+          type: jellyseerr
+          url: http://jellyseerr:5055
+          key: "{{HOMEPAGE_VAR_JELLYSEERR_KEY}}"
+
+- Outils:
+
+    - Portainer:
+        icon: portainer
+        href: http://{{HOMEPAGE_VAR_HOST}}:9000
+        description: Gestion Docker
+        server: my-docker
+        container: portainer
+        widget:
+          type: portainer
+          url: https://portainer:9443
+          env: 2
+          key: "{{HOMEPAGE_VAR_PORTAINER_KEY}}"
+
+    - Watchtower:
+        icon: watchtower
+        description: Mise à jour automatique des conteneurs
+        server: my-docker
+        container: watchtower

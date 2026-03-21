@@ -315,6 +315,46 @@ services:
 
 
 # =========================
+# Dashboard (Homepage)
+# =========================
+
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+
+    networks:
+      - vpn-network
+      - arr-network
+      - media-network
+
+    ports:
+      - 3000:3000
+
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+
+      - HOMEPAGE_VAR_HOST=${SERVER_IP:-localhost}
+      - HOMEPAGE_VAR_QBIT_PORT=${WEBUI_PORT}
+
+      - HOMEPAGE_VAR_PROWLARR_KEY=${PROWLARR_API_KEY}
+      - HOMEPAGE_VAR_SONARR_KEY=${SONARR_API_KEY}
+      - HOMEPAGE_VAR_SONARR_PRIVATE_KEY=${SONARR_PRIVATE_API_KEY}
+      - HOMEPAGE_VAR_RADARR_KEY=${RADARR_API_KEY}
+      - HOMEPAGE_VAR_BAZARR_KEY=${BAZARR_API_KEY}
+      - HOMEPAGE_VAR_JELLYFIN_KEY=${JELLYFIN_API_KEY}
+      - HOMEPAGE_VAR_JELLYSEERR_KEY=${JELLYSEERR_API_KEY}
+      - HOMEPAGE_VAR_PORTAINER_KEY=${PORTAINER_API_KEY}
+
+    volumes:
+      - ./config/homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+    restart: unless-stopped
+
+
+# =========================
 # Networks
 # =========================
 
