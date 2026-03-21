@@ -39,6 +39,9 @@ services:
       - FIREWALL=on
       - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
 
+      # API HTTP pour le widget Homepage
+      - HTTP_CONTROL_SERVER_ADDRESS=:8000
+
       - TZ=${TZ}
 
     volumes:
@@ -331,14 +334,14 @@ services:
       - 3000:3000
 
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
       - TZ=${TZ}
 
       - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
 
       - HOMEPAGE_VAR_HOST=${SERVER_IP:-localhost}
       - HOMEPAGE_VAR_QBIT_PORT=${WEBUI_PORT}
+      - HOMEPAGE_VAR_QBIT_USER=${QBIT_USER:-admin}
+      - HOMEPAGE_VAR_QBIT_PASS=${QBIT_PASS}
 
       - HOMEPAGE_VAR_PROWLARR_KEY=${PROWLARR_API_KEY}
       - HOMEPAGE_VAR_SONARR_KEY=${SONARR_API_KEY}
@@ -347,7 +350,6 @@ services:
       - HOMEPAGE_VAR_BAZARR_KEY=${BAZARR_API_KEY}
       - HOMEPAGE_VAR_JELLYFIN_KEY=${JELLYFIN_API_KEY}
       - HOMEPAGE_VAR_JELLYSEERR_KEY=${JELLYSEERR_API_KEY}
-      - HOMEPAGE_VAR_PORTAINER_KEY=${PORTAINER_API_KEY}
 
     volumes:
       - ./config/homepage:/app/config

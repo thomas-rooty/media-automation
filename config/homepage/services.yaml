@@ -9,11 +9,12 @@
         widget:
           type: qbittorrent
           url: http://gluetun:{{HOMEPAGE_VAR_QBIT_PORT}}
-          username: ""
-          password: ""
+          username: "{{HOMEPAGE_VAR_QBIT_USER}}"
+          password: "{{HOMEPAGE_VAR_QBIT_PASS}}"
 
     - Gluetun:
         icon: gluetun
+        href: http://{{HOMEPAGE_VAR_HOST}}:8000
         description: VPN AirVPN (WireGuard)
         server: my-docker
         container: gluetun
@@ -113,18 +114,6 @@
           key: "{{HOMEPAGE_VAR_JELLYSEERR_KEY}}"
 
 - Outils:
-
-    - Portainer:
-        icon: portainer
-        href: http://{{HOMEPAGE_VAR_HOST}}:9000
-        description: Gestion Docker
-        server: my-docker
-        container: portainer
-        widget:
-          type: portainer
-          url: https://portainer:9443
-          env: 2
-          key: "{{HOMEPAGE_VAR_PORTAINER_KEY}}"
 
     - Watchtower:
         icon: watchtower
