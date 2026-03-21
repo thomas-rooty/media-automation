@@ -39,8 +39,10 @@ services:
       - FIREWALL=on
       - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
 
-      # API HTTP pour le widget Homepage
+      # API HTTP pour le widget Homepage (auth désactivée, réseau interne uniquement)
       - HTTP_CONTROL_SERVER_ADDRESS=:8000
+      - HTTP_CONTROL_SERVER_USERNAME=
+      - HTTP_CONTROL_SERVER_PASSWORD=
 
       - TZ=${TZ}
 
