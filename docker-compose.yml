@@ -66,7 +66,6 @@ services:
       - vpn-network
       - arr-network
 
-
 # =========================
 # qBittorrent
 # =========================
@@ -94,10 +93,9 @@ services:
 
     volumes:
       - ./config/qbittorrent:/config
-      - /mnt/medias/torrents:/downloads
+      - /mnt/medias:/data
 
     restart: unless-stopped
-
 
 # =========================
 # Indexers
@@ -123,7 +121,6 @@ services:
 
     restart: unless-stopped
 
-
   flaresolverr:
     image: flaresolverr/flaresolverr:latest
     container_name: flaresolverr
@@ -140,6 +137,24 @@ services:
 
     restart: unless-stopped
 
+
+# IMPORTANT :
+# Après ce changement :
+# qBittorrent :
+#   Films  -> /data/torrents/movies
+#   Séries -> /data/torrents/series
+#
+# Radarr :
+#   Root Folder -> /data/Medias/Movies
+#
+# Sonarr :
+#   Root Folder -> /data/Medias/Series
+#
+# Sonarr Private :
+#   Root Folder -> /data/Medias/Series_private
+#
+# Dans Radarr/Sonarr :
+# Settings -> Media Management -> Use Hardlinks instead of Copy = ON
 
 # =========================
 # ARR
@@ -162,8 +177,8 @@ services:
 
     volumes:
       - ./config/sonarr:/config
-      - /mnt/medias/torrents:/downloads
-      - /mnt/medias/Medias/Series:/series
+      - /mnt/medias:/data
+      
 
     restart: unless-stopped
 
@@ -184,9 +199,9 @@ services:
 
     volumes:
       - ./config/sonarr_private:/config
-      - /mnt/medias/torrents:/downloads
+      - /mnt/medias:/data
 
-      - /mnt/medias/Medias/Series_private:/series
+      
 
     restart: unless-stopped
 
@@ -207,11 +222,10 @@ services:
 
     volumes:
       - ./config/radarr:/config
-      - /mnt/medias/torrents:/downloads
-      - /mnt/medias/Medias/Movies:/movies
+      - /mnt/medias:/data
+      
 
     restart: unless-stopped
-
 
   bazarr:
     image: lscr.io/linuxserver/bazarr:latest
@@ -230,11 +244,10 @@ services:
 
     volumes:
       - ./config/bazarr:/config
-      - /mnt/medias/Medias/Movies:/movies
-      - /mnt/medias/Medias/Series:/series
+      
+      
 
     restart: unless-stopped
-
 
 # =========================
 # Media
@@ -256,7 +269,6 @@ services:
 
     restart: unless-stopped
 
-
   jellyfin:
     image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
@@ -274,11 +286,10 @@ services:
 
     volumes:
       - ./config/jellyfin:/config
-      - /mnt/medias/Medias/Movies:/movies
-      - /mnt/medias/Medias/Series:/series
+      
+      
 
     restart: unless-stopped
-
 
 # =========================
 # Tools
@@ -301,7 +312,6 @@ services:
 
     restart: unless-stopped
 
-
   watchtower:
     image: containrrr/watchtower:latest
     container_name: watchtower
@@ -317,7 +327,6 @@ services:
       - WATCHTOWER_POLL_INTERVAL=86400
 
     restart: unless-stopped
-
 
 # =========================
 # Dashboard (Homepage)
@@ -358,7 +367,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
     restart: unless-stopped
-
 
 # =========================
 # Networks
