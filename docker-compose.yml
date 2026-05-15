@@ -137,25 +137,6 @@ services:
 
     restart: unless-stopped
 
-
-# IMPORTANT :
-# Après ce changement :
-# qBittorrent :
-#   Films  -> /data/torrents/movies
-#   Séries -> /data/torrents/series
-#
-# Radarr :
-#   Root Folder -> /data/Medias/Movies
-#
-# Sonarr :
-#   Root Folder -> /data/Medias/Series
-#
-# Sonarr Private :
-#   Root Folder -> /data/Medias/Series_private
-#
-# Dans Radarr/Sonarr :
-# Settings -> Media Management -> Use Hardlinks instead of Copy = ON
-
 # =========================
 # ARR
 # =========================
@@ -286,6 +267,8 @@ services:
 
     volumes:
       - ./config/jellyfin:/config
+      - /mnt/medias/Medias/Movies:/movies
+      - /mnt/medias/Medias/Series:/series
       
       
 
