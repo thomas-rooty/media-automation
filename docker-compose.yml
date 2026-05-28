@@ -350,6 +350,14 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
 
     restart: unless-stopped
+  
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    networks:
+      - media-network
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    restart: unless-stopped
 
 # =========================
 # Networks
