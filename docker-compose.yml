@@ -94,6 +94,7 @@ services:
     volumes:
       - ./config/qbittorrent:/config
       - /mnt/medias:/data
+      - /mnt/medias2:/data2
 
     restart: unless-stopped
 
@@ -159,6 +160,7 @@ services:
     volumes:
       - ./config/sonarr:/config
       - /mnt/medias:/data
+      - /mnt/medias2:/data2
       
 
     restart: unless-stopped
@@ -181,6 +183,7 @@ services:
     volumes:
       - ./config/sonarr_private:/config
       - /mnt/medias:/data
+      - /mnt/medias2:/data2
 
       
 
@@ -204,7 +207,7 @@ services:
     volumes:
       - ./config/radarr:/config
       - /mnt/medias:/data
-      
+      - /mnt/medias2:/data2
 
     restart: unless-stopped
 
@@ -269,7 +272,8 @@ services:
       - ./config/jellyfin:/config
       - /mnt/medias/Medias/Movies:/movies
       - /mnt/medias/Medias/Series:/series
-      
+      - /mnt/medias2/Medias/Movies:/movies2
+      - /mnt/medias2/Medias/Series:/series2
       
 
     restart: unless-stopped
