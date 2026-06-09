@@ -106,6 +106,10 @@ services:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
 
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+
     networks:
       - arr-network
 
@@ -149,6 +153,10 @@ services:
     networks:
       - arr-network
 
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
+
     ports:
       - 8989:8989
 
@@ -171,6 +179,10 @@ services:
 
     networks:
       - arr-network
+
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
 
     ports:
       - 8990:8989
@@ -195,6 +207,10 @@ services:
 
     networks:
       - arr-network
+
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
 
     ports:
       - 7878:7878
