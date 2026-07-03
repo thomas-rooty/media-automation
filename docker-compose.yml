@@ -373,40 +373,6 @@ services:
     command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
     restart: unless-stopped
 
-  qbit-progress:
-    image: python:3.12-alpine
-    container_name: qbit-progress
-
-    networks:
-      - arr-network
-
-    env_file:
-      - .env
-
-    environment:
-      - QBIT_URL=http://gluetun:${WEBUI_PORT}
-      - QBIT_USER=${QBIT_USER:-admin}
-      - QBIT_PASS=${QBIT_PASS}
-      - DISCORD_WEBHOOK=${DISCORD_QBIT_WEBHOOK}
-      - CHECK_INTERVAL=${QBIT_PROGRESS_INTERVAL:-60}
-      - PROGRESS_STEP=${QBIT_PROGRESS_STEP:-10}
-      - TZ=${TZ}
-
-    volumes:
-      - ./config/qbit-progress:/app
-
-    working_dir: /app
-
-    command: >
-      sh -c "pip install --no-cache-dir qbittorrent-api requests &&
-             python /app/qbit_progress.py"
-
-    restart: unless-stopped
-
-    depends_on:
-      gluetun:
-        condition: service_healthy
-
 # =========================
 # Networks
 # =========================
