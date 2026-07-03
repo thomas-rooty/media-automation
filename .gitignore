@@ -3,6 +3,7 @@ media/Series
 downloads/
 config/*
 !config/homepage/
+!config/qbit-progress/
 .env
 
 *.env
