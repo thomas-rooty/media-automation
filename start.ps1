@@ -1,93 +1,89 @@
-Write-Host "=== Vérification de Docker Desktop ==="
+param(
+    [switch]$OpenServices
+)
 
-# Vérifie si Docker Desktop est lancé
-$dockerRunning = Get-Process -Name "Docker Desktop" -ErrorAction SilentlyContinue
+$ErrorActionPreference = "Stop"
+$projectPath = $PSScriptRoot
+$envPath = Join-Path $projectPath ".env"
 
-if (-not $dockerRunning) {
-    Write-Host "Docker Desktop n'est pas lancé. Lancement..."
-    Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"
-
-    # Attente de Docker
-    $dockerReady = $false
-    do {
-        Start-Sleep -Seconds 2
-        try {
-            docker info > $null 2>&1
-            if ($LASTEXITCODE -eq 0) {
-                $dockerReady = $true
-            } else {
-                Write-Host "Docker pas encore prêt..."
-            }
-        } catch {
-            Write-Host "En attente de Docker..."
-        }
-    } while (-not $dockerReady)
-
-    # Forcer le moteur Linux
-    Write-Host "Forçage du moteur Docker Linux..."
-    & 'C:\Program Files\Docker\Docker\DockerCli.exe' -SwitchLinuxEngine
-
-    Write-Host "Docker est prêt."
-} else {
-    Write-Host "Docker Desktop est déjà en cours."
+function Write-Step([string]$Message) {
+    Write-Host "`nâ€º $Message" -ForegroundColor Cyan
 }
 
-# Essai d'arrêt des conteneurs existants
-Write-Host "Tentative d'arrêt des conteneurs Docker actifs..."
-try {
-    $containers = docker ps -q 2>$null
-    if ($containers) {
-        $containers | ForEach-Object { docker stop $_ }
-    } else {
-        Write-Host "Aucun conteneur actif à arrêter."
-    }
-} catch {
-    Write-Host "Erreur lors de l'arrêt des conteneurs : $_"
+Write-Host "CapyFlix Â· dÃ©marrage de la plateforme" -ForegroundColor Green
+
+if (-not (Get-Command docker -ErrorAction SilentlyContinue)) {
+    throw "Docker n'est pas installÃ© ou n'est pas disponible dans le PATH."
 }
 
-# Lancement de la stack
-cd "C:\Users\tccar\Projects\media-automation"
-Write-Host "Lancement de la stack Docker..."
-
-$composeOutput = docker compose up -d 2>&1
+docker info *> $null
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "Erreur lors du lancement de la stack Docker :"
-    Write-Host $composeOutput
-    exit 1
+    $dockerDesktop = "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+    if (-not (Test-Path -LiteralPath $dockerDesktop)) {
+        throw "Le moteur Docker ne rÃ©pond pas et Docker Desktop est introuvable."
+    }
+
+    Write-Step "DÃ©marrage de Docker Desktop"
+    Start-Process -FilePath $dockerDesktop -WindowStyle Hidden
+    $ready = $false
+    for ($attempt = 0; $attempt -lt 60; $attempt++) {
+        Start-Sleep -Seconds 2
+        docker info *> $null
+        if ($LASTEXITCODE -eq 0) {
+            $ready = $true
+            break
+        }
+    }
+    if (-not $ready) {
+        throw "Docker n'a pas rÃ©pondu aprÃ¨s 2 minutes."
+    }
 }
 
-Write-Host "Stack Docker démarrée avec succès."
-
-
-# Lancement de Jellyfin (version native Windows)
-$jellyfinPath = "C:\Program Files\Jellyfin\Server\jellyfin-windows-tray\Jellyfin.Windows.Tray.exe"
-if (Test-Path $jellyfinPath) {
-    Write-Host "Lancement de Jellyfin..."
-    Start-Process $jellyfinPath
-} else {
-    Write-Host "Jellyfin non trouvé à l'emplacement spécifié."
+if (-not (Test-Path -LiteralPath $envPath)) {
+    Copy-Item -LiteralPath (Join-Path $projectPath ".env.example") -Destination $envPath
+    throw "Un fichier .env a Ã©tÃ© crÃ©Ã©. Renseignez les identifiants AirVPN et les clÃ©s API, puis relancez ce script."
 }
 
-# Ouverture de Jellyfin dans le navigateur
-$jellyfinUrl = "http://localhost:8096"
-Write-Host "Ouverture de Jellyfin dans le navigateur..."
-Start-Process $jellyfinUrl
+$requiredVariables = @(
+    "WIREGUARD_PUBLIC_KEY",
+    "WIREGUARD_PRIVATE_KEY",
+    "WIREGUARD_ADDRESSES"
+)
+$envValues = @{}
+Get-Content -LiteralPath $envPath -Encoding utf8 | ForEach-Object {
+    if ($_ -match '^\s*([A-Za-z0-9_]+)=(.*)$') {
+        $envValues[$Matches[1]] = $Matches[2].Trim()
+    }
+}
+$missing = $requiredVariables | Where-Object {
+    -not $envValues.ContainsKey($_) -or [string]::IsNullOrWhiteSpace($envValues[$_]) -or $envValues[$_] -like "CHANGE_ME*"
+}
+if ($missing.Count -gt 0) {
+    throw "Variables VPN manquantes dans .env : $($missing -join ', ')"
+}
 
-# Ouverture des autres interfaces web dans le navigateur
-$overseerrUrl = "http://localhost:5055"
-Write-Host "Ouverture d'Overseerr dans le navigateur..."
-Start-Process $overseerrUrl
+Push-Location $projectPath
+try {
+    Write-Step "Validation de la configuration"
+    docker compose config --quiet
+    if ($LASTEXITCODE -ne 0) { throw "La configuration Docker Compose est invalide." }
 
-$radarrUrl = "http://localhost:7878"
-Write-Host "Ouverture de Radarr dans le navigateur..."
-Start-Process $radarrUrl
+    Write-Step "Construction et dÃ©marrage des services"
+    docker compose up -d --build --remove-orphans
+    if ($LASTEXITCODE -ne 0) { throw "Le dÃ©marrage Docker Compose a Ã©chouÃ©." }
 
-$sonarrUrl = "http://localhost:8989"
-Write-Host "Ouverture de Sonarr dans le navigateur..."
-Start-Process $sonarrUrl
+    Write-Step "Ã‰tat des services"
+    docker compose ps
+} finally {
+    Pop-Location
+}
 
-$qbittorrentUrl = "http://localhost:8080"
-Write-Host "Ouverture de qBittorrent dans le navigateur..."
-Start-Process $qbittorrentUrl
+$dashboardPort = if ($envValues["DASHBOARD_PORT"]) { $envValues["DASHBOARD_PORT"] } else { "3000" }
+$dashboardUrl = "http://localhost:$dashboardPort"
+Write-Host "`nDashboard disponible sur $dashboardUrl" -ForegroundColor Green
+Start-Process $dashboardUrl
 
-Write-Host "`nStack média démarrée avec succès."
+if ($OpenServices) {
+    @("http://localhost:8096", "http://localhost:5055", "http://localhost:8989", "http://localhost:7878") |
+        ForEach-Object { Start-Process $_ }
+}

@@ -9,6 +9,7 @@ import logging
 import json as _json
 import asyncio
 import threading
+from contextlib import asynccontextmanager, suppress
 from pathlib import Path
 from typing import Any, Literal
 
@@ -25,12 +26,41 @@ from .settings import ServiceStatus, Settings
 
 settings = Settings()
 
-app = FastAPI(title=settings.title)
+
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    _load_net_history()
+    sampler = asyncio.create_task(_net_history_loop(), name="qbittorrent-network-history")
+    try:
+        yield
+    finally:
+        sampler.cancel()
+        with suppress(asyncio.CancelledError):
+            await sampler
+
+
+app = FastAPI(title=settings.title, lifespan=lifespan)
+
+
+@app.middleware("http")
+async def browser_security_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "same-origin"
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self'; img-src 'self' data:; script-src 'self'; "
+        "style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'"
+    )
+    if request.url.path == "/":
+        response.headers["Cache-Control"] = "no-cache"
+    return response
 
 STATIC_DIR = Path(__file__).resolve().parents[1] / "static"
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 log = logging.getLogger("uvicorn.error")
+_STARTED_AT = time.monotonic()
 
 # ──── Network history (qBittorrent alltime upload/download) ────
 _NET_HISTORY_FILE = Path("/data/net_history.json")
@@ -104,12 +134,6 @@ async def _net_history_loop() -> None:
         except Exception:
             pass
         await asyncio.sleep(300)
-
-
-@app.on_event("startup")
-async def _startup_net_history() -> None:
-    _load_net_history()
-    asyncio.create_task(_net_history_loop())
 
 
 @app.get("/api/network/history")
@@ -279,7 +303,18 @@ def meta() -> dict[str, Any]:
         code_version = int(Path(__file__).stat().st_mtime)
     except Exception:
         code_version = None
-    return {"title": settings.title, "refreshSeconds": settings.refresh_seconds, "codeVersion": code_version}
+    return {
+        "title": settings.title,
+        "refreshSeconds": settings.refresh_seconds,
+        "codeVersion": code_version,
+        "features": ["service-health", "docker-state", "media-requests", "responsive-ui"],
+    }
+
+
+@app.get("/api/health", include_in_schema=False)
+def health() -> dict[str, Any]:
+    """Cheap self-check used by Docker; it deliberately calls no upstream service."""
+    return {"ok": True, "uptimeSeconds": round(time.monotonic() - _STARTED_AT)}
 
 
 @app.get("/api/weather")
@@ -1423,24 +1458,32 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
                 if sid:
                     series_ids.add(str(sid))
 
-            for sid in series_ids:
+            async def fetch_series_progress(sid: str) -> tuple[str, dict[str, int] | None]:
                 try:
                     s_url = f"{base.rstrip('/')}/Users/{settings.jellyfin_user_id}/Items/{sid}"
                     s_params = {"Fields": "RecursiveItemCount,UserData", "EnableUserData": "true"}
                     sr = await client.get(s_url, headers=_jellyfin_headers(), params=s_params)
                     if sr.status_code >= 400:
-                        continue
+                        return sid, None
                     data: Any = sr.json()
                     if not isinstance(data, dict):
-                        continue
+                        return sid, None
                     total = data.get("RecursiveItemCount")
                     ud = data.get("UserData") if isinstance(data.get("UserData"), dict) else {}
                     unplayed = ud.get("UnplayedItemCount") if isinstance(ud, dict) else None
                     if isinstance(total, int) and total > 0 and isinstance(unplayed, int) and unplayed >= 0:
                         watched = max(0, total - unplayed)
-                        series_progress[sid] = {"watched": watched, "total": total}
+                        return sid, {"watched": watched, "total": total}
                 except Exception:
-                    continue
+                    pass
+                return sid, None
+
+            # A dashboard refresh should not take N × timeout when several
+            # different series are present in the latest-items response.
+            progress_results = await asyncio.gather(*(fetch_series_progress(sid) for sid in series_ids))
+            for sid, progress in progress_results:
+                if progress is not None:
+                    series_progress[sid] = progress
 
     out: list[dict[str, Any]] = []
     for it in items:
@@ -1515,186 +1558,379 @@ async def jellyfin_refresh_library() -> dict[str, Any]:
     return {"ok": True}
 
 
-async def _status_simple(name: str, url: str | None, path: str = "/", version_key: str | None = None) -> ServiceStatus:
-    """Generic health check: GET url+path, optionally extract version from JSON response."""
+def _service(
+    slug: str,
+    name: str,
+    ok: bool,
+    detail: str,
+    *,
+    category: str,
+    state: str,
+    response_ms: int | None = None,
+    container: str | None = None,
+) -> ServiceStatus:
+    return ServiceStatus(slug, name, ok, detail, category, state, response_ms, container)
+
+
+def _short_error(exc: Exception) -> str:
+    """Return a useful LAN-safe error without dumping a full URL or traceback."""
+    if isinstance(exc, httpx.TimeoutException):
+        return "délai dépassé"
+    if isinstance(exc, httpx.ConnectError):
+        return "connexion impossible"
+    return str(exc).splitlines()[0][:96] or exc.__class__.__name__
+
+
+async def _status_simple(
+    slug: str,
+    name: str,
+    category: str,
+    url: str | None,
+    path: str = "/",
+    *,
+    headers: dict[str, str] | None = None,
+    version_keys: tuple[str, ...] = (),
+    container: str | None = None,
+) -> ServiceStatus:
+    """Generic HTTP probe with latency and optional version extraction."""
     if not url:
-        return ServiceStatus(name, False, "not configured")
-    full = f"{url.rstrip('/')}{path}"
+        return _service(
+            slug,
+            name,
+            False,
+            "URL non configurée",
+            category=category,
+            state="unconfigured",
+            container=container,
+        )
+
+    started = time.perf_counter()
     try:
         async with httpx.AsyncClient(timeout=5, follow_redirects=True) as client:
-            r = await client.get(full)
-            if r.status_code >= 400:
-                return ServiceStatus(name, False, f"http {r.status_code}")
-            if version_key:
-                try:
-                    data = r.json()
-                    ver = data.get(version_key) if isinstance(data, dict) else None
-                    return ServiceStatus(name, True, f"v{ver}" if ver else "ok")
-                except Exception:
-                    pass
-            return ServiceStatus(name, True, "ok")
-    except Exception as exc:
-        return ServiceStatus(name, False, str(exc)[:80])
+            r = await client.get(f"{url.rstrip('/')}{path}", headers=headers)
+        elapsed = round((time.perf_counter() - started) * 1000)
+        if r.status_code >= 400:
+            return _service(
+                slug,
+                name,
+                False,
+                f"HTTP {r.status_code}",
+                category=category,
+                state="down",
+                response_ms=elapsed,
+                container=container,
+            )
 
-
-async def _status_arr(name: str, url: str | None, api_key: str | None, api_ver: str = "v3") -> ServiceStatus:
-    """Health check for *arr apps (Sonarr, Radarr, Prowlarr)."""
-    if not (url and api_key):
-        return ServiceStatus(name, False, "not configured")
-    full = f"{url.rstrip('/')}/api/{api_ver}/system/status"
-    try:
-        async with httpx.AsyncClient(timeout=5) as client:
-            r = await client.get(full, headers={"X-Api-Key": api_key})
-            if r.status_code >= 400:
-                return ServiceStatus(name, False, f"http {r.status_code}")
-            data = r.json()
-            ver = data.get("version")
-            return ServiceStatus(name, True, f"v{ver}" if ver else "ok")
-    except Exception as exc:
-        return ServiceStatus(name, False, str(exc)[:80])
-
-
-async def _status_sonarr() -> ServiceStatus:
-    return await _status_arr("Sonarr", settings.sonarr_url, settings.sonarr_api_key)
-
-
-async def _status_radarr() -> ServiceStatus:
-    return await _status_arr("Radarr", settings.radarr_url, settings.radarr_api_key)
-
-
-async def _status_prowlarr() -> ServiceStatus:
-    if not settings.prowlarr_url:
-        return ServiceStatus("Prowlarr", False, "not configured")
-    if settings.prowlarr_api_key:
-        return await _status_arr("Prowlarr", settings.prowlarr_url, settings.prowlarr_api_key, api_ver="v1")
-    return await _status_simple("Prowlarr", settings.prowlarr_url, "/ping")
-
-
-async def _status_jellyfin() -> ServiceStatus:
-    if not settings.jellyfin_url:
-        return ServiceStatus("Jellyfin", False, "not configured")
-    url = f"{settings.jellyfin_url.rstrip('/')}/System/Info/Public"
-    try:
-        async with httpx.AsyncClient(timeout=5) as client:
-            r = await client.get(url)
-            if r.status_code >= 400:
-                return ServiceStatus("Jellyfin", False, f"http {r.status_code}")
+        detail = "opérationnel"
+        if version_keys:
             try:
                 data = r.json()
+                if isinstance(data, dict):
+                    version = next((data.get(key) for key in version_keys if data.get(key)), None)
+                    if version:
+                        detail = f"v{version}"
             except Exception:
-                ct = (r.headers.get("content-type") or "").strip()
-                return ServiceStatus("Jellyfin", False, f"invalid json ({ct or 'unknown'})")
-            ver = data.get("Version")
-            return ServiceStatus("Jellyfin", True, f"v{ver}" if ver else "ok")
+                pass
+        return _service(
+            slug,
+            name,
+            True,
+            detail,
+            category=category,
+            state="healthy",
+            response_ms=elapsed,
+            container=container,
+        )
     except Exception as exc:
-        return ServiceStatus("Jellyfin", False, str(exc)[:80])
+        elapsed = round((time.perf_counter() - started) * 1000)
+        return _service(
+            slug,
+            name,
+            False,
+            _short_error(exc),
+            category=category,
+            state="down",
+            response_ms=elapsed,
+            container=container,
+        )
+
+
+async def _status_arr(
+    slug: str,
+    name: str,
+    category: str,
+    url: str | None,
+    api_key: str | None,
+    *,
+    api_ver: str = "v3",
+    container: str,
+) -> ServiceStatus:
+    if not url:
+        return _service(
+            slug,
+            name,
+            False,
+            "URL non configurée",
+            category=category,
+            state="unconfigured",
+            container=container,
+        )
+    if not api_key:
+        return _service(
+            slug,
+            name,
+            False,
+            "clé API manquante",
+            category=category,
+            state="unconfigured",
+            container=container,
+        )
+    return await _status_simple(
+        slug,
+        name,
+        category,
+        url,
+        f"/api/{api_ver}/system/status",
+        headers={"X-Api-Key": api_key},
+        version_keys=("version",),
+        container=container,
+    )
 
 
 async def _status_qb() -> ServiceStatus:
-    if not (settings.qbittorrent_url and settings.qbittorrent_username and settings.qbittorrent_password):
-        return ServiceStatus("qBittorrent", False, "not configured")
-    base = settings.qbittorrent_url
+    slug, name, category, container = "qbittorrent", "qBittorrent", "downloads", "qbittorrent"
+    if not settings.qbittorrent_url:
+        return _service(slug, name, False, "URL non configurée", category=category, state="unconfigured", container=container)
+    if not (settings.qbittorrent_username and settings.qbittorrent_password):
+        return _service(slug, name, False, "identifiants manquants", category=category, state="unconfigured", container=container)
+    started = time.perf_counter()
     try:
         async with httpx.AsyncClient(timeout=5) as client:
-            try:
-                await _qb_login(client, base, settings.qbittorrent_username, settings.qbittorrent_password)
-            except HTTPException as e:
-                return ServiceStatus("qBittorrent", False, str(e.detail))
-            r = await client.get(f"{base.rstrip('/')}/api/v2/app/version")
-            if r.status_code >= 400:
-                return ServiceStatus("qBittorrent", False, f"http {r.status_code}")
-            return ServiceStatus("qBittorrent", True, f"v{r.text.strip()}" if r.text else "ok")
+            await _qb_login(client, settings.qbittorrent_url, settings.qbittorrent_username, settings.qbittorrent_password)
+            r = await client.get(f"{settings.qbittorrent_url.rstrip('/')}/api/v2/app/version")
+        elapsed = round((time.perf_counter() - started) * 1000)
+        if r.status_code >= 400:
+            return _service(slug, name, False, f"HTTP {r.status_code}", category=category, state="down", response_ms=elapsed, container=container)
+        version = r.text.strip()
+        return _service(slug, name, True, f"v{version}" if version else "opérationnel", category=category, state="healthy", response_ms=elapsed, container=container)
+    except HTTPException as exc:
+        return _service(slug, name, False, str(exc.detail), category=category, state="down", container=container)
     except Exception as exc:
-        return ServiceStatus("qBittorrent", False, str(exc)[:80])
-
-
-async def _status_jellyseerr() -> ServiceStatus:
-    if not settings.jellyseerr_url:
-        return ServiceStatus("Jellyseerr", False, "not configured")
-    url = f"{settings.jellyseerr_url.rstrip('/')}/api/v1/status"
-    headers = {"X-Api-Key": settings.jellyseerr_api_key} if settings.jellyseerr_api_key else {}
-    try:
-        async with httpx.AsyncClient(timeout=5) as client:
-            r = await client.get(url, headers=headers)
-            if r.status_code >= 400:
-                return ServiceStatus("Jellyseerr", False, f"http {r.status_code}")
-            try:
-                data = r.json()
-                ver = data.get("version")
-                return ServiceStatus("Jellyseerr", True, f"v{ver}" if ver else "ok")
-            except Exception:
-                return ServiceStatus("Jellyseerr", True, "ok")
-    except Exception as exc:
-        return ServiceStatus("Jellyseerr", False, str(exc)[:80])
-
-
-async def _status_bazarr() -> ServiceStatus:
-    return await _status_simple("Bazarr", settings.bazarr_url, "/api/system/health")
-
-
-async def _status_flaresolverr() -> ServiceStatus:
-    if not settings.flaresolverr_url:
-        return ServiceStatus("FlareSolverr", False, "not configured")
-    return await _status_simple("FlareSolverr", settings.flaresolverr_url, "/health", version_key="version")
-
-
-async def _status_autobrr() -> ServiceStatus:
-    return await _status_simple("Autobrr", settings.autobrr_url, "/api/healthz/liveness")
-
-
-async def _status_watcharr() -> ServiceStatus:
-    return await _status_simple("Watcharr", settings.watcharr_url)
-
-
-async def _status_portainer() -> ServiceStatus:
-    if not settings.portainer_url:
-        return ServiceStatus("Portainer", False, "not configured")
-    return await _status_simple("Portainer", settings.portainer_url, "/api/status", version_key="Version")
-
-
-async def _status_glances() -> ServiceStatus:
-    return await _status_simple("Glances", settings.glances_url, "/api/4/quicklook")
-
-
-async def _status_dozzle() -> ServiceStatus:
-    return await _status_simple("Dozzle", settings.dozzle_url, "/healthcheck")
-
-
-async def _status_nextcloud() -> ServiceStatus:
-    if not settings.nextcloud_url:
-        return ServiceStatus("Nextcloud", False, "not configured")
-    return await _status_simple("Nextcloud", settings.nextcloud_url, "/status.php", version_key="versionstring")
+        return _service(slug, name, False, _short_error(exc), category=category, state="down", container=container)
 
 
 async def _status_gluetun() -> ServiceStatus:
-    return await _status_simple("Gluetun (VPN)", settings.gluetun_url, "/v1/openvpn/status")
+    slug, name, category, container = "gluetun", "Gluetun VPN", "network", "gluetun"
+    if not settings.gluetun_url:
+        return _service(slug, name, False, "URL non configurée", category=category, state="unconfigured", container=container)
+    started = time.perf_counter()
+    try:
+        async with httpx.AsyncClient(timeout=5) as client:
+            r = await client.get(f"{settings.gluetun_url.rstrip('/')}/v1/vpn/status")
+        elapsed = round((time.perf_counter() - started) * 1000)
+        if r.status_code >= 400:
+            return _service(slug, name, False, f"HTTP {r.status_code}", category=category, state="down", response_ms=elapsed, container=container)
+        data: Any = r.json()
+        vpn_state = str(data.get("status") or "unknown").lower() if isinstance(data, dict) else "unknown"
+        ok = vpn_state == "running"
+        return _service(slug, name, ok, "tunnel actif" if ok else f"VPN {vpn_state}", category=category, state="healthy" if ok else "down", response_ms=elapsed, container=container)
+    except Exception as exc:
+        return _service(slug, name, False, _short_error(exc), category=category, state="down", container=container)
+
+
+async def _status_docker_only(slug: str, name: str, category: str, container: str) -> ServiceStatus:
+    return _service(slug, name, False, "vérification Docker", category=category, state="unknown", container=container)
+
+
+async def _docker_containers() -> tuple[bool, dict[str, dict[str, Any]]]:
+    """Read container state through the read-only Docker socket when available."""
+    socket_path = settings.docker_socket
+    if not socket_path or not Path(socket_path).exists():
+        return False, {}
+    try:
+        transport = httpx.AsyncHTTPTransport(uds=socket_path)
+        async with httpx.AsyncClient(transport=transport, timeout=4) as client:
+            response = await client.get("http://docker/containers/json", params={"all": "1"})
+        response.raise_for_status()
+        raw: Any = response.json()
+        containers: dict[str, dict[str, Any]] = {}
+        if isinstance(raw, list):
+            for item in raw:
+                if not isinstance(item, dict):
+                    continue
+                for raw_name in item.get("Names") or []:
+                    name = str(raw_name).lstrip("/")
+                    if name:
+                        containers[name] = item
+        return True, containers
+    except Exception as exc:
+        log.warning("docker status unavailable: %s", _short_error(exc))
+        return False, {}
+
+
+def _merge_container_state(
+    probe: ServiceStatus,
+    *,
+    docker_available: bool,
+    containers: dict[str, dict[str, Any]],
+) -> ServiceStatus:
+    container_name = probe.container
+    if not container_name or not docker_available:
+        if probe.state == "unknown" and container_name:
+            return _service(
+                probe.slug,
+                probe.name,
+                False,
+                "socket Docker indisponible",
+                category=probe.category,
+                state="unknown",
+                container=container_name,
+            )
+        return probe
+
+    container = containers.get(container_name)
+    if container is None:
+        return _service(
+            probe.slug,
+            probe.name,
+            False,
+            "conteneur absent",
+            category=probe.category,
+            state="missing",
+            container=container_name,
+        )
+
+    state = str(container.get("State") or "unknown").lower()
+    summary = str(container.get("Status") or state)
+    unhealthy = "unhealthy" in summary.lower()
+    if state != "running" or unhealthy:
+        return _service(
+            probe.slug,
+            probe.name,
+            False,
+            summary,
+            category=probe.category,
+            state="unhealthy" if unhealthy else state,
+            container=container_name,
+        )
+
+    if probe.state == "unknown":
+        return _service(
+            probe.slug,
+            probe.name,
+            True,
+            "conteneur actif",
+            category=probe.category,
+            state="healthy",
+            container=container_name,
+        )
+    return probe
+
+
+async def _collect_status() -> dict[str, Any]:
+    probes = [
+        _status_gluetun(),
+        _status_qb(),
+        _status_arr("prowlarr", "Prowlarr", "indexers", settings.prowlarr_url, settings.prowlarr_api_key, api_ver="v1", container="prowlarr"),
+        _status_simple("flaresolverr", "FlareSolverr", "indexers", settings.flaresolverr_url, "/health", version_keys=("version",), container="flaresolverr"),
+        _status_arr("sonarr", "Sonarr", "library", settings.sonarr_url, settings.sonarr_api_key, container="sonarr"),
+        _status_arr("sonarr-private", "Sonarr privé", "library", settings.sonarr_private_url, settings.sonarr_private_api_key, container="sonarr_private"),
+        _status_arr("radarr", "Radarr", "library", settings.radarr_url, settings.radarr_api_key, container="radarr"),
+        _status_simple(
+            "bazarr",
+            "Bazarr",
+            "library",
+            settings.bazarr_url,
+            "/api/system/status" if settings.bazarr_api_key else "/",
+            headers={"X-Api-Key": settings.bazarr_api_key} if settings.bazarr_api_key else None,
+            version_keys=("version",),
+            container="bazarr",
+        ),
+        _status_simple("jellyfin", "Jellyfin", "media", settings.jellyfin_url, "/System/Info/Public", version_keys=("Version",), container="jellyfin"),
+        _status_simple(
+            "jellyseerr",
+            "Jellyseerr",
+            "media",
+            settings.jellyseerr_url,
+            "/api/v1/status",
+            headers={"X-Api-Key": settings.jellyseerr_api_key} if settings.jellyseerr_api_key else None,
+            version_keys=("version",),
+            container="jellyseerr",
+        ),
+        _status_simple("portainer", "Portainer", "tools", settings.portainer_url, "/api/status", version_keys=("Version",), container="portainer"),
+        _status_docker_only("watchtower", "Watchtower", "tools", "watchtower"),
+        _status_docker_only("cloudflared", "Cloudflare Tunnel", "network", "cloudflared"),
+    ]
+
+    # Backwards-compatible optional services are shown only when configured.
+    optional = [
+        ("autobrr", "Autobrr", "downloads", settings.autobrr_url, "/api/healthz/liveness", "autobrr"),
+        ("watcharr", "Watcharr", "media", settings.watcharr_url, "/", "watcharr"),
+        ("glances", "Glances", "tools", settings.glances_url, "/api/4/quicklook", "glances"),
+        ("dozzle", "Dozzle", "tools", settings.dozzle_url, "/healthcheck", "dozzle"),
+        ("nextcloud", "Nextcloud", "media", settings.nextcloud_url, "/status.php", "nextcloud"),
+    ]
+    for slug, name, category, url, path, container in optional:
+        if url:
+            probes.append(_status_simple(slug, name, category, url, path, container=container))
+
+    docker_task = asyncio.create_task(_docker_containers())
+    raw_results: list[ServiceStatus] = await asyncio.gather(*probes)
+    docker_available, containers = await docker_task
+    results = [
+        _merge_container_state(item, docker_available=docker_available, containers=containers)
+        for item in raw_results
+    ]
+
+    healthy = sum(1 for item in results if item.ok)
+    down = sum(1 for item in results if item.state in {"down", "exited", "dead", "missing", "unhealthy"})
+    unconfigured = sum(1 for item in results if item.state == "unconfigured")
+    unknown = sum(1 for item in results if item.state == "unknown")
+    checked_at = dt.datetime.now(dt.timezone.utc).isoformat()
+    return {
+        "ok": healthy == len(results) and bool(results),
+        "summary": {
+            "healthy": healthy,
+            "total": len(results),
+            "down": down,
+            "unconfigured": unconfigured,
+            "unknown": unknown,
+        },
+        "dockerAvailable": docker_available,
+        "checkedAt": checked_at,
+        "items": [
+            {
+                "slug": item.slug,
+                "name": item.name,
+                "ok": item.ok,
+                "detail": item.detail,
+                "category": item.category,
+                "state": item.state,
+                "responseMs": item.response_ms,
+                "container": item.container,
+            }
+            for item in results
+        ],
+    }
+
+
+_STATUS_CACHE: dict[str, Any] | None = None
+_STATUS_CACHE_AT = 0.0
+_STATUS_LOCK = asyncio.Lock()
 
 
 @app.get("/api/status")
-async def status() -> JSONResponse:
-    checks = [
-        _status_sonarr(),
-        _status_radarr(),
-        _status_prowlarr(),
-        _status_qb(),
-        _status_jellyfin(),
-        _status_jellyseerr(),
-        _status_bazarr(),
-        _status_flaresolverr(),
-        _status_autobrr(),
-        _status_watcharr(),
-        _status_portainer(),
-        _status_glances(),
-        _status_dozzle(),
-        _status_nextcloud(),
-        _status_gluetun(),
-    ]
-    results: list[ServiceStatus] = await asyncio.gather(*checks)
-    configured = [x for x in results if x.detail != "not configured"]
-    return JSONResponse(
-        {
-            "ok": all(x.ok for x in configured) if configured else False,
-            "items": [{"name": x.name, "ok": x.ok, "detail": x.detail} for x in results if x.detail != "not configured"],
-        }
-    )
+async def status(refresh: bool = False) -> JSONResponse:
+    """Return a complete, cached snapshot of every service in the stack."""
+    global _STATUS_CACHE, _STATUS_CACHE_AT
+    now = time.monotonic()
+    if not refresh and _STATUS_CACHE is not None and now - _STATUS_CACHE_AT < 10:
+        return JSONResponse(_STATUS_CACHE)
 
+    async with _STATUS_LOCK:
+        now = time.monotonic()
+        if not refresh and _STATUS_CACHE is not None and now - _STATUS_CACHE_AT < 10:
+            return JSONResponse(_STATUS_CACHE)
+        _STATUS_CACHE = await _collect_status()
+        _STATUS_CACHE_AT = time.monotonic()
+        return JSONResponse(_STATUS_CACHE)

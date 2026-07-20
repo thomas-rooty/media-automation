@@ -1,110 +1,84 @@
-# 📦 Stack Torrent + VPN (Docker)
+# CapyFlix · plateforme média automatisée
 
-Ce dépôt permet de déployer une stack complète pour le téléchargement automatisé via BitTorrent, protégée par un VPN (PIA). Elle inclut les services suivants :
+CapyFlix regroupe une stack média Docker complète et un dashboard tactile conçu pour une tablette en mode paysage, avec une interface mobile adaptée au portrait.
 
-## 🧩 Services inclus
+## Services
 
-| Service      | Rôle                                                                 |
-|--------------|----------------------------------------------------------------------|
-| **Gluetun**  | Fournit un VPN (PIA) et une interface réseau protégée.               |
-| **qBittorrent** | Client torrent avec interface Web.                                   |
-| **Sonarr**   | Gère les séries (recherche, téléchargement, renommage).              |
-| **Radarr**   | Gère les films (recherche, téléchargement, renommage).               |
-| **Prowlarr** | Moteur d’indexeurs pour Sonarr/Radarr.                               |
-| **Huntarr**  | Dashboard pour centraliser les activités de la stack.                |
-| **Overseerr**| Interface de demande de médias pour les utilisateurs.                |
-| **FlareSolverr** | Bypass Cloudflare pour certains indexeurs (via Prowlarr).             |
+| Domaine | Services |
+|---|---|
+| VPN et téléchargements | Gluetun (AirVPN / WireGuard), qBittorrent |
+| Indexation | Prowlarr, FlareSolverr |
+| Bibliothèque | Sonarr, Sonarr privé, Radarr, Bazarr |
+| Média | Jellyfin, Jellyseerr |
+| Exploitation | Portainer, Watchtower, Cloudflare Tunnel |
+| Supervision | Dashboard CapyFlix (FastAPI + interface web) |
 
-## 📺 Dashboard “salon” (tablette)
+Le dashboard surveille les APIs applicatives et l’état réel des conteneurs via le socket Docker monté en lecture seule. Les services sans API HTTP, comme Watchtower et Cloudflare Tunnel, ne sont donc plus invisibles.
 
-Un mini dashboard **plein écran** (FastAPI + HTML/CSS/JS) est disponible dans `dashboard/` :
+## Démarrage
 
-- **UI**: grosses cartes, thème sombre, lisible à distance
-- **Données**: prochains épisodes (Sonarr), téléchargements (qBittorrent), derniers ajouts (Jellyfin)
-- **Sécurité**: les **API keys restent côté serveur** (proxy via FastAPI)
+1. Créer la configuration locale :
 
-Voir `dashboard/README.md` et `dashboard/docker-compose.dashboard.yml`.
-
-## 🚀 Lancement rapide
-
-1. **Cloner ce dépôt** :
-   ```bash
-   git clone <url_du_dépôt>
-   cd <nom_du_dossier>
+   ```powershell
+   Copy-Item .env.example .env
    ```
 
-2. **Créer les dossiers nécessaires** :
-   ```bash
-   mkdir -p config/{gluetun,qbittorrent,sonarr,radarr,prowlarr,huntarr,overseerr} \
-            config/prowlarr/Definitions/Custom \
-            downloads media/{Series,Movies}
+2. Renseigner dans `.env` les paramètres WireGuard AirVPN, les identifiants qBittorrent et les clés API.
+
+3. Valider puis démarrer :
+
+   ```powershell
+   docker compose config --quiet
+   docker compose up -d --build
    ```
 
-3. **Donner les bons droits** (utilisateur ID 1000) :
-   ```bash
-   sudo chown -R 1000:1000 config downloads media
-   ```
+   Sous Windows, `./start.ps1` effectue ces contrôles, démarre uniquement cette stack et ouvre le dashboard. Il n’arrête plus les autres conteneurs de la machine.
 
-4. **Configurer Gluetun (VPN)** :  
-   Dans le fichier `docker-compose.yml`, modifie ces lignes avec tes identifiants Private Internet Access, ou dans le .env du projet :
-   ```yaml
-   - OPENVPN_USER=votre_identifiant
-   - OPENVPN_PASSWORD=votre_mot_de_passe
-   - SERVER_REGIONS=DE Frankfurt  # ou un autre serveur PIA
-   ```
+4. Ouvrir [http://localhost:3000](http://localhost:3000).
 
-5. **Démarrer la stack** :
-   ```bash
-   docker-compose up -d
-   ```
+## URLs par défaut
 
-## 🌐 Accès aux interfaces
+| Interface | URL |
+|---|---|
+| Dashboard CapyFlix | `http://<serveur>:3000` |
+| qBittorrent | `http://<serveur>:8080` |
+| Jellyfin | `http://<serveur>:8096` |
+| Jellyseerr | `http://<serveur>:5055` |
+| Sonarr | `http://<serveur>:8989` |
+| Sonarr privé | `http://<serveur>:8990` |
+| Radarr | `http://<serveur>:7878` |
+| Prowlarr | `http://<serveur>:9696` |
+| Bazarr | `http://<serveur>:6767` |
+| Portainer | `http://<serveur>:9000` ou `https://<serveur>:9443` |
 
-| Service      | URL par défaut                   |
-|--------------|----------------------------------|
-| **qBittorrent** | http://localhost:8080 (user: admin / mdp: adminadmin) |
-| **Sonarr**   | http://localhost:8989            |
-| **Radarr**   | http://localhost:7878            |
-| **Prowlarr** | http://localhost:9696            |
-| **Huntarr**  | http://localhost:9705            |
-| **Overseerr**| http://localhost:5055            |
-| **FlareSolverr** | http://localhost:8191            |
+## Ce que montre le dashboard
 
-## ⚙️ Configuration rapide
+- état complet des 13 services, latence API et état Docker ;
+- téléchargements actifs, progression, débit et ETA ;
+- prochains épisodes et films surveillés/manquants ;
+- derniers ajouts Jellyfin et demande de médias via Jellyseerr ;
+- mémoire, disques, trafic en direct et historique qBittorrent ;
+- activité d’import Sonarr/Radarr et heures des derniers scans ;
+- météo locale optionnelle.
 
-### 📥 qBittorrent
-- Interface Web : `admin` / `adminadmin` (à changer dès le premier lancement).
-- Dossier de téléchargement : `./downloads`
+Chaque panneau gère sa panne indépendamment : une API indisponible n’efface plus les autres données et affiche une erreur actionnable.
 
-### 📺 Sonarr / 🎬 Radarr
-- Configurer les chemins :
-  - **Séries** : `/series`
-  - **Films** : `/movies`
-- Configurer le client torrent : ajouter `qBittorrent` sur `http://qbittorrent:8080`
+## Exploitation
 
-### 🌍 Prowlarr
-- Ajouter vos indexeurs préférés.
-- Lier Prowlarr à Sonarr et Radarr dans l'onglet *Applications*.
+```powershell
+# État synthétique
+docker compose ps
 
-### 🧠 Overseerr
-- Permet aux utilisateurs de faire des demandes de films/séries.
-- À connecter à Radarr/Sonarr via les paramètres Overseerr.
+# Logs du dashboard
+docker compose logs -f dashboard
 
-## 🔐 Sécurité
+# Reconstruire uniquement le dashboard
+docker compose up -d --build dashboard
 
-- Tout le trafic torrent passe par **Gluetun** (VPN PIA).
-- Pas de fuite IP possible grâce à `network_mode: "service:gluetun"` sur qBittorrent.
-
-## 🛑 Arrêter les services
-
-```bash
-docker-compose down
+# Arrêter uniquement cette stack
+docker compose down
 ```
 
-## ✅ Conseils
+Le contrôle Gluetun utilise la route WireGuard actuelle `/v1/vpn/status`. Le serveur de contrôle reste accessible uniquement sur les réseaux Docker internes.
 
-- Pense à sauvegarder les dossiers `config/` pour ne pas perdre ta configuration.
-- Tu peux accéder aux journaux de chaque service avec :
-  ```bash
-  docker logs <nom_du_conteneur>
-  ```
+Pour lancer seulement le dashboard sur le port 8008, voir [`dashboard/README.md`](dashboard/README.md).

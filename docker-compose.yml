@@ -22,14 +22,14 @@ services:
       - VPN_SERVICE_PROVIDER=airvpn
       - VPN_TYPE=wireguard
 
-      - WIREGUARD_PUBLIC_KEY=${WIREGUARD_PUBLIC_KEY}
-      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
-      - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY}
-      - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES}
-      - WIREGUARD_MTU=${WIREGUARD_MTU}
+      - WIREGUARD_PUBLIC_KEY=${WIREGUARD_PUBLIC_KEY:-}
+      - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY:-}
+      - WIREGUARD_PRESHARED_KEY=${WIREGUARD_PRESHARED_KEY:-}
+      - WIREGUARD_ADDRESSES=${WIREGUARD_ADDRESSES:-}
+      - WIREGUARD_MTU=${WIREGUARD_MTU:-1320}
 
       # serveur autorisés
-      - SERVER_COUNTRIES=${SERVER_COUNTRIES}
+      - SERVER_COUNTRIES=${SERVER_COUNTRIES:-Netherlands}
 
       # rotation auto serveur
       - VPN_ENDPOINT_IP_ROTATION=on
@@ -37,22 +37,21 @@ services:
 
       # firewall kill switch
       - FIREWALL=on
-      - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD}
+      - FIREWALL_VPN_INPUT_PORTS=${AIRVPN_PORT_FORWARD:-6881}
 
-      # API HTTP pour le widget Homepage (auth désactivée, réseau interne uniquement)
+      # API HTTP interne utilisée par le dashboard. Ne pas publier le port 8000.
       - HTTP_CONTROL_SERVER_ADDRESS=:8000
-      - HTTP_CONTROL_SERVER_USERNAME=
-      - HTTP_CONTROL_SERVER_PASSWORD=
+      - 'HTTP_CONTROL_SERVER_AUTH_DEFAULT_ROLE={"auth":"none"}'
 
-      - TZ=${TZ}
+      - TZ=${TZ:-Europe/Paris}
 
     volumes:
       - ./config/gluetun:/gluetun
 
     ports:
-      - ${WEBUI_PORT}:${WEBUI_PORT}
-      - ${AIRVPN_PORT_FORWARD}:${AIRVPN_PORT_FORWARD}
-      - ${AIRVPN_PORT_FORWARD}:${AIRVPN_PORT_FORWARD}/udp
+      - ${WEBUI_PORT:-8080}:${WEBUI_PORT:-8080}
+      - ${AIRVPN_PORT_FORWARD:-6881}:${AIRVPN_PORT_FORWARD:-6881}
+      - ${AIRVPN_PORT_FORWARD:-6881}:${AIRVPN_PORT_FORWARD:-6881}/udp
 
     restart: unless-stopped
 
@@ -84,12 +83,12 @@ services:
       - .env
 
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Paris}
 
-      - WEBUI_PORT=${WEBUI_PORT}
-      - TORRENTING_PORT=${AIRVPN_PORT_FORWARD}
+      - WEBUI_PORT=${WEBUI_PORT:-8080}
+      - TORRENTING_PORT=${AIRVPN_PORT_FORWARD:-6881}
 
     volumes:
       - ./config/qbittorrent:/config
@@ -117,9 +116,9 @@ services:
       - 9696:9696
 
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Paris}
 
     volumes:
       - ./config/prowlarr:/config
@@ -138,7 +137,7 @@ services:
 
     environment:
       - LOG_LEVEL=info
-      - TZ=${TZ}
+      - TZ=${TZ:-Europe/Paris}
 
     restart: unless-stopped
 
@@ -161,9 +160,9 @@ services:
       - 8989:8989
 
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Paris}
 
     volumes:
       - ./config/sonarr:/config
@@ -187,9 +186,9 @@ services:
       - 8990:8989
 
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Paris}
 
     volumes:
       - ./config/sonarr_private:/config
@@ -213,9 +212,9 @@ services:
       - 7878:7878
 
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Paris}
 
     volumes:
       - ./config/radarr:/config
@@ -235,9 +234,9 @@ services:
       - 6767:6767
 
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Paris}
 
     volumes:
       - ./config/bazarr:/config
@@ -275,9 +274,9 @@ services:
       - 8096:8096
 
     environment:
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - TZ=${TZ}
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
+      - TZ=${TZ:-Europe/Paris}
 
     volumes:
       - ./config/jellyfin:/config
@@ -326,12 +325,13 @@ services:
     restart: unless-stopped
 
   # =========================
-  # Dashboard (Homepage)
+  # Dashboard CapyFlix
   # =========================
 
-  homepage:
-    image: ghcr.io/gethomepage/homepage:latest
-    container_name: homepage
+  dashboard:
+    build:
+      context: ./dashboard
+    container_name: capyflix-dashboard
 
     networks:
       - vpn-network
@@ -339,29 +339,49 @@ services:
       - media-network
 
     ports:
-      - 3000:3000
+      - ${DASHBOARD_PORT:-3000}:8000
 
     environment:
-      - TZ=${TZ}
-
-      - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
-
-      - HOMEPAGE_VAR_HOST=${SERVER_IP:-localhost}
-      - HOMEPAGE_VAR_QBIT_PORT=${WEBUI_PORT}
-      - HOMEPAGE_VAR_QBIT_USER=${QBIT_USER:-admin}
-      - HOMEPAGE_VAR_QBIT_PASS=${QBIT_PASS}
-
-      - HOMEPAGE_VAR_PROWLARR_KEY=${PROWLARR_API_KEY}
-      - HOMEPAGE_VAR_SONARR_KEY=${SONARR_API_KEY}
-      - HOMEPAGE_VAR_SONARR_PRIVATE_KEY=${SONARR_PRIVATE_API_KEY}
-      - HOMEPAGE_VAR_RADARR_KEY=${RADARR_API_KEY}
-      - HOMEPAGE_VAR_BAZARR_KEY=${BAZARR_API_KEY}
-      - HOMEPAGE_VAR_JELLYFIN_KEY=${JELLYFIN_API_KEY}
-      - HOMEPAGE_VAR_JELLYSEERR_KEY=${JELLYSEERR_API_KEY}
+      DASH_TITLE: ${DASH_TITLE:-CapyFlix}
+      DASH_REFRESH_SECONDS: ${DASH_REFRESH_SECONDS:-30}
+      DASH_SONARR_URL: http://sonarr:8989
+      DASH_SONARR_API_KEY: ${SONARR_API_KEY:-}
+      DASH_SONARR_PRIVATE_URL: http://sonarr_private:8989
+      DASH_SONARR_PRIVATE_API_KEY: ${SONARR_PRIVATE_API_KEY:-}
+      DASH_RADARR_URL: http://radarr:7878
+      DASH_RADARR_API_KEY: ${RADARR_API_KEY:-}
+      DASH_PROWLARR_URL: http://prowlarr:9696
+      DASH_PROWLARR_API_KEY: ${PROWLARR_API_KEY:-}
+      DASH_BAZARR_URL: http://bazarr:6767
+      DASH_BAZARR_API_KEY: ${BAZARR_API_KEY:-}
+      DASH_FLARESOLVERR_URL: http://flaresolverr:8191
+      DASH_QBITTORRENT_URL: http://gluetun:${WEBUI_PORT:-8080}
+      DASH_QBITTORRENT_USERNAME: ${QBIT_USER:-admin}
+      DASH_QBITTORRENT_PASSWORD: ${QBIT_PASS:-adminadmin}
+      DASH_JELLYFIN_URL: http://jellyfin:8096
+      DASH_JELLYFIN_API_KEY: ${JELLYFIN_API_KEY:-}
+      DASH_JELLYFIN_USER_ID: ${JELLYFIN_USER_ID:-}
+      DASH_JELLYSEERR_URL: http://jellyseerr:5055
+      DASH_JELLYSEERR_API_KEY: ${JELLYSEERR_API_KEY:-}
+      DASH_PORTAINER_URL: http://portainer:9000
+      DASH_GLUETUN_URL: http://gluetun:8000
+      DASH_WEATHER_LAT: ${WEATHER_LAT:-}
+      DASH_WEATHER_LON: ${WEATHER_LON:-}
+      DASH_WEATHER_LABEL: ${WEATHER_LABEL:-}
+      DASH_DISKS_JSON: '[{"label":"Médias 1","path":"/mnt/medias"},{"label":"Médias 2","path":"/mnt/medias2"}]'
 
     volumes:
-      - ./config/homepage:/app/config
+      - dashboard-data:/data
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /mnt/medias:/mnt/medias:ro
+      - /mnt/medias2:/mnt/medias2:ro
+
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
     restart: unless-stopped
 
@@ -370,12 +390,15 @@ services:
     container_name: cloudflared
     networks:
       - arr-network
-    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN:-}
     restart: unless-stopped
 
 # =========================
-# Networks
+# Volumes & networks
 # =========================
+
+volumes:
+  dashboard-data:
 
 networks:
 
