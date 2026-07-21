@@ -1439,6 +1439,37 @@ def _jellyfin_headers() -> dict[str, str]:
     return {"X-Emby-Token": token}
 
 
+def _jellyfin_image_candidate(item: dict[str, Any]) -> tuple[str, str] | None:
+    """Select the best landscape-capable image exposed by a BaseItemDto."""
+    item_id = str(item.get("Id") or "").strip()
+    item_type = str(item.get("Type") or "").lower()
+    tags = item.get("ImageTags") if isinstance(item.get("ImageTags"), dict) else {}
+
+    own_order = ("Thumb", "Primary") if item_type == "episode" else ("Primary", "Thumb")
+    for image_type in own_order:
+        if item_id and tags.get(image_type):
+            return item_id, image_type
+
+    series_id = str(item.get("SeriesId") or "").strip()
+    if series_id and item.get("SeriesThumbImageTag"):
+        return series_id, "Thumb"
+    if series_id and item.get("SeriesPrimaryImageTag"):
+        return series_id, "Primary"
+
+    parent_id = str(item.get("ParentId") or "").strip()
+    if parent_id and item.get("ParentThumbImageTag"):
+        return parent_id, "Thumb"
+
+    parent_primary_id = str(item.get("ParentPrimaryImageItemId") or "").strip()
+    if parent_primary_id and item.get("ParentPrimaryImageTag"):
+        return parent_primary_id, "Primary"
+
+    backdrop_tags = item.get("BackdropImageTags")
+    if item_id and isinstance(backdrop_tags, list) and backdrop_tags:
+        return item_id, "Backdrop"
+    return None
+
+
 @app.get("/api/jellyfin/latest")
 async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
     base = _require(settings.jellyfin_url, "Jellyfin URL")
@@ -1454,6 +1485,7 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
         "sortOrder": ["Descending"],
         "fields": ["DateCreated", "PrimaryImageAspectRatio"],
         "enableImages": True,
+        "enableImageTypes": ["Primary", "Thumb", "Backdrop"],
         "imageTypeLimit": 1,
         "enableUserData": True,
         "enableTotalRecordCount": False,
@@ -1573,6 +1605,7 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
         sid_val = it.get("SeriesId") if isinstance(it, dict) else None
         series_id = str(sid_val) if sid_val else None
         sp = series_progress.get(series_id) if series_id else None
+        image_candidate = _jellyfin_image_candidate(it) if isinstance(it, dict) else None
         out.append(
             {
                 "id": it.get("Id"),
@@ -1587,6 +1620,8 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
                 "dateCreated": it.get("DateCreated"),
                 "premiereDate": it.get("PremiereDate"),
                 "hasPrimaryImage": bool(it.get("ImageTags", {}).get("Primary")),
+                "imageItemId": image_candidate[0] if image_candidate else None,
+                "imageType": image_candidate[1] if image_candidate else None,
                 "userData": user_data_out,
             }
         )
@@ -1595,9 +1630,15 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
 
 
 @app.get("/api/jellyfin/items/{item_id}/image")
-async def jellyfin_primary_image(item_id: str, maxHeight: int = 240, quality: int = 80) -> Response:
+async def jellyfin_primary_image(
+    item_id: str,
+    imageType: Literal["Primary", "Thumb", "Backdrop"] = "Primary",
+    maxHeight: int = 240,
+    quality: int = 80,
+) -> Response:
     base = _require(settings.jellyfin_url, "Jellyfin URL")
-    url = f"{base.rstrip('/')}/Items/{item_id}/Images/Primary"
+    safe_item_id = quote(item_id, safe="")
+    url = f"{base.rstrip('/')}/Items/{safe_item_id}/Images/{imageType}"
     params = {"maxHeight": str(max(80, min(maxHeight, 600))), "quality": str(max(10, min(quality, 95)))}
 
     async with httpx.AsyncClient(timeout=15) as client:
@@ -1605,7 +1646,7 @@ async def jellyfin_primary_image(item_id: str, maxHeight: int = 240, quality: in
         if r.status_code >= 400:
             raise HTTPException(
                 status_code=502,
-                detail={"service": "jellyfin", "status": r.status_code, "endpoint": "primaryImage"},
+                detail={"service": "jellyfin", "status": r.status_code, "endpoint": f"{imageType.lower()}Image"},
             )
         content_type = r.headers.get("content-type") or "image/jpeg"
         return Response(content=r.content, media_type=content_type, headers={"Cache-Control": "public, max-age=300"})

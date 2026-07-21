@@ -326,7 +326,11 @@ function renderJelly(data) {
     const episodeCode = episode ? `S${String(item.parentIndexNumber ?? "?").padStart(2, "0")}E${String(item.indexNumber ?? "?").padStart(2, "0")}` : "";
     const title = episode ? `${item.seriesName || "Série"} · ${episodeCode}` : (item.name || "Média");
     const subtitle = episode ? item.name : [item.type, item.productionYear].filter(Boolean).join(" · ");
-    const imageUrl = item.id ? `/api/jellyfin/items/${encodeURIComponent(item.id)}/image?maxHeight=260&quality=82` : "";
+    const imageItemId = item.imageItemId || item.id;
+    const imageType = item.imageType || "Primary";
+    const imageUrl = imageItemId
+      ? `/api/jellyfin/items/${encodeURIComponent(imageItemId)}/image?imageType=${encodeURIComponent(imageType)}&maxHeight=260&quality=82`
+      : "";
     return `
       <article class="media-item">
         <div class="poster">

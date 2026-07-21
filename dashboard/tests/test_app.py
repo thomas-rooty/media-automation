@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 import httpx
 
-from app.main import _qb_headers, _qb_login, app, jellyfin_latest, settings
+from app.main import _jellyfin_image_candidate, _qb_headers, _qb_login, app, jellyfin_latest, settings
 
 
 class DashboardSmokeTests(unittest.IsolatedAsyncioTestCase):
@@ -116,6 +116,30 @@ class DashboardSmokeTests(unittest.IsolatedAsyncioTestCase):
 
         self.assertEqual(requests, [True, False])
         self.assertFalse(result["userContext"])
+
+    async def test_jellyfin_episode_image_falls_back_to_series(self) -> None:
+        candidate = _jellyfin_image_candidate(
+            {
+                "Id": "episode-1",
+                "Type": "Episode",
+                "ImageTags": {},
+                "SeriesId": "series-1",
+                "SeriesPrimaryImageTag": "image-tag",
+            }
+        )
+        self.assertEqual(candidate, ("series-1", "Primary"))
+
+    async def test_jellyfin_episode_prefers_own_thumbnail(self) -> None:
+        candidate = _jellyfin_image_candidate(
+            {
+                "Id": "episode-1",
+                "Type": "Episode",
+                "ImageTags": {"Thumb": "thumb-tag", "Primary": "primary-tag"},
+                "SeriesId": "series-1",
+                "SeriesPrimaryImageTag": "series-tag",
+            }
+        )
+        self.assertEqual(candidate, ("episode-1", "Thumb"))
 
 
 if __name__ == "__main__":

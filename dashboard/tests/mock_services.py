@@ -107,8 +107,8 @@ def jellyfin_latest() -> dict[str, list[dict]]:
     ]}
 
 
-@app.get("/Items/{item_id}/Images/Primary")
-def jellyfin_image(item_id: str) -> Response:
+@app.get("/Items/{item_id}/Images/{image_type}")
+def jellyfin_image(item_id: str, image_type: str) -> Response:
     colors = {"1": ("#4d8b78", "#8ee6bd"), "2": ("#71584a", "#f2bd78"), "3": ("#465b87", "#9dc2ff"), "4": ("#674d7d", "#cba8f5")}
     start, end = colors.get(item_id, ("#334", "#889"))
     svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="600" height="360"><defs><linearGradient id="g"><stop stop-color="{start}"/><stop offset="1" stop-color="{end}"/></linearGradient></defs><rect width="600" height="360" fill="url(#g)"/><circle cx="470" cy="90" r="120" fill="white" opacity=".09"/><path d="M0 300L180 130l110 90 100-110 210 190" fill="none" stroke="white" opacity=".25" stroke-width="28"/></svg>'
