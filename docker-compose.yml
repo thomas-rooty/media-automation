@@ -308,22 +308,6 @@ services:
 
     restart: unless-stopped
 
-  watchtower:
-    image: containrrr/watchtower:latest
-    container_name: watchtower
-
-    networks:
-      - media-network
-
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-
-    environment:
-      - WATCHTOWER_CLEANUP=true
-      - WATCHTOWER_POLL_INTERVAL=86400
-
-    restart: unless-stopped
-
   # =========================
   # Dashboard CapyFlix
   # =========================
@@ -358,6 +342,7 @@ services:
       DASH_QBITTORRENT_URL: http://gluetun:${WEBUI_PORT:-8080}
       DASH_QBITTORRENT_USERNAME: ${QBIT_USER:-admin}
       DASH_QBITTORRENT_PASSWORD: ${QBIT_PASS:-adminadmin}
+      DASH_QBITTORRENT_HOST: ${QBIT_HOST:-127.0.0.1}
       DASH_JELLYFIN_URL: http://jellyfin:8096
       DASH_JELLYFIN_API_KEY: ${JELLYFIN_API_KEY:-}
       DASH_JELLYFIN_USER_ID: ${JELLYFIN_USER_ID:-}

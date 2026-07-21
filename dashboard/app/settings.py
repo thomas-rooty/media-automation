@@ -33,6 +33,9 @@ class Settings(BaseSettings):
     qbittorrent_url: str | None = None  # e.g. http://gluetun:8080 (same network) or http://qbittorrent:8080
     qbittorrent_username: str | None = None
     qbittorrent_password: str | None = None
+    # Optional HTTP Host override for qBittorrent host-header validation.
+    # The TCP destination can remain the Gluetun Docker hostname.
+    qbittorrent_host: str | None = None
 
     # Jellyfin
     jellyfin_url: str | None = None  # e.g. http://jellyfin:8096
@@ -78,7 +81,7 @@ class Settings(BaseSettings):
 
     # Docker Engine socket. When mounted read-only, it lets the dashboard
     # report stopped/unhealthy containers (including services without an HTTP
-    # API such as Watchtower and Cloudflared).
+    # API such as Cloudflared).
     docker_socket: str = "/var/run/docker.sock"
 
     # Links (quick navigation buttons)

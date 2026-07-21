@@ -92,6 +92,7 @@ def main_data() -> dict[str, dict[str, int]]:
 
 
 @app.get("/System/Info/Public")
+@app.get("/System/Info")
 def jellyfin_status() -> dict[str, str]:
     return {"Version": "10.10.7"}
 

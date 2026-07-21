@@ -19,7 +19,7 @@ from fastapi import Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
-from urllib.parse import quote
+from urllib.parse import quote, urlsplit
 
 from .settings import ServiceStatus, Settings
 
@@ -97,7 +97,7 @@ async def _sample_qb_alltime() -> None:
         return
     base = settings.qbittorrent_url
     try:
-        async with httpx.AsyncClient(timeout=8) as client:
+        async with httpx.AsyncClient(timeout=8, headers=_qb_headers(base)) as client:
             await _qb_login(client, base, settings.qbittorrent_username, settings.qbittorrent_password)
             r = await client.get(f"{base.rstrip('/')}/api/v2/sync/maindata")
             if r.status_code >= 400:
@@ -836,7 +836,7 @@ async def system() -> dict[str, Any]:
 
     if settings.qbittorrent_url and settings.qbittorrent_username and settings.qbittorrent_password:
         base = settings.qbittorrent_url
-        async with httpx.AsyncClient(timeout=6) as client:
+        async with httpx.AsyncClient(timeout=6, headers=_qb_headers(base)) as client:
             try:
                 await _qb_login(client, base, settings.qbittorrent_username, settings.qbittorrent_password)
                 r = await client.get(f"{base.rstrip('/')}/api/v2/transfer/info")
@@ -1320,12 +1320,46 @@ async def radarr_soon(days_future: int = 365, limit: int = 10) -> dict[str, Any]
     return {"rangeDaysFuture": days_future, "count": len(out_sorted), "items": out_sorted}
 
 
+def _qb_headers(base: str) -> dict[str, str]:
+    """Build matching Host, Origin and Referer headers for qBittorrent."""
+    parsed = urlsplit(base)
+    configured_host = (settings.qbittorrent_host or "").strip()
+    host = configured_host or parsed.netloc
+    if configured_host and ":" not in configured_host and parsed.port:
+        host = f"{configured_host}:{parsed.port}"
+    origin = f"{parsed.scheme or 'http'}://{host}"
+    return {"Host": host, "Origin": origin, "Referer": f"{origin}/"}
+
+
 async def _qb_login(client: httpx.AsyncClient, base: str, username: str, password: str) -> None:
     url = f"{base.rstrip('/')}/api/v2/auth/login"
-    r = await client.post(url, data={"username": username, "password": password})
+    r = await client.post(
+        url,
+        data={"username": username, "password": password},
+        # qBittorrent 5 validates Origin/Referer against the request Host.
+        headers=_qb_headers(base),
+    )
     # qBittorrent returns 200 "Ok." on success, 403 on failure
     if r.status_code >= 400 or "Ok" not in r.text:
-        raise HTTPException(status_code=502, detail="qBittorrent login failed")
+        if r.status_code == 403:
+            message = "Accès qBittorrent refusé (IP bannie ou validation du nom d’hôte)"
+            reason = "forbidden"
+        elif r.status_code >= 400:
+            message = f"qBittorrent a répondu HTTP {r.status_code} pendant la connexion"
+            reason = "upstream_http_error"
+        else:
+            message = "Identifiants qBittorrent refusés"
+            reason = "credentials_rejected"
+        raise HTTPException(
+            status_code=502,
+            detail={
+                "service": "qbittorrent",
+                "status": r.status_code,
+                "reason": reason,
+                "message": message,
+                "body": (r.text or "").strip()[:120],
+            },
+        )
 
 
 @app.get("/api/qbittorrent/torrents")
@@ -1337,7 +1371,7 @@ async def qbittorrent_torrents(
     user = _require(settings.qbittorrent_username, "qBittorrent username")
     pw = _require(settings.qbittorrent_password, "qBittorrent password")
 
-    async with httpx.AsyncClient(timeout=10) as client:
+    async with httpx.AsyncClient(timeout=10, headers=_qb_headers(base)) as client:
         await _qb_login(client, base, user, pw)
         url = f"{base.rstrip('/')}/api/v2/torrents/info"
         params: dict[str, str] = {
@@ -1416,12 +1450,11 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
     }
 
     async with httpx.AsyncClient(timeout=10) as client:
-        # Sur certains Jellyfin, le endpoint recommandé est user-scoped:
-        # /Users/{userId}/Items/Latest
+        # Jellyfin stable scopes /Items/Latest with an optional userId query
+        # parameter. /Users/{id}/Items/Latest is not a valid route.
+        url = f"{base.rstrip('/')}/Items/Latest"
         if settings.jellyfin_user_id:
-            url = f"{base.rstrip('/')}/Users/{settings.jellyfin_user_id}/Items/Latest"
-        else:
-            url = f"{base.rstrip('/')}/Items/Latest"
+            params["userId"] = settings.jellyfin_user_id
         r = await client.get(url, headers=_jellyfin_headers(), params=params)
         if r.status_code >= 400:
             detail: dict[str, Any] = {"service": "jellyfin", "status": r.status_code}
@@ -1705,7 +1738,7 @@ async def _status_qb() -> ServiceStatus:
         return _service(slug, name, False, "identifiants manquants", category=category, state="unconfigured", container=container)
     started = time.perf_counter()
     try:
-        async with httpx.AsyncClient(timeout=5) as client:
+        async with httpx.AsyncClient(timeout=5, headers=_qb_headers(settings.qbittorrent_url)) as client:
             await _qb_login(client, settings.qbittorrent_url, settings.qbittorrent_username, settings.qbittorrent_password)
             r = await client.get(f"{settings.qbittorrent_url.rstrip('/')}/api/v2/app/version")
         elapsed = round((time.perf_counter() - started) * 1000)
@@ -1714,7 +1747,12 @@ async def _status_qb() -> ServiceStatus:
         version = r.text.strip()
         return _service(slug, name, True, f"v{version}" if version else "opérationnel", category=category, state="healthy", response_ms=elapsed, container=container)
     except HTTPException as exc:
-        return _service(slug, name, False, str(exc.detail), category=category, state="down", container=container)
+        detail = exc.detail
+        if isinstance(detail, dict):
+            message = str(detail.get("message") or detail.get("reason") or "connexion refusée")
+        else:
+            message = str(detail)
+        return _service(slug, name, False, message, category=category, state="down", container=container)
     except Exception as exc:
         return _service(slug, name, False, _short_error(exc), category=category, state="down", container=container)
 
@@ -1736,6 +1774,24 @@ async def _status_gluetun() -> ServiceStatus:
         return _service(slug, name, ok, "tunnel actif" if ok else f"VPN {vpn_state}", category=category, state="healthy" if ok else "down", response_ms=elapsed, container=container)
     except Exception as exc:
         return _service(slug, name, False, _short_error(exc), category=category, state="down", container=container)
+
+
+async def _status_jellyfin() -> ServiceStatus:
+    slug, name, category, container = "jellyfin", "Jellyfin", "media", "jellyfin"
+    if not settings.jellyfin_url:
+        return _service(slug, name, False, "URL non configurée", category=category, state="unconfigured", container=container)
+    if not settings.jellyfin_api_key:
+        return _service(slug, name, False, "clé API manquante", category=category, state="unconfigured", container=container)
+    return await _status_simple(
+        slug,
+        name,
+        category,
+        settings.jellyfin_url,
+        "/System/Info",
+        headers={"X-Emby-Token": settings.jellyfin_api_key},
+        version_keys=("Version",),
+        container=container,
+    )
 
 
 async def _status_docker_only(slug: str, name: str, category: str, container: str) -> ServiceStatus:
@@ -1846,7 +1902,7 @@ async def _collect_status() -> dict[str, Any]:
             version_keys=("version",),
             container="bazarr",
         ),
-        _status_simple("jellyfin", "Jellyfin", "media", settings.jellyfin_url, "/System/Info/Public", version_keys=("Version",), container="jellyfin"),
+        _status_jellyfin(),
         _status_simple(
             "jellyseerr",
             "Jellyseerr",
@@ -1858,7 +1914,6 @@ async def _collect_status() -> dict[str, Any]:
             container="jellyseerr",
         ),
         _status_simple("portainer", "Portainer", "tools", settings.portainer_url, "/api/status", version_keys=("Version",), container="portainer"),
-        _status_docker_only("watchtower", "Watchtower", "tools", "watchtower"),
         _status_docker_only("cloudflared", "Cloudflare Tunnel", "network", "cloudflared"),
     ]
 

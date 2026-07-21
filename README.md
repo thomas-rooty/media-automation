@@ -13,7 +13,7 @@ CapyFlix regroupe une stack média Docker complète et un dashboard tactile con�
 | Exploitation | Portainer, Watchtower, Cloudflare Tunnel |
 | Supervision | Dashboard CapyFlix (FastAPI + interface web) |
 
-Le dashboard surveille les APIs applicatives et l’état réel des conteneurs via le socket Docker monté en lecture seule. Les services sans API HTTP, comme Watchtower et Cloudflare Tunnel, ne sont donc plus invisibles.
+Le dashboard surveille les APIs applicatives et l’état réel des conteneurs via le socket Docker monté en lecture seule. Cloudflare Tunnel, qui ne fournit pas d’API HTTP exploitable ici, reste ainsi visible. Watchtower est volontairement exclu de la supervision.
 
 ## Démarrage
 
@@ -53,7 +53,7 @@ Le dashboard surveille les APIs applicatives et l’état réel des conteneurs v
 
 ## Ce que montre le dashboard
 
-- état complet des 13 services, latence API et état Docker ;
+- état complet des 12 services supervisés, latence API et état Docker ;
 - téléchargements actifs, progression, débit et ETA ;
 - prochains épisodes et films surveillés/manquants ;
 - derniers ajouts Jellyfin et demande de médias via Jellyseerr ;

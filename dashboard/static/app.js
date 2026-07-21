@@ -114,7 +114,16 @@ async function api(path, options = {}) {
       let detail = "";
       try {
         const body = await response.json();
-        detail = typeof body?.detail === "string" ? body.detail : "";
+        if (typeof body?.detail === "string") {
+          detail = body.detail;
+        } else if (body?.detail && typeof body.detail === "object") {
+          const message = text(body.detail.message);
+          const service = text(body.detail.service);
+          const upstreamStatus = Number(body.detail.status);
+          detail = [message || service, Number.isFinite(upstreamStatus) ? `HTTP ${upstreamStatus}` : ""]
+            .filter(Boolean)
+            .join(" · ");
+        }
       } catch {}
       const error = new Error(detail || `HTTP ${response.status}`);
       error.status = response.status;
