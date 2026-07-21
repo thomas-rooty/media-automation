@@ -1339,8 +1339,12 @@ async def _qb_login(client: httpx.AsyncClient, base: str, username: str, passwor
         # qBittorrent 5 validates Origin/Referer against the request Host.
         headers=_qb_headers(base),
     )
-    # qBittorrent returns 200 "Ok." on success, 403 on failure
-    if r.status_code >= 400 or "Ok" not in r.text:
+    # Depending on qBittorrent/WebUI authentication settings, success is
+    # returned either as 200 "Ok." or as an empty 204 response. Invalid
+    # credentials still return 200 "Fails.".
+    response_body = (r.text or "").strip()
+    login_ok = 200 <= r.status_code < 300 and (not response_body or response_body.lower().startswith("ok"))
+    if not login_ok:
         if r.status_code == 403:
             message = "Accès qBittorrent refusé (IP bannie ou validation du nom d’hôte)"
             reason = "forbidden"
@@ -1357,7 +1361,7 @@ async def _qb_login(client: httpx.AsyncClient, base: str, username: str, passwor
                 "status": r.status_code,
                 "reason": reason,
                 "message": message,
-                "body": (r.text or "").strip()[:120],
+                "body": response_body[:120],
             },
         )
 
@@ -1440,13 +1444,15 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
     base = _require(settings.jellyfin_url, "Jellyfin URL")
     lim = max(1, min(limit or settings.jellyfin_latest_limit, 50))
 
-    params = {
-        "IncludeItemTypes": "Movie,Episode",
-        "Limit": str(lim),
-        "Fields": "DateCreated,PrimaryImageAspectRatio,PremiereDate,UserData",
-        "EnableImages": "true",
-        "ImageTypeLimit": "1",
-        "EnableUserData": "true",
+    params: dict[str, str | int | bool | list[str]] = {
+        # Jellyfin's current OpenAPI schema defines both values as arrays.
+        # httpx serializes list values as repeated query parameters.
+        "includeItemTypes": ["Movie", "Episode"],
+        "limit": lim,
+        "fields": ["DateCreated", "PrimaryImageAspectRatio"],
+        "enableImages": True,
+        "imageTypeLimit": 1,
+        "enableUserData": True,
     }
 
     async with httpx.AsyncClient(timeout=10) as client:
@@ -1459,7 +1465,23 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
         if r.status_code >= 400:
             detail: dict[str, Any] = {"service": "jellyfin", "status": r.status_code}
             try:
-                detail["body"] = r.json()
+                body = r.json()
+                detail["body"] = body
+                if isinstance(body, dict):
+                    problem = str(body.get("detail") or body.get("title") or "").strip()
+                    errors = body.get("errors")
+                    first_error = ""
+                    if isinstance(errors, dict):
+                        for messages in errors.values():
+                            if isinstance(messages, list) and messages:
+                                first_error = str(messages[0]).strip()
+                                break
+                            if isinstance(messages, str):
+                                first_error = messages.strip()
+                                break
+                    message = ": ".join(part for part in (problem, first_error) if part)
+                    if message:
+                        detail["message"] = message[:300]
             except Exception:
                 detail["body"] = (r.text or "").strip()[:500]
             raise HTTPException(status_code=502, detail=detail)

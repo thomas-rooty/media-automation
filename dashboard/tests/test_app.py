@@ -5,7 +5,7 @@ from unittest.mock import patch
 
 import httpx
 
-from app.main import _qb_headers, app, jellyfin_latest, settings
+from app.main import _qb_headers, _qb_login, app, jellyfin_latest, settings
 
 
 class DashboardSmokeTests(unittest.IsolatedAsyncioTestCase):
@@ -57,12 +57,19 @@ class DashboardSmokeTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(headers["Origin"], "http://127.0.0.1:8080")
         self.assertEqual(headers["Referer"], "http://127.0.0.1:8080/")
 
+    async def test_qbittorrent_accepts_empty_204_login(self) -> None:
+        transport = httpx.MockTransport(lambda _: httpx.Response(204))
+        async with httpx.AsyncClient(transport=transport) as client:
+            await _qb_login(client, "http://gluetun:8080", "admin", "password")
+
     async def test_jellyfin_latest_uses_user_id_query_parameter(self) -> None:
         captured: dict[str, str] = {}
 
         def handler(request: httpx.Request) -> httpx.Response:
             captured["path"] = request.url.path
             captured["userId"] = request.url.params.get("userId", "")
+            captured["fields"] = ",".join(request.url.params.get_list("fields"))
+            captured["types"] = ",".join(request.url.params.get_list("includeItemTypes"))
             return httpx.Response(200, json=[])
 
         real_client = httpx.AsyncClient
@@ -80,6 +87,8 @@ class DashboardSmokeTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(result["count"], 0)
         self.assertEqual(captured["path"], "/Items/Latest")
         self.assertEqual(captured["userId"], "user-123")
+        self.assertEqual(captured["types"], "Movie,Episode")
+        self.assertEqual(captured["fields"], "DateCreated,PrimaryImageAspectRatio")
 
 
 if __name__ == "__main__":
