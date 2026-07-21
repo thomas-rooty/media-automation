@@ -62,7 +62,7 @@ class DashboardSmokeTests(unittest.IsolatedAsyncioTestCase):
         async with httpx.AsyncClient(transport=transport) as client:
             await _qb_login(client, "http://gluetun:8080", "admin", "password")
 
-    async def test_jellyfin_latest_uses_user_id_query_parameter(self) -> None:
+    async def test_jellyfin_latest_uses_stable_items_query(self) -> None:
         captured: dict[str, str] = {}
 
         def handler(request: httpx.Request) -> httpx.Response:
@@ -70,7 +70,8 @@ class DashboardSmokeTests(unittest.IsolatedAsyncioTestCase):
             captured["userId"] = request.url.params.get("userId", "")
             captured["fields"] = ",".join(request.url.params.get_list("fields"))
             captured["types"] = ",".join(request.url.params.get_list("includeItemTypes"))
-            return httpx.Response(200, json=[])
+            captured["sortBy"] = request.url.params.get("sortBy", "")
+            return httpx.Response(200, json={"Items": []})
 
         real_client = httpx.AsyncClient
         fake_client = real_client(transport=httpx.MockTransport(handler))
@@ -85,10 +86,36 @@ class DashboardSmokeTests(unittest.IsolatedAsyncioTestCase):
             settings.jellyfin_url, settings.jellyfin_api_key, settings.jellyfin_user_id = previous
 
         self.assertEqual(result["count"], 0)
-        self.assertEqual(captured["path"], "/Items/Latest")
+        self.assertEqual(captured["path"], "/Items")
         self.assertEqual(captured["userId"], "user-123")
         self.assertEqual(captured["types"], "Movie,Episode")
         self.assertEqual(captured["fields"], "DateCreated,PrimaryImageAspectRatio")
+        self.assertEqual(captured["sortBy"], "DateCreated")
+
+    async def test_jellyfin_latest_retries_without_stale_user_id(self) -> None:
+        requests: list[bool] = []
+
+        def handler(request: httpx.Request) -> httpx.Response:
+            has_user = "userId" in request.url.params
+            requests.append(has_user)
+            if has_user:
+                return httpx.Response(400, text="Error processing request.")
+            return httpx.Response(200, json={"Items": []})
+
+        real_client = httpx.AsyncClient
+        fake_client = real_client(transport=httpx.MockTransport(handler))
+        previous = (settings.jellyfin_url, settings.jellyfin_api_key, settings.jellyfin_user_id)
+        settings.jellyfin_url = "http://jellyfin:8096"
+        settings.jellyfin_api_key = "test-key"
+        settings.jellyfin_user_id = "stale-user"
+        try:
+            with patch("app.main.httpx.AsyncClient", return_value=fake_client):
+                result = await jellyfin_latest(limit=1)
+        finally:
+            settings.jellyfin_url, settings.jellyfin_api_key, settings.jellyfin_user_id = previous
+
+        self.assertEqual(requests, [True, False])
+        self.assertFalse(result["userContext"])
 
 
 if __name__ == "__main__":

@@ -97,14 +97,14 @@ def jellyfin_status() -> dict[str, str]:
     return {"Version": "10.10.7"}
 
 
-@app.get("/Items/Latest")
-def jellyfin_latest() -> list[dict]:
-    return [
+@app.get("/Items")
+def jellyfin_latest() -> dict[str, list[dict]]:
+    return {"Items": [
         {"Id": "1", "Name": "Cold Harbor", "Type": "Episode", "SeriesName": "Severance", "ParentIndexNumber": 2, "IndexNumber": 10, "DateCreated": _iso(hours=-1), "ImageTags": {"Primary": "a"}, "UserData": {"Played": False}},
         {"Id": "2", "Name": "Mickey 17", "Type": "Movie", "ProductionYear": 2025, "DateCreated": _iso(hours=-3), "ImageTags": {"Primary": "b"}, "UserData": {"Played": False, "PlaybackPositionTicks": 1200}},
         {"Id": "3", "Name": "The Path", "Type": "Episode", "SeriesName": "The Last of Us", "ParentIndexNumber": 2, "IndexNumber": 4, "DateCreated": _iso(hours=-8), "ImageTags": {"Primary": "c"}, "UserData": {"Played": True}},
         {"Id": "4", "Name": "Silo", "Type": "Episode", "SeriesName": "Silo", "ParentIndexNumber": 2, "IndexNumber": 7, "DateCreated": _iso(days=-1), "ImageTags": {"Primary": "d"}, "UserData": {"Played": False}},
-    ]
+    ]}
 
 
 @app.get("/Items/{item_id}/Images/Primary")

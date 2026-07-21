@@ -1445,23 +1445,35 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
     lim = max(1, min(limit or settings.jellyfin_latest_limit, 50))
 
     params: dict[str, str | int | bool | list[str]] = {
-        # Jellyfin's current OpenAPI schema defines both values as arrays.
-        # httpx serializes list values as repeated query parameters.
+        # /Items is more robust across Jellyfin versions than /Items/Latest,
+        # whose per-user latest-item preference handling can fail server-side.
         "includeItemTypes": ["Movie", "Episode"],
         "limit": lim,
+        "recursive": True,
+        "sortBy": ["DateCreated"],
+        "sortOrder": ["Descending"],
         "fields": ["DateCreated", "PrimaryImageAspectRatio"],
         "enableImages": True,
         "imageTypeLimit": 1,
         "enableUserData": True,
+        "enableTotalRecordCount": False,
     }
 
     async with httpx.AsyncClient(timeout=10) as client:
-        # Jellyfin stable scopes /Items/Latest with an optional userId query
-        # parameter. /Users/{id}/Items/Latest is not a valid route.
-        url = f"{base.rstrip('/')}/Items/Latest"
-        if settings.jellyfin_user_id:
-            params["userId"] = settings.jellyfin_user_id
+        url = f"{base.rstrip('/')}/Items"
+        active_user_id = (settings.jellyfin_user_id or "").strip() or None
+        if active_user_id:
+            params["userId"] = active_user_id
         r = await client.get(url, headers=_jellyfin_headers(), params=params)
+
+        # A stale/invalid configured user id must not hide the whole library.
+        # API-key authentication is explicitly supported by /Items without a
+        # user context, so retry once without personalization.
+        if r.status_code in {400, 404} and active_user_id:
+            params.pop("userId", None)
+            active_user_id = None
+            r = await client.get(url, headers=_jellyfin_headers(), params=params)
+
         if r.status_code >= 400:
             detail: dict[str, Any] = {"service": "jellyfin", "status": r.status_code}
             try:
@@ -1486,7 +1498,14 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
                 detail["body"] = (r.text or "").strip()[:500]
             raise HTTPException(status_code=502, detail=detail)
         try:
-            items: list[dict[str, Any]] = r.json()
+            payload: Any = r.json()
+            if isinstance(payload, dict) and isinstance(payload.get("Items"), list):
+                items = payload["Items"]
+            elif isinstance(payload, list):
+                # Kept for compatibility with older/mock Jellyfin responses.
+                items = payload
+            else:
+                raise ValueError("Jellyfin response does not contain an Items array")
         except Exception:
             raise HTTPException(
                 status_code=502,
@@ -1502,7 +1521,7 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
         # Series progress lookup (episodes watched / total) for episode items.
         # Only reliable when we have a configured user id.
         series_progress: dict[str, dict[str, int]] = {}
-        if settings.jellyfin_user_id:
+        if active_user_id:
             series_ids: set[str] = set()
             for it in items:
                 if not isinstance(it, dict):
@@ -1515,7 +1534,7 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
 
             async def fetch_series_progress(sid: str) -> tuple[str, dict[str, int] | None]:
                 try:
-                    s_url = f"{base.rstrip('/')}/Users/{settings.jellyfin_user_id}/Items/{sid}"
+                    s_url = f"{base.rstrip('/')}/Users/{active_user_id}/Items/{sid}"
                     s_params = {"Fields": "RecursiveItemCount,UserData", "EnableUserData": "true"}
                     sr = await client.get(s_url, headers=_jellyfin_headers(), params=s_params)
                     if sr.status_code >= 400:
@@ -1572,7 +1591,7 @@ async def jellyfin_latest(limit: int | None = None) -> dict[str, Any]:
             }
         )
 
-    return {"count": len(out), "items": out}
+    return {"count": len(out), "items": out, "userContext": bool(active_user_id)}
 
 
 @app.get("/api/jellyfin/items/{item_id}/image")

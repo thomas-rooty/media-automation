@@ -242,7 +242,7 @@ function renderStatus(data) {
   dot.className = `status-dot ${allGood ? "good" : "bad"}`;
   $("statusText").textContent = allGood ? "Tous les services répondent" : `${failing} service${failing > 1 ? "s" : ""} à vérifier`;
   $("statusDetail").textContent = `${healthy}/${total} opérationnels${data?.dockerAvailable === false ? " · Docker non visible" : ""}`;
-  $("overviewHeadline").textContent = allGood ? "La plateforme est opérationnelle" : `${healthy} services sur ${total} opérationnels`;
+  $("overviewHeadline").textContent = allGood ? "Opérationnel" : `${healthy} services sur ${total} opérationnels`;
 
   const strip = $("serviceStrip");
   strip.innerHTML = items.map((item) => `
