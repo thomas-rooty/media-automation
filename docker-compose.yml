@@ -287,6 +287,31 @@ services:
 
     restart: unless-stopped
 
+  navidrome:
+    image: deluan/navidrome:latest
+    container_name: navidrome
+
+    networks:
+      - media-network
+      - arr-network
+
+    ports:
+      - "4533:4533"
+
+    environment:
+      ND_MUSICFOLDER: /music
+      ND_DATAFOLDER: /data
+      ND_SCANSCHEDULE: 1h
+      ND_LOGLEVEL: info
+
+    user: "${PUID:-1000}:${PGID:-1000}"
+
+    volumes:
+      - ./config/navidrome:/data
+      - /mnt/medias/Medias/Music:/music:ro
+
+    restart: unless-stopped
+
   # =========================
   # Tools
   # =========================
@@ -362,7 +387,7 @@ services:
       - /mnt/medias2:/mnt/medias2:ro
 
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"]
+      test: [ "CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)" ]
       interval: 30s
       timeout: 5s
       retries: 3
