@@ -1,0 +1,567 @@
+import argparse
+import email.utils
+import fcntl
+import hashlib
+import http.cookiejar
+import json
+import os
+import shutil
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from pathlib import Path
+
+ROOT = Path("/work")
+STATE_FILE = ROOT / "worker-state.json"
+SELECTION_FILE = ROOT / "selection.json"
+CACHE = ROOT / "cache"
+
+QBIT = os.environ["QBIT_URL"].rstrip("/")
+USER = os.environ["QBIT_USER"]
+PASSWORD = os.environ["QBIT_PASS"]
+
+CATEGORY = "zen-optimizer"
+DEST = "/data/Zen/torrents"
+DISK = Path("/zen-data")
+
+BUDGET = 300_000_000_000
+RESERVE = 10_000_000_000
+INTERVAL = 60
+COOLDOWN = 300
+
+os.umask(0o077)
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--apply", action="store_true")
+parser.add_argument("--limit", type=int, default=5)
+args = parser.parse_args()
+
+if args.limit < 1:
+    raise SystemExit("Limite invalide")
+
+# Empêche les exécutions simultanées.
+lock = open(ROOT / "worker.lock", "a+")
+try:
+    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+except BlockingIOError:
+    raise SystemExit("Worker déjà actif")
+
+def read_json(path, default):
+    return json.loads(path.read_text()) if path.exists() else default
+
+state = read_json(STATE_FILE, {
+    "next_request_at": 0,
+    "processed": {},
+})
+
+state.setdefault("next_request_at", 0)
+state.setdefault("processed", {})
+state.setdefault("failed", {})
+
+def save():
+    temp = STATE_FILE.with_suffix(".tmp")
+    temp.write_text(json.dumps(state, indent=2))
+    os.replace(temp, STATE_FILE)
+
+# Connexion qBittorrent.
+jar = http.cookiejar.CookieJar()
+opener = urllib.request.build_opener(
+    urllib.request.ProxyHandler({}),
+    urllib.request.HTTPCookieProcessor(jar)
+)
+
+def open_url(url, data=None, headers=None):
+    req = urllib.request.Request(
+        url, data=data, headers=headers or {}
+    )
+    return opener.open(req, timeout=45)
+
+def login():
+    data = urllib.parse.urlencode({
+        "username": USER,
+        "password": PASSWORD,
+    }).encode()
+
+    with open_url(
+        QBIT + "/api/v2/auth/login",
+        data=data,
+        headers={
+            "Origin": QBIT,
+            "Referer": QBIT + "/",
+        }
+    ) as r:
+        status = r.status
+        body = r.read().strip()
+
+    if not (
+        (status == 200 and body == b"Ok.")
+        or status == 204
+    ):
+        raise RuntimeError("Authentification refusée")
+
+    # Vérification réelle de la session.
+    with open_url(QBIT + "/api/v2/torrents/info") as r:
+        json.load(r)
+
+def qbit_info():
+    with open_url(QBIT + "/api/v2/torrents/info") as r:
+        return json.load(r)
+
+def actual_usage(path):
+    total = 0
+    for root, dirs, files in os.walk(path):
+        for name in files:
+            p = os.path.join(root, name)
+            try:
+                total += os.lstat(p).st_size
+            except FileNotFoundError:
+                pass
+    return total
+
+def key_of(t):
+    # Identifiant local stable de la sélection.
+    return hashlib.sha256(
+        (t["title"] + "|" +
+         str(round(t["size_gb"] * 1e9))).encode()
+    ).hexdigest()
+
+def infohash(raw):
+    # Extraire les octets bencode exacts du champ info.
+    def parse(i):
+        if i >= len(raw):
+            raise ValueError("Bencode tronqué")
+        c = raw[i:i+1]
+        if c == b"i":
+            j = raw.index(b"e", i+1)
+            int(raw[i+1:j])
+            return j+1
+        if c in (b"l", b"d"):
+            i += 1
+            while i < len(raw) and raw[i:i+1] != b"e":
+                i = parse(i)
+            if i >= len(raw):
+                raise ValueError("Bencode tronqué")
+            return i+1
+        j = raw.index(b":", i)
+        n = int(raw[i:j])
+        k = j+1+n
+        if k > len(raw):
+            raise ValueError("Bencode tronqué")
+        return k
+
+    def string(i):
+        j = raw.index(b":", i)
+        n = int(raw[i:j])
+        start = j+1
+        end = start+n
+        if end > len(raw):
+            raise ValueError("Bencode tronqué")
+        return raw[start:end], end
+
+    if not raw.startswith(b"d"):
+        raise ValueError("Torrent invalide")
+
+    i = 1
+    result = None
+    while i < len(raw) and raw[i:i+1] != b"e":
+        key, i = string(i)
+        start = i
+        i = parse(i)
+        if key == b"info":
+            result = hashlib.sha1(raw[start:i]).hexdigest()
+
+    if i != len(raw)-1 or result is None:
+        raise ValueError("Dictionnaire info invalide")
+
+    return result
+
+def fetch(url):
+    parsed = urllib.parse.urlsplit(url)
+    if (
+        parsed.scheme != "http"
+        or parsed.hostname != "127.0.0.1"
+        or parsed.port != 9696
+        or parsed.path != "/27/download"
+    ):
+        raise ValueError("URL Prowlarr non autorisée")
+
+    # Dans Docker, Prowlarr est joignable par son nom.
+    remote = urllib.parse.urlunsplit((
+        "http", "prowlarr:9696",
+        parsed.path, parsed.query, ""
+    ))
+
+    with open_url(remote) as r:
+        data = r.read(5_000_001)
+
+    if len(data) > 5_000_000:
+        raise ValueError("Fichier torrent trop volumineux")
+
+    return data, infohash(data)
+
+def add_torrent(raw):
+    boundary = "ZenWorkerBoundary"
+
+    body = bytearray()
+
+    for name, value in (
+        ("category", CATEGORY),
+        ("savepath", DEST),
+    ):
+        body.extend((
+            f"--{boundary}\r\n"
+            f'Content-Disposition: form-data; name="{name}"'
+            f"\r\n\r\n{value}\r\n"
+        ).encode())
+
+    body.extend((
+        f"--{boundary}\r\n"
+        'Content-Disposition: form-data; '
+        'name="torrents"; filename="release.torrent"\r\n'
+        "Content-Type: application/x-bittorrent\r\n\r\n"
+    ).encode())
+    body.extend(raw)
+    body.extend(f"\r\n--{boundary}--\r\n".encode())
+
+    with open_url(
+        QBIT + "/api/v2/torrents/add",
+        data=bytes(body),
+        headers={
+            "Content-Type":
+            f"multipart/form-data; boundary={boundary}"
+        }
+    ) as r:
+        response = r.read().decode().strip()
+
+    if response == "Ok.":
+        return
+
+    try:
+        result = json.loads(response)
+        if result.get("success_count", 0) >= 1:
+            return
+    except json.JSONDecodeError:
+        pass
+
+    raise RuntimeError("Ajout non confirmé : " + response[:100])
+
+def retry_after(error):
+    value = error.headers.get("Retry-After")
+    if value:
+        try:
+            return max(0, int(value))
+        except ValueError:
+            try:
+                date = email.utils.parsedate_to_datetime(value)
+                return max(0, int(date.timestamp() - time.time()))
+            except (TypeError, ValueError):
+                pass
+    return COOLDOWN
+
+# Reconstruire le catalogue sans requête réseau.
+catalogue = {}
+for file in CACHE.glob("*.json"):
+    for t in read_json(file, []):
+        if t.get("title") and t.get("downloadUrl"):
+            catalogue.setdefault(t["title"], []).append(t)
+
+selection = read_json(SELECTION_FILE, [])
+
+# Torrents du premier lot : tous déjà ajoutés.
+initial = read_json(ROOT / "batch-ready.json", [])
+initial_titles = {t["title"] for t in initial}
+
+# Torrents ajoutés par l'ancienne version.
+old_state = read_json(ROOT / "queue-state.json", {})
+old_titles = {
+    t["title"]
+    for t in old_state.get("added", {}).values()
+    if t.get("title")
+}
+
+already_known = initial_titles | old_titles
+
+queue = []
+ambiguous = 0
+
+for t in selection:
+    if t["title"] in already_known:
+        continue
+
+    matches = [
+        x for x in catalogue.get(t["title"], [])
+        if abs(
+            x.get("size", 0) -
+            round(t["size_gb"] * 1e9)
+        ) <= 1000
+    ]
+
+    urls = list(dict.fromkeys(
+        x["downloadUrl"] for x in matches
+    ))
+
+    if len(urls) != 1:
+        ambiguous += 1
+        continue
+
+    key = key_of(t)
+    if (
+        key not in state["processed"]
+        and state["failed"].get(key, 0) <= time.time()
+    ):
+        queue.append((key, t, urls[0]))
+
+# Priorité aux tailles intermédiaires.
+def priority(item):
+    key, torrent, url = item
+    size = torrent["size_gb"]
+
+    if 0.1 <= size < 0.4:
+        group = 0
+    elif 0.4 <= size < 1:
+        group = 1
+    elif 1 <= size < 10:
+        group = 2
+    elif 0.01 <= size < 0.1:
+        group = 3
+    else:
+        group = 4
+
+    return (group, -size)
+
+queue.sort(key=priority)
+
+login()
+existing = qbit_info()
+
+reserved = sum(
+    t.get("size", 0) for t in existing
+    if t.get("category") == CATEGORY
+)
+
+print("=== ZEN WORKER V3 ===", flush=True)
+print("Torrents sélectionnés :", len(selection))
+print("Candidats à traiter :", len(queue))
+print("Correspondances ambiguës :", ambiguous)
+print("Torrents Zen actuels :", sum(
+    t.get("category") == CATEGORY for t in existing
+))
+print("Stockage réservé : %.3f Go" % (reserved / 1e9))
+print("Budget : 300 Go")
+print("Mode :", "AJOUT" if args.apply else "SIMULATION")
+if queue:
+    print("Prochain candidat :", queue[0][1]["title"])
+
+if not args.apply:
+    raise SystemExit(0)
+
+added = 0
+failed_this_cycle = 0
+
+for index, (key, t, url) in enumerate(queue, 1):
+    if added >= args.limit:
+        break
+
+    size = round(t["size_gb"] * 1e9)
+
+    current = qbit_info()
+    hashes = {x["hash"].lower() for x in current}
+    reserved = sum(
+        x.get("size", 0) for x in current
+        if x.get("category") == CATEGORY
+    )
+
+    disk_used = actual_usage(DISK)
+    accounted = max(reserved, disk_used)
+
+    if accounted + size > BUDGET:
+        continue
+
+    if shutil.disk_usage(DISK).free < size + RESERVE:
+        print("STOP : espace disque insuffisant")
+        break
+
+    remaining = state["next_request_at"] - time.time()
+
+    if remaining > 0:
+        if remaining > INTERVAL:
+            print(
+                "SUSPENDU : reprise possible dans %.0f secondes"
+                % remaining,
+                flush=True
+            )
+            break
+
+        print(
+            "Attente : %.0f secondes" % remaining,
+            flush=True
+        )
+        time.sleep(remaining)
+
+    state["next_request_at"] = time.time() + INTERVAL
+    save()
+
+    try:
+        raw, h = fetch(url)
+
+        if h in hashes:
+            state["processed"][key] = {
+                "hash": h, "status": "existing"
+            }
+            save()
+            print(f"[{index}] Déjà présent", flush=True)
+            continue
+
+        add_torrent(raw)
+
+        match = None
+        for attempt in range(15):
+            current = qbit_info()
+            match = next(
+                (x for x in current
+                 if x["hash"].lower() == h), None
+            )
+            if match:
+                break
+            if attempt < 14:
+                time.sleep(2)
+
+        if match is None:
+            raise RuntimeError(
+                "Ajout non visible : vérification nécessaire"
+            )
+
+        if (
+            match.get("category") != CATEGORY
+            or match.get("save_path") != DEST
+        ):
+            raise RuntimeError("Destination inattendue")
+
+        state["processed"][key] = {
+            "hash": h,
+            "status": "added",
+            "size_bytes": match.get("size", size),
+        }
+        save()
+
+        added += 1
+        print(
+            f"[{index}] AJOUTÉ ({added}/{args.limit}) : "
+            f"{t['title'][:65]}",
+            flush=True
+        )
+
+    except urllib.error.HTTPError as e:
+        from urllib.parse import urlsplit
+
+        parsed = urlsplit(e.url)
+        host = parsed.hostname or "inconnu"
+
+        # Lire la réponse sans afficher les éventuels secrets.
+        response_body = e.read(32768).lower()
+
+        unavailable = (
+            host == "prowlarr"
+            and e.code in (403, 500)
+            and b"torrent not available for download"
+                in response_body
+        )
+
+        if unavailable:
+            state["processed"][key] = {
+                "status": "unavailable",
+                "http_status": e.code,
+                "reason": "Torrent not available for download",
+                "timestamp": int(time.time())
+            }
+            save()
+
+            print(
+                f"[{index}] INDISPONIBLE : "
+                f"{t['title'][:65]}",
+                flush=True
+            )
+
+            # Garder la cadence et passer au suivant.
+            continue
+
+        print(
+            f"STOP : HTTP {e.code} | Service : {host}",
+            flush=True
+        )
+
+        retry = e.headers.get("Retry-After")
+        if retry:
+            print(
+                f"Retry-After reçu : {retry}",
+                flush=True
+            )
+
+        # Une erreur Prowlarr 500 peut provenir d'un torrent
+        # indisponible. Quarantaine de 24h, pas exclusion définitive.
+        # Ne jamais ignorer une limitation imposée par le serveur.
+        if (
+            host == "prowlarr"
+            and e.code == 500
+            and not retry
+        ):
+            state["failed"][key] = time.time() + 86400
+            failed_this_cycle += 1
+            save()
+
+            print(
+                f"[{index}] ÉCHEC TEMPORAIRE : "
+                f"{t['title'][:65]} "
+                "(ignoré pendant 24h)",
+                flush=True
+            )
+
+            if failed_this_cycle < 2:
+                continue
+
+            # Plusieurs échecs consécutifs :
+            # éviter de solliciter un service en panne.
+            state["next_request_at"] = max(
+                state["next_request_at"],
+                time.time() + 3600
+            )
+            save()
+            print(
+                "STOP : 2 erreurs Prowlarr, "
+                "pause globale de 60 minutes",
+                flush=True
+            )
+            break
+
+        if e.code == 429 or 500 <= e.code <= 599:
+            delay = retry_after(e)
+            state["next_request_at"] = max(
+                state["next_request_at"],
+                time.time() + delay
+            )
+            save()
+            print(
+                f"Suspension : {delay} secondes minimum",
+                flush=True
+            )
+
+        if host == "prowlarr" and e.code == 500:
+            print(
+                "Réponse sans preuve explicite "
+                "d'indisponibilité : candidat conservé.",
+                flush=True
+            )
+
+        break
+
+    except Exception as e:
+        print(
+            "STOP :",
+            type(e).__name__,
+            str(e),
+            flush=True
+        )
+        break
+
+print("Ajouts confirmés :", added, flush=True)

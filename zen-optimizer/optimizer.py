@@ -1,0 +1,183 @@
+import os
+import json
+import time
+import urllib.request
+import urllib.parse
+from pathlib import Path
+
+API_KEY = os.environ["API_KEY"]
+URL = "http://127.0.0.1:9696/api/v1/search"
+
+BUDGET = 600.0
+BONUS = 0.25
+INDEXER_ID = 27
+
+CATEGORIES = {
+    103010: "Musique",
+    103030: "Audiobooks",
+    103050: "Podcasts",
+    107010: "Presse",
+    107020: "Livres",
+    107030: "BD / Manga",
+    102000: "Films",
+    102050: "Clips",
+    102070: "Documentaires",
+    105000: "Series",
+    105070: "Animation",
+    101000: "Jeux",
+    104030: "Linux / Mac",
+    108010: "Impression 3D",
+}
+
+CACHE = Path("zen-optimizer/cache")
+CACHE.mkdir(parents=True, exist_ok=True)
+os.chmod(CACHE, 0o700)
+
+def search(category):
+    cache_file = CACHE / f"{category}.json"
+
+    if cache_file.exists():
+        return json.loads(cache_file.read_text())
+
+    params = urllib.parse.urlencode({
+        "query": "",
+        "type": "search",
+        "indexerIds": INDEXER_ID,
+        "categories": category,
+        "limit": 100,
+    })
+
+    req = urllib.request.Request(
+        URL + "?" + params,
+        headers={"X-Api-Key": API_KEY},
+    )
+
+    with urllib.request.urlopen(req, timeout=60) as response:
+        results = json.load(response)
+
+    cache_file.write_text(json.dumps(results))
+    os.chmod(cache_file, 0o600)
+
+    time.sleep(2)
+    return results
+
+def evaluate(t):
+    size = t.get("size") or 0
+    seeds = t.get("seeders") or 0
+
+    if size <= 0 or seeds < 1 or not t.get("downloadUrl"):
+        return None
+
+    gb = size / 1e9
+
+    if gb < 4:
+        coef = (gb + 0.25) / 4.25
+    else:
+        # Interpolation indicative, à remplacer
+        # par la formule exacte au-dessus de 4 Go.
+        points = [(4, 1), (25, 1.24), (60, 1.38)]
+        if gb <= 60:
+            for (x1, y1), (x2, y2) in zip(
+                points, points[1:]
+            ):
+                if x1 <= gb <= x2:
+                    coef = y1 + (gb-x1)*(y2-y1)/(x2-x1)
+                    break
+        else:
+            return None
+
+    if gb < 1:
+        extra = 0.20 if seeds <= 24 else 0
+    elif gb < 5:
+        extra = (
+            0.35 if seeds <= 10 or 25 <= seeds <= 50
+            else 0.20 if seeds <= 24
+            else 0
+        )
+    elif gb < 10:
+        extra = 0.35 if seeds <= 50 else 0
+    elif gb < 50:
+        extra = (
+            0.50 if seeds <= 10
+            else 0.35 if seeds <= 50
+            else 0
+        )
+    elif gb <= 60:
+        extra = 0.50 if seeds <= 50 else 0
+
+    note = 1.0 + extra
+    zen = coef * (note / 2) * 1.25 / 7
+
+    return {
+        "title": t.get("title", ""),
+        "size_gb": gb,
+        "seeders": seeds,
+        "note": note,
+        "zen_day": zen,
+        "zen_per_gb": zen / gb,
+    }
+
+candidates = {}
+errors = []
+
+for cat, name in CATEGORIES.items():
+    try:
+        results = search(cat)
+        print(f"{name}: {len(results)} resultats", flush=True)
+
+        for torrent in results:
+            candidate = evaluate(torrent)
+            if not candidate:
+                continue
+
+            key = (
+                str(torrent.get("infoHash") or "")
+                or str(torrent.get("guid") or "")
+                or candidate["title"]
+            )
+
+            if key not in candidates:
+                candidates[key] = candidate
+
+    except Exception as e:
+        errors.append(f"{name}: {e}")
+        print(f"ERREUR {name}: {e}", flush=True)
+
+ranked = sorted(
+    candidates.values(),
+    key=lambda x: x["zen_per_gb"],
+    reverse=True
+)
+
+selected = []
+used = 0
+
+for t in ranked:
+    if used + t["size_gb"] <= BUDGET:
+        selected.append(t)
+        used += t["size_gb"]
+
+total = sum(t["zen_day"] for t in selected)
+
+print("\n===== RESULTATS =====")
+print(f"Candidats uniques : {len(candidates)}")
+print(f"Torrents retenus : {len(selected)}")
+print(f"Stockage : {used:.2f} / {BUDGET} Go")
+print(f"Zen par jour : {total:.3f}")
+print(f"Objectif : {total/20*100:.1f}%")
+print(f"Categories en erreur : {len(errors)}")
+
+print("\nTOP 10 Zen/Go :")
+for t in selected[:10]:
+    print(
+        f"{t['size_gb']:.3f} Go | "
+        f"{t['zen_day']:.4f} Zen/j | "
+        f"{t['title']}"
+    )
+
+output = Path("zen-optimizer/selection.json")
+output.write_text(
+    json.dumps(selected, indent=2, ensure_ascii=False)
+)
+
+os.chmod(output, 0o600)

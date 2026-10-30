@@ -1,0 +1,198 @@
+import os
+import json
+import time
+import urllib.parse
+import urllib.request
+import urllib.error
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+CACHE = ROOT / "cache"
+SELECTION = ROOT / "selection.json"
+STATE = ROOT / "refresh-state.json"
+
+CATEGORIES = [
+    103010, 103030, 103050,
+    107010, 107020, 107030,
+    102000, 102050, 102070,
+    105000, 105070,
+    101000, 104030, 108010
+]
+
+MIN_SIZE = 100_000_000
+MAX_SIZE = 400_000_000
+MIN_SEEDERS = 1
+MAX_SEEDERS = 10
+
+# Maximum une recherche par catégorie toutes les six heures.
+CATEGORY_INTERVAL = 21600
+
+os.umask(0o077)
+
+def read_json(path, default):
+    return json.loads(path.read_text()) if path.exists() else default
+
+def write_json(path, data):
+    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp.write_text(json.dumps(data, indent=2, ensure_ascii=False))
+    os.replace(tmp, path)
+
+def api_key():
+    key = os.environ.get("PROWLARR_API_KEY", "")
+    if key:
+        return key
+
+    env_path = ROOT.parent / ".env"
+    if env_path.exists():
+        for line in env_path.read_text().splitlines():
+            if line.startswith("PROWLARR_API_KEY="):
+                return line.split("=", 1)[1].strip().strip('"').strip("'")
+
+    raise SystemExit("PROWLARR_API_KEY manquant dans l'environnement ou .env")
+
+def identity(t):
+    return (t["title"], round(t["size_gb"] * 1e9))
+
+def eligible(t):
+    size = int(t.get("size") or 0)
+    seeds = int(t.get("seeders") or 0)
+    return (
+        MIN_SIZE <= size <= MAX_SIZE
+        and MIN_SEEDERS <= seeds <= MAX_SEEDERS
+        and bool(t.get("downloadUrl"))
+        and bool(t.get("title"))
+    )
+
+def candidate(t):
+    size = int(t["size"])
+    gb = size / 1e9
+    seeds = int(t["seeders"])
+    note = 1.20
+    coef = (gb + 0.25) / 4.25
+    zen = coef * (note / 2) * 1.25 / 7
+
+    return {
+        "title": t["title"],
+        "size_gb": gb,
+        "seeders": seeds,
+        "note": note,
+        "zen_day": zen,
+        "zen_per_gb": zen / gb
+    }
+
+state = read_json(STATE, {"last_search": {}, "next_request_at": 0})
+state.setdefault("last_search", {})
+state.setdefault("next_request_at", 0)
+
+now = time.time()
+
+if now < state["next_request_at"]:
+    print("Recherche suspendue jusqu'à :",
+          time.ctime(state["next_request_at"]))
+    raise SystemExit(0)
+
+eligible_categories = [
+    cat for cat in CATEGORIES
+    if now - state["last_search"].get(str(cat), 0) >= CATEGORY_INTERVAL
+]
+
+if not eligible_categories:
+    print("Toutes les catégories ont été interrogées récemment.")
+    raise SystemExit(0)
+
+# Rotation progressive entre les catégories.
+cat = min(
+    eligible_categories,
+    key=lambda c: state["last_search"].get(str(c), 0)
+)
+
+params = urllib.parse.urlencode({
+    "query": "",
+    "type": "search",
+    "indexerIds": 27,
+    "categories": cat,
+    "limit": 100
+})
+
+url = "http://127.0.0.1:9696/api/v1/search?" + params
+
+req = urllib.request.Request(
+    url,
+    headers={"X-Api-Key": api_key()}
+)
+
+print("Catégorie interrogée :", cat, flush=True)
+
+try:
+    with urllib.request.urlopen(req, timeout=60) as response:
+        results = json.load(response)
+
+except urllib.error.HTTPError as e:
+    delay = 3600
+
+    if e.code == 429:
+        delay = 86400
+        retry = e.headers.get("Retry-After")
+        if retry:
+            try:
+                delay = max(delay, int(retry))
+            except ValueError:
+                pass
+
+    state["next_request_at"] = time.time() + delay
+    write_json(STATE, state)
+
+    print("Erreur HTTP :", e.code)
+    print("Nouvelles recherches suspendues :", delay, "secondes")
+    raise SystemExit(1)
+
+except Exception as e:
+    state["next_request_at"] = time.time() + 3600
+    write_json(STATE, state)
+    print("Recherche interrompue :", type(e).__name__)
+    raise SystemExit(1)
+
+if not isinstance(results, list):
+    print("Réponse inattendue : aucun fichier modifié.")
+    raise SystemExit(1)
+
+old_cache = read_json(CACHE / f"{cat}.json", [])
+
+# Fusion : conserver les anciennes références tout en
+# actualisant les résultats retrouvés lors de la recherche.
+merged = {}
+
+for t in old_cache + results:
+    if t.get("title") and t.get("size"):
+        merged[(t["title"], int(t["size"]))] = t
+
+selection = read_json(SELECTION, [])
+known = {identity(t) for t in selection}
+
+new_candidates = []
+
+for t in results:
+    if not eligible(t):
+        continue
+
+    c = candidate(t)
+    key = identity(c)
+
+    if key not in known:
+        known.add(key)
+        new_candidates.append(c)
+
+# Conserver la sélection historique ; ne pas réinitialiser
+# les états already-added, unavailable ou failed du worker.
+selection.extend(new_candidates)
+
+write_json(CACHE / f"{cat}.json", list(merged.values()))
+write_json(SELECTION, selection)
+
+state["last_search"][str(cat)] = time.time()
+write_json(STATE, state)
+
+print("Résultats retournés :", len(results))
+print("Nouveaux candidats :", len(new_candidates))
+print("Sélection totale :", len(selection))
+print("Aucun historique du worker modifié.")

@@ -1,0 +1,4106 @@
+[
+  {
+    "guid": "https://c411.org/api?t=get&id=eb33480a0aeec4cba3909e312548fc0ab81b5f13&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 25,
+    "ageHours": 614.2704774248889,
+    "ageMinutes": 36856.22864549667,
+    "size": 3820859465,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].SOUNDMORPH.Spark.2025.WAV.[24bit.96khz]-SFXW0RLD",
+    "sortTitle": "sample pack soundmorph spark 2025 wav 24bit 96khz sfxw0rld",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-05T00:45:47Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=TXBqQy9ka1NrMGUyRlR6ZzlneGt4RGcvZGZFME5lazhBNlVQd3Z6bzVjak5ha2hLMWhBVUVQYk5sUDEvVzQwaUt2RzlMK0cwWkdOS0d3czVmNTVQSkF3blFDWFdVYkJlVWw2djJDVGlwSWl1cVpsWkZyNE9MU1ZGdWZLTHFqTWd4ZzFITW41RmFUSmw1bEFNcHRuamk3VzdRaEtDODduSytybjBaQWQ0TkhlYUZsQ0x2NlovK3V6WnBhZ1UzaldPWkdPc1gxRUZkTkJkNDhnbEcwQXRWQT09&file=%5BSAMPLE%5D.%5BPACK%5D.SOUNDMORPH.Spark.2025.WAV.%5B24bit.96khz%5D-SFXW0RLD",
+    "infoUrl": "https://c411.org/torrents/eb33480a0aeec4cba3909e312548fc0ab81b5f13",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "eb33480a0aeec4cba3909e312548fc0ab81b5f13",
+    "seeders": 15,
+    "leechers": 15,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].SOUNDMORPH.Spark.2025.WAV.[24bit.96khz]-SFXW0RLD.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=8b535d9c885d5c1f844aec2dcb9b676443054dbf&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 14,
+    "ageHours": 358.8829774332222,
+    "ageMinutes": 21532.978645995,
+    "size": 620600092,
+    "grabs": 3,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Annika.Ebenstein.Se.Debarrasser.A.Jamais.Des.Troubles.Anxi...R.Votre.Qualite.De.Vie.2021.FLAC.[16bit.44.1kHz]-Fan2",
+    "sortTitle": "annika ebenstein se debarrasser jamais des troubles anxi r votre qualite de vie 2021 flac 16bit 44 1khz fan2",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-15T16:09:02Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=NVBvNTFQVUFKVmtqL3FVdHFvWHpjWVA2c1pkeGNqZUs2WE9WQlZKb0FpelJMeWxTMFRPb2E0V0hEczQ0UFF1SzF6OVllSjdWcDRwV0R5MTRacEExbUZGM1NPa0RxWGk5Z000akdYbW5FQkdMaHFIbkpHejgrNjhoOHB1RUM5SmdpNXhtUWtoQjlnbVJsNmlWY2tJTUQ5VWVOSGFXRElqSUZtQldrTzlUWlVVUi9wSFlIbXhVRm11K3lWWEhFdXpHZy9WVlZXODNsYldBRkkwSlRlMkhaUT09&file=Annika.Ebenstein.Se.Debarrasser.A.Jamais.Des.Troubles.Anxi...R.Votre.Qualite.De.Vie.2021.FLAC.%5B16bit.44.1kHz%5D-Fan2",
+    "infoUrl": "https://c411.org/torrents/8b535d9c885d5c1f844aec2dcb9b676443054dbf",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "8b535d9c885d5c1f844aec2dcb9b676443054dbf",
+    "seeders": 16,
+    "leechers": 16,
+    "protocol": "torrent",
+    "fileName": "Annika.Ebenstein.Se.Debarrasser.A.Jamais.Des.Troubles.Anxi...R.Votre.Qualite.De.Vie.2021.FLAC.[16bit.44.1kHz]-Fan2.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=b1cad8d1c255f23f3713d82737dab92f2d401ff7&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 26,
+    "ageHours": 625.4718663310833,
+    "ageMinutes": 37528.31197986833,
+    "size": 17621277265,
+    "grabs": 2,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "France.Inter.Sur.Les.Epaules.De.Darwin.[INTEGRALE].2010.2022.MP3.[128kbps]-GLF",
+    "sortTitle": "france inter sur les epaules de darwin integrale 2010 2022 mp3 128kbps glf",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-04T13:33:42Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=dHZEZDNFTDdRT0pDSFJLMVcvbEs1b2ZkYllHZi90dkZLMWt2eHo5eklJNnNIK1JBeGJxTzdORDVXM3dWZ2ZQSVJhNDlqWDExZk9JQ3FDeHcxcEw4bzYzOEFPTUM3QUhKbXNwZlZRYzBEU3N6RjNOcGkzTmg2SUdZYnRBcENFUE5LNStNM0x6eUc4dXAxVjA5bkJNeFo0bitibURVd0dqSmc2ZFUvVmhFcmRBVjI5WjcwcEpJb2NYQkJmWFNnV1g4MDJMVi9QWEZyWTZGSzFoUnVGMHhwdz09&file=France.Inter.Sur.Les.Epaules.De.Darwin.%5BINTEGRALE%5D.2010.2022.MP3.%5B128kbps%5D-GLF",
+    "infoUrl": "https://c411.org/torrents/b1cad8d1c255f23f3713d82737dab92f2d401ff7",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "b1cad8d1c255f23f3713d82737dab92f2d401ff7",
+    "seeders": 17,
+    "leechers": 17,
+    "protocol": "torrent",
+    "fileName": "France.Inter.Sur.Les.Epaules.De.Darwin.[INTEGRALE].2010.2022.MP3.[128kbps]-GLF.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=8a43d373a633fca4ccf2d2fface69aaa35e123f6&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 56,
+    "ageHours": 1350.5051996725,
+    "ageMinutes": 81030.31198035333,
+    "size": 7744330662,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Les.Debats.de.Gerard.de.Suresnes.sur.Fun.Radio.avec.Max.1996.2015.MP3.[190kbps]-NOTAG",
+    "sortTitle": "les debats de gerard de suresnes sur fun radio avec max 1996 2015 mp3 190kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-09-04T08:31:42Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=ZnQzRTB3UlRQYTBzSzVJK1hWTjVBbDZ2N3MwZjNHRERqWVNDR1lvdHJVUjZFdS9zbTlJVFM5OXVQNlB2Q0JDQzZKSWlodkg4VUdnNHdpeGpEUDRWMlRXb3hXblowbEsrV25ydmtXbnNXZCsrTG5QaVNncGpzZXJVWHE2c2ViYmpIZTUxcWJFdC8zdDBzUlg4a0xrV0RrdWlWSUtIVUE5YngwUjVoS2hBWHUyTmYxaDNXNUs3MnVWRloxNU14OFdISE5rbDVpcksydTk3UTVvRWxhVlZKQT09&file=Les.Debats.de.Gerard.de.Suresnes.sur.Fun.Radio.avec.Max.1996.2015.MP3.%5B190kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/8a43d373a633fca4ccf2d2fface69aaa35e123f6",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "8a43d373a633fca4ccf2d2fface69aaa35e123f6",
+    "seeders": 15,
+    "leechers": 15,
+    "protocol": "torrent",
+    "fileName": "Les.Debats.de.Gerard.de.Suresnes.sur.Fun.Radio.avec.Max.1996.2015.MP3.[190kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=3fa249034e3fcb52c851e05373bf11dee76c1448&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 47,
+    "ageHours": 1150.3088107919446,
+    "ageMinutes": 69018.52864752,
+    "size": 27794575581,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Test.Press.(Splice).Bundle.2025.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack test press splice bundle 2025 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-09-12T16:43:29Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=YVNCZzZOdHZ6RkJydjRhcUphWkFzaDRSTE1kS1JpRVRqYmZ6aU9JOWk3SWs4b2k5WGEyb0Z5WDRCd093N2w4WVZTVEFsVC8rK2w0S25SbitGYVQyN2hkMDJ1c1ZtQmJLd3VQVHFMUjRGRjZNenY0V3FUWUxDWWpKNXRUYmRyZUYyT0xyU0haSFZET01sc1ZFZitnV0Q4Um1CWkNhQ0M1UDR1dGZtN3dZV01lV0NLUUFPQ2tQMnV3QmFzWDh1SXZsQVV3VHJGV1pvcUlMMVhmVW1OUEFOUT09&file=%5BSAMPLE%5D.%5BPACK%5D.Test.Press.(Splice).Bundle.2025.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/3fa249034e3fcb52c851e05373bf11dee76c1448",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "3fa249034e3fcb52c851e05373bf11dee76c1448",
+    "seeders": 9,
+    "leechers": 9,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Test.Press.(Splice).Bundle.2025.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=9b03e863f74f8efdd41dcf18fd69027045bf6921&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 48,
+    "ageHours": 1154.0960330223334,
+    "ageMinutes": 69245.76198134333,
+    "size": 19811541620,
+    "grabs": 2,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Ghosthack.Ultimate.Producer.Bundle.2026.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack ghosthack ultimate producer bundle 2026 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-09-12T12:56:15Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=QjJlVm11OTEvS21OSEpzUnVybnpPWVpJTEd1RDQ1V0lSbWo2Q1l5RGsxM3dseHp0U1l0WmNqV29VZGV0N1ZiUmh3TnpMOEFOMmt2dDVUajk3bXdBeTdjWFA5bzdweXgwOXZXS1ZJUU10VzNDNyswTjZFS29ra1drY2RmYmovNUtrNEpLckFvTFVIdmppRHB0Qjd3Y0Y1TEI3bUsxUXMvRU1RVXNyWDNmdFRneXlHVkI2UmdDQzhRbjJTS0tyTmYzWjhXd20xdXVIYWZzUTZFVlgrbVA5UT09&file=%5BSAMPLE%5D.%5BPACK%5D.Ghosthack.Ultimate.Producer.Bundle.2026.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/9b03e863f74f8efdd41dcf18fd69027045bf6921",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "9b03e863f74f8efdd41dcf18fd69027045bf6921",
+    "seeders": 12,
+    "leechers": 12,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Ghosthack.Ultimate.Producer.Bundle.2026.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=5cf5e58df81b55209102749edd934574d8e0ca63&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 48,
+    "ageHours": 1154.4576996973333,
+    "ageMinutes": 69267.46198184167,
+    "size": 4989407578,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Ghosthack.Ultimate.Vocal.Library.3.2020.WAV.[24bit.44.1kHz][24bit.48.1kHz]-Cephos",
+    "sortTitle": "sample pack ghosthack ultimate vocal library 3 2020 wav 24bit 44 1khz24bit 48 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-09-12T12:34:33Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=YzJwcW9pVG9LL1Boa2FyRFJFbUgvZ3hYVzZnMkZlVms2SVBqU1ZHL29HdFdST1FmNkFNNlg1OXpmbHNqd0hiSXU1YzhmMHFZM3VVM1dsTEgvelZRc0hzNW5vem1PM0tqdG1rZHJnSk52TnBTekd2MTJiM1ZMbUJkb0cyZTRWSytoTmZSNndlbVBmMmh2Y3ZTejRuZzMxZFhiRmZwak5Uc2REN0VKZ3hsbzJvcmFaUjJLNzFuSERzNU9lVFhyaUZiWnFFMXhCdXQxS2xUWWxRcE1MY2dKZz09&file=%5BSAMPLE%5D.%5BPACK%5D.Ghosthack.Ultimate.Vocal.Library.3.2020.WAV.%5B24bit.44.1kHz%5D%5B24bit.48.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/5cf5e58df81b55209102749edd934574d8e0ca63",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "5cf5e58df81b55209102749edd934574d8e0ca63",
+    "seeders": 9,
+    "leechers": 9,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Ghosthack.Ultimate.Vocal.Library.3.2020.WAV.[24bit.44.1kHz][24bit.48.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=397aa73342d407da615c43037b0450105ee9f54e&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 48,
+    "ageHours": 1154.7304774835,
+    "ageMinutes": 69283.82864901167,
+    "size": 4999430190,
+    "grabs": 1,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Ghosthack.Purple.Clouds.2020.WAV.[32bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack ghosthack purple clouds 2020 wav 32bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-09-12T12:18:11Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=OTZYVStvbTlxR2MwZDFxL0RQUVIxR2VrM21lSHBvelBQTUt5R0gyeEZmTmlOQkhKUVl1T1pMWDlWZ3hwakZUWkZRNlpidldIMFNXKzBGSUdzMnl0SUg4aWhWd2h6L1o4RzNBd25FeU96aG13QVM4ZDd0a0o5cmp2bEhGZ0hRT3RJL1MzM29kY1RCNVFXY241T2VET1REQkdFYmowb1V2S1gwcXltZDcyamJYUElLclZIRmlQSktyUTh4cjc4ajhKejN1Sy9RQlpuaWJKckRMTGhDazBhdz09&file=%5BSAMPLE%5D.%5BPACK%5D.Ghosthack.Purple.Clouds.2020.WAV.%5B32bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/397aa73342d407da615c43037b0450105ee9f54e",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "397aa73342d407da615c43037b0450105ee9f54e",
+    "seeders": 10,
+    "leechers": 11,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Ghosthack.Purple.Clouds.2020.WAV.[32bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=35f905889c8c139b408013cc4532ab3c6a0d8346&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 48,
+    "ageHours": 1155.119644158361,
+    "ageMinutes": 69307.178649505,
+    "size": 2619962843,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Ghosthack.Future.Pop.Vocals.2020.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack ghosthack future pop vocals 2020 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-09-12T11:54:50Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=d1Q5a0tkYk5LUUkvcVhYOVMwaGlUU2d4QzliNDRGY2VWbWNTMC9MS2FiTGdWYW9xSEFmemtQNXRlbHJySHpDT3lsY0kwM05TYytIdkdnWUQ4QVNpSU5HSXZLb3lZM3BDb2JLV0RXaHNEK1VzZVhtemloM0lMRy9kS3p1VXJlK2tSV3doRjJBT1N0c0hHS2NGWW82QnhkWUZzc1FJNDRzbXdxT2ZLNHo4bElpYWVIMnlJMzhLdWlEQWVBTk9QT1o2S2NWR2xaMWFrYStTVFNIcnJMSGpiZz09&file=%5BSAMPLE%5D.%5BPACK%5D.Ghosthack.Future.Pop.Vocals.2020.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/35f905889c8c139b408013cc4532ab3c6a0d8346",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "35f905889c8c139b408013cc4532ab3c6a0d8346",
+    "seeders": 8,
+    "leechers": 8,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Ghosthack.Future.Pop.Vocals.2020.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=7cad5835c5edda42997f6b4a2e36faa4b64fcc23&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 48,
+    "ageHours": 1155.5113108345279,
+    "ageMinutes": 69330.678650075,
+    "size": 855218710,
+    "grabs": 2,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Ghosthack.Electro.Bass.House.2020.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack ghosthack electro bass house 2020 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-09-12T11:31:20Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=OWNtbTYzR1hjSHZRcjFEWU5NL09JTWVZR2dSTFhvK2R1WHA3LzB1WTdIMVp2cHVHZVJhYW4yRXBLM0VyTzVxTHNDV1RkbDBCbmVobTFFSXhsdFhQTG51R1Nwd210MTNtYmVjWHdXSmgrRy9CTStrOHFVU2NyRCtFbUtUdE1RQ2VxMThzeUZtc1YxdG4yK1ZDRXJiMWRJRVBlY1FZK0dJYWsyOE1mSVdsdDdHSk5JYngzL3dwcUVQZzFPcTdHS1JaL1Y4dFh2OEJTTUZwa3c0RzZBVmQxZz09&file=%5BSAMPLE%5D.%5BPACK%5D.Ghosthack.Electro.Bass.House.2020.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/7cad5835c5edda42997f6b4a2e36faa4b64fcc23",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "7cad5835c5edda42997f6b4a2e36faa4b64fcc23",
+    "seeders": 16,
+    "leechers": 16,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Ghosthack.Electro.Bass.House.2020.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=b6e508fbde9f640e6e451fde587245943b49f82f&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 58,
+    "ageHours": 1410.0732552944721,
+    "ageMinutes": 84604.39531767166,
+    "size": 13121497493,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].BOOM.Library.Mechanicals.BUNDLE.2025.WAV.[24bit.96kHz]-NOTAG",
+    "sortTitle": "sample pack boom library mechanicals bundle 2025 wav 24bit 96khz notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-09-01T20:57:37Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=NGorUEticUdrVCszS2pENGdHamI0Z2FQWC8wSmh4OHFLN3FRTnh1MHN5UTd6M3d5a0F5NEJwaEx6Q09iVlFuY1pKOGswN0FFT2R3MWI4Zkd1NnQ4MWErQXFmWEQ1TDdiZHFDKyt3elo4Y2g1eTdOaVVsMUFYN0cvMWRzTEtKVit5am5ZcmVmTG5aS3VkUGZKS3NoampaU1gvbmtkQkdzcFVZT1lvSkR6c0oxTDZaVmF1akt0UkF2UmlDcXpRck5iWEw2VnNKYWFWd09iaDlUaUtHQTdoQT09&file=%5BSAMPLE%5D.%5BPACK%5D.BOOM.Library.Mechanicals.BUNDLE.2025.WAV.%5B24bit.96kHz%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/b6e508fbde9f640e6e451fde587245943b49f82f",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "b6e508fbde9f640e6e451fde587245943b49f82f",
+    "seeders": 12,
+    "leechers": 12,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].BOOM.Library.Mechanicals.BUNDLE.2025.WAV.[24bit.96kHz]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=1a9cb9d6c364f0e87be084175e32086663062997&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 59,
+    "ageHours": 1426.0307553063333,
+    "ageMinutes": 85561.84531838333,
+    "size": 74757406,
+    "grabs": 2,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Les.Plaideurs.1949.Piece.radiophonique.MP3.[192kbps]-ASTROLABE",
+    "sortTitle": "les plaideurs 1949 piece radiophonique mp3 192kbps astrolabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-09-01T05:00:10Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=VmNNUDZwNDhjc0pKdk1jeFlNKzR4N3JFVlZCMWZEcUU5cHprSDJnUTJPcDl6Sm1tWFhPZllnK29IZDMzQXUvbmsxM2U1SjFNeEZSbVNwU3NwNmpINDhmbjl5S2ZUOVVMaG5nbytha21PYlgxYU41bm1qVEN4bjFzY1VWbER4R28zdEgzeDhERjhkWTZjUjJnc2JuQ1NkdW1DYjF0dGp0ek83eldKV2FLOWxUZFhZU0hjdHBFUTMwWG1hSVYyTU9BQkNRT3VmU2F0dkZNOXVNeFl4YVVidz09&file=Les.Plaideurs.1949.Piece.radiophonique.MP3.%5B192kbps%5D-ASTROLABE",
+    "infoUrl": "https://c411.org/torrents/1a9cb9d6c364f0e87be084175e32086663062997",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "1a9cb9d6c364f0e87be084175e32086663062997",
+    "seeders": 44,
+    "leechers": 44,
+    "protocol": "torrent",
+    "fileName": "Les.Plaideurs.1949.Piece.radiophonique.MP3.[192kbps]-ASTROLABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=aa67c984d8e3ffdae29a6c1543413e31336c1227&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 59,
+    "ageHours": 1437.6068664253332,
+    "ageMinutes": 86256.41198552333,
+    "size": 376664064,
+    "grabs": 2,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Pierre.Desproges.Chroniques.De.La.Haine.Ordinaire.1987.WEB.MP3.[174Kbps]-NOTAG",
+    "sortTitle": "pierre desproges chroniques de la haine ordinaire 1987 web mp3 174kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-08-31T17:25:36Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=Yy9rVGtwMElFdkJNWGRiZ3kxRjd0TjRTWDhtTXRPU1pqZDVwRmxkY00rZFllTndacTNVckozeVFGb3BNTFMzNWtWMkc2TnlrZzVla3RJaGhqem5JOWhweitjdWFkN1J0dVlka1RneDJEWS9rdG9aQ2gzUnZEVnlCSWZIazB4dzE4Q0NTaytDZHZVc21iQmlLbkhRZlQ4cjJKakpLUWcwRDErS1RsQ3dlUDRhdWZQOXB4MFEwNUNBOWtTd3FCWHJOMjlRTjU1cjJaa29sRjdEYVBkYzhwdz09&file=Pierre.Desproges.Chroniques.De.La.Haine.Ordinaire.1987.WEB.MP3.%5B174Kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/aa67c984d8e3ffdae29a6c1543413e31336c1227",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "aa67c984d8e3ffdae29a6c1543413e31336c1227",
+    "seeders": 26,
+    "leechers": 26,
+    "protocol": "torrent",
+    "fileName": "Pierre.Desproges.Chroniques.De.La.Haine.Ordinaire.1987.WEB.MP3.[174Kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=fa8088890199f2ffff9f58c69dac0764775d87f0&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 72,
+    "ageHours": 1730.5282553225277,
+    "ageMinutes": 103831.695319355,
+    "size": 837511364,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE][PACK].Jake.Reed.Super.Dead.Drums.1.2021.WAV.[24bit.48kHz]-NOTAG",
+    "sortTitle": "samplepack jake reed super dead drums 1 2021 wav 24bit 48khz notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-08-19T12:30:19Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=cFo2V1EyVmFQQVBvSWg4SU1NR1V3NDZpa2dEaDBabjdTbzZ0bW1yZ2RKVlV4bm1hWjhhSXNpeTlKWkhnWTRRUlpLYmRBVGxaSzd3bTNYU2htSHFkOGlSOENBbEVVVjJBNitReGZ2blUzckdoREpuVXppTnBjUFFBT2F4VlRXZ1dEMmJCOTRkWkdxQjRuNTFkVDRWeVVaK1FPVGl6bWlUUGJ3eitNYjRCUGZySVBiTkFkWm1FYVhyT0IvMVN4MlJ1WjNWaERlK25XWStvZzdiNEk1SzF0Zz09&file=%5BSAMPLE%5D%5BPACK%5D.Jake.Reed.Super.Dead.Drums.1.2021.WAV.%5B24bit.48kHz%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/fa8088890199f2ffff9f58c69dac0764775d87f0",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "fa8088890199f2ffff9f58c69dac0764775d87f0",
+    "seeders": 13,
+    "leechers": 13,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE][PACK].Jake.Reed.Super.Dead.Drums.1.2021.WAV.[24bit.48kHz]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=49bcfdf1979473df11dd332855da3f1fdda7ee76&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 72,
+    "ageHours": 1731.7840886640556,
+    "ageMinutes": 103907.04531984667,
+    "size": 596944400,
+    "grabs": 1,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Leon.Blum.Une.Vie.Heroique.Philippe.Colin.France.Inter.2022.MP3.[161kbps]-ASTROLABE",
+    "sortTitle": "leon blum une vie heroique philippe colin france inter 2022 mp3 161kbps astrolabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-08-19T11:14:58Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=TU85WnJseWRJMW92Qk1MY3hZU250dmZzeWdRalJGbUs0NGkyQVpDMnZya0RHUVN1ODVmZWpJOUtiZHhnM2oyUFVYY1pCMHdJUHBHd1psRUs5SGRFcndYNW9RZUMxTnpUWmNDcXRFbHlIR0xHM3NYenEwQnpvdStQVTQ3dXBBRGNCNUp1Rzd6a0ZaSm4zSitCRGhua0hlT1BKKzlDYmFjWGNlV2M1c0ROMWtlMjJCNUhCRGlOZHBGajlucHJLT0tWR3pyRDdaL1BLV2o5MkxidHpnZm12QT09&file=Leon.Blum.Une.Vie.Heroique.Philippe.Colin.France.Inter.2022.MP3.%5B161kbps%5D-ASTROLABE",
+    "infoUrl": "https://c411.org/torrents/49bcfdf1979473df11dd332855da3f1fdda7ee76",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "49bcfdf1979473df11dd332855da3f1fdda7ee76",
+    "seeders": 11,
+    "leechers": 11,
+    "protocol": "torrent",
+    "fileName": "Leon.Blum.Une.Vie.Heroique.Philippe.Colin.France.Inter.2022.MP3.[161kbps]-ASTROLABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=8c5f244c575435d75f34702aea6e5dbb1d44025b&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 75,
+    "ageHours": 1815.2140886725279,
+    "ageMinutes": 108912.84532035333,
+    "size": 5089642228,
+    "grabs": 1,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE][PACK].Jake.Reed.Super.Dead.Drums.2.2023.WAV.[24bit.48kHz]-NOTAG",
+    "sortTitle": "samplepack jake reed super dead drums 2 2023 wav 24bit 48khz notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-08-15T23:49:10Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=QlpMZ0wreit6R1hjc1d5UzlkWHlSMGtqYlhxcWRwYUdKRDJQaGF6S1hFWE9zZVMvNFk5eXdrQ0laOG1KZ0JzYXVGTmtic25lVVN2em1WUWppU2FBU1RKWnBFS1l2Wm5wY3hNOUIyY1NiYXhzNXdiLzhrakFrOFdIT3pXaHZEVzFHKzF3ZlBSbHpQdlV6Q2JDand1QlVzZFM2UmVOZXhMeFRWZ3Y4VUxLeFFUaEJiSzRKK0Rva2d3ZFBZN3hYeVhEL2VXVFZXYmpmUW5XdXVFQ2xYUFNKUT09&file=%5BSAMPLE%5D%5BPACK%5D.Jake.Reed.Super.Dead.Drums.2.2023.WAV.%5B24bit.48kHz%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/8c5f244c575435d75f34702aea6e5dbb1d44025b",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "8c5f244c575435d75f34702aea6e5dbb1d44025b",
+    "seeders": 10,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE][PACK].Jake.Reed.Super.Dead.Drums.2.2023.WAV.[24bit.48kHz]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=eff208c7a0a7114bd0d2dc872b35ec3db2f4d477&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 79,
+    "ageHours": 1901.2610331249443,
+    "ageMinutes": 114075.6619875,
+    "size": 3580648297,
+    "grabs": 6,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Le.Bureau.Des.Mysteres.[INTEGRALE].2017-2020.MP3.[192kbps]-NOTAG",
+    "sortTitle": "le bureau des mysteres integrale 2017 2020 mp3 192kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-08-12T09:46:21Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=eUpwejJjTDNDeTZvblU3WXM3bzJYWEJhM2ZiaGlQdUxZR25LS3lrZzVVOUV4ZlEyM3VpQnVqZ0dzZ0tqNms1d2wxS3FKMFk1TDFISzRSVHkvdk4ySU5hM0JKVFBjM3NXVkdMK0o3NzlJb1B3YmtsOGNSYnU3UFo3TEZqNHVEN0ZrM3laVXR3QnpRMVNMSzBBV05yQStJQ285d2t3T0gxa2ZORjUxb1dUWCttNmNsdHpnZ0tyeWRXa3NPcUFxaEMvODFrdzJ2TjQyMENEQVRuMCtrYS9RUT09&file=Le.Bureau.Des.Mysteres.%5BINTEGRALE%5D.2017-2020.MP3.%5B192kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/eff208c7a0a7114bd0d2dc872b35ec3db2f4d477",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "eff208c7a0a7114bd0d2dc872b35ec3db2f4d477",
+    "seeders": 21,
+    "leechers": 21,
+    "protocol": "torrent",
+    "fileName": "Le.Bureau.Des.Mysteres.[INTEGRALE].2017-2020.MP3.[192kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=7509b6ee5110230187162d75f35d002f0ea6b658&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 98,
+    "ageHours": 2352.962422021778,
+    "ageMinutes": 141177.74532131,
+    "size": 6474301440,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "V.A.NRJ.Music.Awards.2013.DVD.Iso.AC3.[192kbps]-Marcetlu59",
+    "sortTitle": "v nrj music awards 2013 dvd iso ac3 192kbps marcetlu59",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-24T14:04:16Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=cnN2aEhJckp1ZmVkYWVackZnU0FIWWdYaHZNSG0xNUc0ZEhpNXRiWEoyMEduQWp5N0s1S28yUmpZM0FuY254ZFRnMGZ5UmRTUkoyclB3dStqTEwyc3BPSXdPVUJZOUt0SkpndWpKTUtVbTRDNy9xZmFtY2JQNGNtYkNETE1hQUtXdW40WVpWQ0xhVnplc1VUZkozTnpuN2V3aG9BMFhJMTQ4SmFad0QxUlkvZE1JSm5sMTc5Vk90MUc2alFBTHo3SHBMQ3JRWktveVBLOUU0UVFKRGd3Zz09&file=V.A.NRJ.Music.Awards.2013.DVD.Iso.AC3.%5B192kbps%5D-Marcetlu59",
+    "infoUrl": "https://c411.org/torrents/7509b6ee5110230187162d75f35d002f0ea6b658",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "7509b6ee5110230187162d75f35d002f0ea6b658",
+    "seeders": 10,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "V.A.NRJ.Music.Awards.2013.DVD.Iso.AC3.[192kbps]-Marcetlu59.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=186167a542972f813cdaa4dce54f6933c72fc30c&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 93,
+    "ageHours": 2237.061866474167,
+    "ageMinutes": 134223.71198845335,
+    "size": 1464674477,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].SINEE.Hardgroove.Essentials.Bundle.2023.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack sinee hardgroove essentials bundle 2023 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-29T09:58:18Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=eFBvMzBUWFNhNEUwNFNWcDJ1TWlYTzdpRXFha1RlQmkwLzRrbytaQlpSTjkwM294VEdKZHc1alR4dE5BL1RGTUFNTlBnbEpMM1NxYlFLSzFIaGhjOHAySFdIK2g1YVpzV3hwU3FaL3R1MTErSnBVaW82MExFeHFSSld1ZTRPYzFRbGd4R2wwYWFkclhTM1BKN1dQM25TS3NhS1pZWjh5QzUweEJTWndxNUVGdXhmWll5cU16K1NSbUdMeVRURE4zcWNjdE4wZUdOcHBjWkdDZDM1a2NBQT09&file=%5BSAMPLE%5D.%5BPACK%5D.SINEE.Hardgroove.Essentials.Bundle.2023.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/186167a542972f813cdaa4dce54f6933c72fc30c",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "186167a542972f813cdaa4dce54f6933c72fc30c",
+    "seeders": 10,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].SINEE.Hardgroove.Essentials.Bundle.2023.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=4abfd205261b2cd7d35022d5334cd79470fa5ff4&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 214,
+    "ageHours": 5147.200755371306,
+    "ageMinutes": 308832.04532228166,
+    "size": 5711647374,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "De.remarquables.oublies.[INTEGRALE].2011.MP3.[128Kbps]-NOTAG",
+    "sortTitle": "de remarquables oublies integrale 2011 mp3 128kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-03-30T03:49:58Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=NmZLUTlESmhnSkRNTUJ0TE9WOThKVUFQMmNDZDhMQSszZTFYc1lEa3pKd21vdHVzdXRDbTdydkdwRnl6YS9RLzVpak9OMmZ4UVJOWFA3NVBhTFVpOUlxUXN4cHczdUNMYzZsMmRzV2RkUFFWYjE0UlFpd2pXSDNqUGlDS3hrMXFMaFFwQUJPVWtycTZ6Q3pLTG5VRkdidmNXSzJxcyt3eGkxbEtDZVgxT3ZOTnpjQnU4T2dSdjY3VE1VQVhCNFgzdjZWdmt2dWJlWTVUVVRLSE5LNU5lQT09&file=De.remarquables.oublies.%5BINTEGRALE%5D.2011.MP3.%5B128Kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/4abfd205261b2cd7d35022d5334cd79470fa5ff4",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "4abfd205261b2cd7d35022d5334cd79470fa5ff4",
+    "seeders": 12,
+    "leechers": 12,
+    "protocol": "torrent",
+    "fileName": "De.remarquables.oublies.[INTEGRALE].2011.MP3.[128Kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=78f56dbb08f3d2ec76ae7c36bcd95d5bcd34a53a&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 215,
+    "ageHours": 5179.2454776015,
+    "ageMinutes": 310754.72865609336,
+    "size": 2980498013,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Histoires.d.objets.[INTEGRALE].2011.MP3.[128Kbps]-NOTAG",
+    "sortTitle": "histoires d objets integrale 2011 mp3 128kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-03-28T19:47:17Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=cXRKRmt1dHJWaHkvN1hWNGRSaERMWUhobmtvZjlGYkNIcnNuUWVpZklaM0JHVDBBLzh4TXRwYUVvSXo0eURVYlB3dEZob21tb2FhcDZtTVo1cU4zcGRtNStMMjNDQkJzMmdFbStDOGdUTjVEMmpKUnp2YjhnQktQWnNjTFZOTGpzVnBpbmRUZGM4UCtYZlk3M1dBVjU1RVdNNnM1c0Z0aXc0WU5BSERuVEN1Yk1qYTlYSDJCZ1UvN3I4TEtEU3RmanJMYk16VTZaaEFocHp1WklDSVZMUT09&file=Histoires.d.objets.%5BINTEGRALE%5D.2011.MP3.%5B128Kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/78f56dbb08f3d2ec76ae7c36bcd95d5bcd34a53a",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "78f56dbb08f3d2ec76ae7c36bcd95d5bcd34a53a",
+    "seeders": 10,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "Histoires.d.objets.[INTEGRALE].2011.MP3.[128Kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=4952c433a8e2e2d6796f7e8d7f06b5b8ce31c875&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 98,
+    "ageHours": 2373.0788109426944,
+    "ageMinutes": 142384.728656565,
+    "size": 957638570,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].IQ.Samples.Cyberpunk.2020.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack iq samples cyberpunk 2020 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-23T17:57:17Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=anp5eGlhRUVUOFAyZ2F6b2NtWnEwOGVIakdEWHFQL2J4bWh3UU16Z2Vjc1F1NmV2S25SQ2Nzc1puUUJvSzdJV1lYRHM4aFVHZXJMcXhiTU5qVVVIcmp4R3hJVlBjUWFJVVI4OWVlbGJSYTBCV3JMaDBhYWpGY1Mzb28zcU5mMk9lS2xKRFZhQWRBMFdjVzNGQ2xqMGM2Q3FKelA0bHJMV1hSbFZ4d3Fjb3d4bDI5Q2dWNGp0QUxiYlE3Q1Vta1FCTFNkMnZ3dWdoOWhHZjhQaTZlZTFvZz09&file=%5BSAMPLE%5D.%5BPACK%5D.IQ.Samples.Cyberpunk.2020.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/4952c433a8e2e2d6796f7e8d7f06b5b8ce31c875",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "4952c433a8e2e2d6796f7e8d7f06b5b8ce31c875",
+    "seeders": 22,
+    "leechers": 22,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].IQ.Samples.Cyberpunk.2020.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=8409cb8973718d4a24ab1b9046dfcc9f3845d90b&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 103,
+    "ageHours": 2492.168533172917,
+    "ageMinutes": 149530.11199037667,
+    "size": 2432518144,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Edith.Piaf.Ses.plus.belles.chansons.2007.DVD.Iso.AC3.[192kbps]-Marcetlu59",
+    "sortTitle": "edith piaf ses plus belles chansons 2007 dvd iso ac3 192kbps marcetlu59",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-18T18:51:54Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=ZFRWUWtqQXM3WDIva2E1Z1lQa2c1NGEzaDRzbnlLcGFWRTFoUUUwNG43N3cwMG4rUHY0V0hFSW1uQXNHNVg4bHhNclZ1MkNoeTBoanFoWCtUL0gxRSt5eVcvWmRmeFgycjV0TGFORzdBYUc0QU9uNS82Z0JhYm0wNUFpL1U5MzFwRTVzWURxV09VVHFrd3VMS1FVa2pkeGRNaUxlY1NRc21uZ1JoamNyZUU2WlF6NFdWZms5MlEwVkQ0dHBLZno5Qmd6R0s5bXNSUmFCY2lQUHNiN3k3dz09&file=Edith.Piaf.Ses.plus.belles.chansons.2007.DVD.Iso.AC3.%5B192kbps%5D-Marcetlu59",
+    "infoUrl": "https://c411.org/torrents/8409cb8973718d4a24ab1b9046dfcc9f3845d90b",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "8409cb8973718d4a24ab1b9046dfcc9f3845d90b",
+    "seeders": 10,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "Edith.Piaf.Ses.plus.belles.chansons.2007.DVD.Iso.AC3.[192kbps]-Marcetlu59.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=c3703525d3b7e0b8e2fa36f059e8d16b604f75cc&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 104,
+    "ageHours": 2498.1432554033613,
+    "ageMinutes": 149888.595324205,
+    "size": 1028592436,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Blastwave.FX.Cartoon.Land.2020.WAV.[24bit.96kHz]-Cephos",
+    "sortTitle": "sample pack blastwave fx cartoon land 2020 wav 24bit 96khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-18T12:53:25Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=TFFjN2lnUXJ6VEdieGdoWHJyOEZDaEt6LzFhVE9XWVhtbXF0eER1cG04NHlWT05zdUlObWM0QmVoVlh2K3BXc2RDN0ZSOVI0WmwxZmlzaVNGZFdac2RTWGxvYThDSUd2NXF6OXpFYXlrRUFzTjNZckFDRy9PQjRycFF6VkcyaUZQaEg4SDI4WEd4ZEg5R2s2ODN0WUQ3enJ2Tm4vUk9SNXFTbmdLS1krOG5VVk0ydjMxMytjZ1pjTVN2V0RkZ1M1K1UzZkFDQVFCa0RlTnhwMVlZM1kvZz09&file=%5BSAMPLE%5D.%5BPACK%5D.Blastwave.FX.Cartoon.Land.2020.WAV.%5B24bit.96kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/c3703525d3b7e0b8e2fa36f059e8d16b604f75cc",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "c3703525d3b7e0b8e2fa36f059e8d16b604f75cc",
+    "seeders": 14,
+    "leechers": 14,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Blastwave.FX.Cartoon.Land.2020.WAV.[24bit.96kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=49ab42e20f20f258e83be253088ac3e199d3f2d4&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 105,
+    "ageHours": 2523.9254776334446,
+    "ageMinutes": 151435.52865801,
+    "size": 663341710,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Field.&.Foley.Horror.Film.FX.2022.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack field foley horror film fx 2022 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-17T11:06:29Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=c3JRRkROdE0wY0hEMTRpd2hrUkhVSEk5Z3BuejIrUXJUM1ErNUgwbjMyU0VabmQ1WWFWSzRockFyTDU1eCtJc3lma2JISHlzdzFmdUhzeEt5eWdpV2M4ZFdYN00yTVhpbFlGMkJrTDNxdU5ia2syV0NwTCtUNloveXBzemQyVE4zamF1RUphUmlhQWVCT21paEtKd2VheWxVM3FzMWVxNndBdmFZcXh3VlMyZ01JQlh6UmtLTFVSTU83dkdIOHAwZENNN0ViUGNEVktTUGt0ditnRUtkUT09&file=%5BSAMPLE%5D.%5BPACK%5D.Field.%26.Foley.Horror.Film.FX.2022.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/49ab42e20f20f258e83be253088ac3e199d3f2d4",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "49ab42e20f20f258e83be253088ac3e199d3f2d4",
+    "seeders": 9,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Field.&.Foley.Horror.Film.FX.2022.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=e6b248de0de43c255404334971e550b8731b47db&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 107,
+    "ageHours": 2572.4360332672777,
+    "ageMinutes": 154346.16199604166,
+    "size": 23800207129,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Rendez.Vous.Avec.X.[INTEGRALE].1997.2024.MP3.[128kbps]-NOTAG",
+    "sortTitle": "rendez vous avec x integrale 1997 2024 mp3 128kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-15T10:35:51Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=cElBQVpQNVM0aStUZUFMN2tadUdXbEZrWG5NRGU5M1BSa1hGY2JHSU9UVzh5WFJieVNVTlBSSnhqYXV5QmErUjFVSVRYUm9Mcms2VHQ0eThzZCt3dHF1RHlZTlFpNmt3dkl1WFljd1Y5OFUyU1RIaVhGdW5PbEc4d3k2bDhLekptWWtTUlVLVFlTd0VKWHhGYzZ0bS9IZVJSTUJ2Y0p2WVl0Q1hPdHNjT284a25EME1IRzdMNFVFczIrMkhlVHFva2V4RGpGZjBGcXkvZUE3NTFvQTlTZz09&file=Rendez.Vous.Avec.X.%5BINTEGRALE%5D.1997.2024.MP3.%5B128kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/e6b248de0de43c255404334971e550b8731b47db",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "e6b248de0de43c255404334971e550b8731b47db",
+    "seeders": 17,
+    "leechers": 17,
+    "protocol": "torrent",
+    "fileName": "Rendez.Vous.Avec.X.[INTEGRALE].1997.2024.MP3.[128kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=50a059778a6cd426b523505488e953eccb9da479&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 106,
+    "ageHours": 2567.256311054889,
+    "ageMinutes": 154035.37866329667,
+    "size": 586817674,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Lil.Chick.Drum.Kit.2023.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack lil chick drum kit 2023 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-15T15:46:38Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=b0RISEp1aWxMOTFCWTdSeWR4UVRHRUs3cmRpQ0hPdE1CSldSTlJueno5MUQ4ZWJ2QXV5REx3bXkyNlpSUjV2T0Nxck5jNHpIdUhXcFlINUo4bGFZTlZMVVhEZjlXRXFrOWducTBNekl0U1kxM1U2cHhvQks3cEF5blpZbTF0S2JnVW91ZnMzcFRZdERRdDZteFJuZGtlSlo5R1dhcVZlQzMwTjhQT3JGSThUV2hRZkxuTzdHZC9kc0Z3NFVkb1U1WnY4MDNXV0VGbE1nZ29QekR4M2YzUT09&file=%5BSAMPLE%5D.%5BPACK%5D.Lil.Chick.Drum.Kit.2023.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/50a059778a6cd426b523505488e953eccb9da479",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "50a059778a6cd426b523505488e953eccb9da479",
+    "seeders": 13,
+    "leechers": 14,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Lil.Chick.Drum.Kit.2023.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=e81ed63d43c9e1d867f52c014f15adcd00317ec3&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 115,
+    "ageHours": 2764.9460332858334,
+    "ageMinutes": 165896.76199715334,
+    "size": 715794124,
+    "grabs": 1,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Anthologie.Sonore.Des.Philosophes.Francais.Du.XXe.Siecle.FRENCH.MP3.[192kbps]-NOTAG",
+    "sortTitle": "anthologie sonore des philosophes francais du xxe siecle french mp3 192kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-07T10:05:15Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=S2dmWGg3UmhHR3I5T1ZNa1RtVXRSbXZQZVZxdndNY2RMK0ZqMGJGT1ZPYXlwcGtMUVBvRFd2cWpZdDhycUdiMHlmbmo2emkzR0FMOGRBTjc1cXFaQkowbjI2Sm9aYzErdWt6aTEzalVpM3oxMlNndHRnNmQ2ZmhRN3UvYkd0aVZyK3crT2RLSUg0VFQ0S3A5R1d2SkM0U2E1MEoydkl2Mk5DcEIzcEg0bGhxekJTMXdzMWZHVTJuVjgvUC9icmNRejJLd1FEcnp6WHZSYzZWR1YxUkJrZz09&file=Anthologie.Sonore.Des.Philosophes.Francais.Du.XXe.Siecle.FRENCH.MP3.%5B192kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/e81ed63d43c9e1d867f52c014f15adcd00317ec3",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "e81ed63d43c9e1d867f52c014f15adcd00317ec3",
+    "seeders": 17,
+    "leechers": 17,
+    "protocol": "torrent",
+    "fileName": "Anthologie.Sonore.Des.Philosophes.Francais.Du.XXe.Siecle.FRENCH.MP3.[192kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=8e2ecdbba4b9dcdb58de8d30169c838d859c6581&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 94,
+    "ageHours": 2278.5590314733613,
+    "ageMinutes": 136713.541888405,
+    "size": 26174841012,
+    "grabs": 2,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Deux.Mille.Ans.D.Histoire.[INTEGRALE].1999.2011.MP3.[128kbps]-NOTAG",
+    "sortTitle": "deux mille ans d histoire integrale 1999 2011 mp3 128kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-13T08:53:35Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=WVNHTElBMUFOVC9yUmFnc0pCRFMxOURreC9MQ0VhaVlzT3pOM0I5VVhkdWowbW5MS2NHM2s4aWNZUEFONFBZRVVNa2dNNDQ3SUFQczB1YUVIZEhtRmFzMmg5K2xmdkhtYmhkMTBoZmNXclhLcGVLMm5aZVQ5aXh2cWV5R0RWVUo0cWZIYWFHQVc4Y2x2R2JmR21YTmY5T2dmQ3dIWmhvTHFuSmR3YjVZa3c4dEx5R1I2c3Vabk5KMUkxbkRVV29qbjZZbkw4cHJuUWYwSXU5OVdrNUxFUT09&file=Deux.Mille.Ans.D.Histoire.%5BINTEGRALE%5D.1999.2011.MP3.%5B128kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/8e2ecdbba4b9dcdb58de8d30169c838d859c6581",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "8e2ecdbba4b9dcdb58de8d30169c838d859c6581",
+    "seeders": 8,
+    "leechers": 8,
+    "protocol": "torrent",
+    "fileName": "Deux.Mille.Ans.D.Histoire.[INTEGRALE].1999.2011.MP3.[128kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=4f5de76335957591875bb1d5d213ef5485a140dd&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 108,
+    "ageHours": 2612.261866627528,
+    "ageMinutes": 156735.711997655,
+    "size": 3276897060,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Raveyard.Sounds.Diablo.Hard.Techno.Essentials.Bundle.Vol.1.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack raveyard sounds diablo hard techno essentials bundle vol 1 2024 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-13T18:46:18Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=SHh1QUJGaTVxYk5CZkJlMEVxek43YXZTUmlidi9KYkNOMW9mVVhGai82bFlBMjAzNWJ5ci92eWtyb05ZSERublVCQktmT1NBWjllNjNNUFRnalRmak4wa1AzT044WVl4SW5vL0h6b0loQU5WU0FpK0hnSUFSQ0dHYVpsV1JSNkN2YzNZb2N6bUVjemJpL3NaNHlsRkxkUUYrQVJhYVNNa0tGVXRxdHhTalVndndsK0lWZXQ5OE1LbmZDRVZ0cCs3ZVkvNXphUTI5VDRDTEYrSXlWK2lrUT09&file=%5BSAMPLE%5D.%5BPACK%5D.Raveyard.Sounds.Diablo.Hard.Techno.Essentials.Bundle.Vol.1.2024.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/4f5de76335957591875bb1d5d213ef5485a140dd",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "4f5de76335957591875bb1d5d213ef5485a140dd",
+    "seeders": 7,
+    "leechers": 7,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Raveyard.Sounds.Diablo.Hard.Techno.Essentials.Bundle.Vol.1.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=92c5cd3049de773a53463fffb1ad98a51dd3da0b&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 120,
+    "ageHours": 2902.351866636389,
+    "ageMinutes": 174141.11199818668,
+    "size": 22695982960,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Blockbusters.[INTEGRALE].2017.2025.MP3.[128kbps]-NOTAG",
+    "sortTitle": "blockbusters integrale 2017 2025 mp3 128kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-01T16:40:54Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=OENRNVU3WDdlUko5ZmFjVlpQcVdHMDczOGViWGg4UGFpb2ZWRmNjV1Zxek01dW1tZk8xdWJGdVFnc1RKTEdnU0d0V2dNalkxNVdHeXI5MzVjK1QyWWhvS3F3SWdSellRU0NxaGpUc2hiaUp4alR5ckl5VG85OEZGMzc3OFdNdklIZ001T3FjTU5SQ0Z6Q3VkSmR6L1g5L05HMm5Ia3JkblE2a1QyOUFpVmhxc2wxUW9WcXRHWXViZ0RtVjBzN3FKVXNZUjlzR3psZFFaUmhwaDg4cUhxUT09&file=Blockbusters.%5BINTEGRALE%5D.2017.2025.MP3.%5B128kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/92c5cd3049de773a53463fffb1ad98a51dd3da0b",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "92c5cd3049de773a53463fffb1ad98a51dd3da0b",
+    "seeders": 7,
+    "leechers": 7,
+    "protocol": "torrent",
+    "fileName": "Blockbusters.[INTEGRALE].2017.2025.MP3.[128kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=e2994020a691bd928656fa44501598558e75f1a1&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 112,
+    "ageHours": 2692.800199977778,
+    "ageMinutes": 161568.01199867,
+    "size": 1429163968,
+    "grabs": 1,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Sonic.Academy.Ultimate.FX.3.2021.WAV.[32bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack sonic academy ultimate fx 3 2021 wav 32bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-10T10:14:00Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=QzZjWExlcUJ1LzdVaGxUdmc2TWtjaTM4cFFVWjEyOGwzT3d4bFNtQlBKek9CWlNOSjZiOE9NMEtob0lZTkM0MlB0V2hQK1EydnREWkFmR09FVkFoaGVrREU2NUtLbllVSDhLS3c1NEFRRGl0MmhoRXc1bjI2MlI0NmpCY0NFYUo3QXRQWjNESEY0K21GTm9HaGFnMGZWdUhrTXhVbkZPbGorK1dvMHcvb3FQMml2R0ZScCtOS0xCQkdiMFMzeXJsMVVVK2cyMVRpUDIyNTJlWlgrdG11dz09&file=%5BSAMPLE%5D.%5BPACK%5D.Sonic.Academy.Ultimate.FX.3.2021.WAV.%5B32bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/e2994020a691bd928656fa44501598558e75f1a1",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "e2994020a691bd928656fa44501598558e75f1a1",
+    "seeders": 15,
+    "leechers": 15,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Sonic.Academy.Ultimate.FX.3.2021.WAV.[32bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=16a2ca7f4e032900835c1c294c22c5b92592b5d9&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 112,
+    "ageHours": 2704.8635333193056,
+    "ageMinutes": 162291.81199916,
+    "size": 2845661135,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].TWHS.Hard.Groove.Essentials.Vol.1.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack twhs hard groove essentials vol 1 2024 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-09T22:10:12Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=K0Jzem5iaXQ4NmZFMjNsR1RGOVp5TXplQktPUURsZkxLc0Zxdi9Dc2lwZ2p1SmdGYkJjd3c2V3NOVEZJN2YyUE5RdzkvZUluRmc3eS9Qb201dERIMjMrL1dDcGdicEtiM1JMejBVVWlEMUs0UlVOVHQ4UktnTW83bDNqUmxPODZna0w2ZzlucU12c0x1QnVhL2dPNHY3TmVHTXVCVmQ5dEFQMmdsYlZiclE2cG5oUFNqWW9ZZ2sxQlJOd1NZenNIdlJOa1g5aUo5amp6dUNSaWhWVUZKQT09&file=%5BSAMPLE%5D.%5BPACK%5D.TWHS.Hard.Groove.Essentials.Vol.1.2024.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/16a2ca7f4e032900835c1c294c22c5b92592b5d9",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "16a2ca7f4e032900835c1c294c22c5b92592b5d9",
+    "seeders": 7,
+    "leechers": 7,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].TWHS.Hard.Groove.Essentials.Vol.1.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=09d9c93c2d07f2517badf057e9cec2ee79323195&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 116,
+    "ageHours": 2784.7585333276943,
+    "ageMinutes": 167085.511999665,
+    "size": 40521031,
+    "grabs": 1,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Drops.Only.XOXO.Vol.1.2026.WAV.[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound drops only xoxo vol 1 2026 wav 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-06T14:16:30Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=Z204Zy85L3g4c204bldMc3Z6bGIxME5ZaSt4T0RnZW4xc1plUStpdFBGb0ZFc0VxV3FrNlBkWkxlc2M3WFVwTmtMNnRHTDc0NUxTYjJJRmR1RmxXS0phRlRZdGxxQ1pmRFNnaUlPY2g2WHdSamZ2N2RKTFNqOXBDY05kRnh4TTVzdWgvNldjaFg3a3dYRWVXYU5xcklVV0laS0RXby9WblNGNDFxTm1jcmwvU2kxSFhPMXV3TWNZYUJISGNnNm5tdS9meldlUWQyb29VUE1Ba1ZzYnFSdz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Drops.Only.XOXO.Vol.1.2026.WAV.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/09d9c93c2d07f2517badf057e9cec2ee79323195",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "09d9c93c2d07f2517badf057e9cec2ee79323195",
+    "seeders": 141,
+    "leechers": 141,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Drops.Only.XOXO.Vol.1.2026.WAV.[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=e438d8116d13a85bfe4fd75cf5f07c807070607d&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 116,
+    "ageHours": 2785.0063111216946,
+    "ageMinutes": 167100.378667305,
+    "size": 17692685,
+    "grabs": 9,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Drops.Only.Knocked.Up.Vol.1.2026.WAV.[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound drops only knocked up vol 1 2026 wav 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-06T14:01:38Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=d2QrakFsbVl3NUlkWFFzZHNvMXJwUFFyQ1RpZ2hxQml0T2I3aGNQZjNGMEFMWktSdEFLR0NMOW1GOWRsUGMrZStiMmNmUUlqZWQwbHptU3dsV2RoaHI4QkZWSlZtbGxwQk9pYVNpZ1pzdDFYNGtVQ3k2YzNzV0NPR2F1ZVlScHFKN28rbWJZOElLRC8yV1RVOTgvVFFKN1J3dmpYcVg1RmkyQXhxZE85MXJ6M201cW1wKzJ4dkxndmxGdmh3anJ0Y2x3SG9LaDkybXBNSmtvdG4rNS9vdz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Drops.Only.Knocked.Up.Vol.1.2026.WAV.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/e438d8116d13a85bfe4fd75cf5f07c807070607d",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "e438d8116d13a85bfe4fd75cf5f07c807070607d",
+    "seeders": 318,
+    "leechers": 318,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Drops.Only.Knocked.Up.Vol.1.2026.WAV.[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=c09912081ff00e9c021670c3ef4d3290f946bb04&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 116,
+    "ageHours": 2785.291588912,
+    "ageMinutes": 167117.49533472332,
+    "size": 779891798,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Wooktronic.Vol.1.2025.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound wooktronic vol 1 2025 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-06T13:44:31Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=eFhyNmlTYmQ1TVoyeEpBdjJ6U0x6RnBrWklhTlUrTmlkRDU0TENwS0d5WS9sNm5FdENnWkx3cW1mSXpoSVRyc3Z1dEx1dG5Ta3p6c1R0eS9NNnBCUnh3NzZUN2lNSU5TR3dmYUlKYnZGMXE5ZWtJWCtKRytJdjBuV25ldWdmWVE4ODRMb2FXUzcxaTYzckEwQjY0aFJ3NGRWalJQdWwvRXl0bGNLVndwcGRGUmVmYjN6NXkvbXF2RjhNU0kyekErVmg1dm1EUzQ2MFpvNnlHbEx2ckpyQT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Wooktronic.Vol.1.2025.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/c09912081ff00e9c021670c3ef4d3290f946bb04",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "c09912081ff00e9c021670c3ef4d3290f946bb04",
+    "seeders": 9,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Wooktronic.Vol.1.2025.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=b727ed91611380086e16a84439dc84c1e79b796d&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 116,
+    "ageHours": 2785.536588920111,
+    "ageMinutes": 167132.19533521,
+    "size": 2341512749,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Quest.For.Bass.Vol.2.2025.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound quest for bass vol 2 2025 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-06T13:29:49Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=NnNuRXljTGpiTktjQlZrOExNR04wWWpueWJIZktGYnZBaGhvTUh2Sk00R29SZWo4VnRwWTROWDVIb1NKYWJCb1FMMjhKZ3NwWnBuQk5ZTlg0VUUvMHJnTXFRQzdLYWc5UStEdm9FU0VEYUFJeXp6VitWNzBqWktKamd4RVVIMmdDUXpsOEpiNTRqN0ovQXVmRjJiNDlXeHdQVjdxT05NRlZ4ODFBd0IvZW9nTlQ0R3JZVnYzSTdaa3BMU0hsM1Bhdm5Wcm9Bckp2dStLS1lUM0pNd1UwZz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Quest.For.Bass.Vol.2.2025.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/b727ed91611380086e16a84439dc84c1e79b796d",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "b727ed91611380086e16a84439dc84c1e79b796d",
+    "seeders": 5,
+    "leechers": 5,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Quest.For.Bass.Vol.2.2025.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=0c1422790fba4f2e36b2bcff1267b69ee67427b7&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 116,
+    "ageHours": 2802.8293667060834,
+    "ageMinutes": 168169.76200236834,
+    "size": 50397426,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Drops.Only.Color.Bass.Vol.1.2025.WAV.[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound drops only color bass vol 1 2025 wav 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-05T20:12:15Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=Qy9sK0lyTlp0WjVFc0cvbUFkSUthTC9jZEpCNE0rUTZ5Vnk2ekVZVlRUMUxXK2hBUktHWGlzeU44aXVvUDBHNEdha2k0dGhrQ1oybTlGUXBJUVhWMmpMQnV1TGlOUFJpeXNGUlVjZ0lsRFZVMFd0WU4xNkFwVU96QTRRVVJvM1AwM0J4QVZVaDdsWEZmdWVST20xQ0VOcCtrcTFiZGw5NVF3QkZTbnkvb1l1ZTNFdEczcGxtbllwNVRFQm9nUXJ1TGRsSHBaZjVreXhXWXZkbzhsODRuQT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Drops.Only.Color.Bass.Vol.1.2025.WAV.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/0c1422790fba4f2e36b2bcff1267b69ee67427b7",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "0c1422790fba4f2e36b2bcff1267b69ee67427b7",
+    "seeders": 88,
+    "leechers": 88,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Drops.Only.Color.Bass.Vol.1.2025.WAV.[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=f8e482d2c81c178e059b95fecb4259d49805b023&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 116,
+    "ageHours": 2803.0927000475835,
+    "ageMinutes": 168185.56200285832,
+    "size": 944046307,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Brostep.Vol.1.2025.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound brostep vol 1 2025 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-05T19:56:27Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=RzVLTWNQaTFzMWswQmpWVHhTanhTaXRtY25USWEzR0pOb2cvRlpwVDdEODBzSnp6QW5zd1l4NVJEclhTQVhZdXZTR3E5MDJRQ0VEaDBCQ2hnWXZ5bXBobEJ2KzN2Z3NkQ3ZGOWtaYWJYODlPUDlDQUxrcXorc2VFajdibzdEWnAvQWtVRXV3Y0dtMGJYVnJ5TXNac2hLeldTcUdDa1loeXpwd1p5Sks3NHdGUUJUSjFHd1pWT3lLcWRFeDR3alhNT2F6SWI2YkRDSkZ5d3ZJMSt1bE9Edz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Brostep.Vol.1.2025.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/f8e482d2c81c178e059b95fecb4259d49805b023",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "f8e482d2c81c178e059b95fecb4259d49805b023",
+    "seeders": 10,
+    "leechers": 11,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Brostep.Vol.1.2025.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=65fd6fce279229156c2d74ccf6b3b27ea67ef980&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 116,
+    "ageHours": 2803.3807556112224,
+    "ageMinutes": 168202.84533667666,
+    "size": 47209222,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Drops.Only.Hard.Techno.Vol.1.2024.WAV.[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound drops only hard techno vol 1 2024 wav 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-05T19:39:10Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=REtha1ExK04xVE9LVFRqUnBrTEc5dzM0NWVPVGQxMG1uVXkxQUJLTmViVzJpaURNc05OR1hzOEpUWG9KVlMxeHg0WlNkSWRQV3I5S2NGSFNudUt6Mk5PRm5TVmJSVUFyMDhBODJLLzBLK21IOGNYMlRmYTk3V213UFF6WlkyNEpzMC9IUTF0NE5DZ0I4Mi90REFWWnJmUWVMbmIxaldMTDkvelE1RVBDaVN5TXN2amp1azhsb0pVU0xtMUc2ZjJIZkphWXZFclBlcWFGTGdnWE1UQUdPUT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Drops.Only.Hard.Techno.Vol.1.2024.WAV.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/65fd6fce279229156c2d74ccf6b3b27ea67ef980",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "65fd6fce279229156c2d74ccf6b3b27ea67ef980",
+    "seeders": 92,
+    "leechers": 92,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Drops.Only.Hard.Techno.Vol.1.2024.WAV.[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=38bb8a5d7de000613b991f3b70ea1446fa468cac&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 117,
+    "ageHours": 2828.967977841361,
+    "ageMinutes": 169738.078670485,
+    "size": 1275934,
+    "grabs": 16,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Drops.Only.Wook.Bass.Vol.1.2024.WAV.[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound drops only wook bass vol 1 2024 wav 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-04T18:03:56Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=clcxMUdCWE5WVDNOTmsvRnY2UC9GRnovNE1OYTM5dFFEMXBjcjQrWVNEdDNNWDhOZDNIR0lTMFZWR2FUUGx6TmNiY25pZWpuMG4rZDRkcERtTWRVUXZRb3RkdkNTMDU5M0IzbHFkRGJEOSswdkxaeGdWWW4xSTdCNHpPdFRjMDZWZXpDK3dOMXJKNDEraWl1QXg3Y0V5b3BkejBUYkttZzdlNDJ3T3dCd0FnSEZyc05LN2Y5QXU5dW5OYjhJTmI1c3hSckpUcnNwbTNMZ2RocHRKVzlldz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Drops.Only.Wook.Bass.Vol.1.2024.WAV.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/38bb8a5d7de000613b991f3b70ea1446fa468cac",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "38bb8a5d7de000613b991f3b70ea1446fa468cac",
+    "seeders": 334,
+    "leechers": 335,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Drops.Only.Wook.Bass.Vol.1.2024.WAV.[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=dfd7d4375dac8e5ddd278169f0d391e722c26b49&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 117,
+    "ageHours": 2831.326866738111,
+    "ageMinutes": 169879.61200428833,
+    "size": 2934586161,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Xeno.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound xeno 2024 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-04T15:42:24Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=Q0tYUy9CZURqVHhEcWRTNFliN2hTNjhEcHBxdTMrcElEVThleFFNSVk5SVF5UFNwbUx0b0UyOHBKMk5vVFhDUDRSdlprVlhzKy8vYTNSWE5LYmF5VjkvYnNxVHZGdUFZakxNSmlIeDl4V3NQY0hHMTJuUEMvM29RSXFudGQ3cWljcDBlOVA4TTRtR1pmMUIzZkRlUVN4TWdUd0dacHdpejN5L0xyRWJ4UFkzZWpNV1FhU3YrbTBjZFVlQ2tmOXpmRXo0Sk9sNUlNd1BzTW95MCtOSzEvQT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Xeno.2024.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/dfd7d4375dac8e5ddd278169f0d391e722c26b49",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "dfd7d4375dac8e5ddd278169f0d391e722c26b49",
+    "seeders": 5,
+    "leechers": 5,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Xeno.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=95100c0f8f69ea1fcb2896f478da501a48c72bad&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 117,
+    "ageHours": 2831.72853341275,
+    "ageMinutes": 169903.71200476834,
+    "size": 685643889,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Tearout.Vol.2.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound tearout vol 2 2024 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-04T15:18:18Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=RlBwT094MzM3YUtoclNkdG42aytNTzZhRVRCNHNMTEZCNUZZeWdFbER5WDVXRU5Md2c5dlZaTlJzUWlmMWQ3VFFPSFdmempCUnhTMEhuMWpXZTZjOTFlWmhhNXZwbEROTktkSlgzU3plN3doL1U5MVpRZGEzLzZ4L0dFNjQ2MVYrWTJldGEvS2ZuczZZQWN2NnR0UmJzZnYvUmJFd0xxTlJYbnlucEN3a2Z1Y0ZybFZPbkU1U05ibEpWL05Oa05BbVIwdmtIU0VDNDRRaGpNRVdkYXFKUT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Tearout.Vol.2.2024.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/95100c0f8f69ea1fcb2896f478da501a48c72bad",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "95100c0f8f69ea1fcb2896f478da501a48c72bad",
+    "seeders": 11,
+    "leechers": 12,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Tearout.Vol.2.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=24a03f873ac785e809077f3cfa8362f4a71eb8a1&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 118,
+    "ageHours": 2832.1054778650555,
+    "ageMinutes": 169926.32867190667,
+    "size": 2329801331,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Quest.For.Bass.Vol.1.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound quest for bass vol 1 2024 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-04T14:55:41Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=eGpadnNKUFFWRjA5ZEpIOU1VOHZxcXZCcHF2YU5yd2w4Rk96c29GdWkrZnhaY3lOc2VXdkVlbVBBMnBvV0t1dDFXNm8waitKMDhVNjVXamdCd0txRTNKWEZQQy81T0R5SU83eE5nVWFGZmxlZDluZTBEQ3Z6WVViRmJUOGJrSXo0Z0RzTFBGcUViTE1CN2pkUjRVYk05cWhxNk9KemZYeURORytkeUM4SmtUbVgwdjBiWXhaVFJCanRmQW52SlkzbEhKaTZVc3ZRZlJjaEdvcUFta2NmQT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Quest.For.Bass.Vol.1.2024.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/24a03f873ac785e809077f3cfa8362f4a71eb8a1",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "24a03f873ac785e809077f3cfa8362f4a71eb8a1",
+    "seeders": 8,
+    "leechers": 8,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Quest.For.Bass.Vol.1.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=45774a48bb8d8d8214e57c4994d5b782a2b61e88&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 118,
+    "ageHours": 2837.0618667621666,
+    "ageMinutes": 170223.71200573334,
+    "size": 870131148,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Vaut.Mieux.En.Rire.Podcast.Du.24.05.2026.FLAC.[16Bit.44.1KhZ]-NOTAG",
+    "sortTitle": "vaut mieux en rire podcast du 24 05 2026 flac 16bit 44 1khz notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-04T09:58:18Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=clRMbDBJMFhGdVRpU2FIcjFEbXJEMmVvT05ZbldCR0VRQnJSTGpjdmdTakt5bEkrb2dDOFhaaDJKajhjdjdFWi9IYTVmQWVLbGlDMTdISUxRb0Yzc3F2bDNoQlBEK1lqUERFWGFxOXp0OVQ0dW9oQjZNRVkyVHVBVkwvQjhleU5heU96dTdQUk1Db2xTak9hSWZIdWF1d1RRWllaRDgvOUl3QTc0ZWV4UDVBRkx4WkZlMFFkdzlDeWVvdGlGWnZIV1hQMDgwWXUydm1HQmcwdXI1U2JZQT09&file=Vaut.Mieux.En.Rire.Podcast.Du.24.05.2026.FLAC.%5B16Bit.44.1KhZ%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/45774a48bb8d8d8214e57c4994d5b782a2b61e88",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "45774a48bb8d8d8214e57c4994d5b782a2b61e88",
+    "seeders": 8,
+    "leechers": 8,
+    "protocol": "torrent",
+    "fileName": "Vaut.Mieux.En.Rire.Podcast.Du.24.05.2026.FLAC.[16Bit.44.1KhZ]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=9390b33a71ab7bddd3433dad256260b39c660821&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 118,
+    "ageHours": 2845.409644548167,
+    "ageMinutes": 170724.57867289335,
+    "size": 32370955,
+    "grabs": 11,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Drops.Only.Vol.3.2025.WAV.[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound drops only vol 3 2025 wav 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-04T01:37:26Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=NVJSTlNERzZVSmlKeWl0bzVwVUwxMGxmRFo3SFhXa2hLSmdIeXVDS0g4ZkRMVDF2VnY5U2RPOXBrSE0yVHhRRUtBYk0zMTNEWk0xZVpUNHJvSitxaTR5MmdsNVJGM1U0cExka3c1b0phWUMyV2tpdmtsdVZHeHU5bVNxOENRZlo2a2kwa2N5MEFvZ1l6VlNwbjRUQWk4cWFMcTlObjRQOFJpdmVCbmZDc05vM1lMTUQ4MjFYSFgwb2kvQzZNV2toOHBVYVo5dExzVlFxUWhXSzA2ZWc0QT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Drops.Only.Vol.3.2025.WAV.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/9390b33a71ab7bddd3433dad256260b39c660821",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "9390b33a71ab7bddd3433dad256260b39c660821",
+    "seeders": 314,
+    "leechers": 315,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Drops.Only.Vol.3.2025.WAV.[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=ea2714f28557d1ae0e44dcaca7945cf69b81463d&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 118,
+    "ageHours": 2846.186033444889,
+    "ageMinutes": 170771.16200669666,
+    "size": 1379592124,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Redacted.Pack.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound redacted pack 2024 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-04T00:50:51Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=SjZUZHJVTzlrd2ZPKzJjRTlTZTZTZXZyWmMzT0c5MkNOcjhHVmp0Z3lmcVNSMVU4R1J4M0p1eGpRWEs3cGpkZ3RXUFAzU01jbTdweXAwVjI2eHUwYk1qYWhKYm5MNlFwQ09oUjJ0YlVaeWt2NzRvaE1JbXFybzFxZFMvUVZGbTRtZ3V1S3NLc1BFRHFTUm5JNHBkZ0l6djA3dEUxNzdESzlJZWd1bmNqZHZiUTd6WnI4T0poWjdPaFJuRlMxajVhcjhNcVBMbUk4UndrS09qWHhWaU5IZz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Redacted.Pack.2024.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/ea2714f28557d1ae0e44dcaca7945cf69b81463d",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "ea2714f28557d1ae0e44dcaca7945cf69b81463d",
+    "seeders": 8,
+    "leechers": 8,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Redacted.Pack.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=b3fc0ce6bfc01cbc6c94c426ecd6e3ed17cac060&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 118,
+    "ageHours": 2846.693255675,
+    "ageMinutes": 170801.59534050166,
+    "size": 2135232881,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Redacted.Ableton.Project.Files.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound redacted ableton project files 2024 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-04T00:20:25Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=QVBaT0Jua0wrcjJIMDBWSGNKMnRhTTNXMllUVkdmKzQ1WCtxRHlSQzFkaGl5c2NpSmZBRks2ZitLUEdHb0ppVG5Oc1B1K05Oa053M3VSTnJrL3NsQ1dsNUlpSGh5aXZ6N2VvWjdEd0VqYVd1U3FaWFdFdWhOc2IvaFMzQ1BXamV1em1iL3dDWFN3UllyRkloRDdZSFVPSE01OTBGL0MzVHVWV0lRR01weHU5S3ljVmdPTkdxRW5zSDZuVE80d2ZSSlpheS9OaVdwL0Vudnk3aFdEZzg5QT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Redacted.Ableton.Project.Files.2024.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/b3fc0ce6bfc01cbc6c94c426ecd6e3ed17cac060",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "b3fc0ce6bfc01cbc6c94c426ecd6e3ed17cac060",
+    "seeders": 13,
+    "leechers": 13,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Redacted.Ableton.Project.Files.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=68490c0f5764a31691d29656af33ea6cd3a112ec&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 118,
+    "ageHours": 2848.4068667942224,
+    "ageMinutes": 170904.41200765668,
+    "size": 756344943,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Gorilla.Expansion.Pack.2025.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound gorilla expansion pack 2025 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-03T22:37:36Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=aUE2MWlmeHowNXVtSmplSm1WUFJlaXRKNlVkMC9ZWUFDMGJqWHZkWXNqYXBHUTJaSUVZYUJoeXVNRmtneW9rVkVOcUJXQXkzbHRDZ0t5dHQ0Q3B3eEhSSVg0YXhrbkhEOERhVEU1czByOXcvSFFCdTRnQVJNSUdKUFJ3OW5JZnNTeWVreFl6OCtJWEE5cGo4RTRrS3VrMEprd0FHb1M1andWRXUvMUR3bUQvdHI5K09QUlk5N3M0MjN3QjJoS1d1eWJHMEVmMHk3aURlOVV6Rk42N1V1UT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Gorilla.Expansion.Pack.2025.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/68490c0f5764a31691d29656af33ea6cd3a112ec",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "68490c0f5764a31691d29656af33ea6cd3a112ec",
+    "seeders": 8,
+    "leechers": 9,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Gorilla.Expansion.Pack.2025.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=9513e9d53318e6c8440644ab96774afae16abae2&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 119,
+    "ageHours": 2856.1988112465833,
+    "ageMinutes": 171371.92867479665,
+    "size": 2012820190,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Gorilla.Ableton.Project.Files.2023.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound gorilla ableton project files 2023 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-03T14:50:05Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=Z2czNlYzQVhPY3g5ekxaZEpMQ3YyRElRenVvSnlyZFhiaWNkcUtld1ZmRU0xdG12MUlOSUo4MHprSXoxR0VGeTh2NVdFN0tQUzZyVkhPU0djMHV0VHVTaUhBemRGeWo5dm9uUDlXaFR1c0FQSzBrYktucFZLMCs3QUpkWnBCOGFIOWNkZDNtY3hpdGpYNEJmWkNRYTc4K1ExVjRqUTlGTm5kM3JIa1B2M1ZXSzNYUlN1QUJMYWlSdnVTb2o4RUNvcUFOZ3V0OTRZWlRvOU5rR0JvRDhRZz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Gorilla.Ableton.Project.Files.2023.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/9513e9d53318e6c8440644ab96774afae16abae2",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "9513e9d53318e6c8440644ab96774afae16abae2",
+    "seeders": 10,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Gorilla.Ableton.Project.Files.2023.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=ef2ac581d493d6bd73878229fe5dae3e2d3d641c&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 119,
+    "ageHours": 2858.4677001435834,
+    "ageMinutes": 171508.06200861666,
+    "size": 950423831,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Gorilla.Pack.2023.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound gorilla pack 2023 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-03T12:33:57Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=UmF1aHlxMWFTZDdxSFZSREltZHhHaTQxbVkwV2JrTm56UWtLdjlDR1pWNUxxNzhFdXhPQ1QxQ3BXRHpmYkxkaElYVXVYMHczR2Z3MnJTVmYwdHVtR0hOaHVPdHo5YU56SzdlcXhpUzNzNWdPc3VvbHRHd09rZzlvMzNUV1NPQVNMb1lnWWpoOGxNQkJ0S0ptb0NEM2VCMGw4SFcxZERGMXRUdTFTcUJBRWNTYU5QTHZsRDI3MUJmUVErNzRsRzZsNXVOeHgwR0l6clJ3N3BvMWhkaWNIZz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Gorilla.Pack.2023.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/ef2ac581d493d6bd73878229fe5dae3e2d3d641c",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "ef2ac581d493d6bd73878229fe5dae3e2d3d641c",
+    "seeders": 10,
+    "leechers": 11,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Gorilla.Pack.2023.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=1b841e52f624e9409a562dbb9362e6970142a095&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 119,
+    "ageHours": 2859.6482557071945,
+    "ageMinutes": 171578.895342435,
+    "size": 563046283,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.SadBoi.Vol.1.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound sadboi vol 1 2024 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-03T11:23:07Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=UjdydzExbzc5UHFNMmhTaTlPSFpMa3FnVVduQTRVT3BQeFZPbmxDMzRrb3RJWGNOMElReENobEZXYTBlelNJaEdpZVZrRFhXM2dSd09oc3FuNStaSVYwbXkybjRSM2xkWi9qaVo5TDZmL3c4QzNtK2NSWnlWaTBjTXlxb1gxd2RLbHBrKytwOFFaRWVtOVp4N0V1VlpZQ0RlY0VSVkZzc29JU2xUU21QWXFnUElzNkNoM3F1R0NENEN2NjVtcG81Mk4wc0p2eGdyb0dXQzJkVTRnY3VmUT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.SadBoi.Vol.1.2024.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/1b841e52f624e9409a562dbb9362e6970142a095",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "1b841e52f624e9409a562dbb9362e6970142a095",
+    "seeders": 11,
+    "leechers": 12,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.SadBoi.Vol.1.2024.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=5f5435ca4ff4dea222869e4abee0a3b61992fbcb&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 119,
+    "ageHours": 2859.9477001596665,
+    "ageMinutes": 171596.86200958333,
+    "size": 183891231,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Tearout.Vol.1.2022.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound tearout vol 1 2022 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-07-03T11:05:09Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=aE9Nd240NFNqNHIxMkRYcncwRzJZMWl3Q2ZEeUFuM3kwTzE5cGY0bzhCQnBFMVlSdkUyUC9RMytIdFlsZS9lR1Q1SGV5R0lVTHJybmxpUk0vb0dWeGxwZUVkbk4xMEtHOFJJOGR3QVNVNTdCL201amwvT0crbXBhd2F1c1A2VVJueXppK09BQ01uYUVRZ1ZtM0pob1ZBRXYwQU1rTVc3SGFpemQzV1p0ak9jRzFINzVGd2YyM3dJNDFQdnBsd1JvcXd4L1NFR2F1SFl6dkJVVnc2Zkdrdz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Tearout.Vol.1.2022.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/5f5435ca4ff4dea222869e4abee0a3b61992fbcb",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "5f5435ca4ff4dea222869e4abee0a3b61992fbcb",
+    "seeders": 19,
+    "leechers": 19,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Tearout.Vol.1.2022.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=9f8821d5af5e104ebd3f4ce4789a1638a5bb8899&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 128,
+    "ageHours": 3087.7165890564443,
+    "ageMinutes": 185262.99534339,
+    "size": 736774554,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Cartel.Vol.3.2022.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound cartel vol 3 2022 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-23T23:19:01Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=YytWQTdwNGdpWDAwQ2NXRWtlMVNGMGFubVgzeEF1WmpsUS9HVWNJei9VeVNtTVJMR2YzK3cyVTE5UWgySDhVS0dSRk94L1RBOHBlUGZuekhNQ2NSOEN6eWFpdnVJK09RTUxGQVFYWEgzN2hTaXdTUnJYOHpCdU9qNUc2NTVPMUlBb3VGZ1phNDc3VFpXNklrdUdZaFVMWituVTlEVkNDSThBeDVIc0F6bWtIRmRtS29EejUrTldhVmJrQUtkVlIzMmFMS3puMUI3TmEraG9NSlRpek5Hdz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Cartel.Vol.3.2022.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/9f8821d5af5e104ebd3f4ce4789a1638a5bb8899",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "9f8821d5af5e104ebd3f4ce4789a1638a5bb8899",
+    "seeders": 8,
+    "leechers": 9,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Cartel.Vol.3.2022.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=a91a360b71341988f77886934df187deea148a26&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 129,
+    "ageHours": 3114.1202001755,
+    "ageMinutes": 186847.21201053166,
+    "size": 990467728,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.FOMO.Fire.Pack.Vol.1.2024.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound fomo fire pack vol 1 2024 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-22T20:54:48Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=aGtOcFJ1NkpabzF6YXpEcVN4cklwNmc2SkRiVVVEU29YSjFTT2YrcndDMWZTTys0b2NSWkh1ODhVS0tFRis5cVlXOVk2cFk4clhFZG5zYmFjMm1LSVZySnJnNnpZL1ROUFB5Ny80OWJ0WUNFbXRjQ0R3Q200NDI1ekt3a1hiNDNHWitMcGdGWlhXRFJHOUFhR3hIS3h2U2h2UW9HVGFrZHVXSndKR0JQQ0QyR0FOZ1MxVUwvWVJUM3RibUI4TEVLN2FMYlBiVjNmRGF1M09WNlArSmdtQT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.FOMO.Fire.Pack.Vol.1.2024.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/a91a360b71341988f77886934df187deea148a26",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "a91a360b71341988f77886934df187deea148a26",
+    "seeders": 8,
+    "leechers": 9,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.FOMO.Fire.Pack.Vol.1.2024.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=a2108864c2158764d9a82a892089c93a649d88a5&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 128,
+    "ageHours": 3095.103255738861,
+    "ageMinutes": 185706.195344335,
+    "size": 24537036,
+    "grabs": 5,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Drop.Only.Vol.2.2025.WAV.[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound drop only vol 2 2025 wav 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-23T15:55:49Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=WDcvNVRlVHNoSkw0ZGdFK0FIM21hTVZYa1RGNk5zRDJkbU5DcXdxcHU0emdyREJWSHVCcENDOVg0dm5TcmRBT1FCWVhIT05rdW55S2UyUi9hck5WaitzSWhwQnVjZTNKQXl0M2xvbTliVFgvSnVDOFpLZ05NNnB3aGdobHI5UVhYMmd5WkorNWhSc1owcnFLN0hKaXMxWU1iYVloUTB1dTdKZUZFdHZwcWRDbTdGOEF1YWhtaDhRS1pQTnBuTDZwVVQ0ZGdlei9pVnBod3owVnNJTkJZUT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Drop.Only.Vol.2.2025.WAV.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/a2108864c2158764d9a82a892089c93a649d88a5",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "a2108864c2158764d9a82a892089c93a649d88a5",
+    "seeders": 311,
+    "leechers": 312,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Drop.Only.Vol.2.2025.WAV.[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=cb59ecfdfb5c098aed8d353f37c10d1123b49fcb&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 130,
+    "ageHours": 3124.2863113021667,
+    "ageMinutes": 187457.17867813332,
+    "size": 99372686,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Drop.Only.Vol.1.2024.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound drop only vol 1 2024 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-22T10:44:50Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=bytXZ29Qbkd3YnZsWU5RRUdzSmFzQUdMR3NKZ0RiVU5KdWRLcHMvNzlHRThXRlJjOEpldkNERVlCWnhZTjRteWRLalZIMDdlMDVObjFUSmtMNm9CeWc1NDZnSTdWM2tja1RIL3kxWUMwdExZNzVtK0EzeE1DTUxmV2diQVdwR2R2cTc0WUJxSHR4cXJYSHZFbnFJZmNDSktZOFlqbVZ4Nit2ZEx2Y3YwQnR3WWQ1UndGekFtYk1aTWZpYUFmK1U1WEpQZlVKQWtLYWtQdyt0djQ0M2I5UT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Drop.Only.Vol.1.2024.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/cb59ecfdfb5c098aed8d353f37c10d1123b49fcb",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "cb59ecfdfb5c098aed8d353f37c10d1123b49fcb",
+    "seeders": 30,
+    "leechers": 30,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Drop.Only.Vol.1.2024.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=a0099934848a1bd20bdfcf6474e006848a8b914d&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 130,
+    "ageHours": 3123.5090890879724,
+    "ageMinutes": 187410.54534528,
+    "size": 2406837263,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Ephwurd's.EPH'd.Pack.2021.WAV.[24bit.44.1kHz].[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound ephwurd s eph d pack 2021 wav 24bit 44 1khz 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-22T11:31:28Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=SzhHWXJYbGM2WWtLU0lNREo5a2xVRFNwbUhDR3l4aHE2bEZydUtGSHhFbkJqQlQrYW03Q3BqbEZzUnpVSzI4WmdYUWZMaTk4a3hrK05sM1oyL1lqc05jakpLWWErY1BDOWtDcEVsN3B6QjNYS1pMSCtjNUdKdjJNUm5LMjgrSjc5UjE0ZmRtd0srOEo5ZFlZYW1uUUQxYUI1Ym1kTjNUSENNNjlOVjlrZzhScDhiTFd1d1dKOVd5VDlUWEN5b3p3MG5mQ1VCRDBlL0t1V0hnc2hmWG9tQT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Ephwurd%27s.EPH%27d.Pack.2021.WAV.%5B24bit.44.1kHz%5D.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/a0099934848a1bd20bdfcf6474e006848a8b914d",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "a0099934848a1bd20bdfcf6474e006848a8b914d",
+    "seeders": 6,
+    "leechers": 6,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Ephwurd's.EPH'd.Pack.2021.WAV.[24bit.44.1kHz].[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=e5168000b7cfb22689a0c97373cedccff7d0bb1f&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 130,
+    "ageHours": 3122.599644651778,
+    "ageMinutes": 187355.97867911,
+    "size": 159453166,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "La.France.Pue.Radio.Show.2026.06.16.MP3.[182kbps]-NOTAG",
+    "sortTitle": "la france pue radio show 2026 06 16 mp3 182kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-22T12:26:02Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=OVRvZnp2OStPUjIrMkRsZFQvYUhsTXg2T0d4NTZyYnIwOG5FczVDYnU4b2hta2NLQ2tSTVg2U2lRWHY2OHhzcnpJMjV2dEpTdWh2VitFVGluMzdJNWFydHMwVWlwc2Q4T3U1T3FlQ0NVNkhmTVh0RFpvdnlrY2xLcTdybG9BMW5ENE5KSTExbzhKd3l4cEtXanNEM3UzRndZenJpQzdqTHFmZWIzYzVSanFpNWNkNEJjbG9vZlVzQ3J2K2QydHdmdFh3Tk9pRUNMTmYvZEJ4VytJaENFdz09&file=La.France.Pue.Radio.Show.2026.06.16.MP3.%5B182kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/e5168000b7cfb22689a0c97373cedccff7d0bb1f",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "e5168000b7cfb22689a0c97373cedccff7d0bb1f",
+    "seeders": 13,
+    "leechers": 13,
+    "protocol": "torrent",
+    "fileName": "La.France.Pue.Radio.Show.2026.06.16.MP3.[182kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=f7b9ca7714ae1424636c29694ec8234cc4ff5333&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 130,
+    "ageHours": 3122.896033548472,
+    "ageMinutes": 187373.76201291167,
+    "size": 246193247,
+    "grabs": 3,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Kyan.Khojandi.Et.Navo.Un.Bon.Moment.Avec.T.Deseur.Et.C.Brunet.2026.FLAC.[16Bit.44.1KhZ]-NOTAG",
+    "sortTitle": "kyan khojandi et navo un bon moment avec t deseur et c brunet 2026 flac 16bit 44 1khz notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-22T12:08:15Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=L3BEcTI2WWhuTjNzdGFPOHBidzB5R2NFVXhXQ3ZUendZYVhQakFwNWFsWGRBdW9BYXAxSEJ5VGlSc2xCQzh6T0E0NFVBb2ZBUlg3YmJDSVlqOVdtRVRTOXFwVTdWOUx5NlFUTEFhNzVPMTdyaEFFSmhDMjlocHpoTHJ6Y2VmYkFaWElkK3BCZVhoMFdpZHNlMU1rTXRXd1FwWlJZWWhTaW4rcmFYRUpFZ0MrcEFwNnhZOUExTnB3Y0ZDZStUZFVjNmdIWkhJcWhsZDNsZ1NUWU1OTEs3UT09&file=Kyan.Khojandi.Et.Navo.Un.Bon.Moment.Avec.T.Deseur.Et.C.Brunet.2026.FLAC.%5B16Bit.44.1KhZ%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/f7b9ca7714ae1424636c29694ec8234cc4ff5333",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "f7b9ca7714ae1424636c29694ec8234cc4ff5333",
+    "seeders": 14,
+    "leechers": 14,
+    "protocol": "torrent",
+    "fileName": "Kyan.Khojandi.Et.Navo.Un.Bon.Moment.Avec.T.Deseur.Et.C.Brunet.2026.FLAC.[16Bit.44.1KhZ]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=902c02b3fd169019dc82f16edcadc5d34bd164ec&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 130,
+    "ageHours": 3126.104089112389,
+    "ageMinutes": 187566.24534674667,
+    "size": 190248140,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Jean.Alphonse.Richard.RTL.L.Heure.Du.Crime.2026.FLAC.[16Bit.44.1KhZ]-NOTAG",
+    "sortTitle": "jean alphonse richard rtl l heure du crime 2026 flac 16bit 44 1khz notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-22T08:55:46Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=REFZVVNvNERvZXU3bFNLWHhycVVjYmphdkRmaFJzQW5XQ1VRQ3QyVTd2Njd3aXNYMTRhemlrZ1U3WFd6Z3YwTE1uOHk4V3lQWlpKazRNaFBhT3FKU1JlbDhjMFhXa2hqaFhMNEIzZG95ZEtLL0RjR0RWREpFeGUwMGVXTEpCNnJFL0lSVnpjNjZoYThnZXUwVlUrN2d2RGp6dEFISzk4SXNHempYS2hmbHlqd1R6K0FpWGJjaFFIalV3YmZ5akd3V3RvVmVTajZ5Yy9CRGZjbWp0eUpQUT09&file=Jean.Alphonse.Richard.RTL.L.Heure.Du.Crime.2026.FLAC.%5B16Bit.44.1KhZ%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/902c02b3fd169019dc82f16edcadc5d34bd164ec",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "902c02b3fd169019dc82f16edcadc5d34bd164ec",
+    "seeders": 13,
+    "leechers": 13,
+    "protocol": "torrent",
+    "fileName": "Jean.Alphonse.Richard.RTL.L.Heure.Du.Crime.2026.FLAC.[16Bit.44.1KhZ]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=018527e8ba0a656e56afec7282c4960db8a18ed1&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 131,
+    "ageHours": 3166.765755787111,
+    "ageMinutes": 190005.94534723,
+    "size": 122894968,
+    "grabs": 1,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Nick.Mira.HAYWIRE.2018.WAV.[16bit.44.1kHz].[24bit.44.1kHz].[32bit.44.1kHz]-BERNABE",
+    "sortTitle": "sample pack nick mira haywire 2018 wav 16bit 44 1khz 24bit 44 1khz 32bit 44 1khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T16:16:04Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=dVlvUlF4ODBFUHdEK21JNVRJMUx2dEhXNk5EOEFTQm8wWGFtcisvdGF1L1liUTErclc5WnBJSS9ENENzN1MraWptbnNoYnNiQlpDK1d0c3psbWVVR1h2c0FtTzNVT0lhYkdQaWI2WmJ6SDFzNnhkbzZDRWlxSGtQeUw2d2gxL1Z2YktqbmxQQkZtdVRxUUpnaDZwajZLSHp2S2VvSVRzWkhJcUFoeW5Kdm9rVXd4Ym4yVC84SkVpNTBPSGZPY2h1dXdWa3lJdG9DQkQybFUxM2l3MjVjUT09&file=%5BSAMPLE%5D.%5BPACK%5D.Nick.Mira.HAYWIRE.2018.WAV.%5B16bit.44.1kHz%5D.%5B24bit.44.1kHz%5D.%5B32bit.44.1kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/018527e8ba0a656e56afec7282c4960db8a18ed1",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "018527e8ba0a656e56afec7282c4960db8a18ed1",
+    "seeders": 27,
+    "leechers": 27,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Nick.Mira.HAYWIRE.2018.WAV.[16bit.44.1kHz].[24bit.44.1kHz].[32bit.44.1kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=a0c6f627c314a4586094b6149c4e626b97d222e6&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 131,
+    "ageHours": 3166.7710335731667,
+    "ageMinutes": 190006.26201439335,
+    "size": 110638852,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Nick.Mira.MAGMA.2017.WAV.[24bit.44.1kHz].[32bit.44.1kHz]-BERNABE",
+    "sortTitle": "sample pack nick mira magma 2017 wav 24bit 44 1khz 32bit 44 1khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T16:15:45Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=VEhqVndBMVJPcnBwK0JxVWlXcGRPRFJNZm41SllIOVNFTDNsUWR4VEZ3cEd4ODhzaGlOMTVLU2VnNW5xbzFuUUhjbkFEd2hjaXZZNDdKK0IyNVpaWHJyRm1CeXNFNHhsQVdmUFplUU1zd3ZnQ25zam5VaE0ycTBuc1AvaTNjME1YYXhkQlhCek5wTEgvS09BNllPdjZrcnBRclVwMDBuOXRpbmtwVVVBUVYyT0FLU1Q2RWhOaGJkbnVWRjhzKzhNUGd2MlE3RHRodEs3RnRwWDg0eWkrdz09&file=%5BSAMPLE%5D.%5BPACK%5D.Nick.Mira.MAGMA.2017.WAV.%5B24bit.44.1kHz%5D.%5B32bit.44.1kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/a0c6f627c314a4586094b6149c4e626b97d222e6",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "a0c6f627c314a4586094b6149c4e626b97d222e6",
+    "seeders": 31,
+    "leechers": 31,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Nick.Mira.MAGMA.2017.WAV.[24bit.44.1kHz].[32bit.44.1kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=173acca6dbf2a49d30fde5afdaef6fe247e8e767&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 131,
+    "ageHours": 3166.7788113590277,
+    "ageMinutes": 190006.728681545,
+    "size": 101749172,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Nick.Mira.BODEGA.2017.WAV.[24bit.44.1kHz].[32bit.44.1kHz]-BERNABE",
+    "sortTitle": "sample pack nick mira bodega 2017 wav 24bit 44 1khz 32bit 44 1khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T16:15:17Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=TnhiaEdlT3M3cmNDSnJmZUgwKzZadjF5b3RpQzNjNUFDWHk3aWVVZU9VdXBRQVlWN0wwbTcxRC9YZCtJZnloSlpGMmxFSk5KQ0ZUZEx6elR3M1RZbEQxV2krL2UxQytiRXNLR0VWVlhmYkNtdjJyYzFjelRKaC9MYmEyUU5hWW9teDhCbC9aMC9DQ2RGQWFGZmFrR0tjNURQVVVJYjhadzBlTkwwQ3NvRWp5dHpCQlJmVzBvSWlodnJIM1BWaysyV1M3cnArNmhZaEZOa1d1Y0hPNEJBUT09&file=%5BSAMPLE%5D.%5BPACK%5D.Nick.Mira.BODEGA.2017.WAV.%5B24bit.44.1kHz%5D.%5B32bit.44.1kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/173acca6dbf2a49d30fde5afdaef6fe247e8e767",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "173acca6dbf2a49d30fde5afdaef6fe247e8e767",
+    "seeders": 28,
+    "leechers": 28,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Nick.Mira.BODEGA.2017.WAV.[24bit.44.1kHz].[32bit.44.1kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=3fe91db919766b1c7143d89602b3c561341e5594&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 131,
+    "ageHours": 3166.7749224783056,
+    "ageMinutes": 190006.49534870166,
+    "size": 95497046,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Nick.Mira.SUPERSONIC.2019.WAV.[16bit.44.1kHz].[24bit.44.1kHz].[32bit.44.1kHz]-BERNABE",
+    "sortTitle": "sample pack nick mira supersonic 2019 wav 16bit 44 1khz 24bit 44 1khz 32bit 44 1khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T16:15:31Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=SUh3N2tkSkpOaDR2ZGhUWTdHLzFrc3JoUTJVZmdVcVVtQTRxSGthRlp2bndiTndRSU5qU2tZd2pCZnRqVHRTUXlvVHR0dTJKb3Z6cm1YWGhpdlIwdzJBV1hsTjZxa3RPQkkzSlZ0YXZob0tUZ3Z1OGNBUXpzL25KU01sY0hQY1Fzb3ZwcXJTVGlnaGU4dmk3TytxdnRUWkVXQk1wa01vR3RvM09Mc0NsSTFFWUxxam00TEpINnFyTWR6RGdpMVI4RTlFaW1aZTN4a1RRbWIyU3h5WklFUT09&file=%5BSAMPLE%5D.%5BPACK%5D.Nick.Mira.SUPERSONIC.2019.WAV.%5B16bit.44.1kHz%5D.%5B24bit.44.1kHz%5D.%5B32bit.44.1kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/3fe91db919766b1c7143d89602b3c561341e5594",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "3fe91db919766b1c7143d89602b3c561341e5594",
+    "seeders": 32,
+    "leechers": 32,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Nick.Mira.SUPERSONIC.2019.WAV.[16bit.44.1kHz].[24bit.44.1kHz].[32bit.44.1kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=64aa10d01b3ecbedf305e28f18a7e092fd85232f&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 131,
+    "ageHours": 3166.7838113752778,
+    "ageMinutes": 190007.02868252,
+    "size": 121556298,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Nick.Mira.CONTRA.2018.WAV.[16bit.44.1kHz].[32bit.44.1kHz]-BERNABE",
+    "sortTitle": "sample pack nick mira contra 2018 wav 16bit 44 1khz 32bit 44 1khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T16:14:59Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=dUYyb05tMDAwV2d0cVY0cUlGbHo0R3BRdDNkc2JmMmtaejc3c3NmU1NuN05kQUVUaEFvRXU4QmlYa2lFVFFoSXNocVJHYmFjMmtMK3NDdEZUZ3RjTkdtdnlWcHhjcGJqcmkzU3g1dERPMUFQN2U2Wk5ZYmg4YlJFckhUcmtuc1FiSWVBR0c5ellDL3NSQ1dkM2I4SnkwamxHRTUxL1JNZ2QrYndhRGlSaGFvV3I5eVpNN0VNR05RQmJ4VGl5UTNMN3VXdzZKeUwzZWNXNEpGc2RyN21pdz09&file=%5BSAMPLE%5D.%5BPACK%5D.Nick.Mira.CONTRA.2018.WAV.%5B16bit.44.1kHz%5D.%5B32bit.44.1kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/64aa10d01b3ecbedf305e28f18a7e092fd85232f",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "64aa10d01b3ecbedf305e28f18a7e092fd85232f",
+    "seeders": 31,
+    "leechers": 31,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Nick.Mira.CONTRA.2018.WAV.[16bit.44.1kHz].[32bit.44.1kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=f69358b06d3d3ff39d2e36d70ef321c0fc637f9a&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 131,
+    "ageHours": 3166.7882558276387,
+    "ageMinutes": 190007.29534966,
+    "size": 358375080,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Nick.Mira.DIESEL.2017.WAV.[16bit.44.1kHz].[24bit.44.1kHz].[32bit.44.1kHz]-BERNABE",
+    "sortTitle": "sample pack nick mira diesel 2017 wav 16bit 44 1khz 24bit 44 1khz 32bit 44 1khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T16:14:43Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=MmdmQmE1WkdxN1lrWUxDa1hBRlQ1dCtWa3ZIWGYzdG9HZkRaRS9pbXBWYnhheitEaHdRakdpcncxQ1VXM3ZqcE54ZnpRS3Z3ZFFjOXRrMmJ6N2J6aEdXdG4xYUNDemV6bkV5M3k5MEZTTmxzRFFOdzA0TmdETWFIaUtVZ2lTSnBaVVg3R3MvbFFFYjJNYzFLaWNyVkJibTJ2SS9vZ284S1NSOHRJa1BLMzZ6S2VORVNXa0QzS241Z1JOOWtoQnpodWowRWhDQ1o4dWtoYkZmUk5oR2Z2Zz09&file=%5BSAMPLE%5D.%5BPACK%5D.Nick.Mira.DIESEL.2017.WAV.%5B16bit.44.1kHz%5D.%5B24bit.44.1kHz%5D.%5B32bit.44.1kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/f69358b06d3d3ff39d2e36d70ef321c0fc637f9a",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "f69358b06d3d3ff39d2e36d70ef321c0fc637f9a",
+    "seeders": 12,
+    "leechers": 12,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Nick.Mira.DIESEL.2017.WAV.[16bit.44.1kHz].[24bit.44.1kHz].[32bit.44.1kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=9c92463a3a0145ea8613c2c5a9a6354222494a8a&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 131,
+    "ageHours": 3167.0449225111665,
+    "ageMinutes": 190022.69535067334,
+    "size": 86870378,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Nick.Mira.FORGE.2018.WAV.[16bit.44.1kHz].[32bit.44.1kHz]-BERNABE",
+    "sortTitle": "sample pack nick mira forge 2018 wav 16bit 44 1khz 32bit 44 1khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T15:59:19Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=bGZFUXRBdGZoZk9YeVQrSHJBazRHSVJOVHlNQXFZaVg2NU1Lbmd1a25DY1hJTXBoRktFcnhidzlzNnozZVA1Tm9obkhNTnpJUW9jUTFnY0xKMG1NbCtzanJGakpRNnhjdmlZLzE1QjErNXdtcEIvbkZBM2h6T2I4VmR4dGFpdG9CcXJTQmsvWGRSNVZlUTZlZXc1UlNvNE0wMS9Ib3IrZWsrMmprZ1VwanczYVRHSzN4UW5kWElkYjd3bkZrbEhBaHphMEpJeURoWjRsRUtqdDZVZVVaQT09&file=%5BSAMPLE%5D.%5BPACK%5D.Nick.Mira.FORGE.2018.WAV.%5B16bit.44.1kHz%5D.%5B32bit.44.1kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/9c92463a3a0145ea8613c2c5a9a6354222494a8a",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "9c92463a3a0145ea8613c2c5a9a6354222494a8a",
+    "seeders": 40,
+    "leechers": 40,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Nick.Mira.FORGE.2018.WAV.[16bit.44.1kHz].[32bit.44.1kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=a3a060810f69f5df127f611fb2dd570c687cb8ca&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 131,
+    "ageHours": 3167.0502003011666,
+    "ageMinutes": 190023.01201807332,
+    "size": 289725685,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Nick.Mira.SOUL.2022.WAV.[16bit.44.1kHz].[32bit.44.1kHz].[32bit.48kHz]-BERNABE",
+    "sortTitle": "sample pack nick mira soul 2022 wav 16bit 44 1khz 32bit 44 1khz 32bit 48khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T15:59:00Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=SlpkcmpWMEZTQTQ3ZnZqSnY2bTdORXFuem4zcHBrVEpnMnRiQ3dpS0FrMVM4elduQjJLWUR1MGZ0cWM0c3RTQXVjTE5tRXBPY2ZlVys5WUV3eHR4eUFqbWdlMlpwN3hTdU1hWm42UGRoM0NZN1dpeXRheFI0ZjFIeWtiZWNyd0tRb0lFckNDcFQxNHZsT3ZCN0FPSGhwVzFFOFMveVVKbjM5Vk9vWVJLMjZSeWdVVE13RmZja01OTU9obzNlcnZYWFpVNjZ1QWVkbmVETHVGTWpxQWVqZz09&file=%5BSAMPLE%5D.%5BPACK%5D.Nick.Mira.SOUL.2022.WAV.%5B16bit.44.1kHz%5D.%5B32bit.44.1kHz%5D.%5B32bit.48kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/a3a060810f69f5df127f611fb2dd570c687cb8ca",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "a3a060810f69f5df127f611fb2dd570c687cb8ca",
+    "seeders": 14,
+    "leechers": 14,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Nick.Mira.SOUL.2022.WAV.[16bit.44.1kHz].[32bit.44.1kHz].[32bit.48kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=8d845d3d6801aa2ce08a5bbbd99ecd9316d328da&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 131,
+    "ageHours": 3167.0732558648333,
+    "ageMinutes": 190024.39535189333,
+    "size": 373367772,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Nick.Mira.MIRATOUCH.VOL.1.2020.WAV.[16bit.44.1kHz].[16bit.48kHz].[32bit.44.1kHz].[32bit.48kHz]-BERNABE",
+    "sortTitle": "sample pack nick mira miratouch vol 1 2020 wav 16bit 44 1khz 16bit 48khz 32bit 44 1khz 32bit 48khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T15:57:37Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=dVNySmhRR2YyZUhVLzJlcHZjbE91MGFNMmRnN01Zd0czaGMwMkVIMWRndTEweENsUlcwbjB6aU51Tkc3RDlnaHpvRHpQSnBGNWtBUVJHTCszQTNXKzFFbFFiczZ6aStCSXFPOTBSY2dLS1FPWjNLa3cyZzQrMjRJeUJXdVEwOTd5Zk5KQk1GQU1lazRLVE1mUWhWT3pBcnh0N1ZtRWNQQisxRzgxQUw4TmwrWDRsM0luTzdsdWJoNFU5cXM2czhDOWQrMjVtTjBIdFlQK1A3OVBTNEdqdz09&file=%5BSAMPLE%5D.%5BPACK%5D.Nick.Mira.MIRATOUCH.VOL.1.2020.WAV.%5B16bit.44.1kHz%5D.%5B16bit.48kHz%5D.%5B32bit.44.1kHz%5D.%5B32bit.48kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/8d845d3d6801aa2ce08a5bbbd99ecd9316d328da",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "8d845d3d6801aa2ce08a5bbbd99ecd9316d328da",
+    "seeders": 13,
+    "leechers": 14,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Nick.Mira.MIRATOUCH.VOL.1.2020.WAV.[16bit.44.1kHz].[16bit.48kHz].[32bit.44.1kHz].[32bit.48kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=5c021b393ee02a201c24aed7e7fced92feaf5f92&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 131,
+    "ageHours": 3167.0657558735556,
+    "ageMinutes": 190023.94535241666,
+    "size": 287609282,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Nick.Mira.MIRATOUCH.VOL.2.2021.WAV.[16bit.44.1kHz].[32bit.44.1kHz].[32bit.48kHz]-BERNABE",
+    "sortTitle": "sample pack nick mira miratouch vol 2 2021 wav 16bit 44 1khz 32bit 44 1khz 32bit 48khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T15:58:04Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=Tlc0bHg4S0xGSmh5Vnh4UkU0RHFtR3c2RTFmSzVjcldHanNJZFVFNGRuYm9jTmNmSVRSTGoxTzBhcytLbXdnNHUzc3BLU3pQUVdNbXFtdzdjY2tIUHhHY2diTTMwb0EvNjdnTlZLS3NIbi9YWlZ2amVPcjJGNTNSNmZrTVEyT0t3MFVOaXA1U1VTbVpzMlFhOGxSQTNMZXArOEI3WW5tSm55eVVTMFoxOHBpVnBqUnJHNVErMXZ2MExrQSttcWNmNEZvSThPSVhZMXdqbVR2dlNUSkExQT09&file=%5BSAMPLE%5D.%5BPACK%5D.Nick.Mira.MIRATOUCH.VOL.2.2021.WAV.%5B16bit.44.1kHz%5D.%5B32bit.44.1kHz%5D.%5B32bit.48kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/5c021b393ee02a201c24aed7e7fced92feaf5f92",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "5c021b393ee02a201c24aed7e7fced92feaf5f92",
+    "seeders": 19,
+    "leechers": 19,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Nick.Mira.MIRATOUCH.VOL.2.2021.WAV.[16bit.44.1kHz].[32bit.44.1kHz].[32bit.48kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=cc48ba9a9cb2b48e51fd936a7bf50ac248f6382a&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 131,
+    "ageHours": 3167.0577003263056,
+    "ageMinutes": 190023.46201958167,
+    "size": 459684441,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Nick.Mira.MIRATOUCH.VOL.3.2022.WAV.[16bit.44.1kHz].[16bit.48kHz].[24bit.48kHz].[32bit.48kHz]-BERNABE",
+    "sortTitle": "sample pack nick mira miratouch vol 3 2022 wav 16bit 44 1khz 16bit 48khz 24bit 48khz 32bit 48khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T15:58:33Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=U1FIMms4QzJMbkgrU1R0NkE3aXVWREluME50cU1LV1FPcDRKQ3pqVkVBUzJ5S3o1WnFTRDhyVDBnMDZFTVBoQ2NjZEFOekU4SE5jZmJQY2R5M1RkOSt2SGkyNFNVVzA0NzJORnZxSHJtdFBBSVBnSEY5eGM2Y0xDeStqNnl6Y3crcGZCWWkxZmpHRWVvR3NxMEtFS2cydXJQMFNXLzB3dk5RWEtnZWFCQm0zNlRUSWRtYWF3M0ZEQytLWXFkNHJ3cEJEZGY2Nk1jeHUySlY3em0xRFM5dz09&file=%5BSAMPLE%5D.%5BPACK%5D.Nick.Mira.MIRATOUCH.VOL.3.2022.WAV.%5B16bit.44.1kHz%5D.%5B16bit.48kHz%5D.%5B24bit.48kHz%5D.%5B32bit.48kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/cc48ba9a9cb2b48e51fd936a7bf50ac248f6382a",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "cc48ba9a9cb2b48e51fd936a7bf50ac248f6382a",
+    "seeders": 11,
+    "leechers": 11,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Nick.Mira.MIRATOUCH.VOL.3.2022.WAV.[16bit.44.1kHz].[16bit.48kHz].[24bit.48kHz].[32bit.48kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=b29dc863395d42f5829d98998843367619bdc4fb&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 132,
+    "ageHours": 3168.6577003346665,
+    "ageMinutes": 190119.46202008333,
+    "size": 344823075,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Ysos.NEBULA.2023.WAV.[32bit.44.1kHz].[32bit.48kHz]-BERNABE",
+    "sortTitle": "sample pack ysos nebula 2023 wav 32bit 44 1khz 32bit 48khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T14:22:33Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=LzEwQkU4K0hpNXU4c2FpOGdUNmxOQXZCZE8wd0ltZDJ6N2QybDcxMkY0bElVTG1zTlMzQWVHSGF4RHJIZFZGZWt4U3FTR2hYREFRWjUyQ3dsS3RFYStMOENkSHpPK05wN1hUSHFoNFQzb21JM3VldzZ5b2ZsZmlrMGRVYWZCVFJpSVNBYW5IZUxDOWl3ckJ4WkErdk1yVFJ0aUdzUmY2NThCbytxYlJ0UkRKSVhMcHAxRGUzcWJiN0xBUW5qblhGVUh4NVdBQXdMY2l2N0czNzcwSHo2dz09&file=%5BSAMPLE%5D.%5BPACK%5D.Ysos.NEBULA.2023.WAV.%5B32bit.44.1kHz%5D.%5B32bit.48kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/b29dc863395d42f5829d98998843367619bdc4fb",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "b29dc863395d42f5829d98998843367619bdc4fb",
+    "seeders": 13,
+    "leechers": 14,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Ysos.NEBULA.2023.WAV.[32bit.44.1kHz].[32bit.48kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=c02402df8103153d4ea147278de204ca3aa31f7f&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 133,
+    "ageHours": 3201.9246447869723,
+    "ageMinutes": 192115.47868722168,
+    "size": 36222244226,
+    "grabs": 3,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Doc.Mailloux.et.Josey.Libres.et.sans.tabou.[INTEGRAL].2020.a.2024.MP3.[76kbps]-BREAD",
+    "sortTitle": "doc mailloux et josey libres et sans tabou integral 2020 2024 mp3 76kbps bread",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-19T05:06:32Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=ekVpSkw5OXFiOFRiT3A5djBEZmtWaVpBaXg0Nml0VDlJay9zcG1kN1ZoK3h5dWtVTnZwcW9ybU41bGlNS2pKQmlKbWl5UUp4c2VGajNhRzBZNktGcnVaT0swbHlJWlNLZStjbzlEeFpPTzkwZlVSenZKclErSGxjNGNPUmw3ZHdvU1BaaFQ1OVQ2Z2ZZdndTMmlSZUoyMUZ6QW5tZkoycHhxY3E5dU9pdFplNmN0N3g4c08xRk9QTkJpVlJaN040RVNkSXFrai96Kzc3cnpsVXN6ZWVLQT09&file=Doc.Mailloux.et.Josey.Libres.et.sans.tabou.%5BINTEGRAL%5D.2020.a.2024.MP3.%5B76kbps%5D-BREAD",
+    "infoUrl": "https://c411.org/torrents/c02402df8103153d4ea147278de204ca3aa31f7f",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "c02402df8103153d4ea147278de204ca3aa31f7f",
+    "seeders": 5,
+    "leechers": 5,
+    "protocol": "torrent",
+    "fileName": "Doc.Mailloux.et.Josey.Libres.et.sans.tabou.[INTEGRAL].2020.a.2024.MP3.[76kbps]-BREAD.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=6167da061e69cc0a6e9666a996acc2a0d366c15a&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 132,
+    "ageHours": 3168.97408923975,
+    "ageMinutes": 190138.44535438833,
+    "size": 230857258,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Ysos.NOVA.2023.WAV.[32bit.44.1kHz].[32bit.48kHz]-BERNABE",
+    "sortTitle": "sample pack ysos nova 2023 wav 32bit 44 1khz 32bit 48khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-20T14:03:34Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=Nm9WdERtOGhhdEhLUFVpSU9hUkZJME1sMHNkMG53SE1FcldaYWR6SVZyM2R2bTRrT21pcG0ycEZxeTZ2ZFYwU3hKL1BoQ2FUUWVXZGRrSVAxSTJrQlIyTSswWEZXSHk1MkcvM1RoNlNPMEJIOHdBVzlaWTNrZnlSaDdCN3gzcUtiT05lMmUwemxqbGVOcnoxUWtKYnp3UDg3QTdIQ2x2YlN3b2VYTkpqYkJzK1ZLbTdJVTNEK3hxdDEva3JQS2R4ay8rZVBzb3VsUGFKMncwQXNKVFpnQT09&file=%5BSAMPLE%5D.%5BPACK%5D.Ysos.NOVA.2023.WAV.%5B32bit.44.1kHz%5D.%5B32bit.48kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/6167da061e69cc0a6e9666a996acc2a0d366c15a",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "6167da061e69cc0a6e9666a996acc2a0d366c15a",
+    "seeders": 19,
+    "leechers": 19,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Ysos.NOVA.2023.WAV.[32bit.44.1kHz].[32bit.48kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=1b25250da077e968b60e8d52a049d837b3394837&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 132,
+    "ageHours": 3187.897978136611,
+    "ageMinutes": 191273.87868819834,
+    "size": 138074402,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Ysos.ATLAS.2023.WAV.[24bit.44.1kHz].[32bit.44.1kHz].[32bit.48kHz]-BERNABE",
+    "sortTitle": "sample pack ysos atlas 2023 wav 24bit 44 1khz 32bit 44 1khz 32bit 48khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-19T19:08:08Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=elREWWdyZ1BZdHJYV0Vndis5YVMrR1VEa2RpUlA1VUhIbi9jb0VITmRVdFlob29wUHp0UUFVMkpyV3hyZEVtS0NtRXdOY0xDVGhSTVFjc0M1aEZtS0pjb0JzamdpS2ZVY2Z6SkkxWDBSYnEweU9hWDA5SW9FK29LZEY1Z3hHcThoaDA0UHJucVRmVXRsK2FqdS9JdVF3RzFGTVRUNG00MXNTbzc2ay9XdEVXYjhsdmFpc3dNZjgwbUxYT1NiWkljTExNT2lmL0IwcUkzNGlmY0NnM3p3QT09&file=%5BSAMPLE%5D.%5BPACK%5D.Ysos.ATLAS.2023.WAV.%5B24bit.44.1kHz%5D.%5B32bit.44.1kHz%5D.%5B32bit.48kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/1b25250da077e968b60e8d52a049d837b3394837",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "1b25250da077e968b60e8d52a049d837b3394837",
+    "seeders": 24,
+    "leechers": 24,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Ysos.ATLAS.2023.WAV.[24bit.44.1kHz].[32bit.44.1kHz].[32bit.48kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=011b3f0b6a507f50536510af4852827dfacf418c&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 133,
+    "ageHours": 3193.694644811389,
+    "ageMinutes": 191621.67868868666,
+    "size": 4377669715,
+    "grabs": 10,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "PAPACITO.Burger.Ring.S03.2025.2026.MP3.[256kpbs]-NOTAG",
+    "sortTitle": "papacito burger ring s03 2025 2026 mp3 256kpbs notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-19T13:20:20Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=N0JJK01WS01GV2RSWFEydTNHSjA3dXlFNVp4MEJGRnhPOTZwOEZvdmlZcWdHSWM3d3E4Qk5BZUp0K1QrUWV6RURoaWdXWDlLVzRZNUg0dVdtUDkycFRKbEFxdlRUY1l6V2wrU0E3WjVLWEZ1ZWRjMlRXamh3KzZsZ1YrUnNDYnhaOWlCS0Z0ZFMvS3cxNnBjak1KWkJtTGJ5V3graWMrNGgrSDdyZnJqQ1pOSkUzWmhqbHRaUVB0Nitaa2tQcUp5eVpBR2NFWHpmMVNRSjJtVkd6bGxIdz09&file=PAPACITO.Burger.Ring.S03.2025.2026.MP3.%5B256kpbs%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/011b3f0b6a507f50536510af4852827dfacf418c",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "011b3f0b6a507f50536510af4852827dfacf418c",
+    "seeders": 21,
+    "leechers": 22,
+    "protocol": "torrent",
+    "fileName": "PAPACITO.Burger.Ring.S03.2025.2026.MP3.[256kpbs]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=5f7ed844ecb88a370fbff8ccca614e6e713d0804&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 132,
+    "ageHours": 3184.824922596889,
+    "ageMinutes": 191089.49535581667,
+    "size": 1273486082,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Mid.Temps.2020.WAV.[24bit.44.1kHz].[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound mid temps 2020 wav 24bit 44 1khz 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-19T22:12:31Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=VEQ0V2UzRTVLbWNNYjFjcTN3L3hIOXNvZEg5ekpPdlphUDRlRFZWM1F2UEpXOTBjK1N5aVlXeHIwUmZwUXo3cm5hbWt3b0tvUG9vTXNkQWphSmkwc3BlVmNqS0VsTUE2ajUvL3UrOU1NcWpJaGdYVUFGNHhkZXB6OG4zTWZLTkp5RGxyeHZsRFl6TGw1Tlp3Rkp2Ni9maHhTSURYWkpkOGJBQUlNZ2xyYktBdEt4VGdDVU9IRWl3MmJXRTM3QzlxWUZQd1NsVDEwNCszUjlZMmdyYS9rZz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Mid.Temps.2020.WAV.%5B24bit.44.1kHz%5D.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/5f7ed844ecb88a370fbff8ccca614e6e713d0804",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "5f7ed844ecb88a370fbff8ccca614e6e713d0804",
+    "seeders": 7,
+    "leechers": 7,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Mid.Temps.2020.WAV.[24bit.44.1kHz].[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=e0f50bf92c3b6f5466c89214ddbb42d3b6ccc20e&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 132,
+    "ageHours": 3184.3888114937777,
+    "ageMinutes": 191063.32868962834,
+    "size": 876025094,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Technically.House.2020.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound technically house 2020 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-19T22:38:41Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=eHJFaGczV1psWktSQlUzTHk3T3A2dWlsWmFmL2lwUWlCSGMvUDN3bm9tdVh1bVJWOTJIbXhTcW51TFNwSDlveHhBU2N3OGxZeUJobFpEMXRnc29uYnh2Q3luK1lNOVQzMjJWTHhmNXlFRkZGMjlzSFRJQTdKcE9DTmpoYldqckFWZ2FVT0pIR1EvWDN6bXNQMjBaRXk2eDVzSm5sa1ltT3JURGpwS1VDdUpPbkZOY1E3N3dyTHBHQlc4eFd0Ymo4d2l3d2FBaEFFbkNzeC9rQmtSbXgrUT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Technically.House.2020.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/e0f50bf92c3b6f5466c89214ddbb42d3b6ccc20e",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "e0f50bf92c3b6f5466c89214ddbb42d3b6ccc20e",
+    "seeders": 10,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Technically.House.2020.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=b0a49214915cb6b2889a7beeb0397560afab2b4b&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 132,
+    "ageHours": 3191.335478168528,
+    "ageMinutes": 191480.128690115,
+    "size": 92333025,
+    "grabs": 1,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Ysos.COSMOS.2023.WAV.[32bit.44.1kHz].[32bit.48kHz]-BERNABE",
+    "sortTitle": "sample pack ysos cosmos 2023 wav 32bit 44 1khz 32bit 48khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-19T15:41:53Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=MGE3THByS1huelJzNy9BTndHZmFxZ0ZEbDlMWk1tMjdqUW1pVFprdUk4RGFSZXo4Tm5PT3d4WG1qQndFOFBZWUp5MDY0QWk4eUl1cDFNOTFyNitzSHlaZlBqN0I1TWlrRUExUzlFOFhZcFNKVis5LzF6Tk5GUTdnQ2svQWhDVWhxQWlFcnN5cmFCYTlXQk5WZzNRRjNDd1RndXprOVNkbEs5ckZUT3hHYjhTRTlUQXloNXFRNCtlUlkvSU5MV0ZTR2F3TFIxMU5ReGt1M216VzZqaXlRZz09&file=%5BSAMPLE%5D.%5BPACK%5D.Ysos.COSMOS.2023.WAV.%5B32bit.44.1kHz%5D.%5B32bit.48kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/b0a49214915cb6b2889a7beeb0397560afab2b4b",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "b0a49214915cb6b2889a7beeb0397560afab2b4b",
+    "seeders": 42,
+    "leechers": 42,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Ysos.COSMOS.2023.WAV.[32bit.44.1kHz].[32bit.48kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=16d4e04810953a224579087bb6b5abc9cea11aba&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 132,
+    "ageHours": 3190.3840892874446,
+    "ageMinutes": 191423.04535724834,
+    "size": 4068159444,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Cartel.Vol.2.2020.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound cartel vol 2 2020 wav 24bit 44 1khz24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-19T16:38:58Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=a0pCVWJZN3dwVnp4YVM3UFNuNXRudlpqNmtVdndMZitQdHB4Y2JOb2s5WmVDQjVtTFhKTzRsRGRwSTBEVDc0by82bUozOTdGc2JOdzVrbWdHSlJKVEprRHk0QVZ2Q21ZRHR5dVN0Q0pUNFRrcXRRaWtTdTF5NWZEOGtKdXFPaXdFdTMxRVJlekVvTGRjK09Gd3VuYXlOaGk3eUcvdnp6ZERqYXFLVlpnejF2R1lXeDEwa3VIaHVSU1h4eDdHTlE5TDRKTENFN0pjR3FCN0xaSEs2Q0IzZz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Cartel.Vol.2.2020.WAV.%5B24bit.44.1kHz%5D%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/16d4e04810953a224579087bb6b5abc9cea11aba",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "16d4e04810953a224579087bb6b5abc9cea11aba",
+    "seeders": 4,
+    "leechers": 4,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Cartel.Vol.2.2020.WAV.[24bit.44.1kHz][24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=ccfb9abed45995a20421c4e82dceea6aefee1788&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 132,
+    "ageHours": 3191.0288115177777,
+    "ageMinutes": 191461.72869107,
+    "size": 154805070,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Riddim.Riot.Vol.1.2018.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound riddim riot vol 1 2018 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-19T16:00:17Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=aUhxNEVPSW5RaXBQaExwZnRjODJvTnVJeWZ0MGhLd2VHWlFjNmZ2Wnd3T21EejZPMFl3WnlKYVJIdWllUldibXdHcDhXdFpBaCtObUZIL2Rhbi9xcCtPL2k3a1NEOEJoYjhvM3p6cVpmSDA0R2hHNHIwRjNiU1lWRUJyWlY3cnBCWjRScnN0eG13Z2ZBWHZ3UUR2eFhvRHI1YWk4cTdmVDcwOFJ5Wm53RUNhcDdYNjZzaWZic3hCUllXQ2ljUDRKNUZrSmtPUVlxRHNsVklNc3hOZzJIUT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Riddim.Riot.Vol.1.2018.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/ccfb9abed45995a20421c4e82dceea6aefee1788",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "ccfb9abed45995a20421c4e82dceea6aefee1788",
+    "seeders": 20,
+    "leechers": 20,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Riddim.Riot.Vol.1.2018.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=2f5ae1ea2e982cd34f3702c2799a34b395acdea2&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 132,
+    "ageHours": 3190.8146448590555,
+    "ageMinutes": 191448.878691545,
+    "size": 124419158,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Riddim.Riot.Vol.2.2019.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound riddim riot vol 2 2019 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-19T16:13:08Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=Z1djbXZFMms1K3R2YTRhYnArcWpIdmVUNFh1TDlRNkRvQU05NjlTRy9hNUxwMWJwODhmdWI2bFB2OFlVZzJVVTZrOXdmaVlJL2prbnJ1Z1NSSnR3czhydXJwZG10K0kvNHNxKzgwVnFPRXhYbUpTbkE3VmR3azhoZnFYN1VKQzBHdHc5VjFra1Q1T1NQQlF6eXdaZTc0YnhEbS93TlNMMWxNdnR0YnNUUElXaU12RzFRaWNEaEtRbFRNYkdlTTQ4Y1Y3U09TUFlUV0NmV2lZR3FsUUxyUT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Riddim.Riot.Vol.2.2019.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/2f5ae1ea2e982cd34f3702c2799a34b395acdea2",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "2f5ae1ea2e982cd34f3702c2799a34b395acdea2",
+    "seeders": 26,
+    "leechers": 26,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Riddim.Riot.Vol.2.2019.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=5315bf3f1d73f1a399093d0dba39dc0f9637a563&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 132,
+    "ageHours": 3190.0360337559446,
+    "ageMinutes": 191402.16202536,
+    "size": 517633503,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.In.Your.House.2023.WAV.[24bit.44.1kHz].[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound in your house 2023 wav 24bit 44 1khz 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-19T16:59:51Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=dHF1YUpLY1dMTjhTOVMzaHNnby9ud3hoVndCdU9YSmx5N3BlSitVQXl0Yk5RUjNIbElQbzg0b3VJMkpLeVZ1Z25rOGVVV3FMR2tPQ29qQS8zTVdtRnVEa0dtOEhGR21ZMVRkc244b3FJUkgvRFdSYUpSaE5FL1huSExzeE9KVnBOMWdEV1JZMXdudkE2bm5helFPQVpiWUFmeVU0OHJnVkFjVUVpbEVhTWFUTUdUU3ZGRFNxVTV1blA4bWJQWkRKazlnOXRZazBoaEwzbS9MWEZUTEVkQT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.In.Your.House.2023.WAV.%5B24bit.44.1kHz%5D.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/5315bf3f1d73f1a399093d0dba39dc0f9637a563",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "5315bf3f1d73f1a399093d0dba39dc0f9637a563",
+    "seeders": 8,
+    "leechers": 8,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.In.Your.House.2023.WAV.[24bit.44.1kHz].[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=13c891017870e16a5ddfd9fb5b1dc23a99be0b6c&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 133,
+    "ageHours": 3215.9182559863334,
+    "ageMinutes": 192955.09535918167,
+    "size": 78069410,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].Ysos.UNIVERS.2023.WAV.[24bit.44.1kHz].[32bit.44.1kHz]-BERNABE",
+    "sortTitle": "sample pack ysos univers 2023 wav 24bit 44 1khz 32bit 44 1khz bernabe",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-18T15:06:55Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=TlhQRXdDTEhJeXA0aFY0SVhWRHFGSnEvNkFBdjF2S1VuTnlVK2dOODVkYy9zaHdndzVqY25USmZ6Q2RiK1NSVmJjRDVnNXJncmd0TFdGNi9qVGp5OWozOThlV2NmSDZwWHZiSllQSzFic1h4dUNGN3lReEVubzVaN3BnWk5UMERTZEl5aFhReWMxRmtDQmRxeEZDUnhtZ0E0cGJYOGdvSDBuR2FOTkk2NjdSM0RyMDRHbEZtUWJwazB2OGdEL0NxdHRyU0dVUFJwMWhsRmVXbjBXZ3ZkZz09&file=%5BSAMPLE%5D.%5BPACK%5D.Ysos.UNIVERS.2023.WAV.%5B24bit.44.1kHz%5D.%5B32bit.44.1kHz%5D-BERNABE",
+    "infoUrl": "https://c411.org/torrents/13c891017870e16a5ddfd9fb5b1dc23a99be0b6c",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "13c891017870e16a5ddfd9fb5b1dc23a99be0b6c",
+    "seeders": 48,
+    "leechers": 49,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].Ysos.UNIVERS.2023.WAV.[24bit.44.1kHz].[32bit.44.1kHz]-BERNABE.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=4adc242b83905fb036bf0b185c4b9d2ffed52a00&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 133,
+    "ageHours": 3193.881867105417,
+    "ageMinutes": 191632.91202632833,
+    "size": 487347555,
+    "grabs": 1,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Future.Bass.2019.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound future bass 2019 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-19T13:09:06Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=Ykh4MHpNdWYwclA5K3F4dVBkcDkzSGYrUjdmMDREeW5JUmtUWUJqK3JMUXZsRTZOVDVpenBtZVBUaGhncjBHV1puSXpJMXZSdm1oSGZ4eGE1NzlaZW9ubFZDS2ZMSzZJeTllTmtyZWRCeGZVaUVOZS9WV0FEeE5RalNaMFppZzNJaFNoOE1CaTRyRU8zd3BHZmdQWjB2NlNyOFpiNFoyZVY0dllMTXErYVFRSkVzTjNqRndyWHM3eldSQmdHUG9RWTI5MUpnWG9oUjhiMDFVbm9BQmJBZz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Future.Bass.2019.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/4adc242b83905fb036bf0b185c4b9d2ffed52a00",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "4adc242b83905fb036bf0b185c4b9d2ffed52a00",
+    "seeders": 15,
+    "leechers": 16,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Future.Bass.2019.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=bfd4a41d384581961b1af14b835c6f1e9e3556a3&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 133,
+    "ageHours": 3197.2552004465556,
+    "ageMinutes": 191835.312026795,
+    "size": 455899974,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Cartel.Vol.1.2018.WAV.[24bit.44.1kHz.[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound cartel vol 1 2018 wav 24bit 44 1khz 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-19T09:46:42Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=c2FTZ3JPcHltOFhOcThBcm5pZXNmUjlWcnd1S2s5c25jOUJtbGpFb1pKWHNiVWhTQ3kvbDF5UGo2cm9wd3dOYTF4Rm9oU3pGcFRUaWtNTUl3ZUp1MS8wL0ZCd2o5UERDSitnem4zSWluUFQ4NktYVUxhLzFFTWJ6QUpIKzVaUnVQbzQ1VzhiaVFHZktLbFpkaU9KWkJwRE9NdTRqYzhtZWJvUS9DUXoreENTWGhmZFN1TDhaRjF1VVBzMXB1MXB3WC83MHlhNERDSG1nSElmZG1VY0pNQT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Cartel.Vol.1.2018.WAV.%5B24bit.44.1kHz.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/bfd4a41d384581961b1af14b835c6f1e9e3556a3",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "bfd4a41d384581961b1af14b835c6f1e9e3556a3",
+    "seeders": 14,
+    "leechers": 15,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Cartel.Vol.1.2018.WAV.[24bit.44.1kHz.[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=19b156ab9517525f9170a73b5b7b642b45e1f5d7&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 133,
+    "ageHours": 3196.52401611725,
+    "ageMinutes": 191791.44096703667,
+    "size": 69515596,
+    "grabs": 1,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.The.Meat.Fat.808s.2018.WAV.[24bit.44.1kHz].[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound meat fat 808s 2018 wav 24bit 44 1khz 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-18T20:30:34Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=WmVIRWJqdTJLbWtQcG9zMTJ5OXUxSDhEQ1M3NUliV0RlRnFtUkNYOEVtK1VnUytZZmJCR1hDaElKOWtXYUVrR1BWT1JaajB6UkZRYjkwZS85ZUFERVRPcTJtcXQ1dUc4QzE5VGhycExLdWd6cVQrWlNhNzVLUXBodUNyOU5vMncvMEd0bTV2Y2lxWlk1VENRdnoxazNiUXhQbDluWUQwaEhkc2dBS0J5ZFR5YWtaR1NCL2hlbEhIUksyQVBzUzRQL2UwV0krUXovWVM0bk9veGRGNjRrZz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.The.Meat.Fat.808s.2018.WAV.%5B24bit.44.1kHz%5D.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/19b156ab9517525f9170a73b5b7b642b45e1f5d7",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "19b156ab9517525f9170a73b5b7b642b45e1f5d7",
+    "seeders": 48,
+    "leechers": 48,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.The.Meat.Fat.808s.2018.WAV.[24bit.44.1kHz].[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=b9a2b913cff24ec8b0c9f8d063dd7f6cc6da63a9&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 134,
+    "ageHours": 3216.954293903417,
+    "ageMinutes": 193017.25763420833,
+    "size": 463930993,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Dubsauce.2018.WAV.[24bit.44.1kHz].[24bit.48kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound dubsauce 2018 wav 24bit 44 1khz 24bit 48khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-18T00:04:45Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=SU4ybTBDNk9hRjhIcldmMis4Mit1RWl6RXVjSzVBRXdoYlAwajM1d01kaVVPSDJyN0l2K2s5Vy9oVUM4MzZqRWNGdG85Q2c2aFFWRVhBUndXTHJ0VklKTTNRb1pJYStleW5FYjZCMmw2Z3RXRGNnUFBBZEQ4L3I2cHU2S1JrbU1Oc3FjMFFDYk16d0tqM3BHdTdsQ3VvVC9mQk4xT2tvaTJTaWhMWk5YQzBYZ1JNQ0c3aitqdnhiOUE5ZU5VZUdjc01BM1RCT0ZUOE5VZHd0Wis1Z2ZoQT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Dubsauce.2018.WAV.%5B24bit.44.1kHz%5D.%5B24bit.48kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/b9a2b913cff24ec8b0c9f8d063dd7f6cc6da63a9",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "b9a2b913cff24ec8b0c9f8d063dd7f6cc6da63a9",
+    "seeders": 13,
+    "leechers": 14,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Dubsauce.2018.WAV.[24bit.44.1kHz].[24bit.48kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=ead9f55ac0f5026825a81b6f0d180d43062b5f33&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 135,
+    "ageHours": 3242.8062383556667,
+    "ageMinutes": 194568.37430134334,
+    "size": 48527874,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.Big.Pump.2019.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound big pump 2019 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-16T22:13:38Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=S0Fwb1pndU1jRFZLR1NjTnhjbUoyMk91N3V1L1ZFTUZFRmxaK1hlbXd2N1AveU5vWWRHUXRwVXdsU2hZOFFKWmRWa1RxY1N2ckFDN2pidnp5Smd3QVNDelFQa0pMa1lhdG93aW9kL1J3WlJnK3ZQak1IaUdYL3plazhLRFppSFFzdjZ3L3dPM01DeFlzemV2NEZsUklDbEg2ZFUvTmlZMWZDK2ZsbU9na3VJd2hMWkpvaFpmT2d1UzdtbHZRYmN5TXVsenllejkwenA5Y3BZYzR3QkhsUT09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.Big.Pump.2019.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/ead9f55ac0f5026825a81b6f0d180d43062b5f33",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "ead9f55ac0f5026825a81b6f0d180d43062b5f33",
+    "seeders": 74,
+    "leechers": 74,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.Big.Pump.2019.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=026e0910dd8cbd6ad7542d841c138e0084ea9ffe&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 136,
+    "ageHours": 3277.9406828079445,
+    "ageMinutes": 196676.44096848,
+    "size": 50020999,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "[SAMPLE].[PACK].XLNTSOUND.8TY6IXED.2019.WAV.[24bit.44.1kHz]-Cephos",
+    "sortTitle": "sample pack xlntsound 8ty6ixed 2019 wav 24bit 44 1khz cephos",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-15T11:05:34Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=Q29UaGl5VThLdkpWVUJuZTFmeDZ2eTQwRkZTa0I2OUUxRm44RFZucVBzcGIydG8vdHVXS1ZmZWN6bmUxdldmOEo4dzFOQ04yNUQ1OXVHVWRlU2VPNTArTVM2TnJtVGJvZUdLZzdwWGxZOWR3TmFqQmRYN0FpMGw5cE5JVXZXWjNaYVZ4YlRNQVZCdXJySmx6RjlsMStRTHhscmtXZ1E4NnVHOElaL3hkWmFRWlZNUU5MT2t5RWNQaEpoUnpONXp5dW43YmczcTBGTUR0cExUeUE4UEFsdz09&file=%5BSAMPLE%5D.%5BPACK%5D.XLNTSOUND.8TY6IXED.2019.WAV.%5B24bit.44.1kHz%5D-Cephos",
+    "infoUrl": "https://c411.org/torrents/026e0910dd8cbd6ad7542d841c138e0084ea9ffe",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "026e0910dd8cbd6ad7542d841c138e0084ea9ffe",
+    "seeders": 73,
+    "leechers": 73,
+    "protocol": "torrent",
+    "fileName": "[SAMPLE].[PACK].XLNTSOUND.8TY6IXED.2019.WAV.[24bit.44.1kHz]-Cephos.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=f0ccb7ed5498c5e8efb576738cf574384ee22e92&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 135,
+    "ageHours": 3253.5576952101947,
+    "ageMinutes": 195213.461712615,
+    "size": 255320388,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Jean.Roucas.Les.Roucasseries.1990.CD-RIP.FLAC.[16bits.44.1kHz]-NOTAG",
+    "sortTitle": "jean roucas les roucasseries 1990 cd rip flac 16bits 44 1khz notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-10T13:58:33Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=VUlhQTcyWjBJdUFLRDVuRmlSZ3Naam9ZdC8wbXFWWldldFFkaDQzRDRadTFiNDlEN0xBdXBlNzl5NnFJOE43UmNITnVrbjIrWmdzSkdsUGhDTmlzVWdFZ0FxU0tmZUlTMlgrWjNzSDRwa1pOdUN3YzU4UndmZXB6eEo4dFVhRDQ4MEtWZlNrd0lQYWwwSXU0SVNyS3JCQ0NCQUljNlRDYUVkV1grTFkwWkt1RGR3RTVrMmVXZFZQcEcwcW8ycHZXK01sSWdOOWlVSXljQTlHalNCbGdIdz09&file=Jean.Roucas.Les.Roucasseries.1990.CD-RIP.FLAC.%5B16bits.44.1kHz%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/f0ccb7ed5498c5e8efb576738cf574384ee22e92",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "f0ccb7ed5498c5e8efb576738cf574384ee22e92",
+    "seeders": 10,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "Jean.Roucas.Les.Roucasseries.1990.CD-RIP.FLAC.[16bits.44.1kHz]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=b9b338502e686d377ef0bfc77630cfc50adcb244&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 135,
+    "ageHours": 3259.47769521825,
+    "ageMinutes": 195568.66171309832,
+    "size": 156505717,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "La.France.Pue.Radio.Show.2026.06.02.MP3.[174kbps]-NOTAG",
+    "sortTitle": "la france pue radio show 2026 06 02 mp3 174kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-10T08:03:21Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=NHc0NEFtR2F2NW1FYitEZ1RjdjNDditkaWZMN0YxMmgzN1B2NmQ3LzBQK1h5anRIbU4vRndoS2E5NStYTWRoQW85SHc0YXU4bDlIcXRPemkvNHdyakIyODRiWmx2aXlQbE1LdUMxVk9razJwdUlNeldhVm9Pb2U5bWR2V3FVdlUxQ3RnT3lWTWUwR2xSdVpRUzZpalJiNk9MdEkvQnV5ZGlEUzNIZVlCNk9ndXN3YVNUTG9lRVJPb2pMclFIb3EyNUtYcDZUOEVaSU8zb3hKM3JFOXdCdz09&file=La.France.Pue.Radio.Show.2026.06.02.MP3.%5B174kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/b9b338502e686d377ef0bfc77630cfc50adcb244",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "b9b338502e686d377ef0bfc77630cfc50adcb244",
+    "seeders": 10,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "La.France.Pue.Radio.Show.2026.06.02.MP3.[174kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=5ee12d9e619d4a3764824f86528f0957820e9559&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 137,
+    "ageHours": 3303.8529730040277,
+    "ageMinutes": 198231.178380245,
+    "size": 198562116,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Pierre.Desproges.Les.Requisitoires.Du.Tribunal.Des.Flagrants.Delires.Vol.1.1993.CD-RIP.FLAC.[16bits.44.1kHz]-NOTAG",
+    "sortTitle": "pierre desproges les requisitoires du tribunal des flagrants delires vol 1 1993 cd rip flac 16bits 44 1khz notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-08T11:40:50Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=dlBjYXJRdlpZYkd0aEtJMS9MMkF6QkNyMDNDSktYbm5rZkRScCtESUxKSmhGTXRCbFByODFLU2dBYzliYVJlZzAxWG1YdWhjYUp3UkJ5djVCZWtHSjNsYTFKRUcxbVF4NVhGVGJTanIwM0kxTkcvckFPOXBGdHpRaGxwZEMvcG5VUXgyNEdHSlU3Y0I4ZGhSL3g4SHpGaEFOaDZ1MUJwSzVmVDB6c0RSeUxCcEZZK1VtZFh0STNSQVluWStNdGw4Y1NWOVk1Y1hvYUhlb1FZUnJDL29Udz09&file=Pierre.Desproges.Les.Requisitoires.Du.Tribunal.Des.Flagrants.Delires.Vol.1.1993.CD-RIP.FLAC.%5B16bits.44.1kHz%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/5ee12d9e619d4a3764824f86528f0957820e9559",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "5ee12d9e619d4a3764824f86528f0957820e9559",
+    "seeders": 22,
+    "leechers": 22,
+    "protocol": "torrent",
+    "fileName": "Pierre.Desproges.Les.Requisitoires.Du.Tribunal.Des.Flagrants.Delires.Vol.1.1993.CD-RIP.FLAC.[16bits.44.1kHz]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=7fc86903d1eeb2e7ba3c4835e98dfb261ea83184&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 137,
+    "ageHours": 3303.8129730124724,
+    "ageMinutes": 198228.77838075167,
+    "size": 231849897,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Pierre.Desproges.Les.Requisitoires.Du.Tribunal.Des.Flagrants.Delires.Vol.2.1993.CD-RIP.FLAC.[16bits.44.1kHz]-NOTAG",
+    "sortTitle": "pierre desproges les requisitoires du tribunal des flagrants delires vol 2 1993 cd rip flac 16bits 44 1khz notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-08T11:43:14Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=ODBOZHI5RnFVSHlpZ2l6MnZyM1dIZHJUTmxxZlZVOU54RElGRFlFRTA0VmpRazNMeGo3SU9YRG1nTDN4WXVQK1dNV0NrSlBJRExOK0dGMGM1MW9KTWIzKzk5UWxzSUxJTStBS3c2Zm1pWi9VVTJTMEpURDBFcXA3clk0V0hzYU5Kc2pvcTJ0a1g1ZXRONjJud014TXdheGdCd1g5Q1lla1BtWDFVQVpSazNicmhnZlBPOG5acjB0TEdyNE9qeGwxVmV6MlRhWW5mcUE5K2dSK1BqT3FGUT09&file=Pierre.Desproges.Les.Requisitoires.Du.Tribunal.Des.Flagrants.Delires.Vol.2.1993.CD-RIP.FLAC.%5B16bits.44.1kHz%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/7fc86903d1eeb2e7ba3c4835e98dfb261ea83184",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "7fc86903d1eeb2e7ba3c4835e98dfb261ea83184",
+    "seeders": 21,
+    "leechers": 21,
+    "protocol": "torrent",
+    "fileName": "Pierre.Desproges.Les.Requisitoires.Du.Tribunal.Des.Flagrants.Delires.Vol.2.1993.CD-RIP.FLAC.[16bits.44.1kHz]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=28edade90cb041f363e59d248104b9536e07da06&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 137,
+    "ageHours": 3303.886584131972,
+    "ageMinutes": 198233.19504792168,
+    "size": 208363331,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Pierre.Desproges.Les.Requisitoires.Du.Tribunal.Des.Flagrants.Delires.Vol.3.1993.CD-RIP.FLAC.[16bits.44.1kHz]-NOTAG",
+    "sortTitle": "pierre desproges les requisitoires du tribunal des flagrants delires vol 3 1993 cd rip flac 16bits 44 1khz notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-08T11:38:49Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=b2dlKzVYOUExQUl3MHhKV1lTMzViWXVGN2dUSUdyRUpDTGtqWjl0Y2FJS2NyNENaenNGV3pzay92T2hVenJEMzFPdjg1VVc3OTg4dVZ0TDlPU1lqZXlNN2d6b1h0a044enlHeU1nODFaS2JnTG9XWUcwYVZ1Mk81S1VjRUx6TUhZL2F0SWEweVhsR3dWV2oxMTdGbE5RS0hLbU5HaG1vRGZpMlpabE9jSHBndWlqRHdzTTk1Q1A4QXgzUFN3aWZrRWcrK1ZLYnZCOURnNHMvdWhBNFhTUT09&file=Pierre.Desproges.Les.Requisitoires.Du.Tribunal.Des.Flagrants.Delires.Vol.3.1993.CD-RIP.FLAC.%5B16bits.44.1kHz%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/28edade90cb041f363e59d248104b9536e07da06",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "28edade90cb041f363e59d248104b9536e07da06",
+    "seeders": 21,
+    "leechers": 21,
+    "protocol": "torrent",
+    "fileName": "Pierre.Desproges.Les.Requisitoires.Du.Tribunal.Des.Flagrants.Delires.Vol.3.1993.CD-RIP.FLAC.[16bits.44.1kHz]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=d442d1aec06cb43d47aa330ff07c8f1dc397648e&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 142,
+    "ageHours": 3425.1413063624445,
+    "ageMinutes": 205508.47838175,
+    "size": 727415187,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Histoires.de.lEspace.2020.FR.MP3.[128kbps]-NOTAG",
+    "sortTitle": "histoires de lespace 2020 fr mp3 128kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-03T10:23:32Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=T01wWlNuM3dCWHhBRVZXS3dkTkUxblpJMXFWOVE5aStzWXZnVkRwSFlRVURka1FEUlIvUWU0SnA1bForcWRNVXMxbE10MmxGZDFqdm1CYWpMUEY4S20rT2o3TmJtZVhHYXd6M3lxQUpPNmVoaWZMc1N6REpNSnlXeHhKYVJiNGh6Q1BnSlA0KzF2Q1hQa0xMd3pXV29HbUVaNXZmMmttM2E1NCs4TEtSZVVZNGE2eUFqekFyOW9DNkNOWjltejJaU3V3ZEJ1OGZzZ09UVGs4VmZMM1NaUT09&file=Histoires.de.lEspace.2020.FR.MP3.%5B128kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/d442d1aec06cb43d47aa330ff07c8f1dc397648e",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "d442d1aec06cb43d47aa330ff07c8f1dc397648e",
+    "seeders": 10,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "Histoires.de.lEspace.2020.FR.MP3.[128kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=e4b51f16542d93ce7f97a6fad54b3bb70e5a5c81&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 143,
+    "ageHours": 3444.340750814889,
+    "ageMinutes": 206660.44504889665,
+    "size": 175476670,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Interieur.Crime.Affaire.Dupont.De.Ligones.2026.FLAC.[16Bit.44.1KhZ]-NOTAG",
+    "sortTitle": "interieur crime affaire dupont de ligones 2026 flac 16bit 44 1khz notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-02T15:11:34Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=cExucGZ4OUNIT2ZXMmgzYzNQSDJLQ0NsNjVKbWQvd05VZjB5Nmx5aDgxdnhPWnZoSjgybkpPUHJqOElYSEQxekFTdm5xakUxN3Ric3dWYUkyeTRPdUNRRWxzQVNIWldpN2c2Qlg2Sng2Y24rOW9oc2RLU3RBYStBVHFDUzRKRjUwRWFXdFRScWdubVVETDBQVWdhK3N4UEQ0UmpLU1BhY2J0TVpIQVYyeDU3ZWVCR2dYSmZqRjNBTEkwQTA5TmNKUlB1UTIxUVFjTlZwR2dSRys1YjZhZz09&file=Interieur.Crime.Affaire.Dupont.De.Ligones.2026.FLAC.%5B16Bit.44.1KhZ%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/e4b51f16542d93ce7f97a6fad54b3bb70e5a5c81",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "e4b51f16542d93ce7f97a6fad54b3bb70e5a5c81",
+    "seeders": 14,
+    "leechers": 14,
+    "protocol": "torrent",
+    "fileName": "Interieur.Crime.Affaire.Dupont.De.Ligones.2026.FLAC.[16Bit.44.1KhZ]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=009e6f6dff6097e8e8f9cc6a31dbb893bb841337&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 144,
+    "ageHours": 3462.6157508229444,
+    "ageMinutes": 207756.94504938,
+    "size": 89127601,
+    "grabs": 1,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Radio.Nova.La.Derniere.du.31.Mai.2026.MP3.[128kbps]-M3uh",
+    "sortTitle": "radio nova la derniere du 31 mai 2026 mp3 128kbps m3uh",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-06-01T20:55:04Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=N1drQ0oyNXlDVUMvQUxCUlZWckdKSW5WOFk0V2t5RkxVTVRrdW1OVDdESmlRVFZNWENVbHBMbXNzQUppdlZsblA1OCtsSFlzQllFUkl2WU1SRldscmVaWTRDeSt6MnZOUzVzMGtYY0tFa1hYblBYZFZvWTNobzNhN2N1anRLcHhzbkZTODYvVmpUalhnSDFCVGJwY2M2TFJNczVST0plR3dvbktjVm55WFFHeWRMY1c4cFdBUU1MbXUwdnNuWHI4Z3oxT21Ra1c2TFc5dzFWTFRXUStHUT09&file=Radio.Nova.La.Derniere.du.31.Mai.2026.MP3.%5B128kbps%5D-M3uh",
+    "infoUrl": "https://c411.org/torrents/009e6f6dff6097e8e8f9cc6a31dbb893bb841337",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "009e6f6dff6097e8e8f9cc6a31dbb893bb841337",
+    "seeders": 24,
+    "leechers": 24,
+    "protocol": "torrent",
+    "fileName": "Radio.Nova.La.Derniere.du.31.Mai.2026.MP3.[128kbps]-M3uh.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=2b5ae569d991fb0cfa1e4c00c42807db9a8c98ae&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 148,
+    "ageHours": 3571.8707508309444,
+    "ageMinutes": 214312.24504986,
+    "size": 145717084,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "La.France.Pue.Radio.Show.2026.05.19.MP3.[175kbps]-NOTAG",
+    "sortTitle": "la france pue radio show 2026 05 19 mp3 175kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-05-28T07:39:46Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=ZXFsQUtGcGJ2S1FkbVF5cmQ4UUhBRUtycUVENGFKeWhhaERoWDYrcGhRTDJkL3BkVVRLWURHRHNYNDdhZkNGUWgyWndqUEg1VW5lMFVzZHhVNFNjSlp3OFk5UVFJQkUxSEtHY0ViQ1pXWHF6VGZGL0c3UTJ4L2dkaGx4TEdadWJVTVhtMEgva0lJenk1V2hpbjN5T0dzbTB5amdzdUlMZHlQeW5PNkNiVjY5TlVQQXJtWWUyS3RzSExNb3V6dE5iSWYzc2NXZEVSNzVTTFVuVGR6bU5XQT09&file=La.France.Pue.Radio.Show.2026.05.19.MP3.%5B175kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/2b5ae569d991fb0cfa1e4c00c42807db9a8c98ae",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "2b5ae569d991fb0cfa1e4c00c42807db9a8c98ae",
+    "seeders": 13,
+    "leechers": 13,
+    "protocol": "torrent",
+    "fileName": "La.France.Pue.Radio.Show.2026.05.19.MP3.[175kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=5020dfdfbb4856515888069a64d0b55f362bfbe1&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 15,
+    "ageHours": 360.2154774170278,
+    "ageMinutes": 21612.928645025,
+    "size": 717358764,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Chroma.Commentaire.Audio.2017.MP3.[320kbps]-NOTAG",
+    "sortTitle": "chroma commentaire audio 2017 mp3 320kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-15T14:49:05Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=WEprRnd0Y1hlVUp1WG0vZHcyTTFLeUVjMHlyRkpFWmZLYUZNNEU3UjBlK0lObVJObkd0aWFOZldobkRmNlorSy9TUXEyekFSTEZYS1c0UjcrcGg5aUwzU1dML1UxYUpWYVNTWmlYRjhvYWtITVUyaTVRWXF0R1owazkza2syNU16VFNydnFwdlRYN3RDTTRmeENjOXBFQVdoWkxIcGZXY0dpcTNweUlZaDNJMXh6c2xaam5QL2VZS0VsVE9LUjhuWFo5anFmUWRUZlZTb2hReWE2T3U1dz09&file=Chroma.Commentaire.Audio.2017.MP3.%5B320kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/5020dfdfbb4856515888069a64d0b55f362bfbe1",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "5020dfdfbb4856515888069a64d0b55f362bfbe1",
+    "seeders": 8,
+    "leechers": 8,
+    "protocol": "torrent",
+    "fileName": "Chroma.Commentaire.Audio.2017.MP3.[320kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=2c4bfdffb5978f5f87e2c2246125c70fbac10707&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 1,
+    "ageHours": 45.31186623577778,
+    "ageMinutes": 2718.71197415,
+    "size": 154740383,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "La.France.Pue.Radio.Show.2026.10.20.MP3.[183kbps]-NOTAG",
+    "sortTitle": "la france pue radio show 2026 10 20 mp3 183kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-28T17:43:18Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=NUpxd0dzbnVUL015ZUZMaVZ0NGJRbnI2NlA2a2lsaGU2UDVzTEhIZGJZRUpBL2FiS0liVEpDUzdicUcxY2s4OUNDdEJuYkdzVStXakJrOVZpMUJaaFZObEVyZk5TZnI3Qk03cjNYZWRvcjJFQ29ySjZOU3hmNUprb0dYS0FVZS9OaG5CaHJHdDArRWpHQTUrMzlwR05ZV25Lc2gxZ0ZhVjQ2YlVaWkxHUXcreW1NSE1hR3BjR3p1ajNMV25VZi9ZbERwM2Nxc003WFVOeGRiNm93bnZMUT09&file=La.France.Pue.Radio.Show.2026.10.20.MP3.%5B183kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/2c4bfdffb5978f5f87e2c2246125c70fbac10707",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "2c4bfdffb5978f5f87e2c2246125c70fbac10707",
+    "seeders": 6,
+    "leechers": 7,
+    "protocol": "torrent",
+    "fileName": "La.France.Pue.Radio.Show.2026.10.20.MP3.[183kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=e5207e86e70394d722c78c3caf04a3743d7114b1&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 1,
+    "ageHours": 45.31297735513889,
+    "ageMinutes": 2718.778641311667,
+    "size": 153025272,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "La.France.Pue.Radio.Show.2026.10.06.MP3.[177kbps]-NOTAG",
+    "sortTitle": "la france pue radio show 2026 10 06 mp3 177kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-28T17:43:14Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=TEZMM0JYdS9pVkxWYk1QL3ZKQnZwZUo4ZFFkTkxmVXhBeWZhTXFTYkNxN0VockcwRG43cWJNa2hUeXRuMTk2Z1d4VUtjWkx4aUxYWWkycEtJVS9YU0JZelRHU0VPelBkdkloWU40cWFidFk5b1BObWIySUpmL2ovanM0QkdlWko5WUQ3UGRFbDg1MWMzeDVSY0NVbEdqMUhmYWRHVERheTh3ckZ2ellNRXJ2b3JDWjVISEVJMGxDMmd0RjRNaG9Jb0toYTM0Q2FrL0F1UXFUd0FENWlYZz09&file=La.France.Pue.Radio.Show.2026.10.06.MP3.%5B177kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/e5207e86e70394d722c78c3caf04a3743d7114b1",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "e5207e86e70394d722c78c3caf04a3743d7114b1",
+    "seeders": 8,
+    "leechers": 8,
+    "protocol": "torrent",
+    "fileName": "La.France.Pue.Radio.Show.2026.10.06.MP3.[177kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=92188aaa25b7ccfab28311efa8ff0c29eaaafd55&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 1,
+    "ageHours": 45.314088474,
+    "ageMinutes": 2718.845308443333,
+    "size": 149752955,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "La.France.Pue.Radio.Show.2026.09.22.MP3.[170kbps]-NOTAG",
+    "sortTitle": "la france pue radio show 2026 09 22 mp3 170kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-28T17:43:10Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=MFNpL2ZHQkpVVXRsaXZjNlppaTJoWk1uVHdNbVpIbnBOcXJwRThhWjZWeFI4cnZ3Y2lmaXJvY1AzSTRTZVF6MWRPNy90SHZQNFphR2JENHhBUkJSSytHRnduRGUyU1ovY1NPRkhISytHRU9yaHBNSkx4SGk0TGxRTENyZ0tUUnh0aWRjanJuL2pqMldWU253eFgvdEdQQXpTZWNxZUVnOG1FN1NsVVF1RUdPVnpPRWlUSUJUVFNTamdMRXVJWHhabW9TdVl5ZW8vZ1VQbFV4cG1TWlVHQT09&file=La.France.Pue.Radio.Show.2026.09.22.MP3.%5B170kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/92188aaa25b7ccfab28311efa8ff0c29eaaafd55",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "92188aaa25b7ccfab28311efa8ff0c29eaaafd55",
+    "seeders": 8,
+    "leechers": 8,
+    "protocol": "torrent",
+    "fileName": "La.France.Pue.Radio.Show.2026.09.22.MP3.[170kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=20c4de5d80dca37ce054dea3238197b882edc81c&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 1,
+    "ageHours": 45.314921815333335,
+    "ageMinutes": 2718.8953089233332,
+    "size": 157000071,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "La.France.Pue.Radio.Show.2026.09.08.MP3.[179kbps]-NOTAG",
+    "sortTitle": "la france pue radio show 2026 09 08 mp3 179kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-28T17:43:07Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=UDNoVmFzeEhyeXZVR2xFOUJGUjJrTE9DcFRzNlh2SlllZmRwUmF4R1N3NzByTFBXZWRQQzlCTTZ0azNsOVh0UlhXa3FyZDJZMGk0M2RuUVkvRmJaU2dKNDlEMk1oV2ZLMVFpRVpPTmZaQzJXZDZiUit3NEhFSzRpVjhkeWVsZElBK0Rvd2VxK1ZzTEtISGRZSnBrK0x3OThOQkJkdVpoYy8rcTN1VElhdWpqUWxHMGkwUTJoNkN2ZUttajRKMnJlNFZjdHd3Qkh3QVZvMk5mZjZMOHJUZz09&file=La.France.Pue.Radio.Show.2026.09.08.MP3.%5B179kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/20c4de5d80dca37ce054dea3238197b882edc81c",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "20c4de5d80dca37ce054dea3238197b882edc81c",
+    "seeders": 6,
+    "leechers": 6,
+    "protocol": "torrent",
+    "fileName": "La.France.Pue.Radio.Show.2026.09.08.MP3.[179kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=e34850cf93173cc57b63cdb8cc27d24593698764&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 1,
+    "ageHours": 45.316032934166664,
+    "ageMinutes": 2718.9619760533333,
+    "size": 158834374,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "La.France.Pue.Radio.Show.2026.08.25.MP3.[177kbps]-NOTAG",
+    "sortTitle": "la france pue radio show 2026 08 25 mp3 177kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-28T17:43:03Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=ajZsa1dCbHlaRzJGcDdZdWYzbTdrNHVDcWx3bmxyNnBrUVpQcVFFenZmMUhqdjVWUDljTkxzTGxpQ0VROU01NHhHTjlaN04zSmFQT2VERlAzYmwrL1FJRTBBRkZBNXk5Y1VxdXAyeEkwd3BCS3h6bUUyMWxmMjNXZmlpeDM4Z09DRDFObVhGRGxyUkJIRUorcjFqWmVkVFE5YVFmTWhEaTRpcG1pMnlWQjNYVkxWNzVqSWd0R0Zod3hNZWNCUko1WE02cVF5NGVVY1FEMmhzL1E1K0ZJdz09&file=La.France.Pue.Radio.Show.2026.08.25.MP3.%5B177kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/e34850cf93173cc57b63cdb8cc27d24593698764",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "e34850cf93173cc57b63cdb8cc27d24593698764",
+    "seeders": 6,
+    "leechers": 6,
+    "protocol": "torrent",
+    "fileName": "La.France.Pue.Radio.Show.2026.08.25.MP3.[177kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=3b9038b3ad6936ae66102bc3fac0c3af17ecbff3&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 1,
+    "ageHours": 45.31714405291667,
+    "ageMinutes": 2719.0286431783334,
+    "size": 160852005,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "La.France.Pue.Radio.Show.2026.08.11.MP3.[183kbps]-NOTAG",
+    "sortTitle": "la france pue radio show 2026 08 11 mp3 183kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-28T17:42:59Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=cVFGN2xMcEs2K29mVFZIeUduY3lxS0FzZVJVTkhNNmdpd0hUQ1B6VWFDZTJJalgxbTV6QktCUldlODRnTlpwN2RTeVMyRno2YXB2eFR3aUNNcEJHaHF0MWM2STZmNUhKQ3FtTGhxV1FZMnNMRzMyWDdDN2FWdUR0dHFNYlNpcWtvOUJWQkNia2ZtZ3ZsNDJQT3E3MThJQit1Z2x1cWszWHR5VERqZ0paU1JTNjkraXU0NGR3dXQ0VUZkYmNrZHNNYkFsSXFCd2V4YmhhYUZkZUFTN2hldz09&file=La.France.Pue.Radio.Show.2026.08.11.MP3.%5B183kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/3b9038b3ad6936ae66102bc3fac0c3af17ecbff3",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "3b9038b3ad6936ae66102bc3fac0c3af17ecbff3",
+    "seeders": 6,
+    "leechers": 6,
+    "protocol": "torrent",
+    "fileName": "La.France.Pue.Radio.Show.2026.08.11.MP3.[183kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=5a99f21adde42fa05f182796a0442b31de3f9801&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 1,
+    "ageHours": 45.31797739377778,
+    "ageMinutes": 2719.07864363,
+    "size": 155125631,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "La.France.Pue.Radio.Show.2026.07.28.MP3.[173kbps]-NOTAG",
+    "sortTitle": "la france pue radio show 2026 07 28 mp3 173kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-28T17:42:56Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=a0dCdUdxUUl6cWRHQ0dKSU0yeXRJVjZFb0pjQlR1cGdvZ3hFL1B4ODRBa0hoaW9wMzJqYzQ1L1pQQkFKWDN0Z0JXNGh5N0xIVzdPaXlGTUh3cVNIRTNYbFdPVUhscGgyRytUZVY1amtPMFhDWmFPN0orRFVkZDlEd0FrVnBxbTNpNUpoNHZnV0FWV0FvOHhTWXpVMnp4Z3ZqVG9OYTFJd1owS0ZKdXlXaDRUbnJBY054R21XQjlwQ0dpSHgwRUhuK3VRNUZrUHgyTCtpMjFlRnp3dmNpUT09&file=La.France.Pue.Radio.Show.2026.07.28.MP3.%5B173kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/5a99f21adde42fa05f182796a0442b31de3f9801",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "5a99f21adde42fa05f182796a0442b31de3f9801",
+    "seeders": 6,
+    "leechers": 6,
+    "protocol": "torrent",
+    "fileName": "La.France.Pue.Radio.Show.2026.07.28.MP3.[173kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=66c793be7cdfcbb3414fe009b757cd6183343d38&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 1,
+    "ageHours": 45.31908851263889,
+    "ageMinutes": 2719.1453107616667,
+    "size": 157913639,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "La.France.Pue.Radio.Show.2026.07.14.MP3.[177kbps]-NOTAG",
+    "sortTitle": "la france pue radio show 2026 07 14 mp3 177kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-28T17:42:52Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=cWxVU3RKWjltZ1M4SGNYMlNXOER2ZFdMMjdrQVZZTXZCRzF1VDJhTFYrcG1VM01ncUxwVCtIb1pLcjlqRnhzR0l6QUtUbVRUdk5Dci9sN1ZnaFNEUWJhSVRiTTRYcklVMlF6OUtHSGNBZjM2bnE2STR1Ulh1bHErMHVZb2J2Rm1CWUhPaXRDMUFTd0FPTVFjR0YwbGJjRDJhWXBUelVxNEd4UXZxYjM3OSt5NWRVYmp4aG54WWpERnBVV21sbTN5V3M1NUkyYkxxcGR5eTVuQklrZ2NjQT09&file=La.France.Pue.Radio.Show.2026.07.14.MP3.%5B177kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/66c793be7cdfcbb3414fe009b757cd6183343d38",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "66c793be7cdfcbb3414fe009b757cd6183343d38",
+    "seeders": 5,
+    "leechers": 5,
+    "protocol": "torrent",
+    "fileName": "La.France.Pue.Radio.Show.2026.07.14.MP3.[177kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=d91d39c39c2c3e7e325d79bb5dcf6e1acfcb6103&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 1,
+    "ageHours": 45.32019963138889,
+    "ageMinutes": 2719.211977886667,
+    "size": 153401203,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "La.France.Pue.Radio.Show.2026.06.30.MP3.[175kbps]-NOTAG",
+    "sortTitle": "la france pue radio show 2026 06 30 mp3 175kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-28T17:42:48Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=c0xLL2Q1eHkwNTd3bVJoNFl2Nm54SzAzVnpwSmd4TG1CQkx2UE5tazkzTi9MV0FqWUJzRnE3MWVrZ29PTEJCbHJ2ZXFRc2lCUGh6RkRGSFhBNzFiVmExN3VWKzBYdWhraVBWVDBnY2ErdGlETDVxcTBjNGVGcVdjMTBOOUdidVNpakZXN2hOMENUdUMrOTVaRUdpN3pDUzI4Z2hxU09rZnBGQm04Y2NzbS94blJNZFB3Rm10ZmpQTVpnZ09FaHRZaU91L3BqWXF0Z1g1OHFwdVdhamhxUT09&file=La.France.Pue.Radio.Show.2026.06.30.MP3.%5B175kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/d91d39c39c2c3e7e325d79bb5dcf6e1acfcb6103",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "d91d39c39c2c3e7e325d79bb5dcf6e1acfcb6103",
+    "seeders": 7,
+    "leechers": 7,
+    "protocol": "torrent",
+    "fileName": "La.France.Pue.Radio.Show.2026.06.30.MP3.[175kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=fbc5c1da2303a7a7dfc2c2f8dee07126cfd19a4e&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 0,
+    "ageHours": 3.261588390277778,
+    "ageMinutes": 195.69530342333334,
+    "size": 97972572,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Jean.Alphonse.Richard.L'Heure.Du.Crime.INCONTOURNABLE.Affaire.Victorine.Dartois.Le.Tueur.Du.Ruisseau.2026.MP3.[320Kbps]-NOTAG",
+    "sortTitle": "jean alphonse richard l heure du crime incontournable affaire victorine dartois le tueur du ruisseau 2026 mp3 320kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-30T11:46:19Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=cERvRk9SemhFeG9wY1pQdUwyUkJRZ05LUGJTNWt0MHAzRnErWXo5VWdKMUpZL0kveFA1TVRRVEsydHZ6bEJPcEF6cE5YUHZMN0tYc3dIZ2FYRkJUbW1KUnhLYjIzWU5KWWVrRjU3Tkg3YjM3TUtpU3dmODJ3MC9KaFZiTDJKbHdBTFBwdDNsT0hlT3dadjhiY1Bjd3RMZFhGam9WTUNWQTAwdktmVWhqNmxEWEROSFY1d2N4RVNyalZqd3BSQXJpM0xwM0I5R1FLeG5uM0dKb0pUSEo4QT09&file=Jean.Alphonse.Richard.L%27Heure.Du.Crime.INCONTOURNABLE.Affaire.Victorine.Dartois.Le.Tueur.Du.Ruisseau.2026.MP3.%5B320Kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/fbc5c1da2303a7a7dfc2c2f8dee07126cfd19a4e",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "fbc5c1da2303a7a7dfc2c2f8dee07126cfd19a4e",
+    "seeders": 11,
+    "leechers": 11,
+    "protocol": "torrent",
+    "fileName": "Jean.Alphonse.Richard.L'Heure.Du.Crime.INCONTOURNABLE.Affaire.Victorine.Dartois.Le.Tueur.Du.Ruisseau.2026.MP3.[320Kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=c81157fd0e3312cec6c9d3ae76ee8f10d85d16be&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 0,
+    "ageHours": 3.670755092583333,
+    "ageMinutes": 220.24530555833334,
+    "size": 102451470,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Jean.Alphonse.Richard.L'Heure.Du.Crime.L'INTEGRALE.Fabrice.Neumetzler.jalousie.fatale.2026.MP3.[320Kbps]-NOTAG",
+    "sortTitle": "jean alphonse richard l heure du crime l integrale fabrice neumetzler jalousie fatale 2026 mp3 320kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-30T11:21:46Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=Zk9wWVdDdVBpb1VkTkEzREpsdVM0OHpaMmdPQURBVjEzMkVLZ2R4MWZmSTZJNlZpUE4yUEpsT3A3Qm5FK25Mc0FvUTNiQS9Jb2JGMnNONzJtT3NMTUdPQURYTVRhQmI3VTFYVjhCakx1emRqdGpUVVpwS2lvTWtSOUpSazB2RE92eWdteFdURXdRY3RkMW9pcnVOZ055V0dMMzNhQWt0eVlaVW1RRXFXRkl1alFUTFJaRDlnSFhrbzZmUlFBRzI0MHIvZU9aclJzT2VOM1RVdnQ3OFBTZz09&file=Jean.Alphonse.Richard.L%27Heure.Du.Crime.L%27INTEGRALE.Fabrice.Neumetzler.jalousie.fatale.2026.MP3.%5B320Kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/c81157fd0e3312cec6c9d3ae76ee8f10d85d16be",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "c81157fd0e3312cec6c9d3ae76ee8f10d85d16be",
+    "seeders": 11,
+    "leechers": 12,
+    "protocol": "torrent",
+    "fileName": "Jean.Alphonse.Richard.L'Heure.Du.Crime.L'INTEGRALE.Fabrice.Neumetzler.jalousie.fatale.2026.MP3.[320Kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=a2d27b7952b4eb3d0a751810e028667d04bc7523&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 0,
+    "ageHours": 4.140199547527778,
+    "ageMinutes": 248.41197285666667,
+    "size": 95246734,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Jean.Alphonse.Richard.L'heure.Du.Crime.L'INTÉGRALE.Priscillia.Gonzales.La.morte.dans.le.cimetierre.2026.MP3.[320Kbps]-NOTAG",
+    "sortTitle": "jean alphonse richard l heure du crime l intégrale priscillia gonzales la morte dans le cimetierre 2026 mp3 320kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-30T10:53:36Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=YW1uckpRYkpma25oV0tBWW95ZDViNENoZk9oQlZWMXBEMkVqWm82QllCZ2RYN21OK2pmNGxtV0cvZFIvUVhXa2J4ekx2SmFaVnJFUXhVVW5qYU5MQTlJQk1iRmNUWEJTMEFoRXdsTzlRdEtmdzNlUHlLcmZueXFyaG02VTE0VzVMM2lnLzlhZkp3Yi9ZelUyNzRUU01LRE02ZU1ZeXNiK29NMENLcFN1eXJpYXJxdjV6S3NUR2p0RGEwVHh1NmZQM2RWdUpHdjZPVGl5ZVVHVmF4UURKQT09&file=Jean.Alphonse.Richard.L%27heure.Du.Crime.L%27INT%C3%89GRALE.Priscillia.Gonzales.La.morte.dans.le.cimetierre.2026.MP3.%5B320Kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/a2d27b7952b4eb3d0a751810e028667d04bc7523",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "a2d27b7952b4eb3d0a751810e028667d04bc7523",
+    "seeders": 10,
+    "leechers": 10,
+    "protocol": "torrent",
+    "fileName": "Jean.Alphonse.Richard.L'heure.Du.Crime.L'INTÉGRALE.Priscillia.Gonzales.La.morte.dans.le.cimetierre.2026.MP3.[320Kbps]-NOTAG.torrent"
+  },
+  {
+    "guid": "https://c411.org/api?t=get&id=0e1002e2d4b314d5dff27e35fd401ea3b5b82ea7&apikey=44781c65aeb2fce466a50a6147b56321ecd3fd7d4a54950d2e1a66c82f94a021",
+    "age": 0,
+    "ageHours": 4.604921782138889,
+    "ageMinutes": 276.2953069316667,
+    "size": 108382871,
+    "grabs": 0,
+    "indexerId": 27,
+    "indexer": "C411",
+    "title": "Jean.Alphonse.Richard.L'Heure.Du.Crime.L'INTEGRALE.Nicolas.Panard.Sous.le.masque.de.Domino.2026.MP3.[320Kbps]-NOTAG",
+    "sortTitle": "jean alphonse richard l heure du crime l integrale nicolas panard sous le masque de domino 2026 mp3 320kbps notag",
+    "imdbId": 0,
+    "tmdbId": 0,
+    "tvdbId": 0,
+    "tvMazeId": 0,
+    "publishDate": "2026-10-30T10:25:43Z",
+    "downloadUrl": "http://127.0.0.1:9696/27/download?apikey=8f13940f44844e07bd29b7874e0bbed3&link=SDdBRHQ3NjBQVlAwSGlFWmtyallNamhacjlvR0ZWUmluL0xPdDJNNTYyWE0yUzhHUUtTa3RoaUxRM3RCU1hpRXpyTFR4bW02dlhGcnpVTUhGNG9jcXBrVlBnWW9nNVJuZXVqU0liYk9qcFZSYUJmUzFibFBNLzl0dk9xUHRGTHkyK2E3WVNMVHUzNTNKaVlHYlpGVUkxR1p4dHJqZEpwdEhKYmFVenQ4OHBKdXByeDFXWm5TNmt0OE0wRWNIRnhNUFYzb3BxdzgxaTJDWi9CTVY3NHN6UT09&file=Jean.Alphonse.Richard.L%27Heure.Du.Crime.L%27INTEGRALE.Nicolas.Panard.Sous.le.masque.de.Domino.2026.MP3.%5B320Kbps%5D-NOTAG",
+    "infoUrl": "https://c411.org/torrents/0e1002e2d4b314d5dff27e35fd401ea3b5b82ea7",
+    "indexerFlags": [],
+    "categories": [
+      {
+        "id": 3050,
+        "name": "Audio/Other",
+        "subCategories": []
+      },
+      {
+        "id": 103050,
+        "subCategories": []
+      }
+    ],
+    "infoHash": "0e1002e2d4b314d5dff27e35fd401ea3b5b82ea7",
+    "seeders": 9,
+    "leechers": 9,
+    "protocol": "torrent",
+    "fileName": "Jean.Alphonse.Richard.L'Heure.Du.Crime.L'INTEGRALE.Nicolas.Panard.Sous.le.masque.de.Domino.2026.MP3.[320Kbps]-NOTAG.torrent"
+  }
+]

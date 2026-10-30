@@ -1,0 +1,417 @@
+import argparse
+import email.utils
+import fcntl
+import hashlib
+import http.cookiejar
+import json
+import os
+import shutil
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from pathlib import Path
+
+ROOT = Path("zen-optimizer")
+STATE = ROOT / "queue-state.json"
+SELECTION = ROOT / "selection.json"
+CACHE = ROOT / "cache"
+
+QBIT = "http://127.0.0.1:8080"
+COOKIES = "/tmp/qbit-cookies.txt"
+CATEGORY = "zen-optimizer"
+DESTINATION = "/data/Zen/torrents"
+HOST_DIR = Path("/mnt/medias/Zen/torrents")
+
+BUDGET = 300_000_000_000
+FREE_RESERVE = 10_000_000_000
+INTERVAL = 60
+ERROR_COOLDOWN = 3600
+MAX_METADATA = 5_000_000
+
+os.umask(0o077)
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--apply", action="store_true")
+parser.add_argument("--limit", type=int, default=50)
+args = parser.parse_args()
+
+# Empêcher deux exécutions simultanées.
+lock = open(ROOT / "queue.lock", "a+")
+try:
+    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+except BlockingIOError:
+    raise SystemExit("Une instance est déjà active.")
+
+def load_json(path, default):
+    if path.exists():
+        return json.loads(path.read_text())
+    return default
+
+state = load_json(STATE, {
+    "next_request_at": 0,
+    "added": {},
+    "blocked": {},
+})
+
+state.setdefault("next_request_at", 0)
+state.setdefault("added", {})
+state.setdefault("blocked", {})
+
+def save_state():
+    tmp = STATE.with_suffix(".tmp")
+    tmp.write_text(json.dumps(state, indent=2))
+    os.replace(tmp, STATE)
+
+# Accès authentifié à qBittorrent.
+jar = http.cookiejar.MozillaCookieJar(COOKIES)
+jar.load(ignore_discard=True, ignore_expires=True)
+
+opener = urllib.request.build_opener(
+    urllib.request.HTTPCookieProcessor(jar)
+)
+
+def open_url(url, data=None, headers=None):
+    req = urllib.request.Request(
+        url, data=data, headers=headers or {}
+    )
+    return opener.open(req, timeout=45)
+
+def qbit_info():
+    with open_url(QBIT + "/api/v2/torrents/info") as r:
+        return json.load(r)
+
+def qbit_categories():
+    with open_url(QBIT + "/api/v2/torrents/categories") as r:
+        return json.load(r)
+
+def torrent_hash(raw):
+    # Lire les données bencode sans modifier
+    # les octets du dictionnaire "info".
+    def scan(i):
+        if i >= len(raw):
+            raise ValueError("Bencode incomplet")
+        c = raw[i:i+1]
+        if c == b"i":
+            end = raw.index(b"e", i + 1)
+            int(raw[i+1:end])
+            return end + 1
+        if c in (b"l", b"d"):
+            i += 1
+            while raw[i:i+1] != b"e":
+                i = scan(i)
+            return i + 1
+        sep = raw.index(b":", i)
+        n = int(raw[i:sep])
+        end = sep + 1 + n
+        if end > len(raw):
+            raise ValueError("Bencode incomplet")
+        return end
+
+    def string(i):
+        sep = raw.index(b":", i)
+        n = int(raw[i:sep])
+        start = sep + 1
+        end = start + n
+        if end > len(raw):
+            raise ValueError("Bencode incomplet")
+        return raw[start:end], end
+
+    if not raw.startswith(b"d"):
+        raise ValueError("Pas un fichier torrent")
+
+    i = 1
+    result = None
+    while raw[i:i+1] != b"e":
+        key, i = string(i)
+        start = i
+        i = scan(i)
+        if key == b"info":
+            result = hashlib.sha1(raw[start:i]).hexdigest()
+
+    if i != len(raw)-1 or not result:
+        raise ValueError("Métadonnées invalides")
+    return result
+
+def fetch_metadata(url):
+    u = urllib.parse.urlsplit(url)
+    if (
+        u.scheme != "http"
+        or u.hostname != "127.0.0.1"
+        or u.port != 9696
+        or u.path != "/27/download"
+    ):
+        raise ValueError("Lien Prowlarr inattendu")
+
+    with open_url(url) as r:
+        data = r.read(MAX_METADATA + 1)
+
+    if len(data) > MAX_METADATA:
+        raise ValueError("Métadonnées trop volumineuses")
+
+    return data, torrent_hash(data)
+
+def add_torrent(raw):
+    boundary = "ZenOptimizerUpload"
+    chunks = []
+
+    for key, value in (
+        ("category", CATEGORY),
+        ("savepath", DESTINATION),
+    ):
+        chunks.append(
+            f"--{boundary}\r\n"
+            f'Content-Disposition: form-data; name="{key}"'
+            f"\r\n\r\n{value}\r\n".encode()
+        )
+
+    chunks.append(
+        (
+            f"--{boundary}\r\n"
+            'Content-Disposition: form-data; '
+            'name="torrents"; filename="release.torrent"\r\n'
+            "Content-Type: application/x-bittorrent\r\n\r\n"
+        ).encode()
+    )
+    chunks.append(raw)
+    chunks.append(f"\r\n--{boundary}--\r\n".encode())
+
+    with open_url(
+        QBIT + "/api/v2/torrents/add",
+        data=b"".join(chunks),
+        headers={
+            "Content-Type":
+                f"multipart/form-data; boundary={boundary}"
+        },
+    ) as r:
+        answer = r.read().decode().strip()
+
+    if answer == "Ok.":
+        return
+
+    try:
+        parsed = json.loads(answer)
+        if parsed.get("success_count", 0) >= 1:
+            return
+    except json.JSONDecodeError:
+        pass
+
+    raise RuntimeError(
+        "Réponse qBittorrent non confirmée : " + answer[:150]
+    )
+
+def retry_delay(error):
+    value = error.headers.get("Retry-After")
+    if value:
+        try:
+            return max(0, int(value))
+        except ValueError:
+            try:
+                dt = email.utils.parsedate_to_datetime(value)
+                return max(0, dt.timestamp() - time.time())
+            except (TypeError, ValueError):
+                pass
+    return ERROR_COOLDOWN
+
+# Reconstruire la liste à partir du cache Prowlarr.
+# Ne pas écrire les URL privées dans le journal.
+catalogue = {}
+
+for file in CACHE.glob("*.json"):
+    for t in load_json(file, []):
+        title = t.get("title")
+        url = t.get("downloadUrl")
+        size = t.get("size")
+        if title and url and size:
+            catalogue.setdefault(title, []).append(t)
+
+selection = load_json(SELECTION, [])
+queue = []
+
+for t in selection:
+    matches = [
+        x for x in catalogue.get(t["title"], [])
+        if abs(x["size"] / 1e9 - t["size_gb"]) < 0.000001
+    ]
+
+    urls = list(dict.fromkeys(x["downloadUrl"] for x in matches))
+    if len(urls) == 1:
+        queue.append((t, urls[0]))
+
+categories = qbit_categories()
+if (
+    CATEGORY not in categories
+    or categories[CATEGORY].get("savePath") != DESTINATION
+):
+    raise SystemExit("Catégorie qBittorrent incorrecte.")
+
+existing = qbit_info()
+hashes = {t["hash"].lower() for t in existing}
+
+def reserved_bytes(torrents):
+    return sum(
+        t.get("size", 0)
+        for t in torrents
+        if t.get("category") == CATEGORY
+    )
+
+reserved = reserved_bytes(existing)
+
+print(f"Catalogue sélectionné : {len(selection)}")
+print(f"Candidats avec lien : {len(queue)}")
+print(f"Torrents qBittorrent : {len(existing)}")
+print(f"Stockage Zen réservé : {reserved / 1e9:.3f} Go")
+print(f"Plafond : {BUDGET / 1e9:.0f} Go")
+print("Mode :", "AJOUT" if args.apply else "SIMULATION")
+
+if not args.apply:
+    raise SystemExit(0)
+
+if args.limit < 1:
+    raise SystemExit("La limite doit être positive.")
+
+added = 0
+
+for i, (t, url) in enumerate(queue, 1):
+    if added >= args.limit:
+        break
+
+    if url in state["blocked"]:
+        continue
+
+    # Éviter de redemander les torrents déjà confirmés.
+    if any(
+        entry.get("title") == t["title"]
+        for entry in state["added"].values()
+    ):
+        continue
+
+    size = round(t["size_gb"] * 1e9)
+    if size <= 0:
+        continue
+
+    if reserved + size > BUDGET:
+        continue
+
+    if shutil.disk_usage(HOST_DIR).free < size + FREE_RESERVE:
+        print("STOP : espace disponible insuffisant.")
+        break
+
+    remaining = state["next_request_at"] - time.time()
+    if remaining > 0:
+        print(f"Attente : {remaining:.0f} secondes", flush=True)
+        time.sleep(remaining)
+
+    # Enregistrer le délai AVANT la requête, pour
+    # le conserver même après interruption.
+    state["next_request_at"] = time.time() + INTERVAL
+    save_state()
+
+    try:
+        raw, infohash = fetch_metadata(url)
+
+        if infohash in hashes:
+            print(f"[{i}] Déjà présent : {t['title'][:60]}")
+            continue
+
+        if infohash in state["added"]:
+            print(f"[{i}] Déjà enregistré : {t['title'][:60]}")
+            continue
+
+        current = qbit_info()
+        hashes = {x["hash"].lower() for x in current}
+        reserved = reserved_bytes(current)
+
+        if infohash in hashes:
+            continue
+
+        if reserved + size > BUDGET:
+            print("STOP : budget atteint.")
+            break
+
+        if shutil.disk_usage(HOST_DIR).free < size + FREE_RESERVE:
+            print("STOP : espace insuffisant.")
+            break
+
+        add_torrent(raw)
+
+        # Confirmer que qBittorrent possède le torrent.
+        match = None
+        confirmed = []
+
+        for attempt in range(15):
+            confirmed = qbit_info()
+            match = next(
+                (
+                    x for x in confirmed
+                    if x["hash"].lower() == infohash
+                ),
+                None
+            )
+
+            if match is not None:
+                break
+
+            if attempt < 14:
+                time.sleep(2)
+
+        if match is None:
+            raise RuntimeError(
+                "Ajout non confirmé après 30 secondes. "
+                "Vérifier qBittorrent avant reprise."
+            )
+
+        if (
+            match.get("category") != CATEGORY
+            or match.get("save_path") != DESTINATION
+        ):
+            raise RuntimeError(
+                "Catégorie ou destination inattendue."
+            )
+
+        hashes.add(infohash)
+        reserved = reserved_bytes(confirmed)
+
+        state["added"][infohash] = {
+            "title": t["title"],
+            "size_bytes": size,
+        }
+        save_state()
+
+        added += 1
+
+        print(
+            f"[{i}] AJOUTÉ ({added}/{args.limit}) : "
+            f"{t['title'][:65]}",
+            flush=True
+        )
+
+    except urllib.error.HTTPError as e:
+        if e.code in (429, 503):
+            delay = retry_delay(e)
+            state["next_request_at"] = max(
+                state["next_request_at"],
+                time.time() + delay
+            )
+            save_state()
+            print(
+                f"STOP HTTP {e.code} : "
+                f"suspension d'au moins {delay:.0f} secondes."
+            )
+        else:
+            print(f"STOP HTTP {e.code}")
+        break
+
+    except Exception as e:
+        print(
+            "STOP :",
+            type(e).__name__,
+            str(e)
+        )
+        print("Vérifier qBittorrent avant de reprendre.")
+        break
+
+print()
+print(f"Nouveaux torrents confirmés : {added}")
+print(f"Stockage Zen réservé : {reserved / 1e9:.3f} Go")
+print("Fin du traitement.")

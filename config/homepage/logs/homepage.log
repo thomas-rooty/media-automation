@@ -1,0 +1,528 @@
+[2026-03-21T22:23:23.170Z] info: kubernetes.yaml was copied to the config folder
+[2026-03-21T22:23:35.698Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:35.951Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:35.954Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:35.958Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:35.965Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:35.968Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:35.972Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:35.975Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:35.979Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:35.985Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:35.987Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:35.989Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:52.950Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:52.953Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.228Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.264Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.266Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.269Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.272Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.275Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.276Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.280Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.281Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.286Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.289Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.292Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:23:53.297Z] error: Host validation failed for: wks-tcaron-linux:3000. Hint: Set the HOMEPAGE_ALLOWED_HOSTS environment variable to allow requests from this host / port.
+[2026-03-21T22:24:47.193Z] info: custom.css was copied to the config folder
+[2026-03-21T22:24:47.194Z] info: custom.js was copied to the config folder
+[2026-03-21T22:24:47.204Z] info: proxmox.yaml was copied to the config folder
+[2026-03-21T22:24:47.375Z] error: <service-helpers> Error getting services from Docker server 'my-docker': [Error: connect EACCES /var/run/docker.sock] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2026-03-21T22:24:47.559Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:47.572Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:47.573Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:47.589Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:47.590Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:47.591Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:47.602Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:47.602Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:47.603Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:47.616Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:47.616Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:47.617Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:47.648Z] error: <service-helpers> Error getting services from Docker server 'my-docker': [Error: connect EACCES /var/run/docker.sock] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2026-03-21T22:24:47.711Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:24:47.878Z] error: <qbittorrentProxyHandler> Error logging in to qBittorrent: Data: Fails.
+[2026-03-21T22:24:47.905Z] error: <credentialedProxyHandler> HTTP Error 401 calling https://portainer:9443/api/endpoints/2/docker/containers/json?all=1
+[2026-03-21T22:24:47.961Z] error: <qbittorrentProxyHandler> Error logging in to qBittorrent: Data: Fails.
+[2026-03-21T22:24:47.961Z] error: <qbittorrentProxyHandler> Error logging in to qBittorrent: Data: Fails.
+[2026-03-21T22:24:50.924Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:50.933Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:50.934Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:50.934Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:50.952Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:50.952Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:50.953Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:50.953Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:50.960Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:50.961Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:50.969Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:50.969Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:24:50.985Z] error: <service-helpers> Error getting services from Docker server 'my-docker': [Error: connect EACCES /var/run/docker.sock] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2026-03-21T22:24:51.007Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:24:51.152Z] error: <credentialedProxyHandler> HTTP Error 401 calling https://portainer:9443/api/endpoints/2/docker/containers/json?all=1
+[2026-03-21T22:24:51.180Z] error: <qbittorrentProxyHandler> Error logging in to qBittorrent: Data: Fails.
+[2026-03-21T22:24:51.181Z] error: <qbittorrentProxyHandler> Error logging in to qBittorrent: Data: Fails.
+[2026-03-21T22:24:51.182Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:24:56.020Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:24:56.212Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:24:56.213Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:01.202Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:06.550Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:06.612Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:06.622Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:06.622Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:06.627Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:06.637Z] error: <service-helpers> Error getting services from Docker server 'my-docker': [Error: connect EACCES /var/run/docker.sock] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2026-03-21T22:25:06.638Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:06.638Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:06.648Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:06.649Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:06.649Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:06.662Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:06.663Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:06.664Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:06.692Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:25:06.702Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:06.702Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:06.714Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:06.805Z] error: <credentialedProxyHandler> HTTP Error 401 calling https://portainer:9443/api/endpoints/2/docker/containers/json?all=1
+[2026-03-21T22:25:11.705Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:25:11.739Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:15.366Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:15.379Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:15.380Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:15.389Z] error: <service-helpers> Error getting services from Docker server 'my-docker': [Error: connect EACCES /var/run/docker.sock] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2026-03-21T22:25:15.390Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:15.390Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:15.397Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:15.398Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:15.405Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:15.405Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:15.406Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:15.414Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:15.415Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:15.440Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:25:15.447Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:15.448Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:15.461Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:15.576Z] error: <credentialedProxyHandler> HTTP Error 401 calling https://portainer:9443/api/endpoints/2/docker/containers/json?all=1
+[2026-03-21T22:25:16.218Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:16.231Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:16.725Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:16.726Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:20.469Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:25:20.476Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:20.477Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:20.484Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:21.032Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:25:26.741Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:30.493Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:25:30.497Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:31.731Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:25:36.758Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:36.770Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:45.496Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:45.501Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:45.899Z] error: <service-helpers> Error getting services from Docker server 'my-docker': [Error: connect EACCES /var/run/docker.sock] {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'connect',
+  address: '/var/run/docker.sock'
+}
+[2026-03-21T22:25:45.900Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:45.908Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:45.909Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:45.909Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:45.918Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:45.919Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:45.919Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:45.927Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:45.927Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:45.927Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:45.936Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:45.937Z] error: <dockerStatusService> Error: connect EACCES /var/run/docker.sock
+    at PipeConnectWrap.afterConnect [as oncomplete] (node:net:1637:16)
+    at PipeConnectWrap.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-03-21T22:25:45.961Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:25:45.968Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:45.968Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:45.969Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:46.053Z] error: <credentialedProxyHandler> HTTP Error 401 calling https://portainer:9443/api/endpoints/2/docker/containers/json?all=1
+[2026-03-21T22:25:50.989Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:50.990Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:51.233Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:55.974Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:25:55.983Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:56.257Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:25:56.749Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:26:01.007Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:26:05.508Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:26:06.007Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:26:06.773Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:26:11.057Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:26:11.757Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:26:16.558Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:26:21.564Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:26:22.556Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:26:25.563Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:26:25.576Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:26:25.589Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:26:31.559Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:26:37.550Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:26:41.552Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:26:41.554Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:27:01.558Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:27:11.554Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:27:20.559Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:27:22.562Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:27:22.563Z] error: <qbittorrentProxyHandler> HTTP 403 logging in to qBittorrent.  Data: Your IP address has been banned after too many failed authentication attempts.
+[2026-03-21T22:29:03.087Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/transfer/info...
+[2026-03-21T22:29:03.092Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.8:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.8:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.8',
+    port: 8080
+  }
+]
+[2026-03-21T22:29:03.093Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }
+[2026-03-21T22:29:03.102Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/torrents/count...
+[2026-03-21T22:29:03.104Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.8:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.8:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.8',
+    port: 8080
+  }
+]
+[2026-03-21T22:29:03.104Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }
+[2026-03-21T22:29:03.105Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/torrents/count...
+[2026-03-21T22:29:03.105Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.8:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.8:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.8',
+    port: 8080
+  }
+]
+[2026-03-21T22:29:03.106Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }
+[2026-03-21T22:29:03.108Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:29:03.664Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/transfer/info...
+[2026-03-21T22:29:03.664Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.8:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.8:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.8',
+    port: 8080
+  }
+]
+[2026-03-21T22:29:03.665Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }
+[2026-03-21T22:29:03.673Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/torrents/count...
+[2026-03-21T22:29:03.674Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.8:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.8:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.8',
+    port: 8080
+  }
+]
+[2026-03-21T22:29:03.674Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }
+[2026-03-21T22:29:03.675Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/torrents/count...
+[2026-03-21T22:29:03.676Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.8:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.8:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.8',
+    port: 8080
+  }
+]
+[2026-03-21T22:29:03.676Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }
+[2026-03-21T22:29:03.685Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:29:13.696Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:29:17.433Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/transfer/info...
+[2026-03-21T22:29:17.433Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.8:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.8:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.8',
+    port: 8080
+  }
+]
+[2026-03-21T22:29:17.434Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }
+[2026-03-21T22:29:17.434Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/torrents/count...
+[2026-03-21T22:29:17.435Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.8:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.8:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.8',
+    port: 8080
+  }
+]
+[2026-03-21T22:29:17.435Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }
+[2026-03-21T22:29:17.435Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/torrents/count...
+[2026-03-21T22:29:17.436Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.8:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.8:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.8',
+    port: 8080
+  }
+]
+[2026-03-21T22:29:17.436Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }
+[2026-03-21T22:29:17.448Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:29:22.473Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:29:37.485Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:29:50.692Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:29:51.401Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:29:56.416Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:30:16.427Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:30:16.750Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:30:23.419Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:30:23.796Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:30:33.810Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:30:38.955Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:30:43.978Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:30:48.827Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:30:54.650Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:31:04.669Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:31:19.536Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/transfer/info...
+[2026-03-21T22:31:19.536Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.8:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.8:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.8',
+    port: 8080
+  }
+]
+[2026-03-21T22:31:19.536Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }
+[2026-03-21T22:31:19.545Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:31:19.545Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/torrents/count...
+[2026-03-21T22:31:19.546Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.8:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.8:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.8',
+    port: 8080
+  }
+]
+[2026-03-21T22:31:19.546Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }
+[2026-03-21T22:31:19.556Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/torrents/count...
+[2026-03-21T22:31:19.557Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.8:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.8:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.8',
+    port: 8080
+  }
+]
+[2026-03-21T22:31:19.557Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }
+[2026-03-21T22:31:23.840Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:31:24.176Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:31:25.333Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:35:04.393Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:35:05.056Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:35:11.020Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:35:15.081Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:35:16.043Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:35:18.090Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:35:23.101Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:35:30.097Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:35:31.057Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:35:31.352Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:35:33.513Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-03-21T22:35:43.526Z] error: <credentialedProxyHandler> HTTP Error 401 calling http://gluetun:8000/v1/publicip/ip
+[2026-07-21T08:10:05.186Z] error: <httpProxy> Error calling http://gluetun:8080/api/v2/torrents/info...
+[2026-07-21T08:10:05.195Z] error: <httpProxy> [
+  500,
+  Error: connect ECONNREFUSED 172.21.0.5:8080
+      at <unknown> (Error: connect ECONNREFUSED 172.21.0.5:8080) {
+    errno: -111,
+    code: 'ECONNREFUSED',
+    syscall: 'connect',
+    address: '172.21.0.5',
+    port: 8080
+  }
+]
+[2026-07-21T08:10:05.196Z] error: <qbittorrentProxyHandler> HTTP 500 getting data from qBittorrent.  Data: { error: [Object] }

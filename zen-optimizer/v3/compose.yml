@@ -1,0 +1,33 @@
+services:
+  zen-optimizer:
+    build: .
+    container_name: zen-optimizer
+    restart: unless-stopped
+
+    environment:
+      QBIT_URL: http://gluetun:8080
+      QBIT_USER: ${QBIT_USER:?QBIT_USER manquant}
+      QBIT_PASS: ${QBIT_PASS:?QBIT_PASS manquant}
+      TZ: Europe/Paris
+
+    volumes:
+      - ../:/app/state:ro
+
+    networks:
+      - arr-network
+
+    security_opt:
+      - no-new-privileges:true
+
+    cap_drop:
+      - ALL
+
+    read_only: true
+
+    tmpfs:
+      - /tmp
+
+networks:
+  arr-network:
+    external: true
+    name: ${ARR_NETWORK:?ARR_NETWORK manquant}
